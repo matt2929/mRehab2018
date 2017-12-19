@@ -9,15 +9,15 @@
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:orientation="vertical"
-        android:layout_marginRight="8dp"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginLeft="8dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginBottom="8dp"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="8dp">
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <ListView
             android:id="@+id/loginListView"
@@ -31,7 +31,7 @@
             android:layout_marginTop="8dp"
             android:layout_weight=".5"
             android:choiceMode="singleChoice"
-            android:listSelector="@android:color/darker_gray"
+            android:listSelector="@color/colorAccent"
             app:layout_constraintBottom_toTopOf="@+id/linearLayout"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -56,7 +56,7 @@
             app:layout_constraintRight_toRightOf="parent">
 
             <Button
-                android:id="@+id/selectLeft"
+                android:id="@+id/loginExist"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="16dp"

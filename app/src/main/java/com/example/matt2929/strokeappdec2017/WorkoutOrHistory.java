@@ -1,8 +1,8 @@
 package com.example.matt2929.strokeappdec2017;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
@@ -23,7 +23,6 @@ public class WorkoutOrHistory extends AppCompatActivity {
         workout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 Intent intent = new Intent(getApplicationContext(), WorkoutSelection.class);
                 startActivity(intent);
             }

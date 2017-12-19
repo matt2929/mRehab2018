@@ -1,8 +1,8 @@
 package com.example.matt2929.strokeappdec2017;
 
+import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -24,7 +24,7 @@ public class CreateNewUser extends AppCompatActivity {
         final EditText goalsEnter = (EditText) findViewById(R.id.enterGoals);
         Button enterSave = (Button) findViewById(R.id.enterSave);
 
-
+        //Name
         nameEnter.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
@@ -36,7 +36,7 @@ public class CreateNewUser extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable editable) {}
         });
-
+        //Goals
         goalsEnter.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
@@ -47,7 +47,7 @@ public class CreateNewUser extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable editable) {}
         });
-
+        //Left Hand = 0 || Right Hand = 1
         handChoice.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, @IdRes int i) {
@@ -58,7 +58,7 @@ public class CreateNewUser extends AppCompatActivity {
                 }
             }
         });
-
+        //Age
         ageEnter.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
@@ -73,7 +73,7 @@ public class CreateNewUser extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable editable) {}
         });
-
+        //Save but only if data has been entered into each field
         enterSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

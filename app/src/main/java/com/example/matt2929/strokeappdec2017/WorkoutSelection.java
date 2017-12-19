@@ -1,8 +1,8 @@
 package com.example.matt2929.strokeappdec2017;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -13,10 +13,10 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import static com.example.matt2929.strokeappdec2017.WorkoutData.*;
+import static com.example.matt2929.strokeappdec2017.WorkoutData.ALLWORKOUTS;
 
 public class WorkoutSelection extends AppCompatActivity {
-    int currentSelection = 0;
+    int currentSelection = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,8 +30,13 @@ public class WorkoutSelection extends AppCompatActivity {
         left.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), CreateNewUser.class);
-                startActivity(intent);
+                if (currentSelection != -1) {
+                    Intent intent = new Intent(getApplicationContext(), WorkoutRunner.class);
+                    intent.putExtra("Hand", "Left");
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(getApplicationContext(), "Please Select a Workout", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -40,11 +45,11 @@ public class WorkoutSelection extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (currentSelection != -1) {
-                    //Login
-                    //Intent intent = new Intent(getApplicationContext(), CreateNewUser.class);
-                    //startActivity(intent);
+                    Intent intent = new Intent(getApplicationContext(), WorkoutRunner.class);
+                    intent.putExtra("Hand", "Right");
+                    startActivity(intent);
                 } else {
-                    Toast.makeText(getApplicationContext(), "Please Select a Workout", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Please Select a Workout", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -60,7 +65,7 @@ public class WorkoutSelection extends AppCompatActivity {
         ArrayList<String> string = new ArrayList<String>(Arrays.asList(ALLWORKOUTS));
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1, android.R.id.text1,string);
+                R.layout.text_view_list, android.R.id.text1, string);
         // Assign adapter to ListView
         listView.setAdapter(adapter);
     }

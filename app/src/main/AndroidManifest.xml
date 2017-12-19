@@ -27,7 +27,8 @@
         <activity android:name=".Login" />
         <activity android:name=".CreateNewUser" />
         <activity android:name=".WorkoutOrHistory" />
-        <activity android:name=".WorkoutSelection"></activity>
+        <activity android:name=".WorkoutSelection" />
+        <activity android:name=".WorkoutRunner"></activity>
     </application>
 
 </manifest>
