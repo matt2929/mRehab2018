@@ -1,4 +1,4 @@
-package com.example.matt2929.strokeappdec2017;
+package com.example.matt2929.strokeappdec2017.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,10 +10,13 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.matt2929.strokeappdec2017.R;
+import com.example.matt2929.strokeappdec2017.SaveAndLoadData.ReadWriteUserData;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import static com.example.matt2929.strokeappdec2017.WorkoutData.ALLWORKOUTS;
+import static com.example.matt2929.strokeappdec2017.Values.WorkoutData.ALLWORKOUTS;
 
 public class WorkoutSelection extends AppCompatActivity {
     int currentSelection = -1;

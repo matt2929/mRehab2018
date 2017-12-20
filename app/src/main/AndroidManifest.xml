@@ -17,18 +17,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".StartScreen">
+        <activity android:name=".Activity.StartScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Login" />
-        <activity android:name=".CreateNewUser" />
-        <activity android:name=".WorkoutOrHistory" />
-        <activity android:name=".WorkoutSelection" />
-        <activity android:name=".WorkoutRunner"></activity>
+        <activity android:name=".Activity.Login" />
+        <activity android:name=".Activity.CreateNewUser" />
+        <activity android:name=".Activity.WorkoutOrHistory" />
+        <activity android:name=".Activity.WorkoutSelection" />
+        <activity android:name=".Activity.WorkoutRunner"></activity>
     </application>
 
 </manifest>

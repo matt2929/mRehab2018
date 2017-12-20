@@ -1,4 +1,4 @@
-package com.example.matt2929.strokeappdec2017;
+package com.example.matt2929.strokeappdec2017.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +9,10 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import com.example.matt2929.strokeappdec2017.R;
+import com.example.matt2929.strokeappdec2017.SaveAndLoadData.ReadWriteUserData;
+import com.example.matt2929.strokeappdec2017.SaveAndLoadData.User;
 
 import java.util.ArrayList;
 import java.util.List;

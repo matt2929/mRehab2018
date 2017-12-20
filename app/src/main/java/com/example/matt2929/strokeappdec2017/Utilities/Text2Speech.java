@@ -1,8 +1,11 @@
-package com.example.matt2929.strokeappdec2017;
+package com.example.matt2929.strokeappdec2017.Utilities;
 
 import android.content.Context;
 import android.speech.tts.TextToSpeech;
 import android.speech.tts.UtteranceProgressListener;
+
+import com.example.matt2929.strokeappdec2017.Listeners_Triggers.SpeechCompleteListener;
+import com.example.matt2929.strokeappdec2017.Listeners_Triggers.SpeechInitListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;

@@ -1,4 +1,4 @@
-package com.example.matt2929.strokeappdec2017;
+package com.example.matt2929.strokeappdec2017.Activity;
 
 import android.os.Bundle;
 import android.support.annotation.IdRes;
@@ -10,6 +10,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.Toast;
+
+import com.example.matt2929.strokeappdec2017.R;
+import com.example.matt2929.strokeappdec2017.SaveAndLoadData.ReadWriteUserData;
+import com.example.matt2929.strokeappdec2017.SaveAndLoadData.User;
 
 public class CreateNewUser extends AppCompatActivity {
     User newUser = new User();

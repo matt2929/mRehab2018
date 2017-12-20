@@ -1,4 +1,4 @@
-package com.example.matt2929.strokeappdec2017;
+package com.example.matt2929.strokeappdec2017.Activity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,13 +12,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.matt2929.strokeappdec2017.Listeners_Triggers.SpeechCompleteListener;
+import com.example.matt2929.strokeappdec2017.Listeners_Triggers.SpeechInitListener;
+import com.example.matt2929.strokeappdec2017.R;
+import com.example.matt2929.strokeappdec2017.Utilities.Text2Speech;
+
 public class WorkoutRunner extends AppCompatActivity implements SensorEventListener {
 
     private final int CHECK_CODE = 0x1;
     private final String TTS_WORKOUT_DESCRIPTION = "WORKOUT_DESCRIPTION"; //Say workout description
     private final String TTS_WORKOUT_READY = "WORKOUT_READY";//Say Ready then have some delay
     private final String TTS_WORKOUT_BEGIN = "WORKOUT_BEGIN";//Say Begin
-    private final String TTS_WORKOUT_COMPLETE = "WORKOUT_COMPLETE";//Say Workout complete then give post workout feedback
+    private final String TTS_WORKOUT_COMPLETE = "WORKOUT_COMPLETE";//Say WorkoutAbstract complete then give post workout feedback
     private final String TTS_WORKOUT_AUDIO_FEEDBACK = "WORKOUT_FEEDBACK";//Give mid workout feedback
     private final String TEST = "TEST";//just a test
     private SensorManager mSensorManager;
