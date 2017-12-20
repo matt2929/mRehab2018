@@ -1,8 +1,8 @@
 package com.example.matt2929.strokeappdec2017.Workouts;
 
-import com.example.matt2929.strokeappdec2017.Listeners_Triggers.OutputWorkoutData;
-import com.example.matt2929.strokeappdec2017.Listeners_Triggers.OutputWorkoutStrings;
-import com.example.matt2929.strokeappdec2017.Listeners_Triggers.SpeechTrigger;
+import com.example.matt2929.strokeappdec2017.ListenersAndTriggers.OutputWorkoutData;
+import com.example.matt2929.strokeappdec2017.ListenersAndTriggers.OutputWorkoutStrings;
+import com.example.matt2929.strokeappdec2017.ListenersAndTriggers.SpeechTrigger;
 
 /**
  * Created by matt2929 on 12/19/17.

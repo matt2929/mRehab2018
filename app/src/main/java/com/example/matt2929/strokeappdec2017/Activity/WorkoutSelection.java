@@ -34,7 +34,7 @@ public class WorkoutSelection extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (currentSelection != -1) {
-                    Intent intent = new Intent(getApplicationContext(), WorkoutRunner.class);
+                    Intent intent = new Intent(getApplicationContext(), SensorWorkoutRunner.class);
                     intent.putExtra("Hand", "Left");
                     startActivity(intent);
                 } else {
@@ -48,7 +48,7 @@ public class WorkoutSelection extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (currentSelection != -1) {
-                    Intent intent = new Intent(getApplicationContext(), WorkoutRunner.class);
+                    Intent intent = new Intent(getApplicationContext(), SensorWorkoutRunner.class);
                     intent.putExtra("Hand", "Right");
                     startActivity(intent);
                 } else {

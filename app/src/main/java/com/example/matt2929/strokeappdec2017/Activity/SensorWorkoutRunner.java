@@ -12,20 +12,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.matt2929.strokeappdec2017.Listeners_Triggers.SpeechCompleteListener;
-import com.example.matt2929.strokeappdec2017.Listeners_Triggers.SpeechInitListener;
+import com.example.matt2929.strokeappdec2017.ListenersAndTriggers.SpeechCompleteListener;
+import com.example.matt2929.strokeappdec2017.ListenersAndTriggers.SpeechInitListener;
 import com.example.matt2929.strokeappdec2017.R;
 import com.example.matt2929.strokeappdec2017.Utilities.Text2Speech;
+import com.example.matt2929.strokeappdec2017.Values.WorkoutData;
 
-public class WorkoutRunner extends AppCompatActivity implements SensorEventListener {
+public class SensorWorkoutRunner extends AppCompatActivity implements SensorEventListener {
 
     private final int CHECK_CODE = 0x1;
-    private final String TTS_WORKOUT_DESCRIPTION = "WORKOUT_DESCRIPTION"; //Say workout description
-    private final String TTS_WORKOUT_READY = "WORKOUT_READY";//Say Ready then have some delay
-    private final String TTS_WORKOUT_BEGIN = "WORKOUT_BEGIN";//Say Begin
-    private final String TTS_WORKOUT_COMPLETE = "WORKOUT_COMPLETE";//Say WorkoutAbstract complete then give post workout feedback
-    private final String TTS_WORKOUT_AUDIO_FEEDBACK = "WORKOUT_FEEDBACK";//Give mid workout feedback
-    private final String TEST = "TEST";//just a test
     private SensorManager mSensorManager;
     private Sensor mSensor;
     private EditText editText;
@@ -72,17 +67,17 @@ public class WorkoutRunner extends AppCompatActivity implements SensorEventListe
                     @Override
                     public void Spoke(String s) {
                         //do something when tts finishes saying words
-                        if (s == TTS_WORKOUT_DESCRIPTION) {
+                        if (s == WorkoutData.TTS_WORKOUT_DESCRIPTION) {
 
-                        } else if (s.equals(TTS_WORKOUT_READY)) {
+                        } else if (s.equals(WorkoutData.TTS_WORKOUT_READY)) {
 
-                        } else if (s.equals(TTS_WORKOUT_BEGIN)) {
+                        } else if (s.equals(WorkoutData.TTS_WORKOUT_BEGIN)) {
 
-                        } else if (s.equals(TTS_WORKOUT_COMPLETE)) {
+                        } else if (s.equals(WorkoutData.TTS_WORKOUT_COMPLETE)) {
 
-                        } else if (s.equals(TTS_WORKOUT_AUDIO_FEEDBACK)) {
+                        } else if (s.equals(WorkoutData.TTS_WORKOUT_AUDIO_FEEDBACK)) {
 
-                        } else if (s.equals(TEST)) {
+                        } else if (s.equals(WorkoutData.TEST)) {
 
                         }
                     }
