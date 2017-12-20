@@ -29,7 +29,8 @@
         <activity android:name=".Activity.WorkoutOrHistory" />
         <activity android:name=".Activity.WorkoutSelection" />
         <activity android:name=".Activity.SensorWorkoutRunner" />
-        <activity android:name=".Activity.TouchWorkoutRunner"></activity>
+        <activity android:name=".Activity.TouchWorkoutRunner" />
+        <activity android:name=".Activity.WorkoutPreview"></activity>
     </application>
 
 </manifest>

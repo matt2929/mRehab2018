@@ -18,6 +18,7 @@ public class TouchWorkoutRunner extends AppCompatActivity implements View.OnTouc
 
     private final int CHECK_CODE = 0x1;
     private Text2Speech text2Speech;
+    private boolean workoutInProgress = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +30,9 @@ public class TouchWorkoutRunner extends AppCompatActivity implements View.OnTouc
             @Override
             public void run() {
                 //invalidate view
-                handler.postDelayed(this, 55);
+                if (workoutInProgress) {
+                    handler.postDelayed(this, 55);
+                }
             }
         };
         handler.post(runnable);
