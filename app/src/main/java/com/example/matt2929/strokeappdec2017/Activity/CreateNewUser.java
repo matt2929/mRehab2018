@@ -1,5 +1,6 @@
 package com.example.matt2929.strokeappdec2017.Activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.v7.app.AppCompatActivity;
@@ -85,6 +86,8 @@ public class CreateNewUser extends AppCompatActivity {
                     ReadWriteUserData readWriteUserData = new ReadWriteUserData(getApplicationContext());
                     readWriteUserData.saveUser(newUser);
                 }
+                Intent intent = new Intent(getApplicationContext(), Login.class);
+                startActivity(intent);
             }
         });
     }

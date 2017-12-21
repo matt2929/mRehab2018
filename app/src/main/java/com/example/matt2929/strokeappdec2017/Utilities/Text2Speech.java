@@ -47,10 +47,13 @@ public class Text2Speech extends UtteranceProgressListener implements TextToSpee
         if (ready) {
             HashMap<String, String> hashTts = new HashMap<String, String>();
             hashTts.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, utteranceID);
-            tts.speak(text, TextToSpeech.QUEUE_FLUSH, hashTts);
+            tts.speak(text, TextToSpeech.QUEUE_ADD, hashTts);
         }
     }
 
+    public void silence(long duration) {
+        tts.playSilentUtterance(duration, TextToSpeech.QUEUE_ADD, "Silent");
+    }
     //clear all speaking
     public void stop() {
         tts.speak("", TextToSpeech.QUEUE_FLUSH, null, "Silent");
@@ -79,12 +82,10 @@ public class Text2Speech extends UtteranceProgressListener implements TextToSpee
         }
     }
 
-
     @Override
     public void onStart(String s) {
 
     }
-
     //tts finished saying a word - s is the reference id
     @Override
     public void onDone(String s) {

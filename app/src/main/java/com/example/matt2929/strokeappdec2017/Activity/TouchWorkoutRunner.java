@@ -17,6 +17,7 @@ import com.example.matt2929.strokeappdec2017.Values.WorkoutData;
 public class TouchWorkoutRunner extends AppCompatActivity implements View.OnTouchListener {
 
     private final int CHECK_CODE = 0x1;
+    Long TimeOfWorkout = System.currentTimeMillis();
     private Text2Speech text2Speech;
     private boolean workoutInProgress = true;
 
@@ -74,13 +75,15 @@ public class TouchWorkoutRunner extends AppCompatActivity implements View.OnTouc
                     public void Spoke(String s) {
                         //do something when tts finishes saying words
                         if (s == WorkoutData.TTS_WORKOUT_DESCRIPTION) {
-
+                            text2Speech.silence(2000);
+                            text2Speech.speak("Start When I Say, Begin", WorkoutData.TTS_WORKOUT_READY);
                         } else if (s.equals(WorkoutData.TTS_WORKOUT_READY)) {
-
+                            text2Speech.silence(2000);
+                            text2Speech.speak("Begin", WorkoutData.TTS_WORKOUT_BEGIN);
                         } else if (s.equals(WorkoutData.TTS_WORKOUT_BEGIN)) {
-
+                            TimeOfWorkout = System.currentTimeMillis();
                         } else if (s.equals(WorkoutData.TTS_WORKOUT_COMPLETE)) {
-
+                            Long timeToComplete = Math.abs(TimeOfWorkout - System.currentTimeMillis());
                         } else if (s.equals(WorkoutData.TTS_WORKOUT_AUDIO_FEEDBACK)) {
 
                         } else if (s.equals(WorkoutData.TEST)) {

@@ -16,9 +16,10 @@ import com.example.matt2929.strokeappdec2017.SaveAndLoadData.ReadWriteUserData;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import static com.example.matt2929.strokeappdec2017.Values.WorkoutData.ALLWORKOUTS;
+import static com.example.matt2929.strokeappdec2017.Values.WorkoutData.ALL_WORKOUTS;
 
 public class WorkoutSelection extends AppCompatActivity {
+
     int currentSelection = -1;
 
     @Override
@@ -36,6 +37,7 @@ public class WorkoutSelection extends AppCompatActivity {
                 if (currentSelection != -1) {
                     Intent intent = new Intent(getApplicationContext(), SensorWorkoutRunner.class);
                     intent.putExtra("Hand", "Left");
+                    intent.putExtra("Workout", ALL_WORKOUTS[currentSelection]);
                     startActivity(intent);
                 } else {
                     Toast.makeText(getApplicationContext(), "Please Select a Workout", Toast.LENGTH_SHORT).show();
@@ -65,7 +67,7 @@ public class WorkoutSelection extends AppCompatActivity {
             }
         });
 
-        ArrayList<String> string = new ArrayList<String>(Arrays.asList(ALLWORKOUTS));
+        ArrayList<String> string = new ArrayList<String>(Arrays.asList(ALL_WORKOUTS));
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 R.layout.text_view_list, android.R.id.text1, string);
