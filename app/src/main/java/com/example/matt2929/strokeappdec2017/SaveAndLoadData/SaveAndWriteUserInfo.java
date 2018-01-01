@@ -19,9 +19,10 @@ import java.util.Queue;
  * Created by matt2929 on 12/18/17.
  */
 
-public class ReadWriteUserData {
+public class SaveAndWriteUserInfo {
     Context context;
-    public ReadWriteUserData(Context context) {
+
+    public SaveAndWriteUserInfo(Context context) {
         this.context=context;
     }
 

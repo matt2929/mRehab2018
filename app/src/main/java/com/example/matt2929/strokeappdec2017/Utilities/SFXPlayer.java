@@ -10,13 +10,34 @@ import android.media.MediaPlayer;
 public class SFXPlayer {
     MediaPlayer mediaPlayer;
     Context context;
-
+    boolean playing = false;
     public SFXPlayer(Context context) {
         this.context = context;
     }
 
-    public void playSFX(int sfx) {
+    public void loadSFX(int sfx) {
         mediaPlayer = MediaPlayer.create(context, sfx);
+    }
+
+    public void playSFX() {
         mediaPlayer.start();
+        playing = true;
+    }
+
+    public boolean isPlaying() {
+        return playing;
+    }
+
+    public void loopSFX() {
+        mediaPlayer.setLooping(true);
+    }
+
+    public void noLoopSFX() {
+        mediaPlayer.setLooping(false);
+    }
+
+    public void pauseSFX() {
+        mediaPlayer.pause();
+        playing = false;
     }
 }

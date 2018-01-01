@@ -11,15 +11,16 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.matt2929.strokeappdec2017.R;
-import com.example.matt2929.strokeappdec2017.SaveAndLoadData.ReadWriteUserData;
+import com.example.matt2929.strokeappdec2017.SaveAndLoadData.SaveAndWriteUserInfo;
 import com.example.matt2929.strokeappdec2017.SaveAndLoadData.User;
+import com.example.matt2929.strokeappdec2017.Values.WorkoutData;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Login extends AppCompatActivity {
     int currentSelection = -1;
-
+    List<String> userStrings = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,7 +28,7 @@ public class Login extends AppCompatActivity {
         Button buttonExist = (Button) findViewById(R.id.loginExist); //select pre exisitng user
         Button buttonNew = (Button) findViewById(R.id.loginNew); //generate new user
         final ListView listView = (ListView) findViewById(R.id.loginListView);//list all existing user to pick from
-        ReadWriteUserData readWriteUserData = new ReadWriteUserData(getApplicationContext());//use this to get users saved o
+        SaveAndWriteUserInfo saveAndWriteUserInfo = new SaveAndWriteUserInfo(getApplicationContext());//use this to get users saved o
         //Create New User
         buttonNew.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -43,6 +44,7 @@ public class Login extends AppCompatActivity {
             public void onClick(View view) {
                 if (currentSelection != -1) {
                     //Login
+                    WorkoutData.UserName = userStrings.get(currentSelection);
                     Intent intent = new Intent(getApplicationContext(), WorkoutOrHistory.class);
                     startActivity(intent);
                 } else {
@@ -59,8 +61,8 @@ public class Login extends AppCompatActivity {
             }
         });
         //turn users into strings for list view
-        List<String> userStrings = new ArrayList<>();
-        List<User> userList = readWriteUserData.getUsers();
+
+        List<User> userList = saveAndWriteUserInfo.getUsers();
         for (User u : userList) {
             String userString = "";
             userString += "Name: " + u.getName();

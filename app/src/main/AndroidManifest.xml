@@ -30,7 +30,11 @@
         <activity android:name=".Activity.WorkoutSelection" />
         <activity android:name=".Activity.SensorWorkoutRunner" />
         <activity android:name=".Activity.TouchWorkoutRunner" />
-        <activity android:name=".Activity.WorkoutPreview"></activity>
+        <activity android:name=".Activity.WorkoutPreview" />
+        <activity android:name=".Activity.GoalsAndReps" />
+        <activity android:name=".Activity.PostWorkoutReport" />
+        <activity android:name=".Activity.PostWorkoutGoals" />
+        <activity android:name=".Activity.LoadingScreen"></activity>
     </application>
 
 </manifest>

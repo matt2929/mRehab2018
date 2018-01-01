@@ -13,7 +13,7 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.example.matt2929.strokeappdec2017.R;
-import com.example.matt2929.strokeappdec2017.SaveAndLoadData.ReadWriteUserData;
+import com.example.matt2929.strokeappdec2017.SaveAndLoadData.SaveAndWriteUserInfo;
 import com.example.matt2929.strokeappdec2017.SaveAndLoadData.User;
 
 public class CreateNewUser extends AppCompatActivity {
@@ -83,8 +83,8 @@ public class CreateNewUser extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (validateInput()) {
-                    ReadWriteUserData readWriteUserData = new ReadWriteUserData(getApplicationContext());
-                    readWriteUserData.saveUser(newUser);
+                    SaveAndWriteUserInfo saveAndWriteUserInfo = new SaveAndWriteUserInfo(getApplicationContext());
+                    saveAndWriteUserInfo.saveUser(newUser);
                 }
                 Intent intent = new Intent(getApplicationContext(), Login.class);
                 startActivity(intent);

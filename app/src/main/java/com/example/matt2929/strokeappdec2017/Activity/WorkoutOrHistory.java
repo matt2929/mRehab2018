@@ -22,6 +22,8 @@ public class WorkoutOrHistory extends AppCompatActivity {
                 //TODO:Hookup history button
             }
         });
+
+
         workout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

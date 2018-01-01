@@ -5,5 +5,5 @@ package com.example.matt2929.strokeappdec2017.ListenersAndTriggers;
  */
 
 public interface OutputWorkoutStrings {
-    public String[] getStrings();
+    void getStrings(String[] s);
 }

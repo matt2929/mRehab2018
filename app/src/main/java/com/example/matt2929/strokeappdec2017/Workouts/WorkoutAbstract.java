@@ -2,9 +2,9 @@ package com.example.matt2929.strokeappdec2017.Workouts;
 
 import com.example.matt2929.strokeappdec2017.ListenersAndTriggers.OutputWorkoutData;
 import com.example.matt2929.strokeappdec2017.ListenersAndTriggers.OutputWorkoutStrings;
-import com.example.matt2929.strokeappdec2017.ListenersAndTriggers.PlaySfXTrigger;
 import com.example.matt2929.strokeappdec2017.ListenersAndTriggers.SpeechTrigger;
 import com.example.matt2929.strokeappdec2017.Utilities.AverageValue;
+import com.example.matt2929.strokeappdec2017.Utilities.SFXPlayer;
 
 /**
  * Created by matt2929 on 12/19/17.
@@ -19,20 +19,22 @@ public abstract class WorkoutAbstract {
     WorkoutScore workoutScore;
     float[] outputData;
     String[] outputStrings;
-    PlaySfXTrigger playSfXTrigger;
+    SFXPlayer sfxPlayer;
     float[] dataLast = null;
     boolean WorkoutInProgress = false;
     Long lastActivity = System.currentTimeMillis();
     AverageValue[] AverageValues;
     float[] AverageDataValue;
     Integer reps = 10;
+    String Name = "";
 
-    public void Workout(Integer reps, SpeechTrigger speechTrigger, PlaySfXTrigger playSfXTrigger, OutputWorkoutData outputWorkoutData, OutputWorkoutStrings outputWorkoutStrings) {
+    public void Workout(String Name, Integer reps, SpeechTrigger speechTrigger, SFXPlayer sfxPlayer, OutputWorkoutData outputWorkoutData, OutputWorkoutStrings outputWorkoutStrings) {
+        this.Name = Name;
         this.reps = reps;
         this.speechTrigger = speechTrigger;
         this.outputWorkoutData = outputWorkoutData;
         this.outputWorkoutStrings = outputWorkoutStrings;
-        this.playSfXTrigger = playSfXTrigger;
+        this.sfxPlayer = sfxPlayer;
     }
 
     public void SensorDataIn(float[] data) {
@@ -63,12 +65,16 @@ public abstract class WorkoutAbstract {
         return workoutScore;
     }
 
-    public float[] outPutData() {
-        return outputData;
+    public void outputData(float[] f) {
+        outputWorkoutData.getData(f);
     }
 
-    public String[] outputStrings() {
-        return outputStrings;
+    public void outputStrings(String[] s) {
+        outputWorkoutStrings.getStrings(s);
+    }
+
+    public String getName() {
+        return Name;
     }
 
 }

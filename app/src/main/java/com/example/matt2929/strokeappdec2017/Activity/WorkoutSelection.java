@@ -11,12 +11,14 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.matt2929.strokeappdec2017.R;
-import com.example.matt2929.strokeappdec2017.SaveAndLoadData.ReadWriteUserData;
+import com.example.matt2929.strokeappdec2017.SaveAndLoadData.SaveAndWriteUserInfo;
+import com.example.matt2929.strokeappdec2017.Values.WorkoutData;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
-import static com.example.matt2929.strokeappdec2017.Values.WorkoutData.ALL_WORKOUTS;
+import static com.example.matt2929.strokeappdec2017.Values.WorkoutData.WORKOUT_DESCRIPTIONS;
+import static com.example.matt2929.strokeappdec2017.Values.WorkoutData.WORKOUT_TYPE;
+import static com.example.matt2929.strokeappdec2017.Values.WorkoutData.Workout_Type_Sensor;
 
 public class WorkoutSelection extends AppCompatActivity {
 
@@ -29,15 +31,20 @@ public class WorkoutSelection extends AppCompatActivity {
         Button left = (Button) findViewById(R.id.selectLeft);
         Button right = (Button) findViewById(R.id.selectRight);
         final ListView listView = (ListView) findViewById(R.id.selectActivity);
-        ReadWriteUserData readWriteUserData = new ReadWriteUserData(getApplicationContext());
+        SaveAndWriteUserInfo saveAndWriteUserInfo = new SaveAndWriteUserInfo(getApplicationContext());
 
         left.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (currentSelection != -1) {
-                    Intent intent = new Intent(getApplicationContext(), SensorWorkoutRunner.class);
-                    intent.putExtra("Hand", "Left");
-                    intent.putExtra("Workout", ALL_WORKOUTS[currentSelection]);
+                    Intent intent = new Intent(getApplicationContext(), WorkoutPreview.class);
+                    if (WORKOUT_TYPE[currentSelection].equals(Workout_Type_Sensor)) {
+                        intent.putExtra("WorkoutType", "Sensor");
+                    } else {
+                        intent.putExtra("WorkoutType", "Touch");
+                    }
+                    intent.putExtra("Hand", "Right");
+                    intent.putExtra("Workout", WORKOUT_DESCRIPTIONS[currentSelection].getName());
                     startActivity(intent);
                 } else {
                     Toast.makeText(getApplicationContext(), "Please Select a Workout", Toast.LENGTH_SHORT).show();
@@ -50,8 +57,14 @@ public class WorkoutSelection extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (currentSelection != -1) {
-                    Intent intent = new Intent(getApplicationContext(), SensorWorkoutRunner.class);
+                    Intent intent;
+                    if (WORKOUT_TYPE[currentSelection].equals(WorkoutPreview.class)) {
+                        intent = new Intent(getApplicationContext(), SensorWorkoutRunner.class);
+                    } else {
+                        intent = new Intent(getApplicationContext(), TouchWorkoutRunner.class);
+                    }
                     intent.putExtra("Hand", "Right");
+                    intent.putExtra("Workout", WORKOUT_DESCRIPTIONS[currentSelection].getName());
                     startActivity(intent);
                 } else {
                     Toast.makeText(getApplicationContext(), "Please Select a Workout", Toast.LENGTH_SHORT).show();
@@ -60,15 +73,18 @@ public class WorkoutSelection extends AppCompatActivity {
         });
 
         //Select Existing User
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener()
+
+        {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 currentSelection = i;
             }
         });
-
-        ArrayList<String> string = new ArrayList<String>(Arrays.asList(ALL_WORKOUTS));
-
+        ArrayList<String> string = new ArrayList<String>();
+        for (int i = 0; i < WorkoutData.WORKOUT_DESCRIPTIONS.length; i++) {
+            string.add(WORKOUT_DESCRIPTIONS[i].getName());
+        }
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 R.layout.text_view_list, android.R.id.text1, string);
         // Assign adapter to ListView

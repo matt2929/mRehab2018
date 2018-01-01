@@ -9,81 +9,79 @@ import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.EditText;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.example.matt2929.strokeappdec2017.ListenersAndTriggers.OutputWorkoutData;
 import com.example.matt2929.strokeappdec2017.ListenersAndTriggers.OutputWorkoutStrings;
-import com.example.matt2929.strokeappdec2017.ListenersAndTriggers.PlaySfXTrigger;
 import com.example.matt2929.strokeappdec2017.ListenersAndTriggers.SpeechCompleteListener;
 import com.example.matt2929.strokeappdec2017.ListenersAndTriggers.SpeechInitListener;
 import com.example.matt2929.strokeappdec2017.ListenersAndTriggers.SpeechTrigger;
-import com.example.matt2929.strokeappdec2017.R;
+import com.example.matt2929.strokeappdec2017.SaveAndLoadData.SaveHistoricalReps;
+import com.example.matt2929.strokeappdec2017.SaveAndLoadData.SaveWorkoutSensor;
+import com.example.matt2929.strokeappdec2017.Utilities.SFXPlayer;
 import com.example.matt2929.strokeappdec2017.Utilities.Text2Speech;
 import com.example.matt2929.strokeappdec2017.Values.WorkoutData;
+import com.example.matt2929.strokeappdec2017.Workouts.WO_PickUpHorizontal;
 import com.example.matt2929.strokeappdec2017.Workouts.WO_PickUpVertical;
+import com.example.matt2929.strokeappdec2017.Workouts.WO_Pour;
+import com.example.matt2929.strokeappdec2017.Workouts.WO_Twist;
+import com.example.matt2929.strokeappdec2017.Workouts.WO_Walk;
 import com.example.matt2929.strokeappdec2017.Workouts.WorkoutAbstract;
+import com.example.matt2929.strokeappdec2017.Workouts.WorkoutDescription;
+import com.example.matt2929.strokeappdec2017.WorkoutsView.WV_JustText;
+import com.example.matt2929.strokeappdec2017.WorkoutsView.WV_Pour;
+import com.example.matt2929.strokeappdec2017.WorkoutsView.WorkoutViewAbstract;
 
 public class SensorWorkoutRunner extends AppCompatActivity implements SensorEventListener {
 
     private final int CHECK_CODE = 0x1;
     //~~~~~~~~~~~~~~~~~~~~~~~
     Long TimeOfWorkout = System.currentTimeMillis();
-    Long last = System.currentTimeMillis();
-    private SensorManager mSensorManager;
-    private Sensor mSensor;
-    private EditText editText;
+    //Workout Attributes~~~
+    String _WorkoutHand; //Which Hand
+    String _WorkoutName; //Name of Current Wokrout
+    Integer _WorkoutReps;//Number of Repetitions
+    private SensorManager _mSensorManager;
+    private Sensor _mSensor;
     //Refrence ID for TTS~~~~
-    private Text2Speech text2Speech;
-    private WorkoutAbstract workoutAbstract;
+    private Text2Speech _Text2Speech;
+    private WorkoutAbstract _CurrentWorkout;
+    private WorkoutViewAbstract _CurrentWorkoutView;
+    private WorkoutDescription _WorkoutDescription = null;
+    private SFXPlayer _SFXPlayer;
+    private SaveHistoricalReps _SaveHistoricalReps;
+    private SaveWorkoutSensor _SaveWorkoutSensor;
+    private Boolean _WorkoutInProgress = false;//Is workout currently running?
+    //
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_workout_runner);
-        setupSensorsLinear();
+        Intent intent = getIntent();
+        _WorkoutHand = intent.getStringExtra("Hand");
+        _WorkoutName = intent.getStringExtra("Workout");
+        _WorkoutReps = intent.getIntExtra("Reps", 10);
+        _SaveHistoricalReps = new SaveHistoricalReps(getApplicationContext(), WorkoutData.UserName);
+        _SaveWorkoutSensor = new SaveWorkoutSensor(getApplicationContext(), WorkoutData.UserName, "Time,X,Y,Z");
+        _SFXPlayer = new SFXPlayer(getApplicationContext());
+        SetupWorkout(_WorkoutName, 10);
         checkTTS();
-        SpeechTrigger speechTrigger = new SpeechTrigger() {
-            @Override
-            public void speak(String s) {
-                text2Speech.speak(s, WorkoutData.TTS_WORKOUT_AUDIO_FEEDBACK);
-            }
-        };
-        PlaySfXTrigger playSfXTrigger = new PlaySfXTrigger() {
-            @Override
-            public void playSfXTrigger(int sfxID) {
-
-            }
-        };
-        OutputWorkoutData outputWorkoutData = new OutputWorkoutData() {
-            @Override
-            public float[] getData() {
-                return new float[0];
-            }
-        };
-        OutputWorkoutStrings outputWorkoutStrings = new OutputWorkoutStrings() {
-            @Override
-            public String[] getStrings() {
-                return new String[0];
-            }
-        };
-        workoutAbstract = new WO_PickUpVertical(10, speechTrigger, playSfXTrigger, outputWorkoutData, outputWorkoutStrings);
-        workoutAbstract.StartWorkout();
-        editText = (EditText) findViewById(R.id.editText);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        mSensorManager.unregisterListener(this);
-        if (text2Speech != null) {
-            text2Speech.destroy();
+        _mSensorManager.unregisterListener(this);
+        if (_Text2Speech != null) {
+            _Text2Speech.destroy();
         }
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        mSensorManager.registerListener(this, mSensor, SensorManager.SENSOR_DELAY_GAME);
+        _mSensorManager.registerListener(this, _mSensor, SensorManager.SENSOR_DELAY_GAME);
     }
 
     private void checkTTS() {
@@ -92,25 +90,29 @@ public class SensorWorkoutRunner extends AppCompatActivity implements SensorEven
         startActivityForResult(check, CHECK_CODE);
     }
 
+    //use this to know when tts is done speaking
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == CHECK_CODE) {
             if (resultCode == TextToSpeech.Engine.CHECK_VOICE_DATA_PASS) {
-                text2Speech = new Text2Speech(this);
-                text2Speech.addSpeechCompleteListener(new SpeechCompleteListener() {
+                _Text2Speech = new Text2Speech(this);
+                _Text2Speech.addSpeechCompleteListener(new SpeechCompleteListener() {
                     @Override
                     public void Spoke(String s) {
-                        //do something when tts finishes saying words
-                        if (s == WorkoutData.TTS_WORKOUT_DESCRIPTION) {
-                            text2Speech.silence(2000);
-                            text2Speech.speak("Start When I Say, Begin", WorkoutData.TTS_WORKOUT_READY);
+                        Log.e("TTS: ", s);
+                        if (s.equals(WorkoutData.TTS_WORKOUT_DESCRIPTION)) {
+                            _Text2Speech.silence(2000);
+                            _Text2Speech.speak("Start When I Say, Begin", WorkoutData.TTS_WORKOUT_READY);
                         } else if (s.equals(WorkoutData.TTS_WORKOUT_READY)) {
-                            text2Speech.silence(2000);
-                            text2Speech.speak("Begin", WorkoutData.TTS_WORKOUT_BEGIN);
+                            _Text2Speech.silence(2000);
+                            _Text2Speech.speak("Begin", WorkoutData.TTS_WORKOUT_BEGIN);
                         } else if (s.equals(WorkoutData.TTS_WORKOUT_BEGIN)) {
                             TimeOfWorkout = System.currentTimeMillis();
+                            _CurrentWorkout.StartWorkout();
+                            _WorkoutInProgress = true;
                         } else if (s.equals(WorkoutData.TTS_WORKOUT_COMPLETE)) {
                             Long timeToComplete = Math.abs(TimeOfWorkout - System.currentTimeMillis());
+                            WorkoutFinished();
                         } else if (s.equals(WorkoutData.TTS_WORKOUT_AUDIO_FEEDBACK)) {
 
                         } else if (s.equals(WorkoutData.TEST)) {
@@ -118,9 +120,10 @@ public class SensorWorkoutRunner extends AppCompatActivity implements SensorEven
                         }
                     }
                 });
-                text2Speech.addInitListener(new SpeechInitListener() {
+                _Text2Speech.addInitListener(new SpeechInitListener() {
                     @Override
                     public void onInit() {
+                        _Text2Speech.speak(_WorkoutName + ",on," + _WorkoutHand + ",Hand," + ". Doing " + _WorkoutReps + ",Reps", WorkoutData.TTS_WORKOUT_DESCRIPTION);
                     }
                 });
 
@@ -133,42 +136,127 @@ public class SensorWorkoutRunner extends AppCompatActivity implements SensorEven
         }
     }
 
+    /**
+     * Set up Linear Sensor i.e. gravity factored out
+     */
     public void setupSensorsLinear() {
-        mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-        if (mSensorManager.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION) != null) {
-            mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION);
-        } else {
-            Toast.makeText(getApplicationContext(), "No sesor found", Toast.LENGTH_SHORT).show();
+        if (_mSensorManager != null) {
+            _mSensorManager.unregisterListener(this);
         }
+        _mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        if (_mSensorManager.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION) != null) {
+            _mSensor = _mSensorManager.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION);
+
+        } else {
+            Toast.makeText(getApplicationContext(), "No sensor found", Toast.LENGTH_SHORT).show();
+        }
+        _mSensorManager.registerListener(this, _mSensor, SensorManager.SENSOR_DELAY_GAME);
+
     }
 
-    public void setupSensorsGravity() {
-        mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-        if (mSensorManager.getDefaultSensor(Sensor.TYPE_GRAVITY) != null) {
-            mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_GRAVITY);
-        } else {
-            Toast.makeText(getApplicationContext(), "No sesor found", Toast.LENGTH_SHORT).show();
+    /**
+     *
+     */
+    public void setupGravitySensor() {
+        if (_mSensorManager != null) {
+            _mSensorManager.unregisterListener(this);
         }
+        _mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        if (_mSensorManager.getDefaultSensor(Sensor.TYPE_GRAVITY) != null) {
+            _mSensor = _mSensorManager.getDefaultSensor(Sensor.TYPE_GRAVITY);
+
+        } else {
+            Toast.makeText(getApplicationContext(), "No sensor found", Toast.LENGTH_SHORT).show();
+        }
+        _mSensorManager.registerListener(this, _mSensor, SensorManager.SENSOR_DELAY_GAME);
+
     }
+//There is an update from the Sensor
 
     @Override
     public void onSensorChanged(SensorEvent sensorEvent) {
-        float AccX = sensorEvent.values[0];
-        float AccY = sensorEvent.values[1];
-        float AccZ = sensorEvent.values[2];
-        if (workoutAbstract != null) {
-            workoutAbstract.SensorDataIn(sensorEvent.values);
+        if (_CurrentWorkout != null) {
+            _CurrentWorkout.SensorDataIn(sensorEvent.values);
+            _CurrentWorkoutView.invalidate();
+
         }
-        //get sensor refresh rate
- /*       editText.setText("X:" + AccX + " Y:" + AccY + " Z:" + AccZ);
-        float delay =  (Math.abs(last-System.currentTimeMillis()))/1000f;
-        last=System.currentTimeMillis();
-        Log.e("Sesnor Rate", "Delay: "+delay+"s "+" fps: "+(1f)/(delay));*/
+
+        if (_WorkoutInProgress) {
+            _SaveWorkoutSensor.saveData(sensorEvent.values);
+        }
+
+        if (_CurrentWorkout.isWorkoutComplete()) {
+            WorkoutFinished();
+        }
     }
 
     @Override
     public void onAccuracyChanged(Sensor sensor, int i) {
 
+    }
+
+    public void SetupWorkout(String WorkoutName, int reps) {
+        SpeechTrigger speechTrigger = new SpeechTrigger() {
+            @Override
+            public void speak(String s) {
+                _Text2Speech.speak(s, WorkoutData.TTS_WORKOUT_AUDIO_FEEDBACK);
+            }
+        };
+        OutputWorkoutData outputWorkoutData = new OutputWorkoutData() {
+            @Override
+            public void getData(float[] f) {
+                _CurrentWorkoutView.dataIn(f);
+            }
+        };
+        OutputWorkoutStrings outputWorkoutStrings = new OutputWorkoutStrings() {
+            @Override
+            public void getStrings(String[] s) {
+                _CurrentWorkoutView.stringIn(s);
+            }
+        };
+        for (int i = 0; i < WorkoutData.WORKOUT_DESCRIPTIONS.length; i++) {
+            if (WorkoutName.equals(WorkoutData.WORKOUT_DESCRIPTIONS[i].getName())) {
+                _WorkoutDescription = WorkoutData.WORKOUT_DESCRIPTIONS[i];
+                break;
+            }
+        }
+        if (_WorkoutDescription.getName().equals("Horizontal Bowl")) {
+            setupSensorsLinear();
+            _CurrentWorkout = new WO_PickUpHorizontal(WorkoutName, reps, speechTrigger, _SFXPlayer, outputWorkoutData, outputWorkoutStrings);
+            _CurrentWorkoutView = new WV_JustText(getApplicationContext());
+        } else if (_WorkoutDescription.getName().equals("Vertical Bowl")) {
+            setupSensorsLinear();
+            _CurrentWorkout = new WO_PickUpVertical(WorkoutName, reps, speechTrigger, _SFXPlayer, outputWorkoutData, outputWorkoutStrings);
+            _CurrentWorkoutView = new WV_JustText(getApplicationContext());
+        } else if (_WorkoutDescription.getName().equals("Horizontal Cup")) {
+            setupSensorsLinear();
+            _CurrentWorkout = new WO_PickUpHorizontal(WorkoutName, reps, speechTrigger, _SFXPlayer, outputWorkoutData, outputWorkoutStrings);
+            _CurrentWorkoutView = new WV_JustText(getApplicationContext());
+        } else if (_WorkoutDescription.getName().equals("Vertical Cup")) {
+            setupSensorsLinear();
+            _CurrentWorkout = new WO_PickUpVertical(WorkoutName, reps, speechTrigger, _SFXPlayer, outputWorkoutData, outputWorkoutStrings);
+            _CurrentWorkoutView = new WV_JustText(getApplicationContext());
+        } else if (_WorkoutDescription.getName().equals("Walk Cup")) {
+            setupSensorsLinear();
+            _CurrentWorkout = new WO_Walk(WorkoutName, reps, speechTrigger, _SFXPlayer, outputWorkoutData, outputWorkoutStrings);
+            _CurrentWorkoutView = new WV_JustText(getApplicationContext());
+        } else if (_WorkoutDescription.getName().equals("Twist Cup")) {
+            setupSensorsLinear();
+            _CurrentWorkout = new WO_Twist(WorkoutName, reps, speechTrigger, _SFXPlayer, outputWorkoutData, outputWorkoutStrings);
+            _CurrentWorkoutView = new WV_JustText(getApplicationContext());
+        } else if (_WorkoutDescription.getName().equals("Pour Cup")) {
+            setupGravitySensor();
+            _CurrentWorkout = new WO_Pour(WorkoutName, reps, speechTrigger, _SFXPlayer, outputWorkoutData, outputWorkoutStrings);
+            _CurrentWorkoutView = new WV_Pour(getApplicationContext());
+        }
+        setContentView(_CurrentWorkoutView);
+    }
+
+    public void WorkoutFinished() {
+        _SaveHistoricalReps.updateWorkout(_CurrentWorkout.getName(), _WorkoutReps);
+        _SaveWorkoutSensor.execute();
+        Intent intent = new Intent(getApplicationContext(), LoadingScreen.class);
+        startActivity(intent);
     }
 
 }
