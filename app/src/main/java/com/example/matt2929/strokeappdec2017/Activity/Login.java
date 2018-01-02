@@ -21,6 +21,7 @@ import java.util.List;
 public class Login extends AppCompatActivity {
     int currentSelection = -1;
     List<String> userStrings = new ArrayList<>();
+    List<User> userList = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,7 +45,7 @@ public class Login extends AppCompatActivity {
             public void onClick(View view) {
                 if (currentSelection != -1) {
                     //Login
-                    WorkoutData.UserName = userStrings.get(currentSelection);
+                    WorkoutData.UserName = userList.get(currentSelection).getName();
                     Intent intent = new Intent(getApplicationContext(), WorkoutOrHistory.class);
                     startActivity(intent);
                 } else {
@@ -62,8 +63,9 @@ public class Login extends AppCompatActivity {
         });
         //turn users into strings for list view
 
-        List<User> userList = saveAndWriteUserInfo.getUsers();
-        for (User u : userList) {
+        userList = saveAndWriteUserInfo.getUsers();
+        for (int i = 0; i < userList.size(); i++) {
+            User u = userList.get(i);
             String userString = "";
             userString += "Name: " + u.getName();
             userString += "\nAge:" + u.getAge();
