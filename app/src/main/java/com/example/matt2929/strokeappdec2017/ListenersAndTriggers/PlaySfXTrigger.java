@@ -5,5 +5,5 @@ package com.example.matt2929.strokeappdec2017.ListenersAndTriggers;
  */
 
 public interface PlaySfXTrigger {
-    public void playSfXTrigger(int sfxID);
+    void playSfXTrigger(int sfxID);
 }

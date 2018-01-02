@@ -112,7 +112,10 @@ public class SensorWorkoutRunner extends AppCompatActivity implements SensorEven
                             _WorkoutInProgress = true;
                         } else if (s.equals(WorkoutData.TTS_WORKOUT_COMPLETE)) {
                             Long timeToComplete = Math.abs(TimeOfWorkout - System.currentTimeMillis());
-                            WorkoutFinished();
+                            _SaveHistoricalReps.updateWorkout(_CurrentWorkout.getName(), _WorkoutReps);
+                            _SaveWorkoutSensor.execute();
+                            Intent intent = new Intent(getApplicationContext(), LoadingScreen.class);
+                            startActivity(intent);
                         } else if (s.equals(WorkoutData.TTS_WORKOUT_AUDIO_FEEDBACK)) {
 
                         } else if (s.equals(WorkoutData.TEST)) {
@@ -182,11 +185,18 @@ public class SensorWorkoutRunner extends AppCompatActivity implements SensorEven
         }
 
         if (_WorkoutInProgress) {
-            _SaveWorkoutSensor.saveData(sensorEvent.values);
+            float[] data = new float[sensorEvent.values.length + 1];
+            data[0] = Math.abs(TimeOfWorkout - System.currentTimeMillis());
+            for (int i = 0; i < sensorEvent.values.length; i++) {
+                data[i + 1] = sensorEvent.values[i];
+            }
+            TimeOfWorkout = System.currentTimeMillis();
+            _SaveWorkoutSensor.saveData(data);
         }
 
-        if (_CurrentWorkout.isWorkoutComplete()) {
-            WorkoutFinished();
+        if (_CurrentWorkout.isWorkoutComplete() && _WorkoutInProgress) {
+            _Text2Speech.speak("Workout Complete", WorkoutData.TTS_WORKOUT_COMPLETE);
+            _WorkoutInProgress = false;
         }
     }
 
@@ -251,12 +261,4 @@ public class SensorWorkoutRunner extends AppCompatActivity implements SensorEven
         }
         setContentView(_CurrentWorkoutView);
     }
-
-    public void WorkoutFinished() {
-        _SaveHistoricalReps.updateWorkout(_CurrentWorkout.getName(), _WorkoutReps);
-        _SaveWorkoutSensor.execute();
-        Intent intent = new Intent(getApplicationContext(), LoadingScreen.class);
-        startActivity(intent);
-    }
-
 }

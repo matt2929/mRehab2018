@@ -18,7 +18,8 @@ public class WorkoutPreview extends AppCompatActivity {
         ImageView imageView = (ImageView) findViewById(R.id.previewImage);
         Button button = (Button) findViewById(R.id.preview_start);
         String workoutName = getIntent().getStringExtra("Workout");
-        
+
+
         switch (workoutName) {
             case "Horizontal Bowl":
                 break;

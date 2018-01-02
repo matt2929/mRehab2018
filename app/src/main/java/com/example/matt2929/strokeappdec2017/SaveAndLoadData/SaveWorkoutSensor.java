@@ -3,6 +3,7 @@ package com.example.matt2929.strokeappdec2017.SaveAndLoadData;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Environment;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.example.matt2929.strokeappdec2017.Values.WorkoutData;
@@ -57,15 +58,16 @@ public class SaveWorkoutSensor extends AsyncTask<Void, Void, Void> {
             try {
                 file.createNewFile();
                 writer = new PrintWriter(new FileWriter(file, true));
-                writer.print(_name + heading);
-                writer.append('\n');
+                writer.append(_name + heading + "\n");
+
                 for (int i = 0; i < dataQueue.size(); i++) {
                     for (int j = 0; j < dataQueue.get(i).length; j++) {
-                        if (j == dataQueue.size() - 1) {
+                        if (j == dataQueue.get(i).length - 1) {
                             writer.append(dataQueue.get(i)[j] + "\n");
                         } else {
                             writer.append(dataQueue.get(i)[j] + ",");
                         }
+                        Log.e("Progress Asynch", "" + WorkoutData.progress);
                         WorkoutData.progress = (((float) i) / ((float) dataQueue.size() - 1)) * 100f;
                     }
                 }

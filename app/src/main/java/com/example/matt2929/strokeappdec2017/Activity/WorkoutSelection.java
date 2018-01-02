@@ -43,7 +43,7 @@ public class WorkoutSelection extends AppCompatActivity {
                     } else {
                         intent.putExtra("WorkoutType", "Touch");
                     }
-                    intent.putExtra("Hand", "Right");
+                    intent.putExtra("Hand", "Left");
                     intent.putExtra("Workout", WORKOUT_DESCRIPTIONS[currentSelection].getName());
                     startActivity(intent);
                 } else {
@@ -58,7 +58,7 @@ public class WorkoutSelection extends AppCompatActivity {
             public void onClick(View view) {
                 if (currentSelection != -1) {
                     Intent intent;
-                    if (WORKOUT_TYPE[currentSelection].equals(WorkoutPreview.class)) {
+                    if (WORKOUT_TYPE[currentSelection].equals(Workout_Type_Sensor)) {
                         intent = new Intent(getApplicationContext(), SensorWorkoutRunner.class);
                     } else {
                         intent = new Intent(getApplicationContext(), TouchWorkoutRunner.class);

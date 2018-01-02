@@ -5,5 +5,5 @@ package com.example.matt2929.strokeappdec2017.ListenersAndTriggers;
  */
 
 public interface SpeechTrigger {
-    public void speak(String s);
+    void speak(String s);
 }
