@@ -1,6 +1,7 @@
 package com.example.matt2929.strokeappdec2017.SaveAndLoadData;
 
 import android.content.Context;
+import android.util.Log;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
@@ -37,13 +38,15 @@ public class SaveHistoricalReps {
         List<File> files = getAllFiles(context.getFilesDir());
         ArrayList<String> goals = new ArrayList<>();
         for (File f : files) {
-            if (f.getName().contains("UserReps_") && f.getName().contains("_" + username + "_")) {
-                User user = new User();
-                try {
+	        Log.e("Look for", username + "in " + f.getName());
+	        if (f.getName().contains("UserReps_") && f.getName().contains("_" + username + "_")) {
+		        User user = new User();
+		        try {
                     BufferedReader br = new BufferedReader(new FileReader(f));
                     String line = "";
                     while ((line = br.readLine()) != null) {
-                        workouts.put(line.split(":")[0], Integer.valueOf((line.split(":")[1])));
+	                    Log.e(f.getName(), line);
+	                    workouts.put(line.split(":")[0], Integer.valueOf((line.split(":")[1])));
                     }
                     br.close();
                 } catch (FileNotFoundException e) {
@@ -64,29 +67,7 @@ public class SaveHistoricalReps {
         }
     }
 
-    private String loadFile(String filename) {
-        List<File> files = getAllFiles(context.getFilesDir());
-        String output = "";
-        for (File f : files) {
-            if (f.getName().equals(filename)) {
-                User user = new User();
-                try {
-                    BufferedReader br = new BufferedReader(new FileReader(f));
-                    String line = "";
-                    while ((line = br.readLine()) != null) {
-                        output += line;
-                    }
-                    br.close();
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                }
-                break;
-            }
 
-        }
-        return output;
-    }
 
     public void updateWorkout(String workoutName, Integer reps) {
         String filename = "UserReps_" + username + "_" + ".txt";
@@ -98,8 +79,7 @@ public class SaveHistoricalReps {
             Iterator it = workouts.entrySet().iterator();
             while (it.hasNext()) {
                 Map.Entry pair = (Map.Entry) it.next();
-                System.out.println(pair.getKey() + " = " + pair.getValue());
-                output += pair.getKey() + "," + String.valueOf(pair.getValue()) + "\n";
+	            output += pair.getKey() + ":" + String.valueOf(pair.getValue()) + "\n";
             }
             outputStream.write(output.getBytes());
             outputStream.close();
@@ -114,11 +94,12 @@ public class SaveHistoricalReps {
         Queue<File> files = new LinkedList<>();
         files.addAll(Arrays.asList(parentDir.listFiles()));
         while (!files.isEmpty()) {
-            File file = files.remove();
-            if (file.isDirectory()) {
-                files.addAll(Arrays.asList(file.listFiles()));
-            } else if (file.getName().contains("USER")) {
-                inFiles.add(file);
+	        Log.e("File", files.peek().getName());
+	        File file = files.remove();
+	        if (file.isDirectory()) {
+		        files.addAll(Arrays.asList(file.listFiles()));
+	        } else if (file.getName().contains("UserReps")) {
+		        inFiles.add(file);
             }
         }
         return inFiles;

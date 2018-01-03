@@ -9,6 +9,7 @@ import android.widget.ImageView;
 
 import com.example.matt2929.strokeappdec2017.R;
 
+
 public class WorkoutPreview extends AppCompatActivity {
 
     @Override
@@ -48,7 +49,12 @@ public class WorkoutPreview extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = getIntent();
-                intent.setClass(getApplicationContext(), SensorWorkoutRunner.class);
+	            String WorkoutType = intent.getStringExtra("WorkoutType");
+	            if (WorkoutType.equals("Sensor")) {
+		            intent.setClass(getApplicationContext(), SensorWorkoutRunner.class);
+	            } else {
+		            intent.setClass(getApplicationContext(), TouchWorkoutRunner.class);
+	            }
                 startActivity(intent);
             }
         });

@@ -34,14 +34,10 @@ public class GoalsAndReps extends AppCompatActivity {
         String WorkoutHand = oldIntent.getStringExtra("Hand");
         String WorkoutName = oldIntent.getStringExtra("Workout");
         String WorkoutType = oldIntent.getStringExtra("WorkoutType");
-        if (WorkoutType.equals("Sensor")) {
-            newIntent = new Intent(getApplicationContext(), SensorWorkoutRunner.class);
-        } else {
-            newIntent = new Intent(getApplicationContext(), TouchWorkoutRunner.class);
-        }
+        newIntent = new Intent(getApplicationContext(), WorkoutPreview.class);
         newIntent.putExtra("Hand", oldIntent.getStringExtra("Hand"));
         newIntent.putExtra("Workout", oldIntent.getStringExtra("Workout"));
-
+        newIntent.putExtra("WorkoutType", WorkoutType);
         saveHistoricalGoals = new SaveHistoricalGoals(getApplicationContext());
         saveHistoricalReps = new SaveHistoricalReps(getApplicationContext(), WorkoutData.UserName);
         ArrayList<String> goals = saveHistoricalGoals.getGoals(WorkoutData.UserName);

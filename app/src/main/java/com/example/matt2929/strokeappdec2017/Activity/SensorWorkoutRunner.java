@@ -84,6 +84,14 @@ public class SensorWorkoutRunner extends AppCompatActivity implements SensorEven
         _mSensorManager.registerListener(this, _mSensor, SensorManager.SENSOR_DELAY_GAME);
     }
 
+@Override
+protected void onDestroy() {
+	super.onDestroy();
+	_mSensorManager.unregisterListener(this);
+	if (_Text2Speech != null) {
+		_Text2Speech.destroy();
+	}
+}
     private void checkTTS() {
         Intent check = new Intent();
         check.setAction(TextToSpeech.Engine.ACTION_CHECK_TTS_DATA);
