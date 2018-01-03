@@ -65,8 +65,8 @@ public class SensorWorkoutRunner extends AppCompatActivity implements SensorEven
         _SaveHistoricalReps = new SaveHistoricalReps(getApplicationContext(), WorkoutData.UserName);
         _SaveWorkoutSensor = new SaveWorkoutSensor(getApplicationContext(), WorkoutData.UserName, "Time,X,Y,Z");
         _SFXPlayer = new SFXPlayer(getApplicationContext());
-        SetupWorkout(_WorkoutName, 10);
-        checkTTS();
+	    SetupWorkout(_WorkoutName, _WorkoutReps);
+	    checkTTS();
     }
 
     @Override

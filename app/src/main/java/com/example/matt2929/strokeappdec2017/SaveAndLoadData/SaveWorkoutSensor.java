@@ -4,7 +4,6 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Environment;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.example.matt2929.strokeappdec2017.Values.WorkoutData;
 
@@ -73,12 +72,10 @@ public class SaveWorkoutSensor extends AsyncTask<Void, Void, Void> {
                 }
                 writer.close();
             } catch (IOException e) {
-                Toast.makeText(_context, "Error Saving", Toast.LENGTH_SHORT).show();
                 e.printStackTrace();
             }
 
         } catch (Exception e) {
-            Toast.makeText(_context, "Error Saving", Toast.LENGTH_SHORT).show();
             e.printStackTrace();
         }
         return null;
