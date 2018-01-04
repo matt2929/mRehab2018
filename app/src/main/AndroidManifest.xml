@@ -34,7 +34,8 @@
         <activity android:name=".Activity.GoalsAndReps" />
         <activity android:name=".Activity.PostWorkoutReport" />
         <activity android:name=".Activity.PostWorkoutGoals" />
-        <activity android:name=".Activity.LoadingScreen"></activity>
+        <activity android:name=".Activity.LoadingScreen" />
+        <activity android:name=".Activity.HistoryMain"></activity>
     </application>
 
 </manifest>

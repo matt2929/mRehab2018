@@ -52,9 +52,9 @@ public class GradeView extends View {
         textTextPaint.setTextSize(60);
 
 
-        backgroundPaint.setColor(Color.DKGRAY);
-        marginPaint.setColor(Color.GRAY);
-        this.setBackgroundColor(Color.BLACK);
+	    backgroundPaint.setColor(Color.GRAY);
+	    marginPaint.setColor(Color.DKGRAY);
+	    this.setBackgroundColor(Color.BLACK);
     }
 
     public void SetupView(Bitmap bitmap, String Title, float oldValue, float newValue, boolean didBetter) {

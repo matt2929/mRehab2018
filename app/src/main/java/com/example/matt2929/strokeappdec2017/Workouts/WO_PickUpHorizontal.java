@@ -11,7 +11,7 @@ import com.example.matt2929.strokeappdec2017.Utilities.SFXPlayer;
  * Created by matt2929 on 12/20/17.
  */
 
-public class WO_PickUpHorizontal extends WorkoutAbstract {
+public class WO_PickUpHorizontal extends SensorWorkoutAbstract {
 boolean moving = false;
 double thresehold = .25;
 int pickUpCount = 0;

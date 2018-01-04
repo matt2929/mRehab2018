@@ -8,8 +8,8 @@ import android.media.MediaPlayer;
  */
 
 public class SFXPlayer {
-    MediaPlayer mediaPlayer;
-    Context context;
+	MediaPlayer mediaPlayer = new MediaPlayer();
+	Context context;
     boolean playing = false;
     public SFXPlayer(Context context) {
         this.context = context;
@@ -24,7 +24,17 @@ public class SFXPlayer {
         playing = true;
     }
 
-    public boolean isPlaying() {
+	public void killAll() {
+		playing = false;
+		if (mediaPlayer.isPlaying()) {
+			mediaPlayer.stop();
+		}
+		if (mediaPlayer.isLooping()) {
+			mediaPlayer.setLooping(false);
+		}
+	}
+
+	public boolean isPlaying() {
         return playing;
     }
 

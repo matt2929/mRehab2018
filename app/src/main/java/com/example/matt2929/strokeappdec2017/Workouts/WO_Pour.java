@@ -12,10 +12,11 @@ import com.example.matt2929.strokeappdec2017.Utilities.SFXPlayer;
  * Created by matt2929 on 12/21/17.
  */
 
-public class WO_Pour extends WorkoutAbstract {
+public class WO_Pour extends SensorWorkoutAbstract {
     float filledPercentage = 100f;
     float thresehold = 15f;
     float removalRate = .1f;
+	boolean tooQuicklyFullExplainGiven = false;
 
     public WO_Pour(String Name, Integer reps, SpeechTrigger speechTrigger, SFXPlayer SFX, OutputWorkoutData outputWorkoutData, OutputWorkoutStrings outputWorkoutStrings) {
         super.Workout(Name, reps, speechTrigger, SFX, outputWorkoutData, outputWorkoutStrings);
@@ -52,11 +53,21 @@ public class WO_Pour extends WorkoutAbstract {
                 }
             } else {
                 if (sfxPlayer.isPlaying()) {
-                    sfxPlayer.pauseSFX();
+	                if (AngleStandardized - filledPercentage < thresehold) {
+		                if (!tooQuicklyFullExplainGiven) {
+			                speechTrigger.speak("Your pouring too quickly, please tilt the cup up until water comes out again.");
+			                tooQuicklyFullExplainGiven = true;
+		                } else {
+			                speechTrigger.speak("Your pouring too quickly");
+
+		                }
+		                sfxPlayer.pauseSFX();
+	                }
+
                 }
             }
-            if (filledPercentage < 0) {
-                workoutComplete = true;
+	        if (filledPercentage <= 0) {
+		        workoutComplete = true;
             }
             Log.e("Angle: ", Angle + "º" + "AngleS: " + AngleStandardized + "º Filled%" + filledPercentage);
             outputData(new float[]{Angle, ((filledPercentage) / 100f)});

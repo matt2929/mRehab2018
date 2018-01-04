@@ -28,7 +28,7 @@ public class LoadingScreen extends AppCompatActivity {
                 if (progress != 100f) {
                     ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBar);
                     progressBar.setProgress(Float.floatToIntBits(Math.round(progress)));
-                    textView.setText("" + Float.floatToIntBits(Math.round(progress)));
+                    textView.setText("" + Math.round(progress));
                     handler.postDelayed(this, 100);
                 } else {
                     Intent intent = new Intent(getApplicationContext(), PostWorkoutReport.class);
