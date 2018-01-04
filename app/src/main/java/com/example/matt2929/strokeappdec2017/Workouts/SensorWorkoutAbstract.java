@@ -13,7 +13,7 @@ import com.example.matt2929.strokeappdec2017.Utilities.SFXPlayer;
 public abstract class SensorWorkoutAbstract extends WorkoutAbstract {
 
 
-    public void Workout(String Name, Integer reps, SpeechTrigger speechTrigger, SFXPlayer sfxPlayer, OutputWorkoutData outputWorkoutData, OutputWorkoutStrings outputWorkoutStrings) {
+	public void SensorWorkout(String Name, Integer reps, SpeechTrigger speechTrigger, SFXPlayer sfxPlayer, OutputWorkoutData outputWorkoutData, OutputWorkoutStrings outputWorkoutStrings) {
 	    super.Workout(Name, reps, speechTrigger, sfxPlayer, outputWorkoutData, outputWorkoutStrings);
     }
 

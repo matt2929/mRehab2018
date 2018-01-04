@@ -19,7 +19,7 @@ int belowThresholdCount = 0;
 int belowThresholdMax = 100;
 
 public WO_PickUpVertical(String Name, Integer reps, SpeechTrigger speechTrigger, SFXPlayer sfxPlayer, OutputWorkoutData outputWorkoutData, OutputWorkoutStrings outputWorkoutStrings) {
-	super.Workout(Name, reps, speechTrigger, sfxPlayer, outputWorkoutData, outputWorkoutStrings);
+	super.SensorWorkout(Name, reps, speechTrigger, sfxPlayer, outputWorkoutData, outputWorkoutStrings);
 }
 
 @Override
