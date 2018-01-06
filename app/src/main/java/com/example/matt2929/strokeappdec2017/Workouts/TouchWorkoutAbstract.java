@@ -16,12 +16,16 @@ import java.util.ArrayList;
 public class TouchWorkoutAbstract extends WorkoutAbstract {
 	ArrayList<View> views = new ArrayList<>();
 
-	public void SensorWorkout(String Name, Integer reps, ArrayList<View> views, SpeechTrigger speechTrigger, SFXPlayer sfxPlayer, OutputWorkoutData outputWorkoutData, OutputWorkoutStrings outputWorkoutStrings) {
+	public void TouchWorkout(String Name, Integer reps, ArrayList<View> views, SpeechTrigger speechTrigger, SFXPlayer sfxPlayer, OutputWorkoutData outputWorkoutData, OutputWorkoutStrings outputWorkoutStrings) {
 		super.Workout(Name, reps, speechTrigger, sfxPlayer, outputWorkoutData, outputWorkoutStrings);
 		this.views = views;
 	}
 
 	public void TouchIn(float x, float y) {
+
+	}
+
+	public void Update() {
 
 	}
 }
