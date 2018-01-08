@@ -44,4 +44,8 @@ public class CircleView extends RelativeLayout {
 		super.onDraw(canvas);
 		canvas.drawCircle(getWidth() / 2, getHeight() / 2, getWidth() / 2, paintShape);
 	}
+
+	public void setColor(Integer color) {
+		paintShape.setColor(color);
+	}
 }

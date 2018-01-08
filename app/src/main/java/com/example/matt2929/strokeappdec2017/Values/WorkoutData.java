@@ -14,17 +14,17 @@ public final class WorkoutData {
     public static final String Sensor_Type_Gravity = "Sensor Gravity";
     public final static WorkoutDescription[] WORKOUT_DESCRIPTIONS = new WorkoutDescription[]
             {
-                    new WorkoutDescription("Horizontal Bowl", Workout_Type_Sensor, Sensor_Type_Linear),
-                    new WorkoutDescription("Vertical Bowl", Workout_Type_Sensor, Sensor_Type_Linear),
-                    new WorkoutDescription("Horizontal Cup", Workout_Type_Sensor, Sensor_Type_Linear),
-                    new WorkoutDescription("Vertical Cup", Workout_Type_Sensor, Sensor_Type_Linear),
-                    new WorkoutDescription("Walk Cup", Workout_Type_Sensor, Sensor_Type_Linear),
-                    new WorkoutDescription("Twist Cup", Workout_Type_Sensor, Sensor_Type_Linear),
-                    new WorkoutDescription("Pour Cup", Workout_Type_Sensor, Sensor_Type_Gravity),
-                    new WorkoutDescription("Unlock Key", Workout_Type_Touch, null),
-                    new WorkoutDescription("Unlock Door", Workout_Type_Touch, null),
-                    new WorkoutDescription("Phone Number", Workout_Type_Touch, null),
-                    new WorkoutDescription("Multi Touch", Workout_Type_Touch, null),
+		            new WorkoutDescription("Horizontal Bowl", Workout_Type_Sensor, Sensor_Type_Linear, 10),
+		            new WorkoutDescription("Vertical Bowl", Workout_Type_Sensor, Sensor_Type_Linear, 10),
+		            new WorkoutDescription("Horizontal Cup", Workout_Type_Sensor, Sensor_Type_Linear, 10),
+		            new WorkoutDescription("Vertical Cup", Workout_Type_Sensor, Sensor_Type_Linear, 10),
+		            new WorkoutDescription("Walk Cup", Workout_Type_Sensor, Sensor_Type_Linear, 10),
+		            new WorkoutDescription("Twist Cup", Workout_Type_Sensor, Sensor_Type_Linear, 10),
+		            new WorkoutDescription("Pour Cup", Workout_Type_Sensor, Sensor_Type_Gravity, 10),
+		            new WorkoutDescription("Unlock Key", Workout_Type_Touch, null, 5),
+		            new WorkoutDescription("Unlock Door", Workout_Type_Touch, null, 5),
+		            new WorkoutDescription("Phone Number", Workout_Type_Touch, null, 3),
+		            new WorkoutDescription("Multi Touch", Workout_Type_Touch, null, 5),
             };
     public final static String[] WORKOUT_TYPE = new String[]{
             Workout_Type_Sensor,

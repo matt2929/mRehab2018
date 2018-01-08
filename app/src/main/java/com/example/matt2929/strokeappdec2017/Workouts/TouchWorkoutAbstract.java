@@ -19,6 +19,7 @@ public class TouchWorkoutAbstract extends WorkoutAbstract {
 	public void TouchWorkout(String Name, Integer reps, ArrayList<View> views, SpeechTrigger speechTrigger, SFXPlayer sfxPlayer, OutputWorkoutData outputWorkoutData, OutputWorkoutStrings outputWorkoutStrings) {
 		super.Workout(Name, reps, speechTrigger, sfxPlayer, outputWorkoutData, outputWorkoutStrings);
 		this.views = views;
+
 	}
 
 	public void TouchIn(float x, float y) {

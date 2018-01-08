@@ -5,25 +5,31 @@ package com.example.matt2929.strokeappdec2017.Workouts;
  */
 
 public class WorkoutDescription {
-    private String Name = "";
-    private String WorkoutType = "";
-    private String SensorType = "";
+	private String Name = "";
+	private String WorkoutType = "";
+	private String SensorType = "";
+	private Integer NormalReps = 10;
 
-    public WorkoutDescription(String Name, String WorkoutType, String SensorType) {
-        this.Name = Name;
-        this.WorkoutType = WorkoutType;
-        this.SensorType = SensorType;
-    }
+	public WorkoutDescription(String Name, String WorkoutType, String SensorType, Integer NormalReps) {
+		this.Name = Name;
+		this.WorkoutType = WorkoutType;
+		this.SensorType = SensorType;
+		this.NormalReps = NormalReps;
+	}
 
-    public String getName() {
-        return Name;
-    }
+	public String getName() {
+		return Name;
+	}
 
-    public String getSensorType() {
-        return SensorType;
-    }
+	public String getSensorType() {
+		return SensorType;
+	}
 
-    public String getWorkoutType() {
-        return WorkoutType;
-    }
+	public String getWorkoutType() {
+		return WorkoutType;
+	}
+
+	public Integer getNormalReps() {
+		return NormalReps;
+	}
 }

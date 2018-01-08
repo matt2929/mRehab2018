@@ -87,14 +87,14 @@ public class SensorWorkoutRunner extends AppCompatActivity implements SensorEven
 		_mSensorManager.registerListener(this, _mSensor, SensorManager.SENSOR_DELAY_GAME);
 	}
 
-@Override
-protected void onDestroy() {
-	super.onDestroy();
-	_mSensorManager.unregisterListener(this);
-	if (_Text2Speech != null) {
-		_Text2Speech.destroy();
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		_mSensorManager.unregisterListener(this);
+		if (_Text2Speech != null) {
+			_Text2Speech.destroy();
+		}
 	}
-}
 
 	private void checkTTS() {
 		Intent check = new Intent();
@@ -187,7 +187,7 @@ protected void onDestroy() {
 		}
 		_mSensorManager.registerListener(this, _mSensor, SensorManager.SENSOR_DELAY_GAME);
 
-}
+	}
 //There is an update from the Sensor
 
 	@Override
@@ -274,5 +274,5 @@ protected void onDestroy() {
 			_CurrentWorkoutView = new WV_Pour(getApplicationContext());
 		}
 		setContentView(_CurrentWorkoutView);
-}
+	}
 }

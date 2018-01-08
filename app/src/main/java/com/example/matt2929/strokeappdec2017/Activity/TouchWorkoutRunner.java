@@ -8,7 +8,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.AbsoluteLayout;
 
 import com.example.matt2929.strokeappdec2017.ListenersAndTriggers.OutputWorkoutData;
 import com.example.matt2929.strokeappdec2017.ListenersAndTriggers.OutputWorkoutStrings;
@@ -24,6 +23,7 @@ import com.example.matt2929.strokeappdec2017.Utilities.Text2Speech;
 import com.example.matt2929.strokeappdec2017.Values.WorkoutData;
 import com.example.matt2929.strokeappdec2017.Workouts.TouchWorkoutAbstract;
 import com.example.matt2929.strokeappdec2017.Workouts.WO_MultiTouch;
+import com.example.matt2929.strokeappdec2017.Workouts.WO_PhoneNumber;
 import com.example.matt2929.strokeappdec2017.Workouts.WorkoutDescription;
 
 import java.util.ArrayList;
@@ -57,11 +57,18 @@ public class TouchWorkoutRunner extends AppCompatActivity {
 		_WorkoutName = intent.getStringExtra("Workout");
 		_WorkoutReps = intent.getIntExtra("Reps", 10);
 		_SaveHistoricalReps = new SaveHistoricalReps(getApplicationContext(), WorkoutData.UserName);
-		_SaveWorkoutSensor = new SaveWorkoutSensor(getApplicationContext(), WorkoutData.UserName, "Time,X,Y,Z");
+		_SaveWorkoutSensor = new SaveWorkoutSensor(getApplicationContext(), WorkoutData.UserName, "Time,X,Y");
 		_SaveWorkoutData = new SaveWorkoutData(getApplicationContext());
 		_SFXPlayer = new SFXPlayer(getApplicationContext());
 		SetupWorkout(_WorkoutName, _WorkoutReps);
+		checkTTS();
 
+	}
+
+	private void checkTTS() {
+		Intent check = new Intent();
+		check.setAction(TextToSpeech.Engine.ACTION_CHECK_TTS_DATA);
+		startActivityForResult(check, CHECK_CODE);
 	}
 
 	@Override
@@ -91,6 +98,7 @@ public class TouchWorkoutRunner extends AppCompatActivity {
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (requestCode == CHECK_CODE) {
 			if (resultCode == TextToSpeech.Engine.CHECK_VOICE_DATA_PASS) {
+				Log.e("got here", resultCode + "");
 				_Text2Speech = new Text2Speech(this);
 				_Text2Speech.addSpeechCompleteListener(new SpeechCompleteListener() {
 					@Override
@@ -172,9 +180,23 @@ public class TouchWorkoutRunner extends AppCompatActivity {
 			_CurrentWorkoutView = new WV_JustText(getApplicationContext());
 		*/
 		} else if (_WorkoutDescription.getName().equals("Phone Number")) {
-		/*	_CurrentWorkout = new WO_PickUpHorizontal(WorkoutName, reps, speechTrigger, _SFXPlayer, outputWorkoutData, outputWorkoutStrings);
-			_CurrentWorkoutView = new WV_JustText(getApplicationContext());
-		*/
+			setContentView(R.layout.activity_phone_number);
+			ArrayList<View> views = new ArrayList<>();
+			views.add(findViewById(R.id.whatToType));
+			views.add(findViewById(R.id.whatYouTyped));
+			views.add(findViewById(R.id.phone0));
+			views.add(findViewById(R.id.phone1));
+			views.add(findViewById(R.id.phone2));
+			views.add(findViewById(R.id.phone3));
+			views.add(findViewById(R.id.phone4));
+			views.add(findViewById(R.id.phone5));
+			views.add(findViewById(R.id.phone6));
+			views.add(findViewById(R.id.phone7));
+			views.add(findViewById(R.id.phone8));
+			views.add(findViewById(R.id.phone9));
+			_CurrentWorkoutView = findViewById(android.R.id.content).getRootView();
+			_CurrentWorkout = new WO_PhoneNumber(WorkoutName, reps, views, speechTrigger, _SFXPlayer, outputWorkoutData, outputWorkoutStrings);
+
 		} else if (_WorkoutDescription.getName().equals("Multi Touch")) {
 			setContentView(R.layout.activity_multi_touch);
 			ArrayList<View> views = new ArrayList<>();
@@ -186,17 +208,19 @@ public class TouchWorkoutRunner extends AppCompatActivity {
 			views.add(findViewById(R.id.circle6));
 			_CurrentWorkoutView = findViewById(android.R.id.content).getRootView();
 			_CurrentWorkout = new WO_MultiTouch(WorkoutName, reps, views, speechTrigger, _SFXPlayer, outputWorkoutData, outputWorkoutStrings);
-		}
-		final AbsoluteLayout absoluteLayout = (AbsoluteLayout) findViewById(R.id.multiTouchMaster);
 
+		}
 		final Handler handler = new Handler();
 		handler.post(new Runnable() {
 			@Override
 			public void run() {
 				_CurrentWorkout.Update();
 				_CurrentWorkoutView.invalidate();
-				handler.postDelayed(this, 55);
-				Log.e("_C", "W" + absoluteLayout.getWidth() / 2 + ":H" + absoluteLayout.getHeight() / 2);
+				if (_CurrentWorkout.isWorkoutComplete() && _WorkoutInProgress) {
+					_Text2Speech.speak("Workout Complete", WorkoutData.TTS_WORKOUT_COMPLETE);
+					_WorkoutInProgress = false;
+				}
+				handler.postDelayed(this, 35);
 			}
 		});
 
@@ -205,6 +229,8 @@ public class TouchWorkoutRunner extends AppCompatActivity {
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
 		_CurrentWorkout.TouchIn(event.getX(), event.getY());
+		Log.e("Coordinates", "(" + event.getX() + "," + event.getY() + ")");
+		_SaveWorkoutSensor.saveData(new float[]{event.getX(), event.getY()});
 		return super.onTouchEvent(event);
 	}
 
