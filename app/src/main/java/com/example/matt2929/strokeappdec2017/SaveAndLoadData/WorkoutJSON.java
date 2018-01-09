@@ -76,6 +76,10 @@ public class WorkoutJSON {
 		return Duration;
 	}
 
+	public Calendar getCalendar() {
+		return calendar;
+	}
+
 	public String getWorkoutName() {
 		return WorkoutName;
 	}
