@@ -26,13 +26,16 @@ public WO_PickUpVertical(String Name, Integer reps, SpeechTrigger speechTrigger,
 public void SensorDataIn(float[] data) {
 	super.SensorDataIn(data);
 	int sensorChoice = 1;
+	if (Name.contains("Bowl")) {
+		sensorChoice = 0;
+	}
 	Log.e("Accy", AverageDataValue[1] + " m/s^2 Moving:" + moving + " threshholdCount: " + belowThresholdCount);
 	if (WorkoutInProgress) {
-		if (AverageDataValue[1] > thresehold) {
+		if (AverageDataValue[sensorChoice] > thresehold) {
 			moving = true;
 			belowThresholdCount = 0;
 		}
-		if (AverageDataValue[1] < thresehold) {
+		if (AverageDataValue[sensorChoice] < thresehold) {
 			belowThresholdCount++;
 			if (belowThresholdCount > belowThresholdMax) {
 				if (moving == true) {
