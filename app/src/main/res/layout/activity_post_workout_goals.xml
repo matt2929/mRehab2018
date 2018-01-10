@@ -30,15 +30,21 @@
                 android:id="@+id/button2"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:layout_margin="10dp"
                 android:layout_weight="1"
-                android:text="Add A Goal" />
+                android:background="@drawable/buttonshape"
+                android:text="Add A Goal"
+                android:textSize="30sp" />
 
             <Button
                 android:id="@+id/button"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:layout_margin="10dp"
                 android:layout_weight="1"
-                android:text="Continue " />
+                android:background="@drawable/buttonshape"
+                android:text="Continue "
+                android:textSize="30sp" />
         </LinearLayout>
 
     </LinearLayout>

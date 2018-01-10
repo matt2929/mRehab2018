@@ -22,6 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
+        android:background="@drawable/buttonshape"
         android:text="Start"
         android:textSize="36sp"
         tools:layout_editor_absoluteX="342dp"

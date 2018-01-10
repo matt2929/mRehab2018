@@ -33,7 +33,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@android:drawable/btn_default_small"
+            android:background="@drawable/buttonshape"
             android:fadingEdge="horizontal|vertical"
             android:text="Workout"
             android:textSize="24sp" />
@@ -43,7 +43,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@android:drawable/btn_default_small"
+            android:background="@drawable/buttonshape"
             android:fadingEdge="horizontal|vertical"
             android:text="Duration"
             android:textSize="24sp" />
@@ -60,7 +60,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@android:drawable/btn_default_small"
+            android:background="@drawable/buttonshape"
             android:fadingEdge="horizontal|vertical"
             android:text="Reps"
             android:textSize="24sp" />
@@ -70,7 +70,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@android:drawable/btn_default_small"
+            android:background="@drawable/buttonshape"
             android:fadingEdge="horizontal|vertical"
             android:text="Score"
             android:textSize="24sp" />

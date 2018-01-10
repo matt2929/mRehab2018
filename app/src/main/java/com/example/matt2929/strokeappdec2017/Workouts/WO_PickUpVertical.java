@@ -1,7 +1,5 @@
 package com.example.matt2929.strokeappdec2017.Workouts;
 
-import android.util.Log;
-
 import com.example.matt2929.strokeappdec2017.ListenersAndTriggers.OutputWorkoutData;
 import com.example.matt2929.strokeappdec2017.ListenersAndTriggers.OutputWorkoutStrings;
 import com.example.matt2929.strokeappdec2017.ListenersAndTriggers.SpeechTrigger;
@@ -29,7 +27,6 @@ public void SensorDataIn(float[] data) {
 	if (Name.contains("Bowl")) {
 		sensorChoice = 0;
 	}
-	Log.e("Accy", AverageDataValue[1] + " m/s^2 Moving:" + moving + " threshholdCount: " + belowThresholdCount);
 	if (WorkoutInProgress) {
 		if (AverageDataValue[sensorChoice] > thresehold) {
 			moving = true;
