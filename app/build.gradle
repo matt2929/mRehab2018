@@ -1,5 +1,25 @@
+repositories {
+    jcenter()
+}
+
+buildscript {
+    repositories {
+        jcenter()
+        maven {
+            url 'https://maven.google.com'
+        }
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.0.1'
+    }
+}
+
 apply plugin: 'com.android.application'
 
+dependencies {
+    compile 'com.amazonaws:aws-android-sdk-s3:2.6.+'
+}
 android {
     compileSdkVersion 26
     buildToolsVersion '26.0.2'
