@@ -65,7 +65,7 @@ public class SensorWorkoutRunner extends AppCompatActivity implements SensorEven
 		_WorkoutName = intent.getStringExtra("Workout");
 		_WorkoutReps = intent.getIntExtra("Reps", 10);
 		_SaveHistoricalReps = new SaveHistoricalReps(getApplicationContext(), WorkoutData.UserName);
-		_SaveWorkoutSensor = new SaveWorkoutSensor(getApplicationContext(), WorkoutData.UserName, "Time,X,Y,Z");
+		_SaveWorkoutSensor = new SaveWorkoutSensor(getApplicationContext(), _WorkoutName, "Time,X,Y,Z");
 		_SaveWorkoutData = new SaveWorkoutData(getApplicationContext());
 		_SFXPlayer = new SFXPlayer(getApplicationContext());
 		SetupWorkout(_WorkoutName, _WorkoutReps);

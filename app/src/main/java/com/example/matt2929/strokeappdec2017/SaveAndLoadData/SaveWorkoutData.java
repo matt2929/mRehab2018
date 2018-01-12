@@ -3,6 +3,8 @@ package com.example.matt2929.strokeappdec2017.SaveAndLoadData;
 import android.content.Context;
 import android.os.Environment;
 
+import com.example.matt2929.strokeappdec2017.AmazonCloud.UploadToAmazonBucket;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -24,9 +26,11 @@ import java.util.Queue;
 public class SaveWorkoutData {
 	ArrayList<WorkoutJSON> workoutJSONS = new ArrayList<>();
 	Context context;
+	UploadToAmazonBucket uploadToAmazonBucket;
 
 	public SaveWorkoutData(Context context) {
 		this.context = context;
+		uploadToAmazonBucket = new UploadToAmazonBucket(context);
 	}
 
 
@@ -76,6 +80,7 @@ public class SaveWorkoutData {
 			writer = new PrintWriter(new FileWriter(file, true));
 			writer.append(output);
 			writer.close();
+			uploadToAmazonBucket.saveData(file);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

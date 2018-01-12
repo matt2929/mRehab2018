@@ -45,5 +45,6 @@ public final class WorkoutData {
 	public static final String TTS_WORKOUT_AUDIO_FEEDBACK = "WORKOUT_FEEDBACK";//Give mid workout feedback
     public static final String TEST = "TEST";
     public static String UserName = "";
-    public static Float progress = 0f;
+	public static Float progressLocal = 0f;
+	public static Float progressCloud = 0f;
 }
