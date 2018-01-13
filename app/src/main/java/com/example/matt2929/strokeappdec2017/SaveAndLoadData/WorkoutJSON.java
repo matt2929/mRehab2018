@@ -15,26 +15,30 @@ public class WorkoutJSON {
 	Integer Reps = -1;
 	Long Duration = -1l;
 	Long Accuracy = -1l;
+	String Hand = "Not Set", UserName = "Not Set";
 	Calendar calendar;
 
-	public WorkoutJSON(String WorkoutName, Integer Reps, Long Duration, Long Accuracy) {
+	public WorkoutJSON(String UserName, String WorkoutName, Integer Reps, Long Duration, Long Accuracy, String Hand) {
+		this.UserName = UserName;
 		this.WorkoutName = WorkoutName;
 		this.Reps = Reps;
 		this.Duration = Duration;
 		this.Accuracy = Accuracy;
 		this.calendar = Calendar.getInstance();
+		this.Hand = Hand;
 		try {
 			object.put("Name", WorkoutName);
+			object.put("UserName", UserName);
 			object.put("Reps", Reps);
 			object.put("Duration", Duration);
 			object.put("Accuracy", Accuracy);
+			object.put("Hand", Hand);
 			object.put("Year", calendar.get(Calendar.YEAR));
 			object.put("Month", calendar.get(Calendar.MONTH));
 			object.put("DayOfMonth", calendar.get(Calendar.DAY_OF_MONTH));
 			object.put("HourOfDay", calendar.get(Calendar.HOUR));
 			object.put("Minute", calendar.get(Calendar.MINUTE));
 			object.put("Second", calendar.get(Calendar.SECOND));
-
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
@@ -43,6 +47,8 @@ public class WorkoutJSON {
 	public WorkoutJSON(String JSON) {
 		try {
 			object = new JSONObject(JSON);
+			Hand = object.getString("Hand");
+			UserName = object.getString("UserName");
 			WorkoutName = object.getString("Name");
 			Reps = object.getInt("Reps");
 			Duration = object.getLong("Duration");
@@ -82,6 +88,10 @@ public class WorkoutJSON {
 
 	public String getWorkoutName() {
 		return WorkoutName;
+	}
+
+	public String getHand() {
+		return Hand;
 	}
 }
 

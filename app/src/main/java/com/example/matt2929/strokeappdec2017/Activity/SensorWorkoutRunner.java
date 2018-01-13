@@ -18,8 +18,8 @@ import com.example.matt2929.strokeappdec2017.ListenersAndTriggers.SpeechComplete
 import com.example.matt2929.strokeappdec2017.ListenersAndTriggers.SpeechInitListener;
 import com.example.matt2929.strokeappdec2017.ListenersAndTriggers.SpeechTrigger;
 import com.example.matt2929.strokeappdec2017.SaveAndLoadData.SaveHistoricalReps;
+import com.example.matt2929.strokeappdec2017.SaveAndLoadData.SaveTouchAndSensor;
 import com.example.matt2929.strokeappdec2017.SaveAndLoadData.SaveWorkoutData;
-import com.example.matt2929.strokeappdec2017.SaveAndLoadData.SaveWorkoutSensor;
 import com.example.matt2929.strokeappdec2017.Utilities.SFXPlayer;
 import com.example.matt2929.strokeappdec2017.Utilities.Text2Speech;
 import com.example.matt2929.strokeappdec2017.Values.WorkoutData;
@@ -52,7 +52,7 @@ public class SensorWorkoutRunner extends AppCompatActivity implements SensorEven
 	private WorkoutDescription _WorkoutDescription = null;
 	private SFXPlayer _SFXPlayer;
 	private SaveHistoricalReps _SaveHistoricalReps;
-	private SaveWorkoutSensor _SaveWorkoutSensor;
+	private SaveTouchAndSensor _SaveTouchAndSensor;
 	private SaveWorkoutData _SaveWorkoutData;
 	private Boolean _WorkoutInProgress = false;//Is workout currently running?
 //
@@ -65,7 +65,7 @@ public class SensorWorkoutRunner extends AppCompatActivity implements SensorEven
 		_WorkoutName = intent.getStringExtra("Workout");
 		_WorkoutReps = intent.getIntExtra("Reps", 10);
 		_SaveHistoricalReps = new SaveHistoricalReps(getApplicationContext(), WorkoutData.UserName);
-		_SaveWorkoutSensor = new SaveWorkoutSensor(getApplicationContext(), _WorkoutName, "Time,X,Y,Z");
+		_SaveTouchAndSensor = new SaveTouchAndSensor(getApplicationContext(), _WorkoutName, "Time,X,Y,Z");
 		_SaveWorkoutData = new SaveWorkoutData(getApplicationContext());
 		_SFXPlayer = new SFXPlayer(getApplicationContext());
 		SetupWorkout(_WorkoutName, _WorkoutReps);
@@ -126,8 +126,8 @@ public class SensorWorkoutRunner extends AppCompatActivity implements SensorEven
 							Long timeToComplete = Math.abs(TimeOfWorkout - System.currentTimeMillis());
 							_SFXPlayer.killAll();
 							_SaveHistoricalReps.updateWorkout(_CurrentWorkout.getName(), _WorkoutReps);
-							_SaveWorkoutSensor.execute();
-							_SaveWorkoutData.addNewWorkout(_CurrentWorkout.getName(), timeToComplete, 100l, _CurrentWorkout.getReps());
+							_SaveTouchAndSensor.execute();
+							_SaveWorkoutData.addNewWorkout(_CurrentWorkout.getName(), _WorkoutHand, timeToComplete, 100l, _CurrentWorkout.getReps());
 							Intent intent = new Intent(getApplicationContext(), LoadingScreen.class);
 							startActivity(intent);
 						} else if (s.equals(WorkoutData.TTS_WORKOUT_AUDIO_FEEDBACK)) {
@@ -205,7 +205,7 @@ public class SensorWorkoutRunner extends AppCompatActivity implements SensorEven
 				data[i + 1] = sensorEvent.values[i];
 			}
 			TimeOfWorkout = System.currentTimeMillis();
-			_SaveWorkoutSensor.saveData(data);
+			_SaveTouchAndSensor.saveData(data);
 		}
 
 		if (_CurrentWorkout.isWorkoutComplete() && _WorkoutInProgress) {

@@ -16,8 +16,8 @@ import com.example.matt2929.strokeappdec2017.ListenersAndTriggers.SpeechInitList
 import com.example.matt2929.strokeappdec2017.ListenersAndTriggers.SpeechTrigger;
 import com.example.matt2929.strokeappdec2017.R;
 import com.example.matt2929.strokeappdec2017.SaveAndLoadData.SaveHistoricalReps;
+import com.example.matt2929.strokeappdec2017.SaveAndLoadData.SaveTouchAndSensor;
 import com.example.matt2929.strokeappdec2017.SaveAndLoadData.SaveWorkoutData;
-import com.example.matt2929.strokeappdec2017.SaveAndLoadData.SaveWorkoutSensor;
 import com.example.matt2929.strokeappdec2017.Utilities.SFXPlayer;
 import com.example.matt2929.strokeappdec2017.Utilities.Text2Speech;
 import com.example.matt2929.strokeappdec2017.Values.WorkoutData;
@@ -44,10 +44,9 @@ public class TouchWorkoutRunner extends AppCompatActivity {
 	private WorkoutDescription _WorkoutDescription = null;
 	private SFXPlayer _SFXPlayer;
 	private SaveHistoricalReps _SaveHistoricalReps;
-	private SaveWorkoutSensor _SaveWorkoutSensor;
+	private SaveTouchAndSensor _SaveTouchAndSensor;
 	private SaveWorkoutData _SaveWorkoutData;
 	private Boolean _WorkoutInProgress = false;//Is workout currently running?
-//
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +56,7 @@ public class TouchWorkoutRunner extends AppCompatActivity {
 		_WorkoutName = intent.getStringExtra("Workout");
 		_WorkoutReps = intent.getIntExtra("Reps", 10);
 		_SaveHistoricalReps = new SaveHistoricalReps(getApplicationContext(), WorkoutData.UserName);
-		_SaveWorkoutSensor = new SaveWorkoutSensor(getApplicationContext(), _WorkoutName, "Time,X,Y");
+		_SaveTouchAndSensor = new SaveTouchAndSensor(getApplicationContext(), _WorkoutName, "Time,X,Y,Good Touch");
 		_SaveWorkoutData = new SaveWorkoutData(getApplicationContext());
 		_SFXPlayer = new SFXPlayer(getApplicationContext());
 		SetupWorkout(_WorkoutName, _WorkoutReps);
@@ -91,8 +90,6 @@ public class TouchWorkoutRunner extends AppCompatActivity {
 			_Text2Speech.destroy();
 		}
 	}
-
-
 	//use this to know when tts is done speaking
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -118,8 +115,8 @@ public class TouchWorkoutRunner extends AppCompatActivity {
 							Long timeToComplete = Math.abs(TimeOfWorkout - System.currentTimeMillis());
 							_SFXPlayer.killAll();
 							_SaveHistoricalReps.updateWorkout(_CurrentWorkout.getName(), _WorkoutReps);
-							_SaveWorkoutSensor.execute();
-							_SaveWorkoutData.addNewWorkout(_CurrentWorkout.getName(), timeToComplete, 100l, _CurrentWorkout.getReps());
+							_SaveTouchAndSensor.execute();
+							_SaveWorkoutData.addNewWorkout(_CurrentWorkout.getName(), _WorkoutHand, timeToComplete, 100l, _CurrentWorkout.getReps());
 							Intent intent = new Intent(getApplicationContext(), LoadingScreen.class);
 							startActivity(intent);
 						} else if (s.equals(WorkoutData.TTS_WORKOUT_AUDIO_FEEDBACK)) {
@@ -228,10 +225,18 @@ public class TouchWorkoutRunner extends AppCompatActivity {
 
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
-		_CurrentWorkout.TouchIn(event.getX(), event.getY());
-		Log.e("Coordinates", "(" + event.getX() + "," + event.getY() + ")");
-		_SaveWorkoutSensor.saveData(new float[]{event.getX(), event.getY()});
+		if (event.getAction() == MotionEvent.ACTION_DOWN) {
+			Boolean GoodTouch = _CurrentWorkout.TouchIn(event.getX(), event.getY());
+			int goodTouchInt;
+			if (GoodTouch) {
+				goodTouchInt = 1;
+			} else {
+				goodTouchInt = 0;
+			}
+			Log.e("Coordinates", "(" + event.getX() + "," + event.getY() + ")");
+			_SaveTouchAndSensor.saveData(new float[]{Math.abs(TimeOfWorkout - System.currentTimeMillis()), event.getX(), event.getY(), goodTouchInt});
+			TimeOfWorkout = System.currentTimeMillis();
+		}
 		return super.onTouchEvent(event);
 	}
-
 }

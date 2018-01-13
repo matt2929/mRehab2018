@@ -77,11 +77,11 @@ public class GoalsAndReps extends AppCompatActivity {
     }
 
     public void updateReps(int i) {
-        if (i <= 30 && i >= 5) {
+        if (i <= 30 && i >= 1) {
             reps = i;
             textView.setText("" + reps);
         } else {
-            Toast.makeText(getApplicationContext(), "Reps Must be between 5 and 30", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Reps Must be between 1 and 30", Toast.LENGTH_SHORT).show();
         }
     }
 }

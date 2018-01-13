@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Environment;
 
 import com.example.matt2929.strokeappdec2017.AmazonCloud.UploadToAmazonBucket;
+import com.example.matt2929.strokeappdec2017.Values.WorkoutData;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -59,11 +60,11 @@ public class SaveWorkoutData {
 	}
 
 
-	public void addNewWorkout(String WorkoutName, Long Duration, Long Accuracy, int Reps) {
+	public void addNewWorkout(String WorkoutName, String Hand, Long Duration, Long Accuracy, int Reps) {
 		Calendar currentCalendar = Calendar.getInstance();
-		String fileName = "WorkoutSave_" + WorkoutName + "_" + currentCalendar.get(Calendar.YEAR) + "~" + currentCalendar.get(Calendar.YEAR) + "~" + currentCalendar.get(Calendar.MONTH) + "~" + currentCalendar.get(Calendar.DAY_OF_MONTH) + "_" + currentCalendar.get(Calendar.HOUR) + "~" + currentCalendar.get(Calendar.MINUTE) + ".json";
+		String fileName = WorkoutData.UserName + "_" + WorkoutName + "_" + currentCalendar.get(Calendar.YEAR) + "~" + currentCalendar.get(Calendar.YEAR) + "~" + currentCalendar.get(Calendar.MONTH) + "~" + currentCalendar.get(Calendar.DAY_OF_MONTH) + "_" + currentCalendar.get(Calendar.HOUR) + "~" + currentCalendar.get(Calendar.MINUTE) + ".json";
 		String output = "";
-		WorkoutJSON newWorkoutJSON = new WorkoutJSON(WorkoutName, Reps, Duration, Accuracy);
+		WorkoutJSON newWorkoutJSON = new WorkoutJSON(WorkoutData.UserName, WorkoutName, Reps, Duration, Accuracy, Hand);
 		output = newWorkoutJSON.getJSONString();
 		File fileParent = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "RehabApplicationAllWorkouts");
 		if (!fileParent.exists()) {

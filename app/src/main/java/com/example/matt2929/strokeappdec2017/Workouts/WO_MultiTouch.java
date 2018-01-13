@@ -36,8 +36,7 @@ public class WO_MultiTouch extends TouchWorkoutAbstract {
 	}
 
 	@Override
-	public void TouchIn(float x, float y) {
-		super.TouchIn(x, y);
+	public boolean TouchIn(float x, float y) {
 		if (WorkoutInProgress && !inCooldown) {
 			for (View v : views) {
 				int[] coor = new int[2];
@@ -59,13 +58,15 @@ public class WO_MultiTouch extends TouchWorkoutAbstract {
 								inCooldown = true;
 								speechTrigger.speak("Rep " + completed + " completed. Next rep starting in 5 Seconds.");
 								coolDown = System.currentTimeMillis();
-
 							}
+
 						}
+						return true;
 					}
 				}
 			}
 		}
+		return false;
 	}
 
 	@Override

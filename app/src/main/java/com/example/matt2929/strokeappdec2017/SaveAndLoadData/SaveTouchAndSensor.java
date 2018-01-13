@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
-public class SaveWorkoutSensor extends AsyncTask<Void, Void, Void> {
+public class SaveTouchAndSensor extends AsyncTask<Void, Void, Void> {
 
 
 	public static String _fileName;
@@ -28,7 +28,7 @@ public class SaveWorkoutSensor extends AsyncTask<Void, Void, Void> {
 	UploadToAmazonBucket uploadToAmazonBucket;
 	Calendar cal;
 
-	public SaveWorkoutSensor(Context context, String workoutName, String heading) {
+	public SaveTouchAndSensor(Context context, String workoutName, String heading) {
 		_workoutName = workoutName;
 		_context = context;
 		cal = Calendar.getInstance();
@@ -64,7 +64,6 @@ public class SaveWorkoutSensor extends AsyncTask<Void, Void, Void> {
 				file.createNewFile();
 				writer = new PrintWriter(new FileWriter(file, true));
 				writer.append(WorkoutData.UserName + _workoutName + " " + humanReadableTime(cal.getTimeInMillis()) + "\n" + heading + "\n");
-
 				for (int i = 0; i < dataQueue.size(); i++) {
 					for (int j = 0; j < dataQueue.get(i).length; j++) {
 						if (j == dataQueue.get(i).length - 1) {

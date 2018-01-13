@@ -49,6 +49,18 @@ public class WO_PhoneNumber extends TouchWorkoutAbstract {
 	}
 
 	@Override
+	public boolean TouchIn(float x, float y) {
+		for (Button button : buttons) {
+			if (x >= button.getLeft() && x < button.getRight()) {
+				if (y > button.getTop() && y < button.getBottom()) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	@Override
 	public void Update() {
 		super.Update();
 		if (inCooldown) {

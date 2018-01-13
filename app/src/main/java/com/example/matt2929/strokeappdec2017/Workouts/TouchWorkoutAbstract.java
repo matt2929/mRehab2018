@@ -22,8 +22,8 @@ public class TouchWorkoutAbstract extends WorkoutAbstract {
 
 	}
 
-	public void TouchIn(float x, float y) {
-
+	public boolean TouchIn(float x, float y) {
+		return false;
 	}
 
 	public void Update() {
