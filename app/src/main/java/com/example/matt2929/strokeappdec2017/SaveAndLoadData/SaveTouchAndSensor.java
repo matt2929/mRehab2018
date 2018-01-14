@@ -72,7 +72,9 @@ public class SaveTouchAndSensor extends AsyncTask<Void, Void, Void> {
 							writer.append(dataQueue.get(i)[j] + ",");
 						}
 						Log.e("Progress Asynch", "" + WorkoutData.progressLocal);
-						WorkoutData.progressLocal = (((float) i) / ((float) dataQueue.size() - 1)) * 100f;
+						if (_fileName.contains(".csv")) {
+							WorkoutData.progressLocal = Float.valueOf((((float) i / (float) dataQueue.size()) * 100));
+						}
 					}
 				}
 				writer.close();

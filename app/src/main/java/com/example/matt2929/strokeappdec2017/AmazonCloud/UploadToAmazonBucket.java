@@ -45,13 +45,11 @@ import java.util.List;
  * as buttons for managing the uploads and creating new ones.
  */
 public class UploadToAmazonBucket {
-
 	// Indicates that no upload is currently selected
 	private static final int INDEX_NOT_CHECKED = -1;
-
 	// TAG for logging;
 	private static final String TAG = "UploadActivity";
-
+	String fileName = "";
 	// Button for upload operations
 	private Button btnUploadFile;
 
@@ -76,6 +74,7 @@ public class UploadToAmazonBucket {
 	private int checkedIndex;
 
 	private Context context;
+
 
 	public UploadToAmazonBucket(Context context) {
 		transferUtility = Util.getTransferUtility(context);
@@ -109,18 +108,19 @@ public class UploadToAmazonBucket {
 	}
 
 	public void saveData(File file) {
+		fileName = file.getName();
 		if (!file.exists()) {
 			Log.e("Save file to bucket", "That file doesnt Exist?");
 		} else {
 			String path = file.getPath();
-			beginUpload(path);
+			beginUpload(path, file.getName());
 		}
 	}
 
 	/*
 	 * Begins to upload the file specified by the file path.
 	 */
-	private void beginUpload(String filePath) {
+	private void beginUpload(String filePath, String fileName) {
 		if (filePath == null) {
 			return;
 		}
@@ -192,22 +192,18 @@ public class UploadToAmazonBucket {
 		// Simply updates the UI list when notified.
 		@Override
 		public void onError(int id, Exception e) {
-			Log.e(TAG, "Error during upload: " + id, e);
-
 		}
 
 		@Override
 		public void onProgressChanged(int id, long bytesCurrent, long bytesTotal) {
-			Log.d(TAG, String.format("onProgressChanged: %d, total: %d, current: %d",
-					id, bytesTotal, bytesCurrent));
-			WorkoutData.progressCloud = (float) ((bytesCurrent / bytesTotal) * 100l);
-			Log.e("Cloud Upload", "" + WorkoutData.progressCloud);
+			if (fileName.contains(".csv")) {
+				WorkoutData.progressCloud = Float.valueOf(((float) bytesCurrent / (float) bytesTotal) * 100f);
+				Log.e("Tag", WorkoutData.progressCloud + "% " + bytesCurrent + "bytes " + fileName);
+			}
 		}
 
 		@Override
 		public void onStateChanged(int id, TransferState newState) {
-			Log.d(TAG, "onStateChanged: " + id + ", " + newState);
-
 		}
 	}
 }
