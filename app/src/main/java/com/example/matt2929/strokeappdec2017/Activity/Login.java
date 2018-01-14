@@ -68,12 +68,6 @@ public class Login extends AppCompatActivity {
             User u = userList.get(i);
             String userString = "";
             userString += "Name: " + u.getName();
-            userString += "\nAge:" + u.getAge();
-            if (u.getHand() == 0) {
-                userString += "\nAffected: Left";
-            } else {
-                userString += "\nAffected: Right";
-            }
             userString += "\nGoals: " + u.getGoals();
             userStrings.add(userString);
         }
