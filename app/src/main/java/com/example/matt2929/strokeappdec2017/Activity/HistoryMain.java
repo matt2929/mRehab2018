@@ -1,7 +1,9 @@
 package com.example.matt2929.strokeappdec2017.Activity;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
@@ -12,8 +14,8 @@ import com.example.matt2929.strokeappdec2017.R;
 import com.example.matt2929.strokeappdec2017.SaveAndLoadData.SaveWorkoutData;
 import com.example.matt2929.strokeappdec2017.SaveAndLoadData.WorkoutJSON;
 import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.series.BarGraphSeries;
 import com.jjoe64.graphview.series.DataPoint;
-import com.jjoe64.graphview.series.LineGraphSeries;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -25,10 +27,10 @@ import java.util.Comparator;
  */
 public class HistoryMain extends AppCompatActivity {
 
-	GraphView graphView;
+	GraphView graphViewLeft, graphViewRight;
 	SaveWorkoutData saveWorkoutData;
 	String workoutName = "";
-	TextView xAxis, yAxis, workoutText;
+	TextView xAxisLeft, yAxisLeft, workoutText, xAxisRight, yAxisRight;
 	RadioGroup groupType;
 	RadioButton durationRadio, gradeRadio, repsRadio;
 	Button nextWorkout;
@@ -42,10 +44,13 @@ public class HistoryMain extends AppCompatActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_history_main);
-		graphView = (GraphView) findViewById(R.id.historyGraph);
+		graphViewLeft = (GraphView) findViewById(R.id.historyGraphLeft);
+		graphViewRight = (GraphView) findViewById(R.id.historyGraphRight);
 		nextWorkout = (Button) findViewById(R.id.nextWorkout);
-		xAxis = (TextView) findViewById(R.id.graphXAxis);
-		yAxis = (TextView) findViewById(R.id.graphYAxis);
+		xAxisLeft = (TextView) findViewById(R.id.graphXAxisLeft);
+		yAxisLeft = (TextView) findViewById(R.id.graphYAxisLeft);
+		xAxisRight = (TextView) findViewById(R.id.graphXAxisRight);
+		yAxisRight = (TextView) findViewById(R.id.graphYAxisRight);
 		durationRadio = (RadioButton) findViewById(R.id.radioDuration);
 		gradeRadio = (RadioButton) findViewById(R.id.radioAccuracy);
 		repsRadio = (RadioButton) findViewById(R.id.radioReps);
@@ -85,7 +90,9 @@ public class HistoryMain extends AppCompatActivity {
 			workoutText.setText("No Workouts");
 		}
 
-		xAxis.setText("Weeks Ago Average");
+		xAxisLeft.setText("Weeks Ago (Average)");
+		xAxisRight.setText("Weeks Ago (Average)");
+
 		workoutJSONComparator = new Comparator<WorkoutJSON>() {
 			@Override
 			public int compare(WorkoutJSON t0, WorkoutJSON t1) {
@@ -178,28 +185,42 @@ public class HistoryMain extends AppCompatActivity {
 		}
 		ArrayList<WorkoutJSON> leftHandWorkouts = leftHand(workoutJSONS);
 		ArrayList<WorkoutJSON> rightHandWorkouts = rightHand(workoutJSONS);
-		LineGraphSeries<DataPoint> lineGraphSeriesLeft;
-		LineGraphSeries<DataPoint> lineGraphSeriesRight;
+		BarGraphSeries<DataPoint> lineGraphSeriesLeft;
+		BarGraphSeries<DataPoint> lineGraphSeriesRight;
 		if (workoutType == 0) {
 			lineGraphSeriesLeft = repsToGraph(workoutName, leftHandWorkouts);
 			lineGraphSeriesRight = repsToGraph(workoutName, rightHandWorkouts);
-			graphView.setTitle("Average Weekly Repetitions (" + workoutName + ")");
-			yAxis.setText("Reps");
+			graphViewLeft.setTitle("Weekly Repetitions (Left)");
+			graphViewRight.setTitle("Weekly Repetitions (Right)");
+			yAxisLeft.setText("Reps");
+			yAxisRight.setText("Reps");
 		} else if (workoutType == 1) {
 			lineGraphSeriesLeft = durationToGraph(workoutName, leftHandWorkouts);
 			lineGraphSeriesRight = durationToGraph(workoutName, rightHandWorkouts);
-			graphView.setTitle("Average Weekly Durration (" + workoutName + ")");
-			yAxis.setText("Seconds");
+			graphViewLeft.setTitle("Weekly Durarion (Left)");
+			graphViewRight.setTitle("Weekly Duration (Right)");
+			yAxisLeft.setText("Seconds");
+			yAxisRight.setText("Seconds");
 		} else {
 			lineGraphSeriesLeft = accuracyToGraph(workoutName, leftHandWorkouts);
 			lineGraphSeriesRight = accuracyToGraph(workoutName, rightHandWorkouts);
-			graphView.setTitle("Average Weekly Accuracy (" + workoutName + ")");
-			yAxis.setText("Accuracy");
+			graphViewLeft.setTitle("Weekly Accuracy (Left)");
+			graphViewRight.setTitle("Weekly Accuracy (Right)");
+			yAxisLeft.setText("Accuracy");
+			yAxisRight.setText("Accuracy");
 		}
-		graphView.removeAllSeries();
-		graphView.addSeries(lineGraphSeriesLeft);
-		graphView.addSeries(lineGraphSeriesRight);
-		graphView.invalidate();
+		lineGraphSeriesLeft.setAnimated(true);
+		lineGraphSeriesRight.setAnimated(true);
+		graphViewLeft.removeAllSeries();
+		lineGraphSeriesLeft.setColor(Color.RED);
+		graphViewLeft.addSeries(lineGraphSeriesLeft);
+		graphViewLeft.invalidate();
+
+
+		graphViewRight.removeAllSeries();
+		lineGraphSeriesRight.setColor(Color.GREEN);
+		graphViewRight.addSeries(lineGraphSeriesRight);
+		graphViewRight.invalidate();
 	}
 
 	/**
@@ -235,7 +256,7 @@ public class HistoryMain extends AppCompatActivity {
 	 * @param workoutJSONS
 	 * @return
 	 */
-	public LineGraphSeries<DataPoint> repsToGraph(String workoutStr, ArrayList<WorkoutJSON> workoutJSONS) {
+	public BarGraphSeries<DataPoint> repsToGraph(String workoutStr, ArrayList<WorkoutJSON> workoutJSONS) {
 		ArrayList<WorkoutJSON> filteredWorkoutJSONS = new ArrayList<>();
 		for (WorkoutJSON workout : workoutJSONS) {
 			if (workout.getWorkoutName().equals(workoutStr)) {
@@ -246,7 +267,7 @@ public class HistoryMain extends AppCompatActivity {
 		for (int i = 0; i < dataPoints.length; i++) {
 			dataPoints[i] = new DataPoint(i, filteredWorkoutJSONS.get(i).getReps());
 		}
-		LineGraphSeries<DataPoint> series = new LineGraphSeries<>(dataPoints);
+		BarGraphSeries<DataPoint> series = new BarGraphSeries<>(dataPoints);
 		return series;
 	}
 
@@ -255,7 +276,7 @@ public class HistoryMain extends AppCompatActivity {
 	 * @param workoutJSONS
 	 * @return
 	 */
-	public LineGraphSeries<DataPoint> durationToGraph(String workoutStr, ArrayList<WorkoutJSON> workoutJSONS) {
+	public BarGraphSeries<DataPoint> durationToGraph(String workoutStr, ArrayList<WorkoutJSON> workoutJSONS) {
 		ArrayList<WorkoutJSON> filteredWorkoutJSONS = new ArrayList<>();
 		for (WorkoutJSON workout : workoutJSONS) {
 			if (workout.getWorkoutName().equals(workoutStr)) {
@@ -266,7 +287,8 @@ public class HistoryMain extends AppCompatActivity {
 		for (int i = 0; i < dataPoints.length; i++) {
 			dataPoints[i] = new DataPoint(i, filteredWorkoutJSONS.get(i).getDuration());
 		}
-		LineGraphSeries<DataPoint> series = new LineGraphSeries<>(dataPoints);
+		BarGraphSeries<DataPoint> series = new BarGraphSeries<>(dataPoints);
+		Log.e("DATA", "" + dataPoints.length);
 		return series;
 	}
 
@@ -275,7 +297,7 @@ public class HistoryMain extends AppCompatActivity {
 	 * @param workoutJSONS
 	 * @return
 	 */
-	public LineGraphSeries<DataPoint> accuracyToGraph(String workoutStr, ArrayList<WorkoutJSON> workoutJSONS) {
+	public BarGraphSeries<DataPoint> accuracyToGraph(String workoutStr, ArrayList<WorkoutJSON> workoutJSONS) {
 		ArrayList<WorkoutJSON> filteredWorkoutJSONS = new ArrayList<>();
 		for (WorkoutJSON workout : workoutJSONS) {
 			if (workout.getWorkoutName().equals(workoutStr)) {
@@ -286,7 +308,7 @@ public class HistoryMain extends AppCompatActivity {
 		for (int i = 0; i < dataPoints.length; i++) {
 			dataPoints[i] = new DataPoint(i, filteredWorkoutJSONS.get(i).getAccuracy());
 		}
-		LineGraphSeries<DataPoint> series = new LineGraphSeries<>(dataPoints);
+		BarGraphSeries<DataPoint> series = new BarGraphSeries<>(dataPoints);
 		return series;
 	}
 

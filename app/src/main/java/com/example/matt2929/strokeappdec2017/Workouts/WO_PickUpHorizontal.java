@@ -1,10 +1,9 @@
 package com.example.matt2929.strokeappdec2017.Workouts;
 
-import android.util.Log;
-
 import com.example.matt2929.strokeappdec2017.ListenersAndTriggers.OutputWorkoutData;
 import com.example.matt2929.strokeappdec2017.ListenersAndTriggers.OutputWorkoutStrings;
 import com.example.matt2929.strokeappdec2017.ListenersAndTriggers.SpeechTrigger;
+import com.example.matt2929.strokeappdec2017.Utilities.JerkScoreCalculation;
 import com.example.matt2929.strokeappdec2017.Utilities.SFXPlayer;
 
 /**
@@ -17,9 +16,11 @@ public class WO_PickUpHorizontal extends SensorWorkoutAbstract {
 	int pickUpCount = 0;
 	int belowThresholdCount = 0;
 	int belowThresholdMax = 100;
-
+	boolean savingJerk = false;
+	JerkScoreCalculation jerkScoreCalculation;
 	public WO_PickUpHorizontal(String Name, Integer reps, SpeechTrigger speechTrigger, SFXPlayer sfxPlayer, OutputWorkoutData outputWorkoutData, OutputWorkoutStrings outputWorkoutStrings) {
 		super.SensorWorkout(Name, reps, speechTrigger, sfxPlayer, outputWorkoutData, outputWorkoutStrings);
+		jerkScoreCalculation = new JerkScoreCalculation();
 	}
 
 	@Override
@@ -29,9 +30,14 @@ public class WO_PickUpHorizontal extends SensorWorkoutAbstract {
 		if (Name.contains("Bowl")) {
 			sensorChoice = 0;
 		}
-		Log.e("Accy", AverageDataValue[1] + " m/s^2 Moving:" + moving + " threshholdCount: " + belowThresholdCount);
 		if (WorkoutInProgress) {
+			if (savingJerk) {
+				jerkScoreCalculation.AccelerationIn(data);
+			}
 			if (AverageDataValue[sensorChoice] > thresehold) {
+				if (savingJerk == false) {
+					savingJerk = true;
+				}
 				moving = true;
 				belowThresholdCount = 0;
 			}
@@ -39,9 +45,11 @@ public class WO_PickUpHorizontal extends SensorWorkoutAbstract {
 				belowThresholdCount++;
 				if (belowThresholdCount > belowThresholdMax) {
 					if (moving == true) {
+						savingJerk = false;
+						jerkScoreCalculation.CalculateJerkSingle(5);
 						pickUpCount++;
 						speechTrigger.speak("" + pickUpCount);
-						if (pickUpCount == reps / 2) {
+						if (pickUpCount / reps == .5) {
 							speechTrigger.speak(".Half Way");
 
 						}
@@ -63,8 +71,8 @@ public class WO_PickUpHorizontal extends SensorWorkoutAbstract {
 
 	@Override
 	public WorkoutScore getScore() {
-		workoutScore = new WorkoutScore("Jerk", 10);
-		return super.getScore();
+		workoutScore = new WorkoutScore("Jerk", jerkScoreCalculation.CalculateJerkAverage());
+		return workoutScore;
 	}
 
 	@Override
@@ -77,4 +85,3 @@ public class WO_PickUpHorizontal extends SensorWorkoutAbstract {
 		super.outputStrings(s);
 	}
 }
-

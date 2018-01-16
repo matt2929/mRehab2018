@@ -78,7 +78,6 @@ public class GradeView extends View {
         if (didBetter) {
             backgroundPaint.setColor(Color.GREEN);
         } else {
-            backgroundPaint.setColor(Color.RED);
         }
         canvas.drawRect(0, titleHeight, getWidth() / 3, height, backgroundPaint);
         Init();
