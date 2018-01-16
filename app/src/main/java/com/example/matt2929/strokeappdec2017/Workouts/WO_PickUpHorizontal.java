@@ -41,7 +41,7 @@ public class WO_PickUpHorizontal extends SensorWorkoutAbstract {
 					if (moving == true) {
 						pickUpCount++;
 						speechTrigger.speak("" + pickUpCount);
-						if (pickUpCount / reps == .5) {
+						if (pickUpCount == reps / 2) {
 							speechTrigger.speak(".Half Way");
 
 						}

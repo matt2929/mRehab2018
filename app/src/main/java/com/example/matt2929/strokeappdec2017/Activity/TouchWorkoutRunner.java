@@ -116,7 +116,7 @@ public class TouchWorkoutRunner extends AppCompatActivity {
 							_SFXPlayer.killAll();
 							_SaveHistoricalReps.updateWorkout(_CurrentWorkout.getName(), _WorkoutReps);
 							_SaveTouchAndSensor.execute();
-							_SaveWorkoutData.addNewWorkout(_CurrentWorkout.getName(), _WorkoutHand, timeToComplete, 100l, _CurrentWorkout.getReps());
+							_SaveWorkoutData.addNewWorkout(_CurrentWorkout.getName(), _WorkoutHand, timeToComplete / 100, 100l, _CurrentWorkout.getReps());
 							Intent intent = new Intent(getApplicationContext(), LoadingScreen.class);
 							startActivity(intent);
 						} else if (s.equals(WorkoutData.TTS_WORKOUT_AUDIO_FEEDBACK)) {

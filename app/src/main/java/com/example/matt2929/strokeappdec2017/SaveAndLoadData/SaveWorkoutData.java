@@ -88,6 +88,7 @@ public class SaveWorkoutData {
 	}
 
 	private List<File> getAllFiles(File parentDir) {
+
 		List<File> inFiles = new ArrayList<>();
 		Queue<File> files = new LinkedList<>();
 		files.addAll(Arrays.asList(parentDir.listFiles()));
@@ -95,7 +96,7 @@ public class SaveWorkoutData {
 			File file = files.remove();
 			if (file.isDirectory()) {
 				files.addAll(Arrays.asList(file.listFiles()));
-			} else if (file.getName().contains("WorkoutSave_")) {
+			} else if (file.getName().contains(WorkoutData.UserName)) {
 				inFiles.add(file);
 			}
 		}

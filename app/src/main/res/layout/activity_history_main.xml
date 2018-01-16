@@ -3,81 +3,146 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/background_light"
     android:orientation="vertical"
     android:weightSum="20"
     tools:context="com.example.matt2929.strokeappdec2017.Activity.HistoryMain">
 
 
-    <com.jjoe64.graphview.GraphView
-        android:id="@+id/historyGraph"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_margin="10dp"
-        android:layout_weight="14"
-        android:padding="10dp" />
-
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight=".4"
-        android:visibility="visible" />
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="2.8"
-        android:orientation="horizontal">
+        android:layout_weight="14"
+        android:background="@color/colorBackground"
+        android:orientation="horizontal"
+        android:paddingLeft="10dp">
 
-        <Button
-            android:id="@+id/historyWorkoutShown"
+        <TextView
+            android:id="@+id/graphYAxis"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_margin="15dp"
-            android:layout_weight="1"
-            android:background="@drawable/buttonshape"
-            android:fadingEdge="horizontal|vertical"
-            android:text="Workout"
-            android:textSize="24sp" />
+            android:layout_gravity="center"
+            android:layout_weight=".1"
+            android:background="@color/colorBackground"
+            android:gravity="center"
+            android:rotation="-90"
+            android:text="TextView"
+            android:textStyle="bold" />
 
-        <Button
-            android:id="@+id/historyDuration"
+        <com.jjoe64.graphview.GraphView
+            android:id="@+id/historyGraph"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_margin="15dp"
-            android:layout_weight="1"
-            android:background="@drawable/buttonshape"
-            android:fadingEdge="horizontal|vertical"
-            android:text="Duration"
-            android:textSize="24sp" />
+            android:layout_weight=".9" />
+
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="2.8"
+        android:layout_weight="1"
+        android:background="@color/colorBackground"
+        android:orientation="horizontal"
+        android:paddingBottom="10dp"
+        android:weightSum="1">
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight=".1"
+            android:background="@color/colorBackground" />
+
+        <TextView
+            android:id="@+id/graphXAxis"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight=".9"
+            android:background="@color/colorBackground"
+            android:gravity="center"
+            android:text="TextView"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3"
+        android:background="@color/colorBackground"
+        android:orientation="horizontal"
+        android:weightSum="1">
+
+        <TextView
+            android:id="@+id/CurrentWorkoutText"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginBottom="10dp"
+            android:layout_weight=".7"
+            android:background="@color/colorBackground"
+            android:gravity="center"
+            android:text="TextView"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/nextWorkout"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight=".3"
+            android:background="@drawable/buttonshape"
+            android:padding="10dp"
+            android:text="Next Workout"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3"
         android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/historyReps"
-            android:layout_width="0dp"
+        <RadioGroup
+            android:id="@+id/radioTypes"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="15dp"
-            android:layout_weight="1"
-            android:background="@drawable/buttonshape"
-            android:fadingEdge="horizontal|vertical"
-            android:text="Reps"
-            android:textSize="24sp" />
+            android:orientation="horizontal"
+            android:weightSum="3">
 
-        <Button
-            android:id="@+id/historyScore"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_margin="15dp"
-            android:layout_weight="1"
-            android:background="@drawable/buttonshape"
-            android:fadingEdge="horizontal|vertical"
-            android:text="Score"
-            android:textSize="24sp" />
+            <RadioButton
+                android:id="@+id/radioReps"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="10dp"
+                android:layout_weight="1"
+                android:background="@color/colorBackground"
+                android:checked="true"
+                android:text="Repetitions"
+                android:textAllCaps="false" />
+
+            <RadioButton
+                android:id="@+id/radioDuration"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="10dp"
+                android:layout_weight="1"
+                android:background="@color/colorBackground"
+                android:text="Duration"
+                android:textAllCaps="false" />
+
+            <RadioButton
+                android:id="@+id/radioAccuracy"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="10dp"
+                android:layout_weight="1"
+                android:background="@color/colorBackground"
+                android:text="Accuracy"
+                android:textAllCaps="false" />
+        </RadioGroup>
     </LinearLayout>
 
 </LinearLayout>
