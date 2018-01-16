@@ -36,6 +36,13 @@ public class PostWorkoutReport extends AppCompatActivity {
 
 		saveWorkoutData = new SaveWorkoutData(getApplicationContext());
 		workoutJSONS = saveWorkoutData.getWorkouts();
+		ArrayList<WorkoutJSON> workoutJSONSFiltered = new ArrayList<>();
+		for (WorkoutJSON workoutJSON : workoutJSONS) {
+			if (workoutJSON.getWorkoutName().equals(getIntent().getStringExtra("Workout"))) {
+				workoutJSONSFiltered.add(workoutJSON);
+			}
+		}
+		workoutJSONS = (ArrayList<WorkoutJSON>) workoutJSONSFiltered.clone();
 		long smallest = Long.MAX_VALUE;
 		long secondSmallest = Long.MAX_VALUE;
 		int index = 0, secondIndex = 0;
@@ -54,7 +61,7 @@ public class PostWorkoutReport extends AppCompatActivity {
 		WorkoutJSON closest = workoutJSONS.get(index);
 		WorkoutJSON secondClosest = workoutJSONS.get(secondIndex);
 
-		repView.SetupView(bitmap1, "Number of Repetitions", secondClosest.getReps(), closest.getReps(), closest.getReps() <= secondClosest.getReps());
+		repView.SetupView(bitmap1, "Number of Repetitions", secondClosest.getReps(), closest.getReps(), !(closest.getReps() <= secondClosest.getReps()));
 		qualityView.SetupView(bitmap2, "Quality of Movement", secondClosest.getAccuracy(), closest.getAccuracy(), closest.getAccuracy() <= secondClosest.getAccuracy());
 		durationView.SetupView(bitmap3, "Duration of Workout", secondClosest.getDuration(), closest.getDuration(), closest.getDuration() <= secondClosest.getDuration());
 		button.setOnClickListener(new View.OnClickListener() {
