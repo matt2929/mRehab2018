@@ -140,7 +140,13 @@ public class SensorWorkoutRunner extends AppCompatActivity implements SensorEven
 				_Text2Speech.addInitListener(new SpeechInitListener() {
 					@Override
 					public void onInit() {
-						_Text2Speech.speak(_WorkoutName + ",on," + _WorkoutHand + ",Hand," + ". Doing " + _WorkoutReps + ",Reps", WorkoutData.TTS_WORKOUT_DESCRIPTION);
+						String description = "";
+						for (int i = 0; i < WorkoutData.WORKOUT_DESCRIPTIONS.length; i++) {
+							if (WorkoutData.WORKOUT_DESCRIPTIONS[i].getName().equals(_WorkoutName)) {
+								description = WorkoutData.WORKOUT_DESCRIPTIONS[i].getDescription();
+							}
+						}
+						_Text2Speech.speak(description, WorkoutData.TTS_WORKOUT_DESCRIPTION);
 					}
 				});
 

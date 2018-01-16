@@ -9,12 +9,14 @@ public class WorkoutDescription {
 	private String WorkoutType = "";
 	private String SensorType = "";
 	private Integer NormalReps = 10;
+	private String Description = "";
 
-	public WorkoutDescription(String Name, String WorkoutType, String SensorType, Integer NormalReps) {
+	public WorkoutDescription(String Name, String WorkoutType, String SensorType, Integer NormalReps, String Description) {
 		this.Name = Name;
 		this.WorkoutType = WorkoutType;
 		this.SensorType = SensorType;
 		this.NormalReps = NormalReps;
+		this.Description = Description;
 	}
 
 	public String getName() {
@@ -31,5 +33,9 @@ public class WorkoutDescription {
 
 	public Integer getNormalReps() {
 		return NormalReps;
+	}
+
+	public String getDescription() {
+		return Description;
 	}
 }

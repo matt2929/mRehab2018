@@ -29,8 +29,7 @@ public class StartScreen extends AppCompatActivity {
         demo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-	            Intent intent = new Intent(getApplicationContext(), HistoryMain.class);
-	            startActivity(intent);
+
             }
         });
     }
