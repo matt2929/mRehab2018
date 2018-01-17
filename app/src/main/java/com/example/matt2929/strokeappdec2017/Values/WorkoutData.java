@@ -25,10 +25,12 @@ public final class WorkoutData {
 							"Move the cup onto the shelf then back onto the table. Wait for me to count before moving me again."),
 					new WorkoutDescription("Walk Cup", Workout_Type_Sensor, Sensor_Type_Linear, 10,
 							"Hold the bowl infront of you. Walk fowards at a comfortable pace. Walk for 15 Seconds"),
+					new WorkoutDescription("Sip", Workout_Type_Sensor, Sensor_Type_Gravity, 1,
+							"Put the cup on the table, when we say begin, pick the cup up to your mouth and drink for 10 seconds."),
 					new WorkoutDescription("Twist Cup", Workout_Type_Sensor, Sensor_Type_Linear, 10,
 							"In this workout you will hold the cup up and pretend to pour out water in front of you. Do not\n" +
 									"pour too quick or to slow"),
-					new WorkoutDescription("Pour Cup", Workout_Type_Sensor, Sensor_Type_Gravity, 10,
+					new WorkoutDescription("Pour Cup", Workout_Type_Sensor, Sensor_Type_Gravity, 3,
 							"In this workout you will hold the cup up and pretend to pour out water in front of you. Do not\n" +
 									"pour too quick or to slow."),
 					new WorkoutDescription("Unlock Key", Workout_Type_Touch, null, 5,
@@ -43,6 +45,7 @@ public final class WorkoutData {
 							"In this workout you need to click all the blue circles"),
 			};
 	public final static String[] WORKOUT_TYPE = new String[]{
+			Workout_Type_Sensor,
 			Workout_Type_Sensor,
 			Workout_Type_Sensor,
 			Workout_Type_Sensor,

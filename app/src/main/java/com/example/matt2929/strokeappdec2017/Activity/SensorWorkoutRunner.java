@@ -27,6 +27,7 @@ import com.example.matt2929.strokeappdec2017.Workouts.SensorWorkoutAbstract;
 import com.example.matt2929.strokeappdec2017.Workouts.WO_PickUpHorizontal;
 import com.example.matt2929.strokeappdec2017.Workouts.WO_PickUpVertical;
 import com.example.matt2929.strokeappdec2017.Workouts.WO_Pour;
+import com.example.matt2929.strokeappdec2017.Workouts.WO_Sip;
 import com.example.matt2929.strokeappdec2017.Workouts.WO_Twist;
 import com.example.matt2929.strokeappdec2017.Workouts.WO_Walk;
 import com.example.matt2929.strokeappdec2017.Workouts.WorkoutDescription;
@@ -128,7 +129,8 @@ public class SensorWorkoutRunner extends AppCompatActivity implements SensorEven
 							_SaveHistoricalReps.updateWorkout(_CurrentWorkout.getName(), _WorkoutReps);
 							_SaveTouchAndSensor.execute();
 							_SaveWorkoutData.addNewWorkout(_CurrentWorkout.getName(), _WorkoutHand, timeToComplete / 100l, 100l, _CurrentWorkout.getReps());
-							Intent intent = new Intent(getApplicationContext(), LoadingScreen.class);
+							Intent intent = getIntent();
+							intent.setClass(getApplicationContext(), LoadingScreen.class);
 							startActivity(intent);
 						} else if (s.equals(WorkoutData.TTS_WORKOUT_AUDIO_FEEDBACK)) {
 
@@ -278,6 +280,10 @@ public class SensorWorkoutRunner extends AppCompatActivity implements SensorEven
 			setupGravitySensor();
 			_CurrentWorkout = new WO_Pour(WorkoutName, reps, speechTrigger, _SFXPlayer, outputWorkoutData, outputWorkoutStrings);
 			_CurrentWorkoutView = new WV_Pour(getApplicationContext());
+		} else if (_WorkoutDescription.getName().equals("Sip")) {
+			setupGravitySensor();
+			_CurrentWorkout = new WO_Sip(WorkoutName, reps, speechTrigger, _SFXPlayer, outputWorkoutData, outputWorkoutStrings);
+			_CurrentWorkoutView = new WV_JustText(getApplicationContext());
 		}
 		setContentView(_CurrentWorkoutView);
 	}

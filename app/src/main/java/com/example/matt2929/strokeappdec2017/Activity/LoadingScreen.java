@@ -37,7 +37,8 @@ public class LoadingScreen extends AppCompatActivity {
 					textView.setText(textView.getText().toString() + "\nLocal" + Math.round((progressLocal)));
 					handler.postDelayed(this, 55);
 				} else {
-					Intent intent = new Intent(getApplicationContext(), PostWorkoutReport.class);
+					Intent intent = getIntent();
+					intent.setClass(getApplicationContext(), PostWorkoutReport.class);
 					startActivity(intent);
 				}
 			}

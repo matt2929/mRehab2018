@@ -18,6 +18,7 @@ public class WO_PickUpVertical extends SensorWorkoutAbstract {
 	int belowThresholdMax = 100;
 	boolean savingJerk = false;
 	JerkScoreCalculation jerkScoreCalculation;
+
 	public WO_PickUpVertical(String Name, Integer reps, SpeechTrigger speechTrigger, SFXPlayer sfxPlayer, OutputWorkoutData outputWorkoutData, OutputWorkoutStrings outputWorkoutStrings) {
 		super.SensorWorkout(Name, reps, speechTrigger, sfxPlayer, outputWorkoutData, outputWorkoutStrings);
 		jerkScoreCalculation = new JerkScoreCalculation();
