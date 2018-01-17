@@ -14,6 +14,8 @@ import com.example.matt2929.strokeappdec2017.SaveAndLoadData.WorkoutJSON;
 import com.example.matt2929.strokeappdec2017.WorkoutsView.GradeView;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class PostWorkoutReport extends AppCompatActivity {
 	ArrayList<WorkoutJSON> workoutJSONS;
@@ -37,33 +39,32 @@ public class PostWorkoutReport extends AppCompatActivity {
 		saveWorkoutData = new SaveWorkoutData(getApplicationContext());
 		workoutJSONS = saveWorkoutData.getWorkouts();
 		ArrayList<WorkoutJSON> workoutJSONSFiltered = new ArrayList<>();
+		Comparator<WorkoutJSON> workoutJSONComparator = new Comparator<WorkoutJSON>() {
+			@Override
+			public int compare(WorkoutJSON t0, WorkoutJSON t1) {
+				return (int) (t1.getCalendar().getTimeInMillis() - t0.getCalendar().getTimeInMillis());
+			}
+		};
+
+
 		for (WorkoutJSON workoutJSON : workoutJSONS) {
 			if (workoutJSON.getWorkoutName().equals(getIntent().getStringExtra("Workout"))) {
 				workoutJSONSFiltered.add(workoutJSON);
 			}
 		}
-		workoutJSONS = (ArrayList<WorkoutJSON>) workoutJSONSFiltered.clone();
-		long smallest = Long.MAX_VALUE;
-		long secondSmallest = Long.MAX_VALUE;
-		int index = 0, secondIndex = 0;
-		for (int i = 0; i < workoutJSONS.size(); i++) {
-			long timeDiff = Math.abs(workoutJSONS.get(i).getCalendar().getTimeInMillis() - System.currentTimeMillis());
-			if (timeDiff < smallest) {
-				secondSmallest = smallest;
-				secondIndex = index;
-				smallest = timeDiff;
-				index = i;
-			} else if (timeDiff < secondSmallest) {
-				secondSmallest = timeDiff;
-				secondIndex = i;
-			}
-		}
-		WorkoutJSON closest = workoutJSONS.get(index);
-		WorkoutJSON secondClosest = workoutJSONS.get(secondIndex);
+		Collections.sort(workoutJSONSFiltered, workoutJSONComparator);
 
-		repView.SetupView(bitmap1, "Number of Repetitions", secondClosest.getReps(), closest.getReps(), !(closest.getReps() <= secondClosest.getReps()));
-		qualityView.SetupView(bitmap2, "Quality of Movement", secondClosest.getAccuracy(), closest.getAccuracy(), closest.getAccuracy() <= secondClosest.getAccuracy());
-		durationView.SetupView(bitmap3, "Duration of Workout", secondClosest.getDuration(), closest.getDuration(), closest.getDuration() <= secondClosest.getDuration());
+		WorkoutJSON thisWorkout = workoutJSONSFiltered.get(0);
+		if (workoutJSONSFiltered.size() >= 2) {
+			WorkoutJSON previousWorkout = workoutJSONSFiltered.get(1);
+			repView.SetupView(bitmap1, "Number of Repetitions", previousWorkout.getReps(), thisWorkout.getReps(), (previousWorkout.getReps() <= thisWorkout.getReps()));
+			qualityView.SetupView(bitmap2, "Quality of Movement", previousWorkout.getAccuracy(), thisWorkout.getAccuracy(), (previousWorkout.getAccuracy() >= thisWorkout.getAccuracy()));
+			durationView.SetupView(bitmap3, "Duration of Workout", previousWorkout.getDuration(), thisWorkout.getDuration(), (previousWorkout.getDuration() >= thisWorkout.getDuration()));
+		} else {
+			repView.SetupView(bitmap1, "Number of Repetitions", -1, thisWorkout.getReps(), false);
+			qualityView.SetupView(bitmap2, "Quality of Movement", -1, thisWorkout.getAccuracy(), false);
+			durationView.SetupView(bitmap3, "Duration of Workout", -1, thisWorkout.getDuration(), false);
+		}
 		button.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {

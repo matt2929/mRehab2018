@@ -42,7 +42,6 @@ public class GoalsAndReps extends AppCompatActivity {
         saveHistoricalReps = new SaveHistoricalReps(getApplicationContext(), WorkoutData.UserName);
         ArrayList<String> goals = saveHistoricalGoals.getGoals(WorkoutData.UserName);
         reps = saveHistoricalReps.getWorkoutReps(WorkoutName);
-
         textView = (TextView) findViewById(R.id.GoalAndRepNumberText);
         Button startWorkout = (Button) findViewById(R.id.GoalAndRepStartWorkout);
         Button repPlus = (Button) findViewById(R.id.GoalAndRepPlus);

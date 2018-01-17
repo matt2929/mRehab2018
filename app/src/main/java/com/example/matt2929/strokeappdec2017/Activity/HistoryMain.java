@@ -18,7 +18,6 @@ import com.jjoe64.graphview.series.BarGraphSeries;
 import com.jjoe64.graphview.series.DataPoint;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 
@@ -54,7 +53,12 @@ public class HistoryMain extends AppCompatActivity {
 		durationRadio = (RadioButton) findViewById(R.id.radioDuration);
 		gradeRadio = (RadioButton) findViewById(R.id.radioAccuracy);
 		repsRadio = (RadioButton) findViewById(R.id.radioReps);
-
+		workoutJSONComparator = new Comparator<WorkoutJSON>() {
+			@Override
+			public int compare(WorkoutJSON t0, WorkoutJSON t1) {
+				return (int) (t1.getCalendar().getTimeInMillis() - t0.getCalendar().getTimeInMillis());
+			}
+		};
 		durationRadio.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
@@ -93,42 +97,6 @@ public class HistoryMain extends AppCompatActivity {
 		xAxisLeft.setText("Weeks Ago (Average)");
 		xAxisRight.setText("Weeks Ago (Average)");
 
-		workoutJSONComparator = new Comparator<WorkoutJSON>() {
-			@Override
-			public int compare(WorkoutJSON t0, WorkoutJSON t1) {
-				if (t0.getCalendar().get(Calendar.YEAR) < t1.getCalendar().get(Calendar.YEAR)) {
-					return -1;
-				} else if (t0.getCalendar().get(Calendar.YEAR) > t1.getCalendar().get(Calendar.YEAR)) {
-					return 1;
-				}
-				if (t0.getCalendar().get(Calendar.MONTH) < t1.getCalendar().get(Calendar.MONTH)) {
-					return -1;
-				} else if (t0.getCalendar().get(Calendar.MONTH) > t1.getCalendar().get(Calendar.MONTH)) {
-					return 1;
-				}
-				if (t0.getCalendar().get(Calendar.DAY_OF_MONTH) < t1.getCalendar().get(Calendar.DAY_OF_MONTH)) {
-					return -1;
-				} else if (t0.getCalendar().get(Calendar.DAY_OF_MONTH) > t1.getCalendar().get(Calendar.DAY_OF_MONTH)) {
-					return 1;
-				}
-				if (t0.getCalendar().get(Calendar.HOUR) < t1.getCalendar().get(Calendar.HOUR)) {
-					return -1;
-				} else if (t0.getCalendar().get(Calendar.HOUR) > t1.getCalendar().get(Calendar.HOUR)) {
-					return 1;
-				}
-				if (t0.getCalendar().get(Calendar.MINUTE) < t1.getCalendar().get(Calendar.MINUTE)) {
-					return -1;
-				} else if (t0.getCalendar().get(Calendar.MINUTE) > t1.getCalendar().get(Calendar.MINUTE)) {
-					return 1;
-				}
-				if (t0.getCalendar().get(Calendar.SECOND) < t1.getCalendar().get(Calendar.SECOND)) {
-					return -1;
-				} else if (t0.getCalendar().get(Calendar.SECOND) > t1.getCalendar().get(Calendar.SECOND)) {
-					return 1;
-				}
-				return 0;
-			}
-		};
 
 		nextWorkout.setOnClickListener(new View.OnClickListener() {
 			@Override
