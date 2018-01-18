@@ -26,13 +26,13 @@ import java.util.Comparator;
  */
 public class HistoryMain extends AppCompatActivity {
 
-	GraphView graphViewLeft, graphViewRight;
+	GraphView graphView;
 	SaveWorkoutJson saveWorkoutJson;
 	String workoutName = "";
-	TextView xAxisLeft, yAxisLeft, workoutText, xAxisRight, yAxisRight;
+	TextView xAxis, yAxis, workoutText;
 	RadioGroup groupType;
 	RadioButton durationRadio, gradeRadio, repsRadio;
-	Button nextWorkout;
+	Button nextWorkout, backWorkout;
 	ArrayList<WorkoutJSON> workoutJSONS;
 	ArrayList<String> workoutStrings = new ArrayList<>();
 	Comparator<WorkoutJSON> workoutJSONComparator;
@@ -43,13 +43,11 @@ public class HistoryMain extends AppCompatActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_history_main);
-		graphViewLeft = (GraphView) findViewById(R.id.historyGraphLeft);
-		graphViewRight = (GraphView) findViewById(R.id.historyGraphRight);
+		graphView = (GraphView) findViewById(R.id.historyGraph);
 		nextWorkout = (Button) findViewById(R.id.nextWorkout);
-		xAxisLeft = (TextView) findViewById(R.id.graphXAxisLeft);
-		yAxisLeft = (TextView) findViewById(R.id.graphYAxisLeft);
-		xAxisRight = (TextView) findViewById(R.id.graphXAxisRight);
-		yAxisRight = (TextView) findViewById(R.id.graphYAxisRight);
+		backWorkout = (Button) findViewById(R.id.backWorkout);
+		xAxis = (TextView) findViewById(R.id.graphXAxis);
+		yAxis = (TextView) findViewById(R.id.graphYAxis);
 		durationRadio = (RadioButton) findViewById(R.id.radioDuration);
 		gradeRadio = (RadioButton) findViewById(R.id.radioAccuracy);
 		repsRadio = (RadioButton) findViewById(R.id.radioReps);
@@ -93,9 +91,7 @@ public class HistoryMain extends AppCompatActivity {
 		} else {
 			workoutText.setText("No Workouts");
 		}
-
-		xAxisLeft.setText("Weeks Ago (Average)");
-		xAxisRight.setText("Weeks Ago (Average)");
+		xAxis.setText("Weeks Ago (Average)");
 
 
 		nextWorkout.setOnClickListener(new View.OnClickListener() {
@@ -104,6 +100,19 @@ public class HistoryMain extends AppCompatActivity {
 				workoutIndex++;
 				if (workoutIndex >= workoutStrings.size()) {
 					workoutIndex = 0;
+				}
+				workoutName = workoutStrings.get(workoutIndex);
+				workoutText.setText(workoutStrings.get(workoutIndex));
+				setUpGraph(workoutJSONS, workoutType);
+			}
+		});
+
+		backWorkout.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				workoutIndex--;
+				if (workoutIndex < 0) {
+					workoutIndex = workoutStrings.size() - 1;
 				}
 				workoutName = workoutStrings.get(workoutIndex);
 				workoutText.setText(workoutStrings.get(workoutIndex));
@@ -151,44 +160,27 @@ public class HistoryMain extends AppCompatActivity {
 		if (workoutJSONS.size() > 1) {
 			Collections.sort(workoutJSONS, workoutJSONComparator);
 		}
-		ArrayList<WorkoutJSON> leftHandWorkouts = leftHand(workoutJSONS);
-		ArrayList<WorkoutJSON> rightHandWorkouts = rightHand(workoutJSONS);
+		ArrayList<WorkoutJSON> handWorkouts = leftHand(workoutJSONS);
 		BarGraphSeries<DataPoint> lineGraphSeriesLeft;
 		BarGraphSeries<DataPoint> lineGraphSeriesRight;
 		if (workoutType == 0) {
-			lineGraphSeriesLeft = repsToGraph(workoutName, leftHandWorkouts);
-			lineGraphSeriesRight = repsToGraph(workoutName, rightHandWorkouts);
-			graphViewLeft.setTitle("Weekly Repetitions (Left)");
-			graphViewRight.setTitle("Weekly Repetitions (Right)");
-			yAxisLeft.setText("Reps");
-			yAxisRight.setText("Reps");
+			lineGraphSeriesLeft = repsToGraph(workoutName, handWorkouts);
+			graphView.setTitle("Weekly Repetitions (Left)");
+			yAxis.setText("Reps");
 		} else if (workoutType == 1) {
-			lineGraphSeriesLeft = durationToGraph(workoutName, leftHandWorkouts);
-			lineGraphSeriesRight = durationToGraph(workoutName, rightHandWorkouts);
-			graphViewLeft.setTitle("Weekly Durarion (Left)");
-			graphViewRight.setTitle("Weekly Duration (Right)");
-			yAxisLeft.setText("Seconds");
-			yAxisRight.setText("Seconds");
+			lineGraphSeriesLeft = durationToGraph(workoutName, handWorkouts);
+			graphView.setTitle("Weekly Durarion (Left)");
+			yAxis.setText("Seconds");
 		} else {
-			lineGraphSeriesLeft = accuracyToGraph(workoutName, leftHandWorkouts);
-			lineGraphSeriesRight = accuracyToGraph(workoutName, rightHandWorkouts);
-			graphViewLeft.setTitle("Weekly Accuracy (Left)");
-			graphViewRight.setTitle("Weekly Accuracy (Right)");
-			yAxisLeft.setText("Accuracy");
-			yAxisRight.setText("Accuracy");
+			lineGraphSeriesLeft = accuracyToGraph(workoutName, handWorkouts);
+			graphView.setTitle("Weekly Accuracy (Left)");
+			yAxis.setText("Accuracy");
 		}
 		lineGraphSeriesLeft.setAnimated(true);
-		lineGraphSeriesRight.setAnimated(true);
-		graphViewLeft.removeAllSeries();
+		graphView.removeAllSeries();
 		lineGraphSeriesLeft.setColor(Color.RED);
-		graphViewLeft.addSeries(lineGraphSeriesLeft);
-		graphViewLeft.invalidate();
-
-
-		graphViewRight.removeAllSeries();
-		lineGraphSeriesRight.setColor(Color.GREEN);
-		graphViewRight.addSeries(lineGraphSeriesRight);
-		graphViewRight.invalidate();
+		graphView.addSeries(lineGraphSeriesLeft);
+		graphView.invalidate();
 	}
 
 	/**
@@ -199,20 +191,6 @@ public class HistoryMain extends AppCompatActivity {
 		ArrayList<WorkoutJSON> filteredWorkoutJSONS = new ArrayList<>();
 		for (WorkoutJSON workout : workoutJSONS) {
 			if (workout.getHand().equals("Left")) {
-				filteredWorkoutJSONS.add(workout);
-			}
-		}
-		return filteredWorkoutJSONS;
-	}
-
-	/**
-	 * @param workoutJSONS
-	 * @return
-	 */
-	public ArrayList<WorkoutJSON> rightHand(ArrayList<WorkoutJSON> workoutJSONS) {
-		ArrayList<WorkoutJSON> filteredWorkoutJSONS = new ArrayList<>();
-		for (WorkoutJSON workout : workoutJSONS) {
-			if (workout.getHand().equals("Right")) {
 				filteredWorkoutJSONS.add(workout);
 			}
 		}

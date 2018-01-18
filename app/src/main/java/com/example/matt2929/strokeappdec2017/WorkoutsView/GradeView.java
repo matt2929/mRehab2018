@@ -52,8 +52,8 @@ public class GradeView extends View {
         textTextPaint.setTextSize(60);
 
 	    backgroundPaint.setColor(Color.LTGRAY);
-	    marginPaint.setColor(Color.DKGRAY);
-	    this.setBackgroundColor(Color.BLACK);
+        marginPaint.setColor(Color.BLACK);
+        this.setBackgroundColor(Color.BLACK);
     }
 
     public void SetupView(Bitmap bitmap, String Title, float oldValue, float newValue, boolean didBetter) {
@@ -69,7 +69,7 @@ public class GradeView extends View {
     protected void onDraw(Canvas canvas) {
         float width = this.getWidth();
         float height = this.getHeight();
-        float marginWidth = this.getWidth() / 60;
+        float marginWidth = this.getWidth() / 120;
         float titleHeight = this.getHeight() / 3;
         canvas.drawRect(0, 0, width, height, backgroundPaint);
         canvas.drawText(Title, getWidth() / 2, titleHeight - 30, titleTextPaint);

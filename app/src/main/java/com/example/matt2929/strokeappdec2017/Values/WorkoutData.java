@@ -1,5 +1,7 @@
 package com.example.matt2929.strokeappdec2017.Values;
 
+import android.graphics.Color;
+
 import com.example.matt2929.strokeappdec2017.Workouts.WorkoutDescription;
 
 /**
@@ -15,34 +17,46 @@ public final class WorkoutData {
 	public final static WorkoutDescription[] WORKOUT_DESCRIPTIONS = new WorkoutDescription[]
 			{
 					new WorkoutDescription("Horizontal Bowl", Workout_Type_Sensor, Sensor_Type_Linear, 10,
-							"In this workout you will move the bowl from side to side. Be sure to let it sit on the table when you bring it down. When I count pick up the bowl again"),
+							"In this workout you will move the bowl from side to side. Be sure to let it sit on the table when you bring it down. When I count pick up the bowl again",
+							Color.rgb(51, 204, 255)),
 					new WorkoutDescription("Vertical Bowl", Workout_Type_Sensor, Sensor_Type_Linear, 10,
 							"Move the bowl onto the shelf then back onto the table. Wait for me to count before moving\n" +
-									"me again."),
+									"me again.",
+							Color.rgb(102, 255, 153)),
 					new WorkoutDescription("Horizontal Cup", Workout_Type_Sensor, Sensor_Type_Linear, 10,
-							"In this workout you will move the cup from side to side. Be sure to let it sit on the table when you bring it down. When I count, pick up the cup again."),
+							"In this workout you will move the cup from side to side. Be sure to let it sit on the table when you bring it down. When I count, pick up the cup again.",
+							Color.rgb(204, 255, 102)),
 					new WorkoutDescription("Vertical Cup", Workout_Type_Sensor, Sensor_Type_Linear, 10,
-							"Move the cup onto the shelf then back onto the table. Wait for me to count before moving me again."),
+							"Move the cup onto the shelf then back onto the table. Wait for me to count before moving me again.",
+							Color.rgb(255, 255, 153)),
 					new WorkoutDescription("Walk Cup", Workout_Type_Sensor, Sensor_Type_Linear, 10,
-							"Hold the bowl infront of you. Walk fowards at a comfortable pace. Walk for 15 Seconds"),
+							"Hold the bowl infront of you. Walk fowards at a comfortable pace. Walk for 15 Seconds",
+							Color.rgb(255, 153, 102)),
 					new WorkoutDescription("Sip", Workout_Type_Sensor, Sensor_Type_Gravity, 1,
-							"Put the cup on the table, when we say begin, pick the cup up to your mouth and drink for 10 seconds."),
+							"Put the cup on the table, when we say begin, pick the cup up to your mouth and drink for 10 seconds.",
+							Color.rgb(255, 80, 80)),
 					new WorkoutDescription("Twist Cup", Workout_Type_Sensor, Sensor_Type_Linear, 10,
 							"In this workout you will hold the cup up and pretend to pour out water in front of you. Do not\n" +
-									"pour too quick or to slow"),
+									"pour too quick or to slow",
+							Color.rgb(255, 51, 153)),
 					new WorkoutDescription("Pour Cup", Workout_Type_Sensor, Sensor_Type_Gravity, 3,
 							"In this workout you will hold the cup up and pretend to pour out water in front of you. Do not\n" +
-									"pour too quick or to slow."),
+									"pour too quick or to slow.",
+							Color.rgb(255, 153, 255)),
 					new WorkoutDescription("Unlock Key", Workout_Type_Touch, null, 5,
 							"With the key in contact with the phone screen, rotate the key clockwise and counterclockwise.\n" +
-									"Try to follow the arc as accurately as possible."),
+									"Try to follow the arc as accurately as possible.",
+							Color.rgb(153, 153, 255)),
 					new WorkoutDescription("Unlock Door", Workout_Type_Touch, null, 5,
-							"With the doorknob in contact with the phone screen, rotate the doorknob clockwise and counterclockwise. Try to follow the arc as accurately as possible."),
+							"With the doorknob in contact with the phone screen, rotate the doorknob clockwise and counterclockwise. Try to follow the arc as accurately as possible.",
+							Color.rgb(153, 102, 51)),
 					new WorkoutDescription("Phone Number", Workout_Type_Touch, null, 3,
 							"Type in the phone number shown above as accurately and quickly as possible. You can hold\n" +
-									"the phone in your hand."),
+									"the phone in your hand.",
+							Color.rgb(51, 153, 102)),
 					new WorkoutDescription("Multi Touch", Workout_Type_Touch, null, 5,
-							"In this workout you need to click all the blue circles"),
+							"In this workout you need to click all the blue circles",
+							Color.rgb(153, 51, 102)),
 			};
 	public final static String[] WORKOUT_TYPE = new String[]{
 			Workout_Type_Sensor,

@@ -12,22 +12,18 @@
     <view
         android:id="@+id/repsView"
         class="com.example.matt2929.strokeappdec2017.WorkoutsView.GradeView"
-        id="@+id/view"
         layout_width="match_parent"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_marginBottom="10dp"
         android:layout_weight="1"
         android:amPmBackgroundColor="@android:color/black" />
 
     <view
         android:id="@+id/timeView"
         class="com.example.matt2929.strokeappdec2017.WorkoutsView.GradeView"
-        id="@+id/view"
         layout_width="match_parent"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginBottom="10dp"
         android:layout_weight="1"
         android:amPmBackgroundColor="@android:color/black" />
 
@@ -38,7 +34,6 @@
         layout_width="match_parent"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginBottom="10dp"
         android:layout_weight="1"
         android:amPmBackgroundColor="@android:color/black" />
 
@@ -46,7 +41,7 @@
         android:id="@+id/postWorkoutNext"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_margin="15dp"
+        android:layout_margin="0dp"
         android:layout_weight="1"
         android:background="@drawable/buttonshape"
         android:text="Next Workout"

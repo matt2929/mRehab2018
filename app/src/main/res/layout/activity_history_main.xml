@@ -3,139 +3,37 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/background_light"
     android:orientation="vertical"
-    android:weightSum="20"
+    android:weightSum="10"
     tools:context="com.example.matt2929.strokeappdec2017.Activity.HistoryMain">
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="6"
-        android:background="@color/colorBackground"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/graphYAxisLeft"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight=".175"
-            android:background="@color/colorBackground"
-            android:gravity="center"
-            android:rotation="-90"
-            android:text="TextView"
-            android:textStyle="bold" />
-
-        <com.jjoe64.graphview.GraphView
-            android:id="@+id/historyGraphLeft"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginRight="45dp"
-            android:layout_weight=".825"
-            android:paddingLeft="10dp"
-            android:paddingRight="45dp" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_weight="1.5"
         android:background="@color/colorBackground"
         android:orientation="horizontal"
         android:weightSum="1">
 
-        <Space
+        <Button
+            android:id="@+id/backWorkout"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight=".2"
-            android:background="@color/colorBackground" />
-
-        <TextView
-            android:id="@+id/graphXAxisLeft"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginRight="45dp"
-            android:layout_weight=".8"
-            android:background="@color/colorBackground"
-            android:gravity="center"
-            android:text="TextView"
-            android:textStyle="bold" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="6"
-        android:background="@color/colorBackground"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/graphYAxisRight"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight=".175"
-            android:background="@color/colorBackground"
-            android:gravity="center"
-            android:rotation="270"
-            android:text="TextView"
-            android:textStyle="bold" />
-
-        <com.jjoe64.graphview.GraphView
-            android:id="@+id/historyGraphRight"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginRight="45dp"
-            android:layout_weight=".825" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:background="@color/colorBackground"
-        android:orientation="horizontal"
-        android:weightSum="1">
-
-        <Space
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight=".2"
-            android:background="@color/colorBackground" />
-
-        <TextView
-            android:id="@+id/graphXAxisRight"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginRight="45dp"
-            android:layout_weight=".8"
-            android:background="@color/colorBackground"
-            android:gravity="center"
-            android:text="TextView"
-            android:textStyle="bold" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="3"
-        android:background="@color/colorBackground"
-        android:orientation="horizontal"
-        android:weightSum="1">
+            android:layout_weight=".25"
+            android:background="@drawable/ic_back"
+            android:padding="10dp"
+            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/CurrentWorkoutText"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:layout_weight=".7"
-            android:background="@color/colorBackground"
+            android:layout_weight=".5"
             android:gravity="center"
             android:text="TextView"
+            android:textColor="@android:color/black"
             android:textSize="24sp"
             android:textStyle="bold" />
 
@@ -143,17 +41,78 @@
             android:id="@+id/nextWorkout"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight=".3"
-            android:background="@drawable/buttonshape"
+            android:layout_weight=".25"
+            android:background="@drawable/ic_next"
             android:padding="10dp"
-            android:text="Next Workout"
             android:textSize="12sp" />
+
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="3"
+        android:layout_weight="4"
+        android:background="@color/colorBackground"
+        android:orientation="horizontal"
+        android:weightSum="10">
+
+        <TextView
+            android:id="@+id/graphYAxis"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.8"
+            android:background="@color/colorBackground"
+            android:gravity="center"
+            android:rotation="-90"
+            android:text="TextView"
+            android:textColor="@android:color/black"
+            android:textStyle="bold" />
+
+        <com.jjoe64.graphview.GraphView
+            android:id="@+id/historyGraph"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="6.4" />
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.8"
+            android:background="@color/colorBackground" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/colorBackground"
+        android:orientation="horizontal"
+        android:weightSum="10">
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:background="@color/colorBackground" />
+
+        <TextView
+            android:id="@+id/graphXAxis"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="6"
+            android:background="@color/colorBackground"
+            android:gravity="center"
+            android:text="TextView"
+            android:textColor="@android:color/black"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
         android:orientation="horizontal">
 
         <RadioGroup
@@ -195,5 +154,10 @@
                 android:textAllCaps="false" />
         </RadioGroup>
     </LinearLayout>
+
+    <Switch
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:text="Switch" />
 
 </LinearLayout>
