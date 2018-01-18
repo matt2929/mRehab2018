@@ -11,7 +11,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.example.matt2929.strokeappdec2017.R;
-import com.example.matt2929.strokeappdec2017.SaveAndLoadData.SaveWorkoutData;
+import com.example.matt2929.strokeappdec2017.SaveAndLoadData.SaveWorkoutJson;
 import com.example.matt2929.strokeappdec2017.SaveAndLoadData.WorkoutJSON;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.BarGraphSeries;
@@ -27,7 +27,7 @@ import java.util.Comparator;
 public class HistoryMain extends AppCompatActivity {
 
 	GraphView graphViewLeft, graphViewRight;
-	SaveWorkoutData saveWorkoutData;
+	SaveWorkoutJson saveWorkoutJson;
 	String workoutName = "";
 	TextView xAxisLeft, yAxisLeft, workoutText, xAxisRight, yAxisRight;
 	RadioGroup groupType;
@@ -79,8 +79,8 @@ public class HistoryMain extends AppCompatActivity {
 		});
 		workoutText = (TextView) findViewById(R.id.CurrentWorkoutText);
 		groupType = (RadioGroup) findViewById(R.id.radioTypes);
-		saveWorkoutData = new SaveWorkoutData(getApplicationContext());
-		workoutJSONS = saveWorkoutData.getWorkouts();
+		saveWorkoutJson = new SaveWorkoutJson(getApplicationContext());
+		workoutJSONS = saveWorkoutJson.getWorkouts();
 		for (WorkoutJSON workoutJSON : workoutJSONS) {
 			if (!workoutStrings.contains(workoutJSON.getWorkoutName())) {
 				workoutStrings.add(workoutJSON.getWorkoutName());

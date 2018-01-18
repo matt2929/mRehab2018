@@ -24,12 +24,12 @@ import java.util.Queue;
  * Created by matt2929 on 1/3/18.
  */
 
-public class SaveWorkoutData {
+public class SaveWorkoutJson {
 	ArrayList<WorkoutJSON> workoutJSONS = new ArrayList<>();
 	Context context;
 	UploadToAmazonBucket uploadToAmazonBucket;
 
-	public SaveWorkoutData(Context context) {
+	public SaveWorkoutJson(Context context) {
 		this.context = context;
 		uploadToAmazonBucket = new UploadToAmazonBucket(context);
 	}

@@ -9,7 +9,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.matt2929.strokeappdec2017.R;
-import com.example.matt2929.strokeappdec2017.SaveAndLoadData.SaveWorkoutData;
+import com.example.matt2929.strokeappdec2017.SaveAndLoadData.SaveWorkoutJson;
 import com.example.matt2929.strokeappdec2017.SaveAndLoadData.WorkoutJSON;
 import com.example.matt2929.strokeappdec2017.WorkoutsView.GradeView;
 
@@ -19,7 +19,7 @@ import java.util.Comparator;
 
 public class PostWorkoutReport extends AppCompatActivity {
 	ArrayList<WorkoutJSON> workoutJSONS;
-	SaveWorkoutData saveWorkoutData;
+	SaveWorkoutJson saveWorkoutJson;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -36,8 +36,8 @@ public class PostWorkoutReport extends AppCompatActivity {
 		Bitmap bitmap2 = BitmapFactory.decodeResource(getResources(), R.drawable.shake);
 		Bitmap bitmap3 = BitmapFactory.decodeResource(getResources(), R.drawable.stop_watch);
 
-		saveWorkoutData = new SaveWorkoutData(getApplicationContext());
-		workoutJSONS = saveWorkoutData.getWorkouts();
+		saveWorkoutJson = new SaveWorkoutJson(getApplicationContext());
+		workoutJSONS = saveWorkoutJson.getWorkouts();
 		ArrayList<WorkoutJSON> workoutJSONSFiltered = new ArrayList<>();
 		Comparator<WorkoutJSON> workoutJSONComparator = new Comparator<WorkoutJSON>() {
 			@Override
