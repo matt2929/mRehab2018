@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import com.example.matt2929.strokeappdec2017.R;
 
 
-public class WorkoutPreview extends AppCompatActivity {
+public class WorkoutPreviewActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -16,7 +16,7 @@ import com.example.matt2929.strokeappdec2017.R;
 import com.example.matt2929.strokeappdec2017.SaveAndLoadData.SaveAndWriteUserInfo;
 import com.example.matt2929.strokeappdec2017.SaveAndLoadData.User;
 
-public class CreateNewUser extends AppCompatActivity {
+public class CreateNewUserActivity extends AppCompatActivity {
     User newUser = new User();
 
     @Override
@@ -86,7 +86,7 @@ public class CreateNewUser extends AppCompatActivity {
                     SaveAndWriteUserInfo saveAndWriteUserInfo = new SaveAndWriteUserInfo(getApplicationContext());
                     saveAndWriteUserInfo.saveUser(newUser);
                 }
-                Intent intent = new Intent(getApplicationContext(), Login.class);
+                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                 startActivity(intent);
             }
         });

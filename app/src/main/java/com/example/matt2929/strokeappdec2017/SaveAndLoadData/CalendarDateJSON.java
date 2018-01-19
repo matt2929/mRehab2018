@@ -7,11 +7,11 @@ import org.json.JSONObject;
  * Created by matt2929 on 1/17/18.
  */
 
-public class SaveCalendarJSON {
+public class CalendarDateJSON {
 	int month = -1, dayOfMonth = -1, year = -1;
 	JSONObject jsonObject = new JSONObject();
 
-	public SaveCalendarJSON(int month, int dayOfMonth, int year) {
+	public CalendarDateJSON(int month, int dayOfMonth, int year) {
 		this.month = month;
 		this.dayOfMonth = dayOfMonth;
 		this.year = year;
@@ -22,6 +22,21 @@ public class SaveCalendarJSON {
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public CalendarDateJSON(String string) {
+		try {
+			JSONObject jsonObject = new JSONObject(string);
+			year = jsonObject.getInt("year");
+			dayOfMonth = jsonObject.getInt("dom");
+			month = jsonObject.getInt("month");
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public String getJSONString() {
+		return jsonObject.toString();
 	}
 
 }

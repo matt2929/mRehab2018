@@ -8,7 +8,7 @@ import android.widget.Button;
 
 import com.example.matt2929.strokeappdec2017.R;
 
-public class WorkoutOrHistory extends AppCompatActivity {
+public class WorkoutOrHistoryActivity extends AppCompatActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -19,7 +19,7 @@ public class WorkoutOrHistory extends AppCompatActivity {
 		history.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				Intent intent = new Intent(getApplicationContext(), HistoryMain.class);
+				Intent intent = new Intent(getApplicationContext(), CalendarSetActivity.class);
 				startActivity(intent);
 			}
 		});
@@ -28,7 +28,7 @@ public class WorkoutOrHistory extends AppCompatActivity {
 		workout.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				Intent intent = new Intent(getApplicationContext(), WorkoutSelection.class);
+				Intent intent = new Intent(getApplicationContext(), WorkoutSelectionActivity.class);
 				startActivity(intent);
 			}
 		});

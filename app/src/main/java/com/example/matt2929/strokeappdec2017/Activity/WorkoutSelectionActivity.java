@@ -21,7 +21,7 @@ import static com.example.matt2929.strokeappdec2017.Values.WorkoutData.WORKOUT_D
 import static com.example.matt2929.strokeappdec2017.Values.WorkoutData.WORKOUT_TYPE;
 import static com.example.matt2929.strokeappdec2017.Values.WorkoutData.Workout_Type_Sensor;
 
-public class WorkoutSelection extends AppCompatActivity {
+public class WorkoutSelectionActivity extends AppCompatActivity {
 
 	int currentSelection = -1;
 
@@ -37,7 +37,7 @@ public class WorkoutSelection extends AppCompatActivity {
 			@Override
 			public void onClick(View view) {
 				if (currentSelection != -1) {
-					Intent intent = new Intent(getApplicationContext(), GoalsAndReps.class);
+					Intent intent = new Intent(getApplicationContext(), GoalsAndRepsActivity.class);
 					if (WORKOUT_TYPE[currentSelection].equals(Workout_Type_Sensor)) {
 						intent.putExtra("WorkoutType", "Sensor");
 					} else {
@@ -57,7 +57,7 @@ public class WorkoutSelection extends AppCompatActivity {
 			@Override
 			public void onClick(View view) {
 				if (currentSelection != -1) {
-					Intent intent = new Intent(getApplicationContext(), GoalsAndReps.class);
+					Intent intent = new Intent(getApplicationContext(), GoalsAndRepsActivity.class);
 					if (WORKOUT_TYPE[currentSelection].equals(Workout_Type_Sensor)) {
 						intent.putExtra("WorkoutType", "Sensor");
 					} else {

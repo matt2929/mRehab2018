@@ -10,7 +10,7 @@ import android.widget.Button;
 
 import com.example.matt2929.strokeappdec2017.R;
 
-public class StartScreen extends AppCompatActivity {
+public class StartScreenActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,8 +22,8 @@ public class StartScreen extends AppCompatActivity {
 	    login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), Login.class);
-                startActivity(intent);
+	            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+	            startActivity(intent);
             }
         });
         demo.setOnClickListener(new View.OnClickListener() {

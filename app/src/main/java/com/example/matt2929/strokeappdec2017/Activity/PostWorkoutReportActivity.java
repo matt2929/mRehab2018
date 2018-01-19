@@ -9,7 +9,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.matt2929.strokeappdec2017.R;
-import com.example.matt2929.strokeappdec2017.SaveAndLoadData.SaveWorkoutJson;
+import com.example.matt2929.strokeappdec2017.SaveAndLoadData.SaveWorkoutJSON;
 import com.example.matt2929.strokeappdec2017.SaveAndLoadData.WorkoutJSON;
 import com.example.matt2929.strokeappdec2017.WorkoutsView.GradeView;
 
@@ -17,9 +17,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
-public class PostWorkoutReport extends AppCompatActivity {
+public class PostWorkoutReportActivity extends AppCompatActivity {
 	ArrayList<WorkoutJSON> workoutJSONS;
-	SaveWorkoutJson saveWorkoutJson;
+	SaveWorkoutJSON saveWorkoutJSON;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -36,8 +36,8 @@ public class PostWorkoutReport extends AppCompatActivity {
 		Bitmap bitmap2 = BitmapFactory.decodeResource(getResources(), R.drawable.shake);
 		Bitmap bitmap3 = BitmapFactory.decodeResource(getResources(), R.drawable.stop_watch);
 
-		saveWorkoutJson = new SaveWorkoutJson(getApplicationContext());
-		workoutJSONS = saveWorkoutJson.getWorkouts();
+		saveWorkoutJSON = new SaveWorkoutJSON(getApplicationContext());
+		workoutJSONS = saveWorkoutJSON.getWorkouts();
 		ArrayList<WorkoutJSON> workoutJSONSFiltered = new ArrayList<>();
 		Comparator<WorkoutJSON> workoutJSONComparator = new Comparator<WorkoutJSON>() {
 			@Override
@@ -69,7 +69,7 @@ public class PostWorkoutReport extends AppCompatActivity {
 			@Override
 			public void onClick(View view) {
 				//TODO:if within some data, DO YOU WANT TO ADD A NEW GOAL?
-				Intent intent = new Intent(getApplicationContext(), WorkoutSelection.class);
+				Intent intent = new Intent(getApplicationContext(), WorkoutSelectionActivity.class);
 				startActivity(intent);
 			}
 		});

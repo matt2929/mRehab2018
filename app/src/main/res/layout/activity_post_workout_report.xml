@@ -6,7 +6,7 @@
     android:background="@android:color/background_dark"
     android:orientation="vertical"
     android:weightSum="4"
-    tools:context="com.example.matt2929.strokeappdec2017.Activity.PostWorkoutReport">
+    tools:context="com.example.matt2929.strokeappdec2017.Activity.PostWorkoutReportActivity">
 
 
     <view

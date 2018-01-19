@@ -7,7 +7,7 @@
     android:background="@android:color/background_dark"
     android:orientation="vertical"
     android:weightSum="2"
-    tools:context="com.example.matt2929.strokeappdec2017.Activity.WorkoutPreview">
+    tools:context="com.example.matt2929.strokeappdec2017.Activity.WorkoutPreviewActivity">
 
     <ImageView
         android:id="@+id/previewImage"

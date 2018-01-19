@@ -17,7 +17,7 @@ import com.example.matt2929.strokeappdec2017.Values.WorkoutData;
 
 import java.util.ArrayList;
 
-public class GoalsAndReps extends AppCompatActivity {
+public class GoalsAndRepsActivity extends AppCompatActivity {
     SaveHistoricalGoals saveHistoricalGoals;
     SaveHistoricalReps saveHistoricalReps;
     Integer reps = 10;
@@ -34,8 +34,8 @@ public class GoalsAndReps extends AppCompatActivity {
         String WorkoutHand = oldIntent.getStringExtra("Hand");
         String WorkoutName = oldIntent.getStringExtra("Workout");
         String WorkoutType = oldIntent.getStringExtra("WorkoutType");
-        newIntent = new Intent(getApplicationContext(), WorkoutPreview.class);
-        newIntent.putExtra("Hand", oldIntent.getStringExtra("Hand"));
+	    newIntent = new Intent(getApplicationContext(), WorkoutPreviewActivity.class);
+	    newIntent.putExtra("Hand", oldIntent.getStringExtra("Hand"));
         newIntent.putExtra("Workout", oldIntent.getStringExtra("Workout"));
         newIntent.putExtra("WorkoutType", WorkoutType);
         saveHistoricalGoals = new SaveHistoricalGoals(getApplicationContext());

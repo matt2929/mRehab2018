@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.example.matt2929.strokeappdec2017.R;
 
-public class SetNextWorkout extends AppCompatActivity {
+public class SetNextWorkoutActivity extends AppCompatActivity {
 	DatePicker datePicker;
 	TextView textView;
 	Button button;
@@ -29,7 +29,7 @@ public class SetNextWorkout extends AppCompatActivity {
 			@Override
 			public void onClick(View view) {
 				if (dateSelected) {
-					Intent intent = new Intent(getApplicationContext(), WorkoutOrHistory.class);
+					Intent intent = new Intent(getApplicationContext(), WorkoutOrHistoryActivity.class);
 					startActivity(intent);
 				}
 			}

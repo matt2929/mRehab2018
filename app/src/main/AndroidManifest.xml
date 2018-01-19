@@ -19,31 +19,31 @@
         android:roundIcon="@drawable/icon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activity.StartScreen">
+        <activity android:name=".Activity.StartScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activity.Login" />
-        <activity android:name=".Activity.CreateNewUser" />
-        <activity android:name=".Activity.WorkoutOrHistory" />
-        <activity android:name=".Activity.WorkoutSelection" />
+        <activity android:name=".Activity.LoginActivity" />
+        <activity android:name=".Activity.CreateNewUserActivity" />
+        <activity android:name=".Activity.WorkoutOrHistoryActivity" />
+        <activity android:name=".Activity.WorkoutSelectionActivity" />
         <activity android:name=".Activity.SensorWorkoutRunner" />
         <activity android:name=".Activity.TouchWorkoutRunner" />
-        <activity android:name=".Activity.WorkoutPreview" />
-        <activity android:name=".Activity.GoalsAndReps" />
-        <activity android:name=".Activity.PostWorkoutReport" />
-        <activity android:name=".Activity.PostWorkoutGoals" />
-        <activity android:name=".Activity.LoadingScreen" />
-        <activity android:name=".Activity.HistoryMain" />
+        <activity android:name=".Activity.WorkoutPreviewActivity" />
+        <activity android:name=".Activity.GoalsAndRepsActivity" />
+        <activity android:name=".Activity.PostWorkoutReportActivity" />
+        <activity android:name=".Activity.PostWorkoutGoalsActivity" />
+        <activity android:name=".Activity.LoadingScreenActivity" />
 
         <service
             android:name="com.amazonaws.mobileconnectors.s3.transferutility.TransferService"
             android:enabled="true" />
 
-        <activity android:name=".Activity.SetNextWorkout"></activity>
+        <activity android:name=".Activity.SetNextWorkoutActivity" />
+        <activity android:name=".Activity.CalendarSetActivity"></activity>
     </application>
 
 </manifest>

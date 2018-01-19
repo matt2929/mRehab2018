@@ -17,7 +17,7 @@ import com.example.matt2929.strokeappdec2017.ListenersAndTriggers.SpeechTrigger;
 import com.example.matt2929.strokeappdec2017.R;
 import com.example.matt2929.strokeappdec2017.SaveAndLoadData.SaveHistoricalReps;
 import com.example.matt2929.strokeappdec2017.SaveAndLoadData.SaveTouchAndSensor;
-import com.example.matt2929.strokeappdec2017.SaveAndLoadData.SaveWorkoutJson;
+import com.example.matt2929.strokeappdec2017.SaveAndLoadData.SaveWorkoutJSON;
 import com.example.matt2929.strokeappdec2017.Utilities.SFXPlayer;
 import com.example.matt2929.strokeappdec2017.Utilities.Text2Speech;
 import com.example.matt2929.strokeappdec2017.Values.WorkoutData;
@@ -45,7 +45,7 @@ public class TouchWorkoutRunner extends AppCompatActivity {
 	private SFXPlayer _SFXPlayer;
 	private SaveHistoricalReps _SaveHistoricalReps;
 	private SaveTouchAndSensor _SaveTouchAndSensor;
-	private SaveWorkoutJson _SaveWorkoutJson;
+	private SaveWorkoutJSON _SaveWorkoutJSON;
 	private Boolean _WorkoutInProgress = false;//Is workout currently running?
 
 	@Override
@@ -57,7 +57,7 @@ public class TouchWorkoutRunner extends AppCompatActivity {
 		_WorkoutReps = intent.getIntExtra("Reps", 10);
 		_SaveHistoricalReps = new SaveHistoricalReps(getApplicationContext(), WorkoutData.UserName);
 		_SaveTouchAndSensor = new SaveTouchAndSensor(getApplicationContext(), _WorkoutName, "Time,X,Y,Good Touch");
-		_SaveWorkoutJson = new SaveWorkoutJson(getApplicationContext());
+		_SaveWorkoutJSON = new SaveWorkoutJSON(getApplicationContext());
 		_SFXPlayer = new SFXPlayer(getApplicationContext());
 		SetupWorkout(_WorkoutName, _WorkoutReps);
 		checkTTS();
@@ -116,9 +116,9 @@ public class TouchWorkoutRunner extends AppCompatActivity {
 							_SFXPlayer.killAll();
 							_SaveHistoricalReps.updateWorkout(_CurrentWorkout.getName(), _WorkoutReps);
 							_SaveTouchAndSensor.execute();
-							_SaveWorkoutJson.addNewWorkout(_CurrentWorkout.getName(), _WorkoutHand, timeToComplete / 1000l, 100l, _CurrentWorkout.getReps());
+							_SaveWorkoutJSON.addNewWorkout(_CurrentWorkout.getName(), _WorkoutHand, timeToComplete / 1000l, 100l, _CurrentWorkout.getReps());
 							Intent intent = getIntent();
-							intent.setClass(getApplicationContext(), LoadingScreen.class);
+							intent.setClass(getApplicationContext(), LoadingScreenActivity.class);
 							startActivity(intent);
 						} else if (s.equals(WorkoutData.TTS_WORKOUT_AUDIO_FEEDBACK)) {
 

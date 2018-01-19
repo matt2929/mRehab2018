@@ -5,7 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.example.matt2929.strokeappdec2017.R;
 
-public class PostWorkoutGoals extends AppCompatActivity {
+public class PostWorkoutGoalsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

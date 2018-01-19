@@ -18,7 +18,7 @@ import com.example.matt2929.strokeappdec2017.Values.WorkoutData;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Login extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
     int currentSelection = -1;
     List<String> userStrings = new ArrayList<>();
     List<User> userList = new ArrayList<>();
@@ -34,8 +34,8 @@ public class Login extends AppCompatActivity {
         buttonNew.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), CreateNewUser.class);
-                startActivity(intent);
+	            Intent intent = new Intent(getApplicationContext(), CreateNewUserActivity.class);
+	            startActivity(intent);
             }
         });
 
@@ -44,10 +44,10 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (currentSelection != -1) {
-                    //Login
-                    WorkoutData.UserName = userList.get(currentSelection).getName();
-                    Intent intent = new Intent(getApplicationContext(), WorkoutOrHistory.class);
-                    startActivity(intent);
+	                //LoginActivity
+	                WorkoutData.UserName = userList.get(currentSelection).getName();
+	                Intent intent = new Intent(getApplicationContext(), WorkoutOrHistoryActivity.class);
+	                startActivity(intent);
                 } else {
                     Toast.makeText(getApplicationContext(), "Please Select a User", Toast.LENGTH_LONG).show();
                 }

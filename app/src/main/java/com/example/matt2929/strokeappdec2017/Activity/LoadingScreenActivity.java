@@ -13,7 +13,7 @@ import com.example.matt2929.strokeappdec2017.Values.WorkoutData;
 import static com.example.matt2929.strokeappdec2017.Values.WorkoutData.progressCloud;
 import static com.example.matt2929.strokeappdec2017.Values.WorkoutData.progressLocal;
 
-public class LoadingScreen extends AppCompatActivity {
+public class LoadingScreenActivity extends AppCompatActivity {
 	TextView textView;
 	ProgressBar progressBarCloud, progressBarLocal;
 
@@ -38,7 +38,7 @@ public class LoadingScreen extends AppCompatActivity {
 					handler.postDelayed(this, 55);
 				} else {
 					Intent intent = getIntent();
-					intent.setClass(getApplicationContext(), PostWorkoutReport.class);
+					intent.setClass(getApplicationContext(), PostWorkoutReportActivity.class);
 					startActivity(intent);
 				}
 			}

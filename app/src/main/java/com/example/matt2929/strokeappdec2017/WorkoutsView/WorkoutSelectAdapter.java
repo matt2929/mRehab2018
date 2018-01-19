@@ -46,7 +46,6 @@ public class WorkoutSelectAdapter extends ArrayAdapter<WorkoutSelectData> {
 		activityCount.setTextSize(textSize);
 		activityName.setTextSize(textSize);
 		activityName.setShadowLayer(5, 5, 5, Color.LTGRAY);
-
 		return convertView;
 	}
 }
