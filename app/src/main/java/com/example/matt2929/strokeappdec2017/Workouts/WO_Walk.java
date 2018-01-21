@@ -1,5 +1,6 @@
 package com.example.matt2929.strokeappdec2017.Workouts;
 
+import com.example.matt2929.strokeappdec2017.ListenersAndTriggers.EndRepTrigger;
 import com.example.matt2929.strokeappdec2017.ListenersAndTriggers.OutputWorkoutData;
 import com.example.matt2929.strokeappdec2017.ListenersAndTriggers.OutputWorkoutStrings;
 import com.example.matt2929.strokeappdec2017.ListenersAndTriggers.SpeechTrigger;
@@ -10,8 +11,8 @@ import com.example.matt2929.strokeappdec2017.Utilities.SFXPlayer;
  */
 
 public class WO_Walk extends SensorWorkoutAbstract {
-    public WO_Walk(String Name, Integer reps, SpeechTrigger speechTrigger, SFXPlayer sfxPlayer, OutputWorkoutData outputWorkoutData, OutputWorkoutStrings outputWorkoutStrings) {
-        super.SensorWorkout(Name, reps, speechTrigger, sfxPlayer, outputWorkoutData, outputWorkoutStrings);
+    public WO_Walk(String Name, Integer reps, SpeechTrigger speechTrigger, EndRepTrigger endRepTrigger, SFXPlayer sfxPlayer, OutputWorkoutData outputWorkoutData, OutputWorkoutStrings outputWorkoutStrings) {
+        super.SensorWorkout(Name, reps, speechTrigger, endRepTrigger, sfxPlayer, outputWorkoutData, outputWorkoutStrings);
     }
 
 }

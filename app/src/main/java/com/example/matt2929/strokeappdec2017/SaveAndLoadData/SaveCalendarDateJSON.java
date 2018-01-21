@@ -19,7 +19,9 @@ import java.util.List;
 import java.util.Queue;
 
 /**
+ *
  * Created by matt2929 on 1/18/18.
+ *
  */
 
 public class SaveCalendarDateJSON {
@@ -44,16 +46,16 @@ public class SaveCalendarDateJSON {
 		return calendarDateJSON.month;
 	}
 
-	private void getData() {
+	public void getData() {
 		List<File> files = getAllFiles(context.getFilesDir());
 		String output = "";
 		for (File f : files) {
-			if (f.getName().equals("Calendar_" + WorkoutData.UserName + ".txt")) {
+			if (f.getName().equals("Calendar_" + WorkoutData.UserName + ".json")) {
 				try {
 					BufferedReader br = new BufferedReader(new FileReader(f));
 					String line = "";
 					while ((line = br.readLine()) != null) {
-						Log.e(f.getName(), line);
+						Log.e("line", line);
 						output += line;
 					}
 					br.close();
@@ -65,10 +67,11 @@ public class SaveCalendarDateJSON {
 			}
 		}
 		calendarDateJSON = new CalendarDateJSON(output);
+		Log.e("dom", "" + calendarDateJSON.dayOfMonth);
 	}
 
-	private void addCalendarDate(int dom, int month, int year) {
-		String filename = "Calendar_" + WorkoutData.UserName + ".txt";
+	public void addCalendarDate(int dom, int month, int year) {
+		String filename = "Calendar_" + WorkoutData.UserName + ".json";
 		FileOutputStream outputStream;
 		calendarDateJSON = new CalendarDateJSON(month, dom, year);
 		try {
@@ -79,7 +82,6 @@ public class SaveCalendarDateJSON {
 			e.printStackTrace();
 			Toast.makeText(context, "Failure to save", Toast.LENGTH_SHORT).show();
 		}
-
 	}
 
 	private List<File> getAllFiles(File parentDir) {
@@ -87,7 +89,6 @@ public class SaveCalendarDateJSON {
 		Queue<File> files = new LinkedList<>();
 		files.addAll(Arrays.asList(parentDir.listFiles()));
 		while (!files.isEmpty()) {
-			Log.e("File", files.peek().getName());
 			File file = files.remove();
 			if (file.isDirectory()) {
 				files.addAll(Arrays.asList(file.listFiles()));
@@ -96,5 +97,9 @@ public class SaveCalendarDateJSON {
 			}
 		}
 		return inFiles;
+	}
+
+	public String getString() {
+		return calendarDateJSON.getJSONString();
 	}
 }

@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.matt2929.strokeappdec2017.ListenersAndTriggers.EndRepTrigger;
 import com.example.matt2929.strokeappdec2017.ListenersAndTriggers.OutputWorkoutData;
 import com.example.matt2929.strokeappdec2017.ListenersAndTriggers.OutputWorkoutStrings;
 import com.example.matt2929.strokeappdec2017.ListenersAndTriggers.SpeechTrigger;
@@ -30,8 +31,8 @@ public class WO_PhoneNumber extends TouchWorkoutAbstract {
 	boolean[] phoneNumberProg = new boolean[10];
 	Long delayTime = 4000l;
 
-	public WO_PhoneNumber(String Name, Integer reps, ArrayList<View> views, SpeechTrigger speechTrigger, SFXPlayer sfxPlayer, OutputWorkoutData outputWorkoutData, OutputWorkoutStrings outputWorkoutStrings) {
-		super.TouchWorkout(Name, reps, views, speechTrigger, sfxPlayer, outputWorkoutData, outputWorkoutStrings);
+	public WO_PhoneNumber(String Name, Integer reps, ArrayList<View> views, EndRepTrigger endRepTrigger, SpeechTrigger speechTrigger, SFXPlayer sfxPlayer, OutputWorkoutData outputWorkoutData, OutputWorkoutStrings outputWorkoutStrings) {
+		super.TouchWorkout(Name, reps, views, endRepTrigger, speechTrigger, sfxPlayer, outputWorkoutData, outputWorkoutStrings);
 		for (int i = 2; i < views.size(); i++) {
 			buttons.add((Button) views.get(i));
 		}

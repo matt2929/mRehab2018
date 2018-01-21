@@ -8,27 +8,39 @@
     tools:context="com.example.matt2929.strokeappdec2017.Activity.CalendarSetActivity">
 
     <CalendarView
-        android:id="@+id/calendarView"
+        android:id="@+id/setDateCalendar"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="7" />
+        android:layout_weight="6" />
 
     <TextView
         android:id="@+id/setDateText"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="2"
+        android:background="@android:drawable/picture_frame"
         android:gravity="center"
         android:text="TextView"
         android:textColor="@android:color/background_dark"
         android:textSize="30sp" />
 
-    <Button
-        android:id="@+id/button3"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_margin="15dp"
         android:layout_weight="2"
-        android:background="@drawable/buttonshape"
-        android:text="Button" />
+        android:orientation="horizontal"
+        android:weightSum="1">
+
+        <Button
+            android:id="@+id/setDateSaveButton"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="15dp"
+            android:layout_weight="1"
+            android:background="@drawable/buttonshape"
+            android:text="Save Date"
+            android:textSize="30sp" />
+
+    </LinearLayout>
+
 </LinearLayout>

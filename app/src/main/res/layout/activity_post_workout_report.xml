@@ -44,6 +44,6 @@
         android:layout_margin="0dp"
         android:layout_weight="1"
         android:background="@drawable/buttonshape"
-        android:text="Next Workout"
+        android:text="Next Activity"
         android:textSize="36sp" />
 </LinearLayout>

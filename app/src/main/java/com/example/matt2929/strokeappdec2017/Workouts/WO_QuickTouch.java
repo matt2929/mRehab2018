@@ -3,6 +3,7 @@ package com.example.matt2929.strokeappdec2017.Workouts;
 import android.graphics.Color;
 import android.view.View;
 
+import com.example.matt2929.strokeappdec2017.ListenersAndTriggers.EndRepTrigger;
 import com.example.matt2929.strokeappdec2017.ListenersAndTriggers.OutputWorkoutData;
 import com.example.matt2929.strokeappdec2017.ListenersAndTriggers.OutputWorkoutStrings;
 import com.example.matt2929.strokeappdec2017.ListenersAndTriggers.SpeechTrigger;
@@ -15,7 +16,7 @@ import java.util.ArrayList;
  * Created by matt2929 on 1/6/18.
  */
 
-public class WO_MultiTouch extends TouchWorkoutAbstract {
+public class WO_QuickTouch extends TouchWorkoutAbstract {
 	float[] angle = new float[0];
 	boolean newLevelBreak = false;
 	ArrayList<Integer> touched = new ArrayList<>();
@@ -25,8 +26,8 @@ public class WO_MultiTouch extends TouchWorkoutAbstract {
 	int completed = 0;
 	int level = 0;
 
-	public WO_MultiTouch(String Name, Integer reps, ArrayList<View> views, SpeechTrigger speechTrigger, SFXPlayer sfxPlayer, OutputWorkoutData outputWorkoutData, OutputWorkoutStrings outputWorkoutStrings) {
-		super.TouchWorkout(Name, reps, views, speechTrigger, sfxPlayer, outputWorkoutData, outputWorkoutStrings);
+	public WO_QuickTouch(String Name, Integer reps, ArrayList<View> views, EndRepTrigger endRepTrigger, SpeechTrigger speechTrigger, SFXPlayer sfxPlayer, OutputWorkoutData outputWorkoutData, OutputWorkoutStrings outputWorkoutStrings) {
+		super.TouchWorkout(Name, reps, views, endRepTrigger, speechTrigger, sfxPlayer, outputWorkoutData, outputWorkoutStrings);
 		angle = new float[views.size()];
 		float angleSeperation = 360f / views.size();
 		for (int i = 0; i < views.size(); i++) {

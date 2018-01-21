@@ -3,8 +3,6 @@
     <color name="colorPrimary">#cddc39</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#ace2fc</color>
-    <color name="colorBackground">#dff2fb
-    </color>
-    <color name="colorPhoneScreen">#abffa8
-    </color>
+    <color name="colorBackground">#dff2fb</color>
+    <color name="colorPhoneScreen">#e2b5b4</color>
 </resources>

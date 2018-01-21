@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
+import com.example.matt2929.strokeappdec2017.ListenersAndTriggers.EndRepTrigger;
 import com.example.matt2929.strokeappdec2017.ListenersAndTriggers.OutputWorkoutData;
 import com.example.matt2929.strokeappdec2017.ListenersAndTriggers.OutputWorkoutStrings;
 import com.example.matt2929.strokeappdec2017.ListenersAndTriggers.SpeechCompleteListener;
@@ -22,8 +23,8 @@ import com.example.matt2929.strokeappdec2017.Utilities.SFXPlayer;
 import com.example.matt2929.strokeappdec2017.Utilities.Text2Speech;
 import com.example.matt2929.strokeappdec2017.Values.WorkoutData;
 import com.example.matt2929.strokeappdec2017.Workouts.TouchWorkoutAbstract;
-import com.example.matt2929.strokeappdec2017.Workouts.WO_MultiTouch;
 import com.example.matt2929.strokeappdec2017.Workouts.WO_PhoneNumber;
+import com.example.matt2929.strokeappdec2017.Workouts.WO_QuickTouch;
 import com.example.matt2929.strokeappdec2017.Workouts.WorkoutDescription;
 
 import java.util.ArrayList;
@@ -47,6 +48,7 @@ public class TouchWorkoutRunner extends AppCompatActivity {
 	private SaveTouchAndSensor _SaveTouchAndSensor;
 	private SaveWorkoutJSON _SaveWorkoutJSON;
 	private Boolean _WorkoutInProgress = false;//Is workout currently running?
+	private ArrayList<Long> saveDurations = new ArrayList<>();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -90,6 +92,7 @@ public class TouchWorkoutRunner extends AppCompatActivity {
 			_Text2Speech.destroy();
 		}
 	}
+
 	//use this to know when tts is done speaking
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -116,7 +119,7 @@ public class TouchWorkoutRunner extends AppCompatActivity {
 							_SFXPlayer.killAll();
 							_SaveHistoricalReps.updateWorkout(_CurrentWorkout.getName(), _WorkoutReps);
 							_SaveTouchAndSensor.execute();
-							_SaveWorkoutJSON.addNewWorkout(_CurrentWorkout.getName(), _WorkoutHand, timeToComplete / 1000l, 100l, _CurrentWorkout.getReps());
+							_SaveWorkoutJSON.addNewWorkout(_CurrentWorkout.getName(), _WorkoutHand, averageTime(saveDurations), 100l, _CurrentWorkout.getReps());
 							Intent intent = getIntent();
 							intent.setClass(getApplicationContext(), LoadingScreenActivity.class);
 							startActivity(intent);
@@ -168,6 +171,15 @@ public class TouchWorkoutRunner extends AppCompatActivity {
 				//	_CurrentWorkoutView.stringIn(s);
 			}
 		};
+
+		EndRepTrigger endRepTrigger = new EndRepTrigger() {
+			@Override
+			public void playSfXTrigger(int sfxID) {
+				saveDurations.add(System.currentTimeMillis() - TimeOfWorkout);
+				TimeOfWorkout = System.currentTimeMillis();
+			}
+		};
+
 		for (int i = 0; i < WorkoutData.WORKOUT_DESCRIPTIONS.length; i++) {
 			if (WorkoutName.equals(WorkoutData.WORKOUT_DESCRIPTIONS[i].getName())) {
 				_WorkoutDescription = WorkoutData.WORKOUT_DESCRIPTIONS[i];
@@ -176,7 +188,7 @@ public class TouchWorkoutRunner extends AppCompatActivity {
 		}
 		if (_WorkoutDescription.getName().equals("Unlock Key")) {
 		/*	setContentView(R.layout.activity_m);
-			_CurrentWorkout = new WO_MultiTouch(WorkoutName, reps, speechTrigger, _SFXPlayer, outputWorkoutData, outputWorkoutStrings);
+			_CurrentWorkout = new WO_QuickTouch(WorkoutName, reps, speechTrigger, _SFXPlayer, outputWorkoutData, outputWorkoutStrings);
 
 		*/
 		} else if (_WorkoutDescription.getName().equals("Unlock Door")) {
@@ -199,10 +211,10 @@ public class TouchWorkoutRunner extends AppCompatActivity {
 			views.add(findViewById(R.id.phone8));
 			views.add(findViewById(R.id.phone9));
 			_CurrentWorkoutView = findViewById(android.R.id.content).getRootView();
-			_CurrentWorkout = new WO_PhoneNumber(WorkoutName, reps, views, speechTrigger, _SFXPlayer, outputWorkoutData, outputWorkoutStrings);
+			_CurrentWorkout = new WO_PhoneNumber(WorkoutName, reps, views, endRepTrigger, speechTrigger, _SFXPlayer, outputWorkoutData, outputWorkoutStrings);
 
 		} else if (_WorkoutDescription.getName().equals("Multi Touch")) {
-			setContentView(R.layout.activity_multi_touch);
+			setContentView(R.layout.activity_quick_touch);
 			ArrayList<View> views = new ArrayList<>();
 			views.add(findViewById(R.id.circle1));
 			views.add(findViewById(R.id.circle2));
@@ -211,7 +223,7 @@ public class TouchWorkoutRunner extends AppCompatActivity {
 			views.add(findViewById(R.id.circle5));
 			views.add(findViewById(R.id.circle6));
 			_CurrentWorkoutView = findViewById(android.R.id.content).getRootView();
-			_CurrentWorkout = new WO_MultiTouch(WorkoutName, reps, views, speechTrigger, _SFXPlayer, outputWorkoutData, outputWorkoutStrings);
+			_CurrentWorkout = new WO_QuickTouch(WorkoutName, reps, views, endRepTrigger, speechTrigger, _SFXPlayer, outputWorkoutData, outputWorkoutStrings);
 
 		}
 		final Handler handler = new Handler();
@@ -245,5 +257,14 @@ public class TouchWorkoutRunner extends AppCompatActivity {
 			TimeOfWorkout = System.currentTimeMillis();
 		}
 		return super.onTouchEvent(event);
+	}
+
+	public Long averageTime(ArrayList<Long> longs) {
+		Long sum = 0l;
+		for (Long l : longs) {
+			sum += l;
+		}
+
+		return (sum / ((long) longs.size()) / 1000l);
 	}
 }

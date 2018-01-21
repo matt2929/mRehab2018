@@ -1,5 +1,6 @@
 package com.example.matt2929.strokeappdec2017.Workouts;
 
+import com.example.matt2929.strokeappdec2017.ListenersAndTriggers.EndRepTrigger;
 import com.example.matt2929.strokeappdec2017.ListenersAndTriggers.OutputWorkoutData;
 import com.example.matt2929.strokeappdec2017.ListenersAndTriggers.OutputWorkoutStrings;
 import com.example.matt2929.strokeappdec2017.ListenersAndTriggers.SpeechTrigger;
@@ -26,14 +27,16 @@ public abstract class WorkoutAbstract {
 	float[] AverageDataValue;
 	Integer reps = 10;
 	String Name = "";
+	EndRepTrigger endRepTrigger;
 
-	public void Workout(String Name, Integer reps, SpeechTrigger speechTrigger, SFXPlayer sfxPlayer, OutputWorkoutData outputWorkoutData, OutputWorkoutStrings outputWorkoutStrings) {
+	public void Workout(String Name, Integer reps, SpeechTrigger speechTrigger, EndRepTrigger endRepTrigger, SFXPlayer sfxPlayer, OutputWorkoutData outputWorkoutData, OutputWorkoutStrings outputWorkoutStrings) {
 		this.Name = Name;
 		this.reps = reps;
 		this.speechTrigger = speechTrigger;
 		this.outputWorkoutData = outputWorkoutData;
 		this.outputWorkoutStrings = outputWorkoutStrings;
 		this.sfxPlayer = sfxPlayer;
+		this.endRepTrigger = endRepTrigger;
 	}
 
 	public void StartWorkout() {

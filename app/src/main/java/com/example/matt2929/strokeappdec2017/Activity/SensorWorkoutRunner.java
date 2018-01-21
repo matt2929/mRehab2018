@@ -12,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.example.matt2929.strokeappdec2017.ListenersAndTriggers.EndRepTrigger;
 import com.example.matt2929.strokeappdec2017.ListenersAndTriggers.OutputWorkoutData;
 import com.example.matt2929.strokeappdec2017.ListenersAndTriggers.OutputWorkoutStrings;
 import com.example.matt2929.strokeappdec2017.ListenersAndTriggers.SpeechCompleteListener;
@@ -35,6 +36,8 @@ import com.example.matt2929.strokeappdec2017.WorkoutsView.WV_JustText;
 import com.example.matt2929.strokeappdec2017.WorkoutsView.WV_Pour;
 import com.example.matt2929.strokeappdec2017.WorkoutsView.WorkoutViewAbstract;
 
+import java.util.ArrayList;
+
 public class SensorWorkoutRunner extends AppCompatActivity implements SensorEventListener {
 
 	private final int CHECK_CODE = 0x1;
@@ -55,8 +58,8 @@ public class SensorWorkoutRunner extends AppCompatActivity implements SensorEven
 	private SaveHistoricalReps _SaveHistoricalReps;
 	private SaveTouchAndSensor _SaveTouchAndSensor;
 	private SaveWorkoutJSON _SaveWorkoutJSON;
-	private Boolean _WorkoutInProgress = false;//Is workout currently running?
-//
+	private Boolean _WorkoutInProgress = false;
+	private ArrayList<Long> saveDurations = new ArrayList<>();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -129,7 +132,7 @@ public class SensorWorkoutRunner extends AppCompatActivity implements SensorEven
 							_SaveHistoricalReps.updateWorkout(_CurrentWorkout.getName(), _WorkoutReps);
 							_SaveTouchAndSensor.execute();
 							Log.e("time", "" + timeToComplete);
-							_SaveWorkoutJSON.addNewWorkout(_CurrentWorkout.getName(), _WorkoutHand, timeToComplete / 1000l, 100l, _CurrentWorkout.getReps());
+							_SaveWorkoutJSON.addNewWorkout(_CurrentWorkout.getName(), _WorkoutHand, averageTime(saveDurations), 100l, _CurrentWorkout.getReps());
 							Intent intent = getIntent();
 							intent.setClass(getApplicationContext(), LoadingScreenActivity.class);
 							startActivity(intent);
@@ -234,6 +237,15 @@ public class SensorWorkoutRunner extends AppCompatActivity implements SensorEven
 				_Text2Speech.speak(s, WorkoutData.TTS_WORKOUT_AUDIO_FEEDBACK);
 			}
 		};
+
+		EndRepTrigger endRepTrigger = new EndRepTrigger() {
+			@Override
+			public void playSfXTrigger(int sfxID) {
+				saveDurations.add(System.currentTimeMillis() - TimeOfWorkout);
+				TimeOfWorkout = System.currentTimeMillis();
+			}
+		};
+
 		OutputWorkoutData outputWorkoutData = new OutputWorkoutData() {
 			@Override
 			public void getData(float[] f) {
@@ -254,37 +266,46 @@ public class SensorWorkoutRunner extends AppCompatActivity implements SensorEven
 		}
 		if (_WorkoutDescription.getName().equals("Horizontal Bowl")) {
 			setupSensorsLinear();
-			_CurrentWorkout = new WO_PickUpHorizontal(WorkoutName, reps, speechTrigger, _SFXPlayer, outputWorkoutData, outputWorkoutStrings);
+			_CurrentWorkout = new WO_PickUpHorizontal(WorkoutName, reps, speechTrigger, endRepTrigger, _SFXPlayer, outputWorkoutData, outputWorkoutStrings);
 			_CurrentWorkoutView = new WV_JustText(getApplicationContext());
 		} else if (_WorkoutDescription.getName().equals("Vertical Bowl")) {
 			setupSensorsLinear();
-			_CurrentWorkout = new WO_PickUpVertical(WorkoutName, reps, speechTrigger, _SFXPlayer, outputWorkoutData, outputWorkoutStrings);
+			_CurrentWorkout = new WO_PickUpVertical(WorkoutName, reps, speechTrigger, endRepTrigger, _SFXPlayer, outputWorkoutData, outputWorkoutStrings);
 			_CurrentWorkoutView = new WV_JustText(getApplicationContext());
 		} else if (_WorkoutDescription.getName().equals("Horizontal Cup")) {
 			setupSensorsLinear();
-			_CurrentWorkout = new WO_PickUpHorizontal(WorkoutName, reps, speechTrigger, _SFXPlayer, outputWorkoutData, outputWorkoutStrings);
+			_CurrentWorkout = new WO_PickUpHorizontal(WorkoutName, reps, speechTrigger, endRepTrigger, _SFXPlayer, outputWorkoutData, outputWorkoutStrings);
 			_CurrentWorkoutView = new WV_JustText(getApplicationContext());
 		} else if (_WorkoutDescription.getName().equals("Vertical Cup")) {
 			setupSensorsLinear();
-			_CurrentWorkout = new WO_PickUpVertical(WorkoutName, reps, speechTrigger, _SFXPlayer, outputWorkoutData, outputWorkoutStrings);
+			_CurrentWorkout = new WO_PickUpVertical(WorkoutName, reps, speechTrigger, endRepTrigger, _SFXPlayer, outputWorkoutData, outputWorkoutStrings);
 			_CurrentWorkoutView = new WV_JustText(getApplicationContext());
 		} else if (_WorkoutDescription.getName().equals("Walk Cup")) {
 			setupSensorsLinear();
-			_CurrentWorkout = new WO_Walk(WorkoutName, reps, speechTrigger, _SFXPlayer, outputWorkoutData, outputWorkoutStrings);
+			_CurrentWorkout = new WO_Walk(WorkoutName, reps, speechTrigger, endRepTrigger, _SFXPlayer, outputWorkoutData, outputWorkoutStrings);
 			_CurrentWorkoutView = new WV_JustText(getApplicationContext());
 		} else if (_WorkoutDescription.getName().equals("Twist Cup")) {
 			setupSensorsLinear();
-			_CurrentWorkout = new WO_Twist(WorkoutName, reps, speechTrigger, _SFXPlayer, outputWorkoutData, outputWorkoutStrings);
+			_CurrentWorkout = new WO_Twist(WorkoutName, reps, speechTrigger, endRepTrigger, _SFXPlayer, outputWorkoutData, outputWorkoutStrings);
 			_CurrentWorkoutView = new WV_JustText(getApplicationContext());
 		} else if (_WorkoutDescription.getName().equals("Pour Cup")) {
 			setupGravitySensor();
-			_CurrentWorkout = new WO_Pour(WorkoutName, reps, speechTrigger, _SFXPlayer, outputWorkoutData, outputWorkoutStrings);
+			_CurrentWorkout = new WO_Pour(WorkoutName, reps, speechTrigger, endRepTrigger, _SFXPlayer, outputWorkoutData, outputWorkoutStrings);
 			_CurrentWorkoutView = new WV_Pour(getApplicationContext());
 		} else if (_WorkoutDescription.getName().equals("Sip")) {
 			setupGravitySensor();
-			_CurrentWorkout = new WO_Sip(WorkoutName, reps, speechTrigger, _SFXPlayer, outputWorkoutData, outputWorkoutStrings);
+			_CurrentWorkout = new WO_Sip(WorkoutName, reps, speechTrigger, endRepTrigger, _SFXPlayer, outputWorkoutData, outputWorkoutStrings);
 			_CurrentWorkoutView = new WV_JustText(getApplicationContext());
 		}
 		setContentView(_CurrentWorkoutView);
+	}
+
+	public Long averageTime(ArrayList<Long> longs) {
+		Long sum = 0l;
+		for (Long l : longs) {
+			sum += l;
+		}
+
+		return (sum / ((long) longs.size()) / 1000l);
 	}
 }

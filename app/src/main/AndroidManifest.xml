@@ -28,7 +28,7 @@
         </activity>
         <activity android:name=".Activity.LoginActivity" />
         <activity android:name=".Activity.CreateNewUserActivity" />
-        <activity android:name=".Activity.WorkoutOrHistoryActivity" />
+        <activity android:name=".Activity.WorkoutOrHistoryOrCalendarActivity" />
         <activity android:name=".Activity.WorkoutSelectionActivity" />
         <activity android:name=".Activity.SensorWorkoutRunner" />
         <activity android:name=".Activity.TouchWorkoutRunner" />
@@ -42,7 +42,6 @@
             android:name="com.amazonaws.mobileconnectors.s3.transferutility.TransferService"
             android:enabled="true" />
 
-        <activity android:name=".Activity.SetNextWorkoutActivity" />
         <activity android:name=".Activity.CalendarSetActivity"></activity>
     </application>
 

@@ -2,6 +2,7 @@ package com.example.matt2929.strokeappdec2017.Workouts;
 
 import android.util.Log;
 
+import com.example.matt2929.strokeappdec2017.ListenersAndTriggers.EndRepTrigger;
 import com.example.matt2929.strokeappdec2017.ListenersAndTriggers.OutputWorkoutData;
 import com.example.matt2929.strokeappdec2017.ListenersAndTriggers.OutputWorkoutStrings;
 import com.example.matt2929.strokeappdec2017.ListenersAndTriggers.SpeechTrigger;
@@ -23,8 +24,8 @@ public class WO_Pour extends SensorWorkoutAbstract {
 	long startOfCooldown = 0l;
 
 
-	public WO_Pour(String Name, Integer reps, SpeechTrigger speechTrigger, SFXPlayer SFX, OutputWorkoutData outputWorkoutData, OutputWorkoutStrings outputWorkoutStrings) {
-		super.Workout(Name, reps, speechTrigger, SFX, outputWorkoutData, outputWorkoutStrings);
+	public WO_Pour(String Name, Integer reps, SpeechTrigger speechTrigger, EndRepTrigger endRepTrigger, SFXPlayer SFX, OutputWorkoutData outputWorkoutData, OutputWorkoutStrings outputWorkoutStrings) {
+		super.Workout(Name, reps, speechTrigger, endRepTrigger, SFX, outputWorkoutData, outputWorkoutStrings);
 		sfxPlayer.loadSFX(R.raw.pour_water);
 		sfxPlayer.loopSFX();
 	}
