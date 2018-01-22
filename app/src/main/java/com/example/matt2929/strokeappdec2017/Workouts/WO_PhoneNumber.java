@@ -87,6 +87,7 @@ public class WO_PhoneNumber extends TouchWorkoutAbstract {
 						whatTyped.setText(whatTyped.getText().toString() + numS);
 						if (i == 9) {
 							completed++;
+							endRepTrigger.endRep();
 							if (completed == reps) {
 								workoutComplete = true;
 							} else {

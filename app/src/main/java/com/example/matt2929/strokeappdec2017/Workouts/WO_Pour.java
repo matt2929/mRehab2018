@@ -56,6 +56,7 @@ public class WO_Pour extends SensorWorkoutAbstract {
 				filledPercentage -= removalRate;
 				if (filledPercentage < 0) {
 					repCount++;
+					endRepTrigger.endRep();
 					if (repCount == reps) {
 						workoutComplete = true;
 					} else {

@@ -53,6 +53,7 @@ public class WO_Sip extends SensorWorkoutAbstract {
 			}
 			if (timeDrank > timeToDrink) {
 				repCount++;
+				endRepTrigger.endRep();
 				inCoolDown = true;
 				cooldownStart = System.currentTimeMillis();
 				if (sfxPlayer.isPlaying()) {

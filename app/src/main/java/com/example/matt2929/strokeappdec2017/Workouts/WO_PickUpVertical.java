@@ -45,6 +45,7 @@ public class WO_PickUpVertical extends SensorWorkoutAbstract {
 			}
 			if (AverageDataValue[sensorChoice] < thresehold) {
 				belowThresholdCount++;
+				endRepTrigger.endRep();
 				if (belowThresholdCount > belowThresholdMax) {
 					if (moving == true) {
 						savingJerk = false;

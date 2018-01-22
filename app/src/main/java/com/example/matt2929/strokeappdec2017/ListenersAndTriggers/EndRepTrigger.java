@@ -5,5 +5,5 @@ package com.example.matt2929.strokeappdec2017.ListenersAndTriggers;
  */
 
 public interface EndRepTrigger {
-	void playSfXTrigger(int sfxID);
+	void endRep();
 }

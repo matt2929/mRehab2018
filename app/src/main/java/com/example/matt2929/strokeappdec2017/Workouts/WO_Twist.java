@@ -31,6 +31,7 @@ public class WO_Twist extends SensorWorkoutAbstract {
 		if (WorkoutInProgress) {
 			if (AverageDataValue[1] < threshold && lastValue >= threshold) {
 				count++;
+				endRepTrigger.endRep();
 				speechTrigger.speak("" + count);
 				if (count == reps) {
 					workoutComplete = true;

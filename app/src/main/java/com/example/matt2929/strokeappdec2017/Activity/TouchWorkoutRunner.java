@@ -174,7 +174,7 @@ public class TouchWorkoutRunner extends AppCompatActivity {
 
 		EndRepTrigger endRepTrigger = new EndRepTrigger() {
 			@Override
-			public void playSfXTrigger(int sfxID) {
+			public void endRep() {
 				saveDurations.add(System.currentTimeMillis() - TimeOfWorkout);
 				TimeOfWorkout = System.currentTimeMillis();
 			}
@@ -260,11 +260,11 @@ public class TouchWorkoutRunner extends AppCompatActivity {
 	}
 
 	public Long averageTime(ArrayList<Long> longs) {
-		Long sum = 0l;
-		for (Long l : longs) {
-			sum += l;
+		Long sum = 0L;
+		for (int i = 0; i < longs.size(); i++) {
+			sum += longs.get(i);
 		}
-
-		return (sum / ((long) longs.size()) / 1000l);
+		Long value = ((sum / ((long) longs.size())));
+		return value;
 	}
 }

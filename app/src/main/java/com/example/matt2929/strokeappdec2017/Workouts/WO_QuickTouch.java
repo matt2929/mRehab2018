@@ -52,6 +52,7 @@ public class WO_QuickTouch extends TouchWorkoutAbstract {
 						}
 						if (checkDone()) {
 							completed++;
+							endRepTrigger.endRep();
 							if (completed == reps) {
 								workoutComplete = true;
 							} else {
@@ -97,6 +98,7 @@ public class WO_QuickTouch extends TouchWorkoutAbstract {
 					canTouch = true;
 					inCooldown = false;
 					newLevel();
+
 				}
 			}
 		}
