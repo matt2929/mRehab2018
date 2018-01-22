@@ -10,6 +10,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.matt2929.strokeappdec2017.R;
+import com.example.matt2929.strokeappdec2017.SaveAndLoadData.SaveActivitiesDoneToday;
 import com.example.matt2929.strokeappdec2017.Utilities.WorkoutSelectData;
 import com.example.matt2929.strokeappdec2017.Values.WorkoutData;
 import com.example.matt2929.strokeappdec2017.Workouts.WorkoutDescription;
@@ -24,6 +25,7 @@ import static com.example.matt2929.strokeappdec2017.Values.WorkoutData.Workout_T
 public class WorkoutSelectionActivity extends AppCompatActivity {
 
 	int currentSelection = -1;
+	SaveActivitiesDoneToday saveActivitiesDoneToday;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +34,7 @@ public class WorkoutSelectionActivity extends AppCompatActivity {
 		Button left = (Button) findViewById(R.id.selectLeft);
 		Button right = (Button) findViewById(R.id.selectRight);
 		final ListView listView = (ListView) findViewById(R.id.selectActivity);
-
+		saveActivitiesDoneToday = new SaveActivitiesDoneToday(getApplicationContext());
 		left.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
@@ -84,7 +86,7 @@ public class WorkoutSelectionActivity extends AppCompatActivity {
 		ArrayList<WorkoutSelectData> workouts = new ArrayList<>();
 		for (int i = 0; i < WorkoutData.WORKOUT_DESCRIPTIONS.length; i++) {
 			WorkoutDescription wd = WorkoutData.WORKOUT_DESCRIPTIONS[i];
-			workouts.add(new WorkoutSelectData(wd.getName(), 0, wd.getColor()));
+			workouts.add(new WorkoutSelectData(wd.getName(), saveActivitiesDoneToday.getWorkoutActivityCount(wd.getName()), wd.getColor()));
 		}
 		WorkoutSelectAdapter workoutSelectAdapter = new WorkoutSelectAdapter(getApplicationContext(), workouts);
 		listView.setAdapter(workoutSelectAdapter);

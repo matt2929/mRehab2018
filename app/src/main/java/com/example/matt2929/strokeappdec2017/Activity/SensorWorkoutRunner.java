@@ -18,6 +18,7 @@ import com.example.matt2929.strokeappdec2017.ListenersAndTriggers.OutputWorkoutS
 import com.example.matt2929.strokeappdec2017.ListenersAndTriggers.SpeechCompleteListener;
 import com.example.matt2929.strokeappdec2017.ListenersAndTriggers.SpeechInitListener;
 import com.example.matt2929.strokeappdec2017.ListenersAndTriggers.SpeechTrigger;
+import com.example.matt2929.strokeappdec2017.SaveAndLoadData.SaveActivitiesDoneToday;
 import com.example.matt2929.strokeappdec2017.SaveAndLoadData.SaveHistoricalReps;
 import com.example.matt2929.strokeappdec2017.SaveAndLoadData.SaveTouchAndSensor;
 import com.example.matt2929.strokeappdec2017.SaveAndLoadData.SaveWorkoutJSON;
@@ -60,7 +61,7 @@ public class SensorWorkoutRunner extends AppCompatActivity implements SensorEven
 	private SaveWorkoutJSON _SaveWorkoutJSON;
 	private Boolean _WorkoutInProgress = false;
 	private ArrayList<Long> saveDurations = new ArrayList<>();
-
+	private SaveActivitiesDoneToday _SaveActivitiesDoneToday;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -73,6 +74,7 @@ public class SensorWorkoutRunner extends AppCompatActivity implements SensorEven
 		_SaveWorkoutJSON = new SaveWorkoutJSON(getApplicationContext());
 		_SFXPlayer = new SFXPlayer(getApplicationContext());
 		SetupWorkout(_WorkoutName, _WorkoutReps);
+		_SaveActivitiesDoneToday = new SaveActivitiesDoneToday(getApplicationContext());
 		checkTTS();
 	}
 
@@ -133,6 +135,7 @@ public class SensorWorkoutRunner extends AppCompatActivity implements SensorEven
 							_SaveTouchAndSensor.execute();
 							Log.e("time", "" + timeToComplete);
 							_SaveWorkoutJSON.addNewWorkout(_CurrentWorkout.getName(), _WorkoutHand, averageTime(saveDurations), 100l, _CurrentWorkout.getReps());
+							_SaveActivitiesDoneToday.updateWorkout(_WorkoutName);
 							Intent intent = getIntent();
 							intent.setClass(getApplicationContext(), LoadingScreenActivity.class);
 							startActivity(intent);

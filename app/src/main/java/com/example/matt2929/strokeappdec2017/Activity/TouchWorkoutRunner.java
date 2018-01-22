@@ -16,6 +16,7 @@ import com.example.matt2929.strokeappdec2017.ListenersAndTriggers.SpeechComplete
 import com.example.matt2929.strokeappdec2017.ListenersAndTriggers.SpeechInitListener;
 import com.example.matt2929.strokeappdec2017.ListenersAndTriggers.SpeechTrigger;
 import com.example.matt2929.strokeappdec2017.R;
+import com.example.matt2929.strokeappdec2017.SaveAndLoadData.SaveActivitiesDoneToday;
 import com.example.matt2929.strokeappdec2017.SaveAndLoadData.SaveHistoricalReps;
 import com.example.matt2929.strokeappdec2017.SaveAndLoadData.SaveTouchAndSensor;
 import com.example.matt2929.strokeappdec2017.SaveAndLoadData.SaveWorkoutJSON;
@@ -49,6 +50,7 @@ public class TouchWorkoutRunner extends AppCompatActivity {
 	private SaveWorkoutJSON _SaveWorkoutJSON;
 	private Boolean _WorkoutInProgress = false;//Is workout currently running?
 	private ArrayList<Long> saveDurations = new ArrayList<>();
+	private SaveActivitiesDoneToday _SaveActivitiesDoneToday;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +63,7 @@ public class TouchWorkoutRunner extends AppCompatActivity {
 		_SaveTouchAndSensor = new SaveTouchAndSensor(getApplicationContext(), _WorkoutName, "Time,X,Y,Good Touch");
 		_SaveWorkoutJSON = new SaveWorkoutJSON(getApplicationContext());
 		_SFXPlayer = new SFXPlayer(getApplicationContext());
+		_SaveActivitiesDoneToday = new SaveActivitiesDoneToday(getApplicationContext());
 		SetupWorkout(_WorkoutName, _WorkoutReps);
 		checkTTS();
 
@@ -120,6 +123,7 @@ public class TouchWorkoutRunner extends AppCompatActivity {
 							_SaveHistoricalReps.updateWorkout(_CurrentWorkout.getName(), _WorkoutReps);
 							_SaveTouchAndSensor.execute();
 							_SaveWorkoutJSON.addNewWorkout(_CurrentWorkout.getName(), _WorkoutHand, averageTime(saveDurations), 100l, _CurrentWorkout.getReps());
+							_SaveActivitiesDoneToday.updateWorkout(_WorkoutName);
 							Intent intent = getIntent();
 							intent.setClass(getApplicationContext(), LoadingScreenActivity.class);
 							startActivity(intent);

@@ -24,7 +24,7 @@ public class WorkoutOrHistoryOrCalendarActivity extends AppCompatActivity {
 		history.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				Intent intent = new Intent(getApplicationContext(), CalendarSetActivity.class);
+				Intent intent = new Intent(getApplicationContext(), HistoryViewActivity.class);
 				startActivity(intent);
 			}
 		});
