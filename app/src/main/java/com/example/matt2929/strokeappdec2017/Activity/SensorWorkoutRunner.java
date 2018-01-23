@@ -134,7 +134,7 @@ public class SensorWorkoutRunner extends AppCompatActivity implements SensorEven
 							_SaveHistoricalReps.updateWorkout(_CurrentWorkout.getName(), _WorkoutReps);
 							_SaveTouchAndSensor.execute();
 							Log.e("time", "" + timeToComplete);
-							_SaveWorkoutJSON.addNewWorkout(_CurrentWorkout.getName(), _WorkoutHand, averageTime(saveDurations), 100l, _CurrentWorkout.getReps());
+							_SaveWorkoutJSON.addNewWorkout(_CurrentWorkout.getName(), _WorkoutHand, averageTime(saveDurations) / Long.valueOf(1000), (long) _CurrentWorkout.getScore().getScore(), _CurrentWorkout.getReps());
 							_SaveActivitiesDoneToday.updateWorkout(_WorkoutName);
 							Intent intent = getIntent();
 							intent.setClass(getApplicationContext(), LoadingScreenActivity.class);
@@ -245,6 +245,7 @@ public class SensorWorkoutRunner extends AppCompatActivity implements SensorEven
 			@Override
 			public void endRep() {
 				saveDurations.add(System.currentTimeMillis() - TimeOfWorkout);
+				Log.e(("duration"), "" + (System.currentTimeMillis() - TimeOfWorkout));
 				TimeOfWorkout = System.currentTimeMillis();
 			}
 		};
@@ -308,7 +309,7 @@ public class SensorWorkoutRunner extends AppCompatActivity implements SensorEven
 		for (int i = 0; i < longs.size(); i++) {
 			sum += longs.get(i);
 		}
-		Long value = ((sum / ((long) longs.size())));
+		Long value = ((sum / (Long.valueOf(longs.size()))));
 		return value;
 	}
 }

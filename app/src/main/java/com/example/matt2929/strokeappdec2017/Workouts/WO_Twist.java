@@ -31,6 +31,7 @@ public class WO_Twist extends SensorWorkoutAbstract {
 		if (WorkoutInProgress) {
 			if (AverageDataValue[1] < threshold && lastValue >= threshold) {
 				count++;
+				outputWorkoutStrings.getStrings(new String[]{count + ""});
 				endRepTrigger.endRep();
 				speechTrigger.speak("" + count);
 				if (count == reps) {
@@ -39,5 +40,10 @@ public class WO_Twist extends SensorWorkoutAbstract {
 			}
 		}
 		lastValue = AverageDataValue[1];
+	}
+
+	@Override
+	public WorkoutScore getScore() {
+		return super.getScore();
 	}
 }

@@ -30,6 +30,7 @@ public class WO_PhoneNumber extends TouchWorkoutAbstract {
 	int[] phoneNumber = new int[10];
 	boolean[] phoneNumberProg = new boolean[10];
 	Long delayTime = 4000l;
+	int incorrect = 0;
 
 	public WO_PhoneNumber(String Name, Integer reps, ArrayList<View> views, EndRepTrigger endRepTrigger, SpeechTrigger speechTrigger, SFXPlayer sfxPlayer, OutputWorkoutData outputWorkoutData, OutputWorkoutStrings outputWorkoutStrings) {
 		super.TouchWorkout(Name, reps, views, endRepTrigger, speechTrigger, sfxPlayer, outputWorkoutData, outputWorkoutStrings);
@@ -58,6 +59,7 @@ public class WO_PhoneNumber extends TouchWorkoutAbstract {
 				}
 			}
 		}
+
 		return false;
 	}
 
@@ -82,6 +84,7 @@ public class WO_PhoneNumber extends TouchWorkoutAbstract {
 			for (int i = 0; i < phoneNumberProg.length; i++) {
 				if (phoneNumberProg[i] == false) {
 					if (phoneNumber[i] == number) {
+						incorrect++;
 						phoneNumberProg[i] = true;
 						quickChange(b, Color.GREEN);
 						whatTyped.setText(whatTyped.getText().toString() + numS);
@@ -139,6 +142,11 @@ public class WO_PhoneNumber extends TouchWorkoutAbstract {
 	public void StartWorkout() {
 		super.StartWorkout();
 		canTouch = true;
+	}
+
+	@Override
+	public WorkoutScore getScore() {
+		return new WorkoutScore("Accuracy", ((((float) reps * 10f) - (float) incorrect)) / ((float) reps * 10f) * 100f);
 	}
 
 	public boolean checkDone() {

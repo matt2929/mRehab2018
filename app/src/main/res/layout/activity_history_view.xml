@@ -131,7 +131,10 @@
                 android:background="@color/colorBackground"
                 android:checked="true"
                 android:text="Repetitions"
-                android:textAllCaps="false" />
+                android:textAlignment="viewStart"
+                android:textAllCaps="false"
+                android:textSize="14sp"
+                android:textStyle="bold" />
 
             <RadioButton
                 android:id="@+id/radioDuration"
@@ -141,7 +144,10 @@
                 android:layout_weight="1"
                 android:background="@color/colorBackground"
                 android:text="Duration"
-                android:textAllCaps="false" />
+                android:textAlignment="viewStart"
+                android:textAllCaps="false"
+                android:textSize="14sp"
+                android:textStyle="bold" />
 
             <RadioButton
                 android:id="@+id/radioAccuracy"
@@ -151,13 +157,37 @@
                 android:layout_weight="1"
                 android:background="@color/colorBackground"
                 android:text="Accuracy"
-                android:textAllCaps="false" />
+                android:textAlignment="viewStart"
+                android:textAllCaps="false"
+                android:textSize="14sp"
+                android:textStyle="bold" />
         </RadioGroup>
     </LinearLayout>
 
-    <Switch
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:text="Switch" />
+        android:layout_weight="1.5"
+        android:orientation="horizontal"
+        android:weightSum="3">
+
+        <Button
+            android:id="@+id/graphHome"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:layout_weight="2"
+            android:background="@drawable/buttonshape"
+            android:text="Home"
+            android:textSize="24sp" />
+
+        <Switch
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:checked="false"
+            android:text="Other Hand"
+            android:textSize="24sp" />
+    </LinearLayout>
 
 </LinearLayout>

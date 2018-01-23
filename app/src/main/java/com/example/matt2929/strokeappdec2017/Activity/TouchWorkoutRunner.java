@@ -122,7 +122,7 @@ public class TouchWorkoutRunner extends AppCompatActivity {
 							_SFXPlayer.killAll();
 							_SaveHistoricalReps.updateWorkout(_CurrentWorkout.getName(), _WorkoutReps);
 							_SaveTouchAndSensor.execute();
-							_SaveWorkoutJSON.addNewWorkout(_CurrentWorkout.getName(), _WorkoutHand, averageTime(saveDurations), 100l, _CurrentWorkout.getReps());
+							_SaveWorkoutJSON.addNewWorkout(_CurrentWorkout.getName(), _WorkoutHand, averageTime(saveDurations) / Long.valueOf(1000), (long) _CurrentWorkout.getScore().getScore(), _CurrentWorkout.getReps());
 							_SaveActivitiesDoneToday.updateWorkout(_WorkoutName);
 							Intent intent = getIntent();
 							intent.setClass(getApplicationContext(), LoadingScreenActivity.class);
@@ -217,7 +217,7 @@ public class TouchWorkoutRunner extends AppCompatActivity {
 			_CurrentWorkoutView = findViewById(android.R.id.content).getRootView();
 			_CurrentWorkout = new WO_PhoneNumber(WorkoutName, reps, views, endRepTrigger, speechTrigger, _SFXPlayer, outputWorkoutData, outputWorkoutStrings);
 
-		} else if (_WorkoutDescription.getName().equals("Multi Touch")) {
+		} else if (_WorkoutDescription.getName().equals("Quick Touch")) {
 			setContentView(R.layout.activity_quick_touch);
 			ArrayList<View> views = new ArrayList<>();
 			views.add(findViewById(R.id.circle1));
@@ -268,7 +268,7 @@ public class TouchWorkoutRunner extends AppCompatActivity {
 		for (int i = 0; i < longs.size(); i++) {
 			sum += longs.get(i);
 		}
-		Long value = ((sum / ((long) longs.size())));
+		Long value = ((sum / (Long.valueOf(longs.size()))));
 		return value;
 	}
 }

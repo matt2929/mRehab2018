@@ -54,7 +54,7 @@ public final class WorkoutData {
 							"Type in the phone number shown above as accurately and quickly as possible. You can hold\n" +
 									"the phone in your hand.",
 							Color.rgb(51, 153, 102)),
-					new WorkoutDescription("Multi Touch", Workout_Type_Touch, null, 5,
+					new WorkoutDescription("Quick Touch", Workout_Type_Touch, null, 5,
 							"In this workout you need to click all the blue circles",
 							Color.rgb(153, 51, 102)),
 			};

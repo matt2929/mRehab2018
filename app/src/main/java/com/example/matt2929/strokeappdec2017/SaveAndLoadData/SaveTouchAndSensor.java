@@ -1,6 +1,8 @@
 package com.example.matt2929.strokeappdec2017.SaveAndLoadData;
 
 import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Environment;
 import android.util.Log;
@@ -78,7 +80,11 @@ public class SaveTouchAndSensor extends AsyncTask<Void, Void, Void> {
 					}
 				}
 				writer.close();
-				uploadToAmazonBucket.saveData(file);
+				ConnectivityManager ConnectionManager = (ConnectivityManager) _context.getSystemService(Context.CONNECTIVITY_SERVICE);
+				NetworkInfo networkInfo = ConnectionManager.getActiveNetworkInfo();
+				if (networkInfo != null && networkInfo.isConnected() == true) {
+					uploadToAmazonBucket.saveData(file);
+				}
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

@@ -1,6 +1,8 @@
 package com.example.matt2929.strokeappdec2017.SaveAndLoadData;
 
 import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Environment;
 
 import com.example.matt2929.strokeappdec2017.AmazonCloud.UploadToAmazonBucket;
@@ -81,7 +83,12 @@ public class SaveWorkoutJSON {
 			writer = new PrintWriter(new FileWriter(file, true));
 			writer.append(output);
 			writer.close();
-			uploadToAmazonBucket.saveData(file);
+			ConnectivityManager ConnectionManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+			NetworkInfo networkInfo = ConnectionManager.getActiveNetworkInfo();
+			if (networkInfo != null && networkInfo.isConnected() == true) {
+				uploadToAmazonBucket.saveData(file);
+			}
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

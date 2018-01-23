@@ -1,6 +1,5 @@
 package com.example.matt2929.strokeappdec2017.Activity;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -13,6 +12,8 @@ import android.widget.TextView;
 import com.example.matt2929.strokeappdec2017.R;
 import com.example.matt2929.strokeappdec2017.SaveAndLoadData.SaveWorkoutJSON;
 import com.example.matt2929.strokeappdec2017.SaveAndLoadData.WorkoutJSON;
+import com.example.matt2929.strokeappdec2017.Values.WorkoutData;
+import com.example.matt2929.strokeappdec2017.Workouts.WorkoutDescription;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.BarGraphSeries;
 import com.jjoe64.graphview.series.DataPoint;
@@ -38,7 +39,7 @@ public class HistoryViewActivity extends AppCompatActivity {
 	Comparator<WorkoutJSON> workoutJSONComparator;
 	int workoutIndex = 0;
 	int workoutType = 0;
-
+	Integer color = 0;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -89,6 +90,11 @@ public class HistoryViewActivity extends AppCompatActivity {
 		if (workoutStrings.size() > 0) {
 			workoutName = workoutStrings.get(0);
 			workoutText.setText(workoutName);
+			for (WorkoutDescription workoutDescription : WorkoutData.WORKOUT_DESCRIPTIONS) {
+				if (workoutDescription.getName().equals(workoutName)) {
+					color = workoutDescription.getColor();
+				}
+			}
 		} else {
 			workoutText.setText("No Workouts");
 		}
@@ -103,6 +109,11 @@ public class HistoryViewActivity extends AppCompatActivity {
 					workoutIndex = 0;
 				}
 				workoutName = workoutStrings.get(workoutIndex);
+				for (WorkoutDescription workoutDescription : WorkoutData.WORKOUT_DESCRIPTIONS) {
+					if (workoutDescription.getName().equals(workoutName)) {
+						color = workoutDescription.getColor();
+					}
+				}
 				workoutText.setText(workoutStrings.get(workoutIndex));
 				setUpGraph(workoutJSONS, workoutType);
 			}
@@ -116,6 +127,11 @@ public class HistoryViewActivity extends AppCompatActivity {
 					workoutIndex = workoutStrings.size() - 1;
 				}
 				workoutName = workoutStrings.get(workoutIndex);
+				for (WorkoutDescription workoutDescription : WorkoutData.WORKOUT_DESCRIPTIONS) {
+					if (workoutDescription.getName().equals(workoutName)) {
+						color = workoutDescription.getColor();
+					}
+				}
 				workoutText.setText(workoutStrings.get(workoutIndex));
 				setUpGraph(workoutJSONS, workoutType);
 			}
@@ -179,7 +195,7 @@ public class HistoryViewActivity extends AppCompatActivity {
 		}
 		lineGraphSeriesLeft.setAnimated(true);
 		graphView.removeAllSeries();
-		lineGraphSeriesLeft.setColor(Color.RED);
+		lineGraphSeriesLeft.setColor(color);
 		graphView.addSeries(lineGraphSeriesLeft);
 		graphView.invalidate();
 	}

@@ -49,7 +49,7 @@ public abstract class WorkoutAbstract {
 	}
 
 	public WorkoutScore getScore() {
-		return workoutScore;
+		return new WorkoutScore("Null", -1);
 	}
 
 	public void outputData(float[] f) {

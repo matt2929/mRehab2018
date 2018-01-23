@@ -15,6 +15,7 @@ public class WV_JustText extends WorkoutViewAbstract {
 	Paint textPaint = new Paint();
 	String output = "";
 
+
 	public WV_JustText(Context context) {
 		super(context);
 		setUp();
@@ -37,8 +38,10 @@ public class WV_JustText extends WorkoutViewAbstract {
 
 	private void setUp() {
 		textPaint.setColor(Color.BLACK);
-		textPaint.setTextSize(45);
+		textPaint.setTextSize(80);
 		textPaint.setTextAlign(Paint.Align.CENTER);
+		textPaint.setAntiAlias(true);
+		setBackgroundColor(Color.LTGRAY);
 	}
 
 	@Override
@@ -50,6 +53,6 @@ public class WV_JustText extends WorkoutViewAbstract {
 	@Override
 	protected void onDraw(Canvas canvas) {
 		super.onDraw(canvas);
-		canvas.drawText(output, getWidth() / 2, getHeight() / 2, textPaint);
+		canvas.drawText("Count " + output + "", getWidth() / 2, getHeight() / 2, textPaint);
 	}
 }

@@ -25,7 +25,7 @@ public class WO_QuickTouch extends TouchWorkoutAbstract {
 	boolean inCooldown = false;
 	int completed = 0;
 	int level = 0;
-
+	int incorrect = 0;
 	public WO_QuickTouch(String Name, Integer reps, ArrayList<View> views, EndRepTrigger endRepTrigger, SpeechTrigger speechTrigger, SFXPlayer sfxPlayer, OutputWorkoutData outputWorkoutData, OutputWorkoutStrings outputWorkoutStrings) {
 		super.TouchWorkout(Name, reps, views, endRepTrigger, speechTrigger, sfxPlayer, outputWorkoutData, outputWorkoutStrings);
 		angle = new float[views.size()];
@@ -68,6 +68,7 @@ public class WO_QuickTouch extends TouchWorkoutAbstract {
 				}
 			}
 		}
+		incorrect++;
 		return false;
 	}
 
@@ -138,6 +139,12 @@ public class WO_QuickTouch extends TouchWorkoutAbstract {
 		if (level == 3) {
 			level = 0;
 		}
+	}
+
+	@Override
+	public WorkoutScore getScore() {
+		return new WorkoutScore("Accuracy", ((((float) reps * 6f) - (float) incorrect)) / ((float) reps * 6f) * 100f);
+
 	}
 
 	@Override

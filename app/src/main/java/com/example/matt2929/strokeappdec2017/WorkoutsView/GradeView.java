@@ -49,7 +49,7 @@ public class GradeView extends View {
 
         textTextPaint.setColor(Color.BLACK);
         textTextPaint.setTextAlign(Paint.Align.CENTER);
-        textTextPaint.setTextSize(60);
+	    textTextPaint.setTextSize(50);
 
 	    backgroundPaint.setColor(Color.LTGRAY);
         marginPaint.setColor(Color.BLACK);

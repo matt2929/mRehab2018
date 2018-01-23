@@ -18,7 +18,7 @@ public class WO_Sip extends SensorWorkoutAbstract {
 	double thresholdPickup = 1.5;
 	boolean pickedUp = false;
 	double threseholdDrink = 2;
-	long timeToDrink = 10000, timeDrank = 0, checkPoint = 0;
+	long timeToDrink = 4000, timeDrank = 0, checkPoint = 0;
 	int repCount = 0;
 	boolean inCoolDown = false;
 	long coolDownLength = 5000, cooldownStart = 0;

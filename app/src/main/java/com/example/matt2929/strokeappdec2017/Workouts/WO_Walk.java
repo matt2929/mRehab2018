@@ -15,4 +15,8 @@ public class WO_Walk extends SensorWorkoutAbstract {
         super.SensorWorkout(Name, reps, speechTrigger, endRepTrigger, sfxPlayer, outputWorkoutData, outputWorkoutStrings);
     }
 
+	@Override
+	public WorkoutScore getScore() {
+		return super.getScore();
+	}
 }

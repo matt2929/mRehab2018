@@ -45,12 +45,13 @@ public class WO_PickUpHorizontal extends SensorWorkoutAbstract {
 			}
 			if (AverageDataValue[sensorChoice] < thresehold) {
 				belowThresholdCount++;
-				endRepTrigger.endRep();
 				if (belowThresholdCount > belowThresholdMax) {
 					if (moving == true) {
 						savingJerk = false;
 						jerkScoreCalculation.CalculateJerkSingle(5);
 						pickUpCount++;
+						outputStrings(new String[]{"" + pickUpCount});
+						endRepTrigger.endRep();
 						speechTrigger.speak("" + pickUpCount);
 						if (pickUpCount / reps == .5) {
 							speechTrigger.speak(".Half Way");
@@ -64,7 +65,6 @@ public class WO_PickUpHorizontal extends SensorWorkoutAbstract {
 				}
 			}
 		}
-
 	}
 
 	@Override

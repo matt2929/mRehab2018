@@ -27,7 +27,7 @@ import java.util.Queue;
  */
 
 public class SaveActivitiesDoneToday {
-	
+
 	final String LAST_TIME = "lasttime";
 	Context context;
 	HashMap<String, Long> workouts = new HashMap<>();
@@ -56,7 +56,7 @@ public class SaveActivitiesDoneToday {
 					String line = "";
 					while ((line = br.readLine()) != null) {
 						Log.e(f.getName(), line);
-						workouts.put(line.split(":")[0], Long.valueOf(Integer.valueOf((line.split(":")[1]))));
+						workouts.put(line.split(":")[0], Long.valueOf((line.split(":")[1])));
 					}
 					br.close();
 				} catch (FileNotFoundException e) {
