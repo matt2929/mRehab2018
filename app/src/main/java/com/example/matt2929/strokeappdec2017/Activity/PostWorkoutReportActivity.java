@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 import com.example.matt2929.strokeappdec2017.R;
 import com.example.matt2929.strokeappdec2017.SaveAndLoadData.SaveWorkoutJSON;
@@ -20,6 +21,7 @@ import java.util.Comparator;
 public class PostWorkoutReportActivity extends AppCompatActivity {
 	ArrayList<WorkoutJSON> workoutJSONS;
 	SaveWorkoutJSON saveWorkoutJSON;
+	ImageButton imageButton;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +37,14 @@ public class PostWorkoutReportActivity extends AppCompatActivity {
 		Bitmap bitmap1 = BitmapFactory.decodeResource(getResources(), R.drawable.muscle);
 		Bitmap bitmap2 = BitmapFactory.decodeResource(getResources(), R.drawable.shake);
 		Bitmap bitmap3 = BitmapFactory.decodeResource(getResources(), R.drawable.stop_watch);
-
+		ImageButton imageButton = (ImageButton) findViewById(R.id.postWorkoutHome);
+		imageButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				Intent intent = new Intent(getApplicationContext(), WorkoutOrHistoryOrCalendarActivity.class);
+				startActivity(intent);
+			}
+		});
 		saveWorkoutJSON = new SaveWorkoutJSON(getApplicationContext());
 		workoutJSONS = saveWorkoutJSON.getWorkouts();
 		ArrayList<WorkoutJSON> workoutJSONSFiltered = new ArrayList<>();

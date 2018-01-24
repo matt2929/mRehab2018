@@ -75,7 +75,7 @@ public class SaveTouchAndSensor extends AsyncTask<Void, Void, Void> {
 						}
 						Log.e("Progress Asynch", "" + WorkoutData.progressLocal);
 						if (_fileName.contains(".csv")) {
-							WorkoutData.progressLocal = Float.valueOf((((float) i / (float) dataQueue.size()) * 100));
+							WorkoutData.progressLocal = Float.valueOf(((float) i / (float) dataQueue.size()) * 100);
 						}
 					}
 				}
@@ -84,6 +84,11 @@ public class SaveTouchAndSensor extends AsyncTask<Void, Void, Void> {
 				NetworkInfo networkInfo = ConnectionManager.getActiveNetworkInfo();
 				if (networkInfo != null && networkInfo.isConnected() == true) {
 					uploadToAmazonBucket.saveData(file);
+
+					Log.e("Internet", "Some");
+				} else {
+					WorkoutData.progressCloud = 100f;
+					Log.e("Internet", "None");
 				}
 			} catch (IOException e) {
 				e.printStackTrace();

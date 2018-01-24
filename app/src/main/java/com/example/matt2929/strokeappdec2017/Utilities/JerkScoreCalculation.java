@@ -41,7 +41,7 @@ public class JerkScoreCalculation {
 		for (Float f : dataAccDerivative) {
 			sum += f;
 		}
-		sum = (float) (sum * (Math.pow((Math.abs(timeStart - System.currentTimeMillis()) / 100l), 5) / Math.pow(amplitude, 2)));
+		sum = (float) (sum * (Math.pow((Math.abs(timeStart - System.currentTimeMillis()) / 100l), 3) / Math.pow(amplitude, 2)));
 		sum *= .5;
 		jerkScores.add((float) Math.pow(sum, .5));
 		lastData = null;

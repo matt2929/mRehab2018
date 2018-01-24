@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -26,6 +27,7 @@ public class WorkoutSelectionActivity extends AppCompatActivity {
 
 	int currentSelection = -1;
 	SaveActivitiesDoneToday saveActivitiesDoneToday;
+	ImageButton imageButton;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +35,7 @@ public class WorkoutSelectionActivity extends AppCompatActivity {
 		setContentView(R.layout.activity_workout_selection);
 		Button left = (Button) findViewById(R.id.selectLeft);
 		Button right = (Button) findViewById(R.id.selectRight);
+		imageButton = (ImageButton) findViewById(R.id.workoutSelectionHome);
 		final ListView listView = (ListView) findViewById(R.id.selectActivity);
 		saveActivitiesDoneToday = new SaveActivitiesDoneToday(getApplicationContext());
 		left.setOnClickListener(new View.OnClickListener() {
@@ -71,6 +74,14 @@ public class WorkoutSelectionActivity extends AppCompatActivity {
 				} else {
 					Toast.makeText(getApplicationContext(), "Please Select a Workout", Toast.LENGTH_SHORT).show();
 				}
+			}
+		});
+
+		imageButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				Intent intent = new Intent(getApplicationContext(), WorkoutOrHistoryOrCalendarActivity.class);
+				startActivity(intent);
 			}
 		});
 

@@ -87,6 +87,8 @@ public class SaveWorkoutJSON {
 			NetworkInfo networkInfo = ConnectionManager.getActiveNetworkInfo();
 			if (networkInfo != null && networkInfo.isConnected() == true) {
 				uploadToAmazonBucket.saveData(file);
+			} else {
+				WorkoutData.progressCloud = 100f;
 			}
 
 		} catch (IOException e) {
@@ -107,7 +109,6 @@ public class SaveWorkoutJSON {
 				inFiles.add(file);
 			}
 		}
-
 		return inFiles;
 	}
 }

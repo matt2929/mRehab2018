@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,8 +24,9 @@ public class GoalsAndRepsActivity extends AppCompatActivity {
     Integer reps = 10;
     Intent newIntent;
     TextView textView;
+	ImageButton imageButton;
 
-    @Override
+	@Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
@@ -46,7 +48,8 @@ public class GoalsAndRepsActivity extends AppCompatActivity {
         Button startWorkout = (Button) findViewById(R.id.GoalAndRepStartWorkout);
         Button repPlus = (Button) findViewById(R.id.GoalAndRepPlus);
         Button repMinus = (Button) findViewById(R.id.GoalAndRepMinus);
-        ListView goalListView = (ListView) findViewById(R.id.GoalAndRepGoalsList);
+	    imageButton = (ImageButton) findViewById(R.id.GoalAndRepHome);
+		ListView goalListView = (ListView) findViewById(R.id.GoalAndRepGoalsList);
         textView.setText("" + reps);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 R.layout.text_view_list, android.R.id.text1, goals);
@@ -73,6 +76,13 @@ public class GoalsAndRepsActivity extends AppCompatActivity {
                 startActivity(newIntent);
             }
         });
+	    imageButton.setOnClickListener(new View.OnClickListener() {
+		    @Override
+		    public void onClick(View view) {
+			    Intent intent = new Intent(getApplicationContext(), WorkoutOrHistoryOrCalendarActivity.class);
+			    startActivity(intent);
+		    }
+	    });
     }
 
     public void updateReps(int i) {

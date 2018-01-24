@@ -1,10 +1,12 @@
 package com.example.matt2929.strokeappdec2017.Activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -34,13 +36,13 @@ public class HistoryViewActivity extends AppCompatActivity {
 	RadioGroup groupType;
 	RadioButton durationRadio, gradeRadio, repsRadio;
 	Button nextWorkout, backWorkout;
+	ImageButton imageButton;
 	ArrayList<WorkoutJSON> workoutJSONS;
 	ArrayList<String> workoutStrings = new ArrayList<>();
 	Comparator<WorkoutJSON> workoutJSONComparator;
 	int workoutIndex = 0;
 	int workoutType = 0;
 	Integer color = 0;
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -48,6 +50,7 @@ public class HistoryViewActivity extends AppCompatActivity {
 		graphView = (GraphView) findViewById(R.id.historyGraph);
 		nextWorkout = (Button) findViewById(R.id.nextWorkout);
 		backWorkout = (Button) findViewById(R.id.backWorkout);
+		imageButton = (ImageButton) findViewById(R.id.historyHome);
 		xAxis = (TextView) findViewById(R.id.graphXAxis);
 		yAxis = (TextView) findViewById(R.id.graphYAxis);
 		durationRadio = (RadioButton) findViewById(R.id.radioDuration);
@@ -137,6 +140,13 @@ public class HistoryViewActivity extends AppCompatActivity {
 			}
 		});
 
+		imageButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				Intent intent = new Intent(getApplicationContext(), WorkoutOrHistoryOrCalendarActivity.class);
+				startActivity(intent);
+			}
+		});
 
 	}
 
