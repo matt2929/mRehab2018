@@ -14,9 +14,9 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/icon"
+        android:icon="@drawable/cupicon"
         android:label="@string/app_name"
-        android:roundIcon="@drawable/icon"
+        android:roundIcon="@drawable/cupicon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".Activity.StartScreenActivity">
@@ -43,7 +43,8 @@
             android:enabled="true" />
 
         <activity android:name=".Activity.CalendarSetActivity" />
-        <activity android:name=".Activity.HistoryViewActivity"></activity>
+        <activity android:name=".Activity.HistoryViewActivity" />
+        <activity android:name=".Activity.PutPhoneInCupActivity"></activity>
     </application>
 
 </manifest>

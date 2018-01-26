@@ -34,7 +34,7 @@ public class HistoryViewActivity extends AppCompatActivity {
 	String workoutName = "";
 	TextView xAxis, yAxis, workoutText;
 	RadioGroup groupType;
-	RadioButton durationRadio, gradeRadio, repsRadio;
+	RadioButton timeRadio, gradeRadio, repsRadio;
 	Button nextWorkout, backWorkout;
 	ImageButton imageButton;
 	ArrayList<WorkoutJSON> workoutJSONS;
@@ -53,16 +53,16 @@ public class HistoryViewActivity extends AppCompatActivity {
 		imageButton = (ImageButton) findViewById(R.id.historyHome);
 		xAxis = (TextView) findViewById(R.id.graphXAxis);
 		yAxis = (TextView) findViewById(R.id.graphYAxis);
-		durationRadio = (RadioButton) findViewById(R.id.radioDuration);
+		timeRadio = (RadioButton) findViewById(R.id.radioTime);
 		gradeRadio = (RadioButton) findViewById(R.id.radioAccuracy);
 		repsRadio = (RadioButton) findViewById(R.id.radioReps);
 		workoutJSONComparator = new Comparator<WorkoutJSON>() {
 			@Override
 			public int compare(WorkoutJSON t0, WorkoutJSON t1) {
-				return (int) (t1.getCalendar().getTimeInMillis() - t0.getCalendar().getTimeInMillis());
+				return (int) (t0.getCalendar().getTimeInMillis() - t1.getCalendar().getTimeInMillis());
 			}
 		};
-		durationRadio.setOnClickListener(new View.OnClickListener() {
+		timeRadio.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
 				onRadioButtonClicked(view);
@@ -101,7 +101,7 @@ public class HistoryViewActivity extends AppCompatActivity {
 		} else {
 			workoutText.setText("No Workouts");
 		}
-		xAxis.setText("Weeks Ago (Average)");
+		xAxis.setText("Week From Start");
 
 
 		nextWorkout.setOnClickListener(new View.OnClickListener() {
@@ -162,7 +162,7 @@ public class HistoryViewActivity extends AppCompatActivity {
 					setUpGraph(workoutJSONS, 0);
 				}
 				break;
-			case R.id.radioDuration:
+			case R.id.radioTime:
 				if (checked) {
 
 					workoutType = 1;
@@ -189,19 +189,18 @@ public class HistoryViewActivity extends AppCompatActivity {
 		}
 		ArrayList<WorkoutJSON> handWorkouts = leftHand(workoutJSONS);
 		BarGraphSeries<DataPoint> lineGraphSeriesLeft;
-		BarGraphSeries<DataPoint> lineGraphSeriesRight;
 		if (workoutType == 0) {
 			lineGraphSeriesLeft = repsToGraph(workoutName, handWorkouts);
 			graphView.setTitle("Weekly Repetitions (Left)");
-			yAxis.setText("Reps");
+			yAxis.setText("Reps (Average)");
 		} else if (workoutType == 1) {
-			lineGraphSeriesLeft = durationToGraph(workoutName, handWorkouts);
-			graphView.setTitle("Weekly Durarion (Left)");
-			yAxis.setText("Seconds");
+			lineGraphSeriesLeft = timeToGraph(workoutName, handWorkouts);
+			graphView.setTitle("Weekly Repetition Time (Left)");
+			yAxis.setText("Seconds (Average)");
 		} else {
 			lineGraphSeriesLeft = accuracyToGraph(workoutName, handWorkouts);
-			graphView.setTitle("Weekly Accuracy (Left)");
-			yAxis.setText("Accuracy");
+			graphView.setTitle("Weekly Repetition Accuracy (Left)");
+			yAxis.setText("Accuracy (Average)");
 		}
 		lineGraphSeriesLeft.setAnimated(true);
 		graphView.removeAllSeries();
@@ -249,7 +248,7 @@ public class HistoryViewActivity extends AppCompatActivity {
 	 * @param workoutJSONS
 	 * @return
 	 */
-	public BarGraphSeries<DataPoint> durationToGraph(String workoutStr, ArrayList<WorkoutJSON> workoutJSONS) {
+	public BarGraphSeries<DataPoint> timeToGraph(String workoutStr, ArrayList<WorkoutJSON> workoutJSONS) {
 		ArrayList<WorkoutJSON> filteredWorkoutJSONS = new ArrayList<>();
 		for (WorkoutJSON workout : workoutJSONS) {
 			if (workout.getWorkoutName().equals(workoutStr)) {

@@ -34,6 +34,8 @@
             android:layout_weight=".5"
             android:gravity="center"
             android:text="TextView"
+            android:textAlignment="center"
+            android:textAllCaps="false"
             android:textColor="@android:color/black"
             android:textSize="24sp"
             android:textStyle="bold" />
@@ -138,13 +140,13 @@
                 android:textStyle="bold" />
 
             <RadioButton
-                android:id="@+id/radioDuration"
+                android:id="@+id/radioTime"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="10dp"
                 android:layout_weight="1"
                 android:background="@color/colorBackground"
-                android:text="Duration"
+                android:text="Time"
                 android:textAlignment="viewStart"
                 android:textAllCaps="false"
                 android:textSize="14sp"
@@ -170,24 +172,28 @@
         android:layout_height="0dp"
         android:layout_weight="1.5"
         android:orientation="horizontal"
-        android:weightSum="3">
+        android:weightSum="4">
 
         <ImageButton
             android:id="@+id/historyHome"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_margin="15dp"
-            android:layout_weight="2"
+            android:layout_weight="1"
             android:background="@drawable/buttonshape"
             android:scaleType="centerInside"
             app:srcCompat="@drawable/home" />
 
-        <Switch
+        <Space
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:checked="false"
-            android:text="Other Hand"
+            android:layout_weight="1.5" />
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.5"
+            android:text="Left\nHand"
             android:textSize="24sp" />
     </LinearLayout>
 

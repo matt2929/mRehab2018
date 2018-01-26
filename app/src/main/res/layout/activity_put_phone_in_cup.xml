@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.matt2929.strokeappdec2017.Activity.PutPhoneInCupActivity">
+
+    <LinearLayout
+        android:id="@+id/isPhoneInCup"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="10">
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="4"
+            android:cropToPadding="true"
+            android:scaleType="centerInside"
+            app:srcCompat="@drawable/putincup" />
+
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="4"
+            android:gravity="center"
+            android:text="Is the phone in the cup?"
+            android:textAlignment="center"
+            android:textColor="@android:color/background_dark"
+            android:textSize="36sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_margin="15sp"
+            android:layout_weight="2"
+            android:orientation="horizontal"
+            android:weightSum="10">
+
+            <Button
+                android:id="@+id/inPhoneButtonYes"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="15sp"
+                android:layout_weight="5"
+                android:background="@drawable/buttonshape"
+                android:text="Yes"
+                android:textSize="30sp" />
+
+            <Button
+                android:id="@+id/inPhoneButtonNo"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="15sp"
+                android:layout_weight="5"
+                android:background="@drawable/buttonshape"
+                android:text="No"
+                android:textSize="30sp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/phoneInCup"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:visibility="visible"
+        android:weightSum="10">
+
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="4"
+            android:cropToPadding="true"
+            android:scaleType="centerInside"
+            app:srcCompat="@drawable/putincup" />
+
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="4"
+            android:gravity="center"
+            android:text="Press OK when the phone is in the cup"
+            android:textAlignment="center"
+            android:textColor="@android:color/background_dark"
+            android:textSize="36sp" />
+
+        <Button
+            android:id="@+id/inPhoneButtonOk"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_margin="15sp"
+            android:layout_weight="2"
+            android:background="@drawable/buttonshape"
+            android:text="OK"
+            android:textSize="36sp" />
+
+    </LinearLayout>
+
+</RelativeLayout>

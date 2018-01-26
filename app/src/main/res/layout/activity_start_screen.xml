@@ -27,7 +27,7 @@
             android:layout_weight=".5"
             android:background="@drawable/buttonshape"
             android:text="Login"
-            android:textSize="24sp"
+            android:textSize="46sp"
             tools:layout_editor_absoluteX="-265dp"
             tools:layout_editor_absoluteY="259dp" />
 
@@ -39,7 +39,7 @@
             android:layout_weight=".5"
             android:background="@drawable/buttonshape"
             android:text="Demo"
-            android:textSize="24sp"
+            android:textSize="46sp"
             tools:layout_editor_absoluteX="133dp"
             tools:layout_editor_absoluteY="346dp" />
     </LinearLayout>

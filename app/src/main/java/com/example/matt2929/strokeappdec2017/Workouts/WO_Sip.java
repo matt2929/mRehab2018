@@ -8,6 +8,7 @@ import com.example.matt2929.strokeappdec2017.ListenersAndTriggers.OutputWorkoutS
 import com.example.matt2929.strokeappdec2017.ListenersAndTriggers.SpeechTrigger;
 import com.example.matt2929.strokeappdec2017.R;
 import com.example.matt2929.strokeappdec2017.Utilities.SFXPlayer;
+import com.example.matt2929.strokeappdec2017.Utilities.ZeroCrossCalculation;
 
 /**
  * Created by matt2929 on 1/16/18.
@@ -22,11 +23,13 @@ public class WO_Sip extends SensorWorkoutAbstract {
 	int repCount = 0;
 	boolean inCoolDown = false;
 	long coolDownLength = 5000, cooldownStart = 0;
+	ZeroCrossCalculation zeroCrossCalculation;
 
 	public WO_Sip(String Name, Integer reps, SpeechTrigger speechTrigger, EndRepTrigger endRepTrigger, SFXPlayer sfxPlayer, OutputWorkoutData outputWorkoutData, OutputWorkoutStrings outputWorkoutStrings) {
 		super.SensorWorkout(Name, reps, speechTrigger, endRepTrigger, sfxPlayer, outputWorkoutData, outputWorkoutStrings);
 		sfxPlayer.loadSFX(R.raw.pour_water);
 		sfxPlayer.loopSFX();
+		zeroCrossCalculation = new ZeroCrossCalculation();
 	}
 
 
@@ -53,6 +56,7 @@ public class WO_Sip extends SensorWorkoutAbstract {
 			}
 			if (timeDrank > timeToDrink) {
 				repCount++;
+				zeroCrossCalculation.endRep();
 				endRepTrigger.endRep();
 				inCoolDown = true;
 				cooldownStart = System.currentTimeMillis();
@@ -90,7 +94,8 @@ public class WO_Sip extends SensorWorkoutAbstract {
 
 	@Override
 	public WorkoutScore getScore() {
-		return super.getScore();
+		workoutScore = new WorkoutScore("Accuracy", zeroCrossCalculation.calculateZeroCross());
+		return workoutScore;
 	}
 
 	@Override

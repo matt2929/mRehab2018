@@ -129,11 +129,9 @@ public class SensorWorkoutRunner extends AppCompatActivity implements SensorEven
 							_CurrentWorkout.StartWorkout();
 							_WorkoutInProgress = true;
 						} else if (s.equals(WorkoutData.TTS_WORKOUT_COMPLETE)) {
-							Long timeToComplete = Math.abs(TimeOfWorkout - System.currentTimeMillis());
 							_SFXPlayer.killAll();
 							_SaveHistoricalReps.updateWorkout(_CurrentWorkout.getName(), _WorkoutReps);
 							_SaveTouchAndSensor.execute();
-							Log.e("time", "" + timeToComplete);
 							_SaveWorkoutJSON.addNewWorkout(_CurrentWorkout.getName(), _WorkoutHand, averageTime(saveDurations) / Long.valueOf(1000), (long) _CurrentWorkout.getScore().getScore(), _CurrentWorkout.getReps());
 							_SaveActivitiesDoneToday.updateWorkout(_WorkoutName);
 							Intent intent = getIntent();

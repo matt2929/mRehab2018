@@ -25,7 +25,7 @@
             android:layout_margin="15dp"
             android:layout_weight="1"
             android:background="@drawable/buttonshape"
-            android:text="Workout"
+            android:text="Begin Workout"
             android:textSize="30sp"
             tools:layout_editor_absoluteX="-265dp"
             tools:layout_editor_absoluteY="259dp" />

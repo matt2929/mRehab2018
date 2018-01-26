@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
+import android.widget.VideoView;
 
 import com.example.matt2929.strokeappdec2017.R;
 
@@ -16,8 +16,8 @@ public class WorkoutPreviewActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_workout_preview);
-        ImageView imageView = (ImageView) findViewById(R.id.previewImage);
-        Button button = (Button) findViewById(R.id.preview_start);
+	    VideoView videoView = (VideoView) findViewById(R.id.videoView);
+	    Button button = (Button) findViewById(R.id.preview_start);
         String workoutName = getIntent().getStringExtra("Workout");
 
 

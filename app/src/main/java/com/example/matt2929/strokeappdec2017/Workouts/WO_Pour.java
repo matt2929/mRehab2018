@@ -8,6 +8,7 @@ import com.example.matt2929.strokeappdec2017.ListenersAndTriggers.OutputWorkoutS
 import com.example.matt2929.strokeappdec2017.ListenersAndTriggers.SpeechTrigger;
 import com.example.matt2929.strokeappdec2017.R;
 import com.example.matt2929.strokeappdec2017.Utilities.SFXPlayer;
+import com.example.matt2929.strokeappdec2017.Utilities.ZeroCrossCalculation;
 
 /**
  * Created by matt2929 on 12/21/17.
@@ -22,18 +23,20 @@ public class WO_Pour extends SensorWorkoutAbstract {
 	boolean inCooldown = false;
 	long coolDownDuration = 5000;
 	long startOfCooldown = 0l;
-
+	ZeroCrossCalculation zeroCrossCalculation;
 
 	public WO_Pour(String Name, Integer reps, SpeechTrigger speechTrigger, EndRepTrigger endRepTrigger, SFXPlayer SFX, OutputWorkoutData outputWorkoutData, OutputWorkoutStrings outputWorkoutStrings) {
 		super.Workout(Name, reps, speechTrigger, endRepTrigger, SFX, outputWorkoutData, outputWorkoutStrings);
 		sfxPlayer.loadSFX(R.raw.pour_water);
 		sfxPlayer.loopSFX();
+		zeroCrossCalculation = new ZeroCrossCalculation();
 	}
 
 	@Override
 	public void SensorDataIn(float[] data) {
 		super.SensorDataIn(data);
 		if (WorkoutInProgress && !inCooldown) {
+			zeroCrossCalculation.dataIn(data);
 			float GravY, GravX;
 			GravY = data[1];
 			GravX = data[0];
@@ -56,6 +59,7 @@ public class WO_Pour extends SensorWorkoutAbstract {
 				filledPercentage -= removalRate;
 				if (filledPercentage < 0) {
 					repCount++;
+					zeroCrossCalculation.endRep();
 					endRepTrigger.endRep();
 					if (repCount == reps) {
 						workoutComplete = true;
@@ -106,7 +110,7 @@ public class WO_Pour extends SensorWorkoutAbstract {
 
 	@Override
 	public WorkoutScore getScore() {
-		workoutScore = new WorkoutScore("Jerk", 10);
+		workoutScore = new WorkoutScore("Jerk", zeroCrossCalculation.calculateZeroCross());
 		return super.getScore();
 	}
 

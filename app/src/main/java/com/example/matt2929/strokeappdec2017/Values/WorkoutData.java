@@ -14,47 +14,54 @@ public final class WorkoutData {
 	public static final String Workout_Type_Touch = "Workout Touch";
 	public static final String Sensor_Type_Linear = "Sensor Linear";
 	public static final String Sensor_Type_Gravity = "Sensor Gravity";
+
+	public static final String Print_Container_Cup = "Print Cup";
+	public static final String Print_Container_Bowl = "Print Bowl";
+	public static final String Print_Container_Key = "Print Key";
+	public static final String Print_Container_Door = "Print Door";
+	public static final String Print_Container_No_Container = "No Container";
+
 	public final static WorkoutDescription[] WORKOUT_DESCRIPTIONS = new WorkoutDescription[]
 			{
-					new WorkoutDescription("Horizontal Bowl", Workout_Type_Sensor, Sensor_Type_Linear, 10,
+					new WorkoutDescription("Horizontal Bowl", Workout_Type_Sensor, Sensor_Type_Linear, Print_Container_Bowl, 10,
 							"In this workout you will move the bowl from side to side. Be sure to let it sit on the table when you bring it down. When I count pick up the bowl again",
 							Color.rgb(51, 204, 255)),
-					new WorkoutDescription("Vertical Bowl", Workout_Type_Sensor, Sensor_Type_Linear, 10,
+					new WorkoutDescription("Vertical Bowl", Workout_Type_Sensor, Sensor_Type_Linear, Print_Container_Bowl, 10,
 							"Move the bowl onto the shelf then back onto the table. Wait for me to count before moving\n" +
 									"me again.",
 							Color.rgb(102, 255, 153)),
-					new WorkoutDescription("Horizontal Cup", Workout_Type_Sensor, Sensor_Type_Linear, 10,
+					new WorkoutDescription("Horizontal Cup", Workout_Type_Sensor, Sensor_Type_Linear, Print_Container_Cup, 10,
 							"In this workout you will move the cup from side to side. Be sure to let it sit on the table when you bring it down. When I count, pick up the cup again.",
 							Color.rgb(177, 178, 21)),
-					new WorkoutDescription("Vertical Cup", Workout_Type_Sensor, Sensor_Type_Linear, 10,
+					new WorkoutDescription("Vertical Cup", Workout_Type_Sensor, Sensor_Type_Linear, Print_Container_Cup, 10,
 							"Move the cup onto the shelf then back onto the table. Wait for me to count before moving me again.",
 							Color.rgb(33, 103, 52)),
-					new WorkoutDescription("Walk Cup", Workout_Type_Sensor, Sensor_Type_Linear, 10,
+					new WorkoutDescription("Walk Cup", Workout_Type_Sensor, Sensor_Type_Linear, Print_Container_Bowl, 10,
 							"Hold the bowl infront of you. Walk fowards at a comfortable pace. Walk for 15 Seconds",
 							Color.rgb(255, 153, 102)),
-					new WorkoutDescription("Sip", Workout_Type_Sensor, Sensor_Type_Gravity, 1,
-							"Put the cup on the table, when we say begin, pick the cup up to your mouth and drink for 10 seconds.",
+					new WorkoutDescription("Sip", Workout_Type_Sensor, Sensor_Type_Gravity, Print_Container_Cup, 1,
+							"Put the cup on the table, when we say begin, pick the cup up to your mouth and drink for 4 seconds.",
 							Color.rgb(255, 80, 80)),
-					new WorkoutDescription("Twist Cup", Workout_Type_Sensor, Sensor_Type_Linear, 10,
-							"In this workout you will hold the cup up and pretend to pour out water in front of you. Do not\n" +
-									"pour too quick or to slow",
+					new WorkoutDescription("Twist Cup", Workout_Type_Sensor, Sensor_Type_Linear, Print_Container_Cup, 10,
+							"&quot;Hold the cup in your hand. Hold the cup out in front of you. Start with the cup in the upright\n" +
+									"position. Twist your wrist clockwise as far as possible than back to the upright position.",
 							Color.rgb(255, 51, 153)),
-					new WorkoutDescription("Pour Cup", Workout_Type_Sensor, Sensor_Type_Gravity, 3,
+					new WorkoutDescription("Pour Cup", Workout_Type_Sensor, Sensor_Type_Gravity, Print_Container_Cup, 3,
 							"In this workout you will hold the cup up and pretend to pour out water in front of you. Do not\n" +
 									"pour too quick or to slow.",
 							Color.rgb(255, 153, 255)),
-					new WorkoutDescription("Unlock Key", Workout_Type_Touch, null, 5,
+					new WorkoutDescription("Unlock Key", Workout_Type_Touch, null, Print_Container_Key, 5,
 							"With the key in contact with the phone screen, rotate the key clockwise and counterclockwise.\n" +
 									"Try to follow the arc as accurately as possible.",
 							Color.rgb(153, 153, 255)),
-					new WorkoutDescription("Unlock Door", Workout_Type_Touch, null, 5,
+					new WorkoutDescription("Unlock Door", Workout_Type_Touch, null, Print_Container_Door, 5,
 							"With the doorknob in contact with the phone screen, rotate the doorknob clockwise and counterclockwise. Try to follow the arc as accurately as possible.",
 							Color.rgb(153, 102, 51)),
-					new WorkoutDescription("Phone Number", Workout_Type_Touch, null, 3,
+					new WorkoutDescription("Phone Number", Workout_Type_Touch, null, Print_Container_No_Container, 3,
 							"Type in the phone number shown above as accurately and quickly as possible. You can hold\n" +
 									"the phone in your hand.",
 							Color.rgb(51, 153, 102)),
-					new WorkoutDescription("Quick Touch", Workout_Type_Touch, null, 5,
+					new WorkoutDescription("Quick Touch", Workout_Type_Touch, null, Print_Container_No_Container, 5,
 							"In this workout you need to click all the blue circles",
 							Color.rgb(153, 51, 102)),
 			};

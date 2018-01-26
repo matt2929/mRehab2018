@@ -7,6 +7,7 @@ import com.example.matt2929.strokeappdec2017.ListenersAndTriggers.OutputWorkoutD
 import com.example.matt2929.strokeappdec2017.ListenersAndTriggers.OutputWorkoutStrings;
 import com.example.matt2929.strokeappdec2017.ListenersAndTriggers.SpeechTrigger;
 import com.example.matt2929.strokeappdec2017.Utilities.SFXPlayer;
+import com.example.matt2929.strokeappdec2017.Utilities.ZeroCrossCalculation;
 
 /**
  * Created by matt2929 on 12/21/17.
@@ -18,10 +19,12 @@ public class WO_Twist extends SensorWorkoutAbstract {
 	float lastValue = 0;
 	int count = 0;
 	float threshold = -3.75f;
+	ZeroCrossCalculation zeroCrossCalculation;
 
 	public WO_Twist(String Name, Integer reps, SpeechTrigger speechTrigger, EndRepTrigger endRepTrigger, SFXPlayer sfxPlayer, OutputWorkoutData outputWorkoutData, OutputWorkoutStrings outputWorkoutStrings) {
 		super.SensorWorkout(Name, reps, speechTrigger, endRepTrigger, sfxPlayer, outputWorkoutData, outputWorkoutStrings);
 		Time = System.currentTimeMillis();
+		zeroCrossCalculation = new ZeroCrossCalculation();
 	}
 
 	@Override
@@ -29,8 +32,10 @@ public class WO_Twist extends SensorWorkoutAbstract {
 		super.SensorDataIn(data);
 		Log.e("Twist", AverageDataValue[1] + "Y, " + down);
 		if (WorkoutInProgress) {
+			zeroCrossCalculation.dataIn(data);
 			if (AverageDataValue[1] < threshold && lastValue >= threshold) {
 				count++;
+				zeroCrossCalculation.endRep();
 				outputWorkoutStrings.getStrings(new String[]{count + ""});
 				endRepTrigger.endRep();
 				speechTrigger.speak("" + count);
@@ -44,6 +49,7 @@ public class WO_Twist extends SensorWorkoutAbstract {
 
 	@Override
 	public WorkoutScore getScore() {
-		return super.getScore();
+		workoutScore = new WorkoutScore("Accuracy", zeroCrossCalculation.calculateZeroCross());
+		return workoutScore;
 	}
 }

@@ -30,7 +30,7 @@ public class PostWorkoutReportActivity extends AppCompatActivity {
 		//TODO: post workout report
 		GradeView repView = (GradeView) findViewById(R.id.repsView);
 		GradeView qualityView = (GradeView) findViewById(R.id.scoreView);
-		GradeView durationView = (GradeView) findViewById(R.id.timeView);
+		GradeView timeView = (GradeView) findViewById(R.id.timeView);
 		BitmapFactory.Options options = new BitmapFactory.Options();
 		options.inJustDecodeBounds = true;
 		Button button = (Button) findViewById(R.id.postWorkoutNext);
@@ -67,12 +67,12 @@ public class PostWorkoutReportActivity extends AppCompatActivity {
 		if (workoutJSONSFiltered.size() >= 2) {
 			WorkoutJSON previousWorkout = workoutJSONSFiltered.get(1);
 			repView.SetupView(bitmap1, "Number of Repetitions", previousWorkout.getReps(), thisWorkout.getReps(), (previousWorkout.getReps() <= thisWorkout.getReps()));
-			qualityView.SetupView(bitmap2, "Quality of Movement", previousWorkout.getAccuracy(), thisWorkout.getAccuracy(), (previousWorkout.getAccuracy() >= thisWorkout.getAccuracy()));
-			durationView.SetupView(bitmap3, "Duration of Workout", previousWorkout.getDuration(), thisWorkout.getDuration(), (previousWorkout.getDuration() >= thisWorkout.getDuration()));
+			qualityView.SetupView(bitmap2, "Repetition Accuracy (Average)", previousWorkout.getAccuracy(), thisWorkout.getAccuracy(), (previousWorkout.getAccuracy() >= thisWorkout.getAccuracy()));
+			timeView.SetupView(bitmap3, "Repetition Time (Average)", previousWorkout.getDuration(), thisWorkout.getDuration(), (previousWorkout.getDuration() >= thisWorkout.getDuration()));
 		} else {
 			repView.SetupView(bitmap1, "Number of Repetitions", -1, thisWorkout.getReps(), false);
-			qualityView.SetupView(bitmap2, "Quality of Movement", -1, thisWorkout.getAccuracy(), false);
-			durationView.SetupView(bitmap3, "Duration of Workout", -1, thisWorkout.getDuration(), false);
+			qualityView.SetupView(bitmap2, "Repetition Accuracy (Average)", -1, thisWorkout.getAccuracy(), false);
+			timeView.SetupView(bitmap3, "Repetition Time (Average)", -1, thisWorkout.getDuration(), false);
 		}
 		button.setOnClickListener(new View.OnClickListener() {
 			@Override
