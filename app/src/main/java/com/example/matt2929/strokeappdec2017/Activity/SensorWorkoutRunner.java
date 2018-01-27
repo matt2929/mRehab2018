@@ -132,7 +132,7 @@ public class SensorWorkoutRunner extends AppCompatActivity implements SensorEven
 							_SFXPlayer.killAll();
 							_SaveHistoricalReps.updateWorkout(_CurrentWorkout.getName(), _WorkoutReps);
 							_SaveTouchAndSensor.execute();
-							_SaveWorkoutJSON.addNewWorkout(_CurrentWorkout.getName(), _WorkoutHand, averageTime(saveDurations) / Long.valueOf(1000), (long) _CurrentWorkout.getScore().getScore(), _CurrentWorkout.getReps());
+							_SaveWorkoutJSON.addNewWorkout(_CurrentWorkout.getName(), _WorkoutHand, averageTime(saveDurations) / (float) (1000), _CurrentWorkout.getScore().getScore(), _CurrentWorkout.getReps());
 							_SaveActivitiesDoneToday.updateWorkout(_WorkoutName);
 							Intent intent = getIntent();
 							intent.setClass(getApplicationContext(), LoadingScreenActivity.class);
@@ -302,12 +302,12 @@ public class SensorWorkoutRunner extends AppCompatActivity implements SensorEven
 		setContentView(_CurrentWorkoutView);
 	}
 
-	public Long averageTime(ArrayList<Long> longs) {
-		Long sum = 0L;
+	public float averageTime(ArrayList<Long> longs) {
+		float sum = 0L;
 		for (int i = 0; i < longs.size(); i++) {
 			sum += longs.get(i);
 		}
-		Long value = ((sum / (Long.valueOf(longs.size()))));
+		float value = ((sum / (Long.valueOf(longs.size()))));
 		return value;
 	}
 }

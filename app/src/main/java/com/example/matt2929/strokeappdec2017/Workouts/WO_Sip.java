@@ -1,7 +1,5 @@
 package com.example.matt2929.strokeappdec2017.Workouts;
 
-import android.util.Log;
-
 import com.example.matt2929.strokeappdec2017.ListenersAndTriggers.EndRepTrigger;
 import com.example.matt2929.strokeappdec2017.ListenersAndTriggers.OutputWorkoutData;
 import com.example.matt2929.strokeappdec2017.ListenersAndTriggers.OutputWorkoutStrings;
@@ -16,14 +14,14 @@ import com.example.matt2929.strokeappdec2017.Utilities.ZeroCrossCalculation;
 
 public class WO_Sip extends SensorWorkoutAbstract {
 
-	double thresholdPickup = 1.5;
-	boolean pickedUp = false;
-	double threseholdDrink = 2;
-	long timeToDrink = 4000, timeDrank = 0, checkPoint = 0;
-	int repCount = 0;
-	boolean inCoolDown = false;
-	long coolDownLength = 5000, cooldownStart = 0;
-	ZeroCrossCalculation zeroCrossCalculation;
+	private double thresholdPickup = 3.0;
+	private boolean pickedUp = false;
+	private double threseholdDrink = 2;
+	private long timeToDrink = 4000, timeDrank = 0, checkPoint = 0;
+	private int repCount = 0;
+	private boolean inCoolDown = false;
+	private long coolDownLength = 5000, cooldownStart = 0;
+	private ZeroCrossCalculation zeroCrossCalculation;
 
 	public WO_Sip(String Name, Integer reps, SpeechTrigger speechTrigger, EndRepTrigger endRepTrigger, SFXPlayer sfxPlayer, OutputWorkoutData outputWorkoutData, OutputWorkoutStrings outputWorkoutStrings) {
 		super.SensorWorkout(Name, reps, speechTrigger, endRepTrigger, sfxPlayer, outputWorkoutData, outputWorkoutStrings);
@@ -37,6 +35,7 @@ public class WO_Sip extends SensorWorkoutAbstract {
 	public void SensorDataIn(float[] data) {
 		super.SensorDataIn(data);
 		if (WorkoutInProgress && !inCoolDown) {
+			zeroCrossCalculation.dataIn(data);
 			if (data[1] > thresholdPickup && !pickedUp) {
 				pickedUp = true;
 				checkPoint = System.currentTimeMillis();
@@ -69,7 +68,6 @@ public class WO_Sip extends SensorWorkoutAbstract {
 					speechTrigger.speak("Sip complete, Place the cup back down on the table and wait for the next sip.");
 				}
 			}
-			Log.e("Sip", "picked up:" + pickedUp + " drink progress:" + (timeDrank) + "%" + data[2]);
 		}
 		if (inCoolDown) {
 			if (Math.abs(cooldownStart - System.currentTimeMillis()) > coolDownLength) {

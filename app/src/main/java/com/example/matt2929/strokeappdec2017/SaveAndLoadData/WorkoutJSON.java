@@ -13,12 +13,12 @@ public class WorkoutJSON {
 	JSONObject object = new JSONObject();
 	String WorkoutName = "";
 	Integer Reps = -1;
-	Long Duration = -1l;
-	Long Accuracy = -1l;
+	float Duration = -1l;
+	float Accuracy = -1l;
 	String Hand = "Not Set", UserName = "Not Set";
 	Calendar calendar;
 
-	public WorkoutJSON(String UserName, String WorkoutName, Integer Reps, Long Duration, Long Accuracy, String Hand) {
+	public WorkoutJSON(String UserName, String WorkoutName, Integer Reps, float Duration, float Accuracy, String Hand) {
 		this.UserName = UserName;
 		this.WorkoutName = WorkoutName;
 		this.Reps = Reps;
@@ -52,7 +52,7 @@ public class WorkoutJSON {
 			WorkoutName = object.getString("Name");
 			Reps = object.getInt("Reps");
 			Duration = object.getLong("Duration");
-			Accuracy = object.getLong("Accuracy");
+			Accuracy = (float) object.getDouble("Accuracy");
 			int Year = object.getInt("Year");
 			int Month = object.getInt("Month");
 			int DOM = object.getInt("DayOfMonth");
@@ -74,11 +74,11 @@ public class WorkoutJSON {
 		return Reps;
 	}
 
-	public Long getAccuracy() {
+	public float getAccuracy() {
 		return Accuracy;
 	}
 
-	public Long getDuration() {
+	public float getDuration() {
 		return Duration;
 	}
 

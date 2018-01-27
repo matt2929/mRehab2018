@@ -1,7 +1,5 @@
 package com.example.matt2929.strokeappdec2017.Workouts;
 
-import android.util.Log;
-
 import com.example.matt2929.strokeappdec2017.ListenersAndTriggers.EndRepTrigger;
 import com.example.matt2929.strokeappdec2017.ListenersAndTriggers.OutputWorkoutData;
 import com.example.matt2929.strokeappdec2017.ListenersAndTriggers.OutputWorkoutStrings;
@@ -36,7 +34,6 @@ public class WO_Pour extends SensorWorkoutAbstract {
 	public void SensorDataIn(float[] data) {
 		super.SensorDataIn(data);
 		if (WorkoutInProgress && !inCooldown) {
-			zeroCrossCalculation.dataIn(data);
 			float GravY, GravX;
 			GravY = data[1];
 			GravX = data[0];
@@ -86,9 +83,8 @@ public class WO_Pour extends SensorWorkoutAbstract {
 					sfxPlayer.pauseSFX();
 				}
 			}
-
-			Log.e("Angle: ", Angle + "º" + "AngleS: " + AngleStandardized + "º Filled%" + filledPercentage);
 			outputData(new float[]{Angle, ((filledPercentage) / 100f)});
+			zeroCrossCalculation.dataIn(new float[]{Angle});
 		} else if (inCooldown) {
 			if (Math.abs(System.currentTimeMillis() - startOfCooldown) >= coolDownDuration) {
 				inCooldown = false;
@@ -111,7 +107,7 @@ public class WO_Pour extends SensorWorkoutAbstract {
 	@Override
 	public WorkoutScore getScore() {
 		workoutScore = new WorkoutScore("Jerk", zeroCrossCalculation.calculateZeroCross());
-		return super.getScore();
+		return workoutScore;
 	}
 
 	@Override

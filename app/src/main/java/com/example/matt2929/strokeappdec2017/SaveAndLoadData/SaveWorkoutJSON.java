@@ -62,7 +62,7 @@ public class SaveWorkoutJSON {
 	}
 
 
-	public void addNewWorkout(String WorkoutName, String Hand, Long Duration, Long Accuracy, int Reps) {
+	public void addNewWorkout(String WorkoutName, String Hand, float Duration, float Accuracy, int Reps) {
 		Calendar currentCalendar = Calendar.getInstance();
 		String fileName = WorkoutData.UserName + "_" + WorkoutName + "_" + currentCalendar.get(Calendar.YEAR) + "~" + currentCalendar.get(Calendar.MONTH) + "~" + currentCalendar.get(Calendar.DAY_OF_MONTH) + "_[" + currentCalendar.get(Calendar.HOUR_OF_DAY) + "h~" + currentCalendar.get(Calendar.MINUTE) + "m" + currentCalendar.get(Calendar.SECOND) + "].json";
 		String output = "";

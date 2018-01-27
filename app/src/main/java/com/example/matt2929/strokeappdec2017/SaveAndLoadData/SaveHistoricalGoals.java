@@ -3,6 +3,8 @@ package com.example.matt2929.strokeappdec2017.SaveAndLoadData;
 import android.content.Context;
 import android.widget.Toast;
 
+import com.example.matt2929.strokeappdec2017.Values.WorkoutData;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -20,86 +22,86 @@ import java.util.Queue;
  */
 
 public class SaveHistoricalGoals {
-    Context context;
+	Context context;
 
-    public SaveHistoricalGoals(Context context) {
-        this.context = context;
-    }
+	public SaveHistoricalGoals(Context context) {
+		this.context = context;
+	}
 
-    public ArrayList<String> getGoals(String username) {
-        List<File> files = getAllFiles(context.getFilesDir());
-        ArrayList<String> goals = new ArrayList<>();
-        for (File f : files) {
-            if (f.getName().contains("UserGoals_") && f.getName().contains("_" + username + "_")) {
-                try {
-                    BufferedReader br = new BufferedReader(new FileReader(f));
-                    String line = "";
-                    while ((line = br.readLine()) != null) {
-                        if (line.contains("Goal")) {
-                            goals.add(line.split(":")[1]);
-                        }
-                    }
-                    br.close();
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                }
-                break;
-            }
+	public ArrayList<String> getGoals() {
+		List<File> files = getAllFiles(context.getFilesDir());
+		ArrayList<String> goals = new ArrayList<>();
+		for (File f : files) {
+			if (f.getName().contains("UserGoals_") && f.getName().contains("_" + WorkoutData.UserName + "_")) {
+				try {
+					BufferedReader br = new BufferedReader(new FileReader(f));
+					String line = "";
+					while ((line = br.readLine()) != null) {
+						if (line.contains("Goal")) {
+							goals.add(line.split(":")[1]);
+						}
+					}
+					br.close();
+				} catch (FileNotFoundException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+				}
+				break;
+			}
 
-        }
-        return goals;
-    }
+		}
+		return goals;
+	}
 
-    private String loadFile(String filename) {
-        List<File> files = getAllFiles(context.getFilesDir());
-        String output = "";
-        for (File f : files) {
-            if (f.getName().equals(filename)) {
-                try {
-                    BufferedReader br = new BufferedReader(new FileReader(f));
-                    String line = "";
-                    while ((line = br.readLine()) != null) {
-                        output += line;
-                    }
-                    br.close();
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                }
-                break;
-            }
+	private String loadFile(String filename) {
+		List<File> files = getAllFiles(context.getFilesDir());
+		String output = "";
+		for (File f : files) {
+			if (f.getName().equals(filename)) {
+				try {
+					BufferedReader br = new BufferedReader(new FileReader(f));
+					String line = "";
+					while ((line = br.readLine()) != null) {
+						output += line;
+					}
+					br.close();
+				} catch (FileNotFoundException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+				}
+				break;
+			}
 
-        }
-        return output;
-    }
+		}
+		return output;
+	}
 
-    public void saveGoals(String username, String goal) {
-        String filename = "UserGoals_" + username + "_" + ".txt";
-        FileOutputStream outputStream;
+	public void saveGoals(String goal) {
+		String filename = "UserGoals_" + WorkoutData.UserName + "_" + ".txt";
+		FileOutputStream outputStream;
 
-        try {
-            outputStream = context.openFileOutput(filename, Context.MODE_PRIVATE);
-            outputStream.write((loadFile(filename) + "\nGoal:" + goal).getBytes());
-            outputStream.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-            Toast.makeText(context, "Failure to save", Toast.LENGTH_SHORT).show();
-        }
-    }
+		try {
+			outputStream = context.openFileOutput(filename, Context.MODE_PRIVATE);
+			outputStream.write((loadFile(filename) + "\nGoal:" + goal).getBytes());
+			outputStream.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+			Toast.makeText(context, "Failure to save", Toast.LENGTH_SHORT).show();
+		}
+	}
 
-    private List<File> getAllFiles(File parentDir) {
-        List<File> inFiles = new ArrayList<>();
-        Queue<File> files = new LinkedList<>();
-        files.addAll(Arrays.asList(parentDir.listFiles()));
-        while (!files.isEmpty()) {
-            File file = files.remove();
-            if (file.isDirectory()) {
-                files.addAll(Arrays.asList(file.listFiles()));
-            } else if (file.getName().contains("UserGoals")) {
-                inFiles.add(file);
-            }
-        }
-        return inFiles;
-    }
+	private List<File> getAllFiles(File parentDir) {
+		List<File> inFiles = new ArrayList<>();
+		Queue<File> files = new LinkedList<>();
+		files.addAll(Arrays.asList(parentDir.listFiles()));
+		while (!files.isEmpty()) {
+			File file = files.remove();
+			if (file.isDirectory()) {
+				files.addAll(Arrays.asList(file.listFiles()));
+			} else if (file.getName().contains("UserGoals")) {
+				inFiles.add(file);
+			}
+		}
+		return inFiles;
+	}
 }

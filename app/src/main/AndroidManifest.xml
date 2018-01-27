@@ -44,7 +44,8 @@
 
         <activity android:name=".Activity.CalendarSetActivity" />
         <activity android:name=".Activity.HistoryViewActivity" />
-        <activity android:name=".Activity.PutPhoneInCupActivity"></activity>
+        <activity android:name=".Activity.PutPhoneInCupActivity" />
+        <activity android:name=".Activity.SetGoalsActivity"></activity>
     </application>
 
 </manifest>

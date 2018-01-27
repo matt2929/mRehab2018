@@ -21,6 +21,8 @@ public final class WorkoutData {
 	public static final String Print_Container_Door = "Print Door";
 	public static final String Print_Container_No_Container = "No Container";
 
+	public static final String Key_Last_Goal_Set = "Last Goal Set";
+
 	public final static WorkoutDescription[] WORKOUT_DESCRIPTIONS = new WorkoutDescription[]
 			{
 					new WorkoutDescription("Horizontal Bowl", Workout_Type_Sensor, Sensor_Type_Linear, Print_Container_Bowl, 10,

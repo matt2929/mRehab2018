@@ -8,15 +8,22 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.matt2929.strokeappdec2017.R;
+import com.example.matt2929.strokeappdec2017.Utilities.SaveLastGoalSet;
 
 public class WorkoutOrHistoryOrCalendarActivity extends AppCompatActivity {
 
 	TextView textView;
+	SaveLastGoalSet saveLastGoalSet = new SaveLastGoalSet();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_workout_or_history);
+
+		if (saveLastGoalSet.isTwoWeeks(this)) {
+			Intent intent = new Intent(this, SetGoalsActivity.class);
+			startActivity(intent);
+		}
 		Button history = (Button) findViewById(R.id.workHist_Hist);
 		Button workout = (Button) findViewById(R.id.workHist_Work);
 		Button calendar = (Button) findViewById(R.id.workHist_Next);
