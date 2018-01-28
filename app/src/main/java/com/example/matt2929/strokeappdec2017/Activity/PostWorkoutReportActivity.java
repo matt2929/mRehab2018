@@ -12,6 +12,7 @@ import android.widget.ImageButton;
 import com.example.matt2929.strokeappdec2017.R;
 import com.example.matt2929.strokeappdec2017.SaveAndLoadData.SaveWorkoutJSON;
 import com.example.matt2929.strokeappdec2017.SaveAndLoadData.WorkoutJSON;
+import com.example.matt2929.strokeappdec2017.Utilities.SFXPlayer;
 import com.example.matt2929.strokeappdec2017.WorkoutsView.GradeView;
 
 import java.util.ArrayList;
@@ -22,12 +23,15 @@ public class PostWorkoutReportActivity extends AppCompatActivity {
 	ArrayList<WorkoutJSON> workoutJSONS;
 	SaveWorkoutJSON saveWorkoutJSON;
 	ImageButton imageButton;
+	SFXPlayer sfxPlayer;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_post_workout_report);
 		//TODO: post workout report
+		sfxPlayer = new SFXPlayer(getApplicationContext());
+		sfxPlayer.loadSFX(R.raw.tada);
 		GradeView repView = (GradeView) findViewById(R.id.repsView);
 		GradeView qualityView = (GradeView) findViewById(R.id.scoreView);
 		GradeView timeView = (GradeView) findViewById(R.id.timeView);
@@ -62,18 +66,29 @@ public class PostWorkoutReportActivity extends AppCompatActivity {
 			}
 		}
 		Collections.sort(workoutJSONSFiltered, workoutJSONComparator);
-
 		WorkoutJSON thisWorkout = workoutJSONSFiltered.get(0);
+		boolean betterReps = false;
+		boolean betterSmoothness = false;
+		boolean betterTime = false;
 		if (workoutJSONSFiltered.size() >= 2) {
 			WorkoutJSON previousWorkout = workoutJSONSFiltered.get(1);
-			repView.SetupView(bitmap1, "Number of Repetitions", previousWorkout.getReps(), thisWorkout.getReps(), (previousWorkout.getReps() <= thisWorkout.getReps()));
-			qualityView.SetupView(bitmap2, "Repetition Smoothness (Average)", previousWorkout.getAccuracy(), thisWorkout.getAccuracy(), (previousWorkout.getAccuracy() >= thisWorkout.getAccuracy()));
-			timeView.SetupView(bitmap3, "Repetition Time (Average)", previousWorkout.getDuration(), thisWorkout.getDuration(), (previousWorkout.getDuration() >= thisWorkout.getDuration()));
+			betterReps = (previousWorkout.getReps() <= thisWorkout.getReps());
+			betterSmoothness = (previousWorkout.getAccuracy() >= thisWorkout.getAccuracy());
+			betterTime = (previousWorkout.getDuration() >= thisWorkout.getDuration());
+			repView.SetupView(bitmap1, "Number of Repetitions", previousWorkout.getReps(), thisWorkout.getReps(), betterReps);
+			qualityView.SetupView(bitmap2, "Repetition Smoothness (Average)", previousWorkout.getAccuracy(), thisWorkout.getAccuracy(), betterSmoothness);
+			timeView.SetupView(bitmap3, "Repetition Time (Average)", previousWorkout.getDuration(), thisWorkout.getDuration(), betterTime);
+
 		} else {
 			repView.SetupView(bitmap1, "Number of Repetitions", -1, thisWorkout.getReps(), false);
 			qualityView.SetupView(bitmap2, "Repetition Smoothness (Average)", -1, thisWorkout.getAccuracy(), false);
 			timeView.SetupView(bitmap3, "Repetition Time (Average)", -1, thisWorkout.getDuration(), false);
 		}
+
+		if (betterReps || betterSmoothness || betterTime) {
+			sfxPlayer.playSFX();
+		}
+
 		button.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
