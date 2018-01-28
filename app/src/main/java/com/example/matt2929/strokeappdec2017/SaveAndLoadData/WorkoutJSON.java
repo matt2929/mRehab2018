@@ -26,11 +26,12 @@ public class WorkoutJSON {
 		this.Accuracy = Accuracy;
 		this.calendar = Calendar.getInstance();
 		this.Hand = Hand;
+
 		try {
 			object.put("Name", WorkoutName);
 			object.put("UserName", UserName);
 			object.put("Reps", Reps);
-			object.put("Duration", Duration);
+			object.put("Duration", String.valueOf(Duration));
 			object.put("Accuracy", Accuracy);
 			object.put("Hand", Hand);
 			object.put("Year", calendar.get(Calendar.YEAR));
@@ -51,7 +52,7 @@ public class WorkoutJSON {
 			UserName = object.getString("UserName");
 			WorkoutName = object.getString("Name");
 			Reps = object.getInt("Reps");
-			Duration = object.getLong("Duration");
+			Duration = Float.valueOf(object.getString("Duration"));
 			Accuracy = (float) object.getDouble("Accuracy");
 			int Year = object.getInt("Year");
 			int Month = object.getInt("Month");

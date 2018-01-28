@@ -26,7 +26,9 @@ import com.example.matt2929.strokeappdec2017.Values.WorkoutData;
 import com.example.matt2929.strokeappdec2017.Workouts.TouchWorkoutAbstract;
 import com.example.matt2929.strokeappdec2017.Workouts.WO_PhoneNumber;
 import com.example.matt2929.strokeappdec2017.Workouts.WO_QuickTouch;
+import com.example.matt2929.strokeappdec2017.Workouts.WO_Unlock;
 import com.example.matt2929.strokeappdec2017.Workouts.WorkoutDescription;
+import com.example.matt2929.strokeappdec2017.WorkoutsView.WV_Unlock;
 
 import java.util.ArrayList;
 
@@ -49,7 +51,7 @@ public class TouchWorkoutRunner extends AppCompatActivity {
 	private SaveTouchAndSensor _SaveTouchAndSensor;
 	private SaveWorkoutJSON _SaveWorkoutJSON;
 	private Boolean _WorkoutInProgress = false;//Is workout currently running?
-	private ArrayList<Long> saveDurations = new ArrayList<>();
+	private ArrayList<Float> saveDurations = new ArrayList<>();
 	private SaveActivitiesDoneToday _SaveActivitiesDoneToday;
 
 	@Override
@@ -118,7 +120,6 @@ public class TouchWorkoutRunner extends AppCompatActivity {
 							_CurrentWorkout.StartWorkout();
 							_WorkoutInProgress = true;
 						} else if (s.equals(WorkoutData.TTS_WORKOUT_COMPLETE)) {
-							Long timeToComplete = Math.abs(TimeOfWorkout - System.currentTimeMillis());
 							_SFXPlayer.killAll();
 							_SaveHistoricalReps.updateWorkout(_CurrentWorkout.getName(), _WorkoutReps);
 							_SaveTouchAndSensor.execute();
@@ -179,7 +180,7 @@ public class TouchWorkoutRunner extends AppCompatActivity {
 		EndRepTrigger endRepTrigger = new EndRepTrigger() {
 			@Override
 			public void endRep() {
-				saveDurations.add(System.currentTimeMillis() - TimeOfWorkout);
+				saveDurations.add(Float.valueOf(System.currentTimeMillis() - TimeOfWorkout));
 				TimeOfWorkout = System.currentTimeMillis();
 			}
 		};
@@ -191,14 +192,20 @@ public class TouchWorkoutRunner extends AppCompatActivity {
 			}
 		}
 		if (_WorkoutDescription.getName().equals("Unlock Key")) {
-		/*	setContentView(R.layout.activity_m);
-			_CurrentWorkout = new WO_QuickTouch(WorkoutName, reps, speechTrigger, _SFXPlayer, outputWorkoutData, outputWorkoutStrings);
+			_CurrentWorkoutView = new WV_Unlock(getApplicationContext());
+			setContentView(_CurrentWorkoutView);
+			ArrayList<View> views = new ArrayList<>();
+			views.add(_CurrentWorkoutView);
+			_CurrentWorkoutView.invalidate();
+			_CurrentWorkout = new WO_Unlock(WorkoutName, reps, views, endRepTrigger, speechTrigger, _SFXPlayer, outputWorkoutData, outputWorkoutStrings);
 
-		*/
 		} else if (_WorkoutDescription.getName().equals("Unlock Door")) {
-		/*	_CurrentWorkout = new WO_PickUpVertical(WorkoutName, reps, speechTrigger, _SFXPlayer, outputWorkoutData, outputWorkoutStrings);
-			_CurrentWorkoutView = new WV_JustText(getApplicationContext());
-		*/
+			_CurrentWorkoutView = new WV_Unlock(getApplicationContext());
+			setContentView(_CurrentWorkoutView);
+			ArrayList<View> views = new ArrayList<>();
+			views.add(_CurrentWorkoutView);
+			_CurrentWorkoutView.invalidate();
+			_CurrentWorkout = new WO_Unlock(WorkoutName, reps, views, endRepTrigger, speechTrigger, _SFXPlayer, outputWorkoutData, outputWorkoutStrings);
 		} else if (_WorkoutDescription.getName().equals("Phone Number")) {
 			setContentView(R.layout.activity_phone_number);
 			ArrayList<View> views = new ArrayList<>();
@@ -248,7 +255,7 @@ public class TouchWorkoutRunner extends AppCompatActivity {
 
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
-		if (event.getAction() == MotionEvent.ACTION_DOWN) {
+		if (event.getAction() == MotionEvent.ACTION_DOWN || event.getAction() == MotionEvent.ACTION_MOVE) {
 			Boolean GoodTouch = _CurrentWorkout.TouchIn(event.getX(), event.getY());
 			int goodTouchInt;
 			if (GoodTouch) {
@@ -263,12 +270,12 @@ public class TouchWorkoutRunner extends AppCompatActivity {
 		return super.onTouchEvent(event);
 	}
 
-	public Long averageTime(ArrayList<Long> longs) {
-		Long sum = 0L;
-		for (int i = 0; i < longs.size(); i++) {
-			sum += longs.get(i);
+	public Float averageTime(ArrayList<Float> floats) {
+		float sum = 0L;
+		for (int i = 0; i < floats.size(); i++) {
+			sum += floats.get(i);
 		}
-		Long value = ((sum / (Long.valueOf(longs.size()))));
+		Float value = ((sum / ((float) floats.size())));
 		return value;
 	}
 }

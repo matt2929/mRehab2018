@@ -67,11 +67,11 @@ public class PostWorkoutReportActivity extends AppCompatActivity {
 		if (workoutJSONSFiltered.size() >= 2) {
 			WorkoutJSON previousWorkout = workoutJSONSFiltered.get(1);
 			repView.SetupView(bitmap1, "Number of Repetitions", previousWorkout.getReps(), thisWorkout.getReps(), (previousWorkout.getReps() <= thisWorkout.getReps()));
-			qualityView.SetupView(bitmap2, "Repetition Accuracy (Average)", previousWorkout.getAccuracy(), thisWorkout.getAccuracy(), (previousWorkout.getAccuracy() >= thisWorkout.getAccuracy()));
+			qualityView.SetupView(bitmap2, "Repetition Smoothness (Average)", previousWorkout.getAccuracy(), thisWorkout.getAccuracy(), (previousWorkout.getAccuracy() >= thisWorkout.getAccuracy()));
 			timeView.SetupView(bitmap3, "Repetition Time (Average)", previousWorkout.getDuration(), thisWorkout.getDuration(), (previousWorkout.getDuration() >= thisWorkout.getDuration()));
 		} else {
 			repView.SetupView(bitmap1, "Number of Repetitions", -1, thisWorkout.getReps(), false);
-			qualityView.SetupView(bitmap2, "Repetition Accuracy (Average)", -1, thisWorkout.getAccuracy(), false);
+			qualityView.SetupView(bitmap2, "Repetition Smoothness (Average)", -1, thisWorkout.getAccuracy(), false);
 			timeView.SetupView(bitmap3, "Repetition Time (Average)", -1, thisWorkout.getDuration(), false);
 		}
 		button.setOnClickListener(new View.OnClickListener() {

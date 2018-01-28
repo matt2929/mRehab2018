@@ -54,5 +54,7 @@ public class CalendarSetActivity extends AppCompatActivity {
 				saveCalendarDateJSON.addCalendarDate(_dom, _month, _year);
 			}
 		});
+
+
 	}
 }
