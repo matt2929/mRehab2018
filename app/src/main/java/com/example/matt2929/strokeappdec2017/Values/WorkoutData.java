@@ -67,19 +67,7 @@ public final class WorkoutData {
 							"In this workout you need to click all the blue circles",
 							Color.rgb(153, 51, 102)),
 			};
-	public final static String[] WORKOUT_TYPE = new String[]{
-			Workout_Type_Sensor,
-			Workout_Type_Sensor,
-			Workout_Type_Sensor,
-			Workout_Type_Sensor,
-			Workout_Type_Sensor,
-			Workout_Type_Sensor,
-			Workout_Type_Sensor,
-			Workout_Type_Sensor,
-			Workout_Type_Touch,
-			Workout_Type_Touch,
-			Workout_Type_Touch,
-			Workout_Type_Touch};
+
 	public static final String TTS_WORKOUT_DESCRIPTION = "WORKOUT_DESCRIPTION"; //Say workout description
 	public static final String TTS_WORKOUT_READY = "WORKOUT_READY";//Say Ready then have some delay
 	public static final String TTS_WORKOUT_BEGIN = "WORKOUT_BEGIN";//Say Begin

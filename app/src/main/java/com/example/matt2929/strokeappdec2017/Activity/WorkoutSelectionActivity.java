@@ -20,7 +20,6 @@ import com.example.matt2929.strokeappdec2017.WorkoutsView.WorkoutSelectAdapter;
 import java.util.ArrayList;
 
 import static com.example.matt2929.strokeappdec2017.Values.WorkoutData.WORKOUT_DESCRIPTIONS;
-import static com.example.matt2929.strokeappdec2017.Values.WorkoutData.WORKOUT_TYPE;
 import static com.example.matt2929.strokeappdec2017.Values.WorkoutData.Workout_Type_Sensor;
 
 public class WorkoutSelectionActivity extends AppCompatActivity {
@@ -85,7 +84,7 @@ public class WorkoutSelectionActivity extends AppCompatActivity {
 	public void handSelection(boolean leftHand) {
 		if (currentSelection != -1) {
 			Intent intent = new Intent(getApplicationContext(), GoalsAndRepsActivity.class);
-			if (WORKOUT_TYPE[currentSelection].equals(Workout_Type_Sensor)) {
+			if (WORKOUT_DESCRIPTIONS[currentSelection].getWorkoutType().equals(Workout_Type_Sensor)) {
 				intent.putExtra("WorkoutType", "Sensor");
 			} else {
 				intent.putExtra("WorkoutType", "Touch");
