@@ -34,6 +34,7 @@ public class WO_Unlock extends TouchWorkoutAbstract {
 	@Override
 	public boolean TouchIn(float x, float y) {
 		if (WorkoutInProgress) {
+			outputData(new float[]{x, y});
 			double angle = Math.atan((y / x));
 			zeroCrossCalculation.dataIn(new float[]{(float) angle});
 			float margin = (200f);

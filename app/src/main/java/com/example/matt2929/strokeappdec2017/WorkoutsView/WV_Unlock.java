@@ -17,6 +17,7 @@ public class WV_Unlock extends WorkoutViewAbstract {
 
 	Paint innerCircle, outerCircle, pointColor;
 
+	float x = 0, y = 0;
 
 	public WV_Unlock(Context context) {
 		super(context);
@@ -44,13 +45,14 @@ public class WV_Unlock extends WorkoutViewAbstract {
 		pointColor = new Paint();
 		innerCircle.setColor(Color.rgb(0, 0, 0));
 		outerCircle.setColor(Color.rgb(153, 102, 51));
-		pointColor.setColor(Color.rgb(153, 102, 51));
+		pointColor.setColor(Color.YELLOW);
 		setBackgroundColor(Color.BLACK);
 	}
 
 	@Override
 	public void dataIn(float[] f) {
-		super.dataIn(f);
+		x = f[0];
+		y = f[1];
 	}
 
 	@Override
@@ -60,7 +62,7 @@ public class WV_Unlock extends WorkoutViewAbstract {
 		canvas.drawCircle(getWidth() / 2, getHeight() - heightCircle, heightCircle + (radiusTouch * 2), outerCircle);
 		canvas.drawCircle(getWidth() / 2, getHeight() - heightCircle, heightCircle + (radiusTouch), innerCircle);
 		canvas.drawCircle(getWidth() / 2, getHeight() - heightCircle, heightCircle - (radiusTouch), outerCircle);
-
+		canvas.drawCircle(x, y, radiusTouch, pointColor);
 	}
 
 	private float inchToPixels(float dim) {
@@ -68,4 +70,6 @@ public class WV_Unlock extends WorkoutViewAbstract {
 		float conversionFactor = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_IN, 1, mDisplayMetric);
 		return dim * conversionFactor;
 	}
+
+
 }

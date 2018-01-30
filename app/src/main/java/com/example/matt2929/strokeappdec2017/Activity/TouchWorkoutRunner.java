@@ -29,6 +29,7 @@ import com.example.matt2929.strokeappdec2017.Workouts.WO_QuickTouch;
 import com.example.matt2929.strokeappdec2017.Workouts.WO_Unlock;
 import com.example.matt2929.strokeappdec2017.Workouts.WorkoutDescription;
 import com.example.matt2929.strokeappdec2017.WorkoutsView.WV_Unlock;
+import com.example.matt2929.strokeappdec2017.WorkoutsView.WorkoutViewAbstract;
 
 import java.util.ArrayList;
 
@@ -44,7 +45,7 @@ public class TouchWorkoutRunner extends AppCompatActivity {
 	//Refrence ID for TTS~~~~
 	private Text2Speech _Text2Speech;
 	private TouchWorkoutAbstract _CurrentWorkout;
-	private View _CurrentWorkoutView;
+	private WorkoutViewAbstract _CurrentWorkoutView;
 	private WorkoutDescription _WorkoutDescription = null;
 	private SFXPlayer _SFXPlayer;
 	private SaveHistoricalReps _SaveHistoricalReps;
@@ -167,13 +168,13 @@ public class TouchWorkoutRunner extends AppCompatActivity {
 		OutputWorkoutData outputWorkoutData = new OutputWorkoutData() {
 			@Override
 			public void getData(float[] f) {
-				//	_CurrentWorkoutView.dataIn(f);
+				_CurrentWorkoutView.dataIn(f);
 			}
 		};
 		OutputWorkoutStrings outputWorkoutStrings = new OutputWorkoutStrings() {
 			@Override
 			public void getStrings(String[] s) {
-				//	_CurrentWorkoutView.stringIn(s);
+				_CurrentWorkoutView.stringIn(s);
 			}
 		};
 
@@ -221,7 +222,7 @@ public class TouchWorkoutRunner extends AppCompatActivity {
 			views.add(findViewById(R.id.phone7));
 			views.add(findViewById(R.id.phone8));
 			views.add(findViewById(R.id.phone9));
-			_CurrentWorkoutView = findViewById(android.R.id.content).getRootView();
+			_CurrentWorkoutView = (WorkoutViewAbstract) findViewById(android.R.id.content).getRootView();
 			_CurrentWorkout = new WO_PhoneNumber(WorkoutName, reps, views, endRepTrigger, speechTrigger, _SFXPlayer, outputWorkoutData, outputWorkoutStrings);
 
 		} else if (_WorkoutDescription.getName().equals("Quick Touch")) {
@@ -233,7 +234,7 @@ public class TouchWorkoutRunner extends AppCompatActivity {
 			views.add(findViewById(R.id.circle4));
 			views.add(findViewById(R.id.circle5));
 			views.add(findViewById(R.id.circle6));
-			_CurrentWorkoutView = findViewById(android.R.id.content).getRootView();
+			_CurrentWorkoutView = (WorkoutViewAbstract) findViewById(android.R.id.content).getRootView();
 			_CurrentWorkout = new WO_QuickTouch(WorkoutName, reps, views, endRepTrigger, speechTrigger, _SFXPlayer, outputWorkoutData, outputWorkoutStrings);
 
 		}

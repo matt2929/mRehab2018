@@ -88,7 +88,6 @@ public class PostWorkoutReportActivity extends AppCompatActivity {
 			repView.SetupView(bitmap1, "Number of Repetitions", previousWorkout.getReps(), thisWorkout.getReps(), betterReps);
 			qualityView.SetupView(bitmap2, "Repetition Smoothness (Average)", previousWorkout.getAccuracy(), thisWorkout.getAccuracy(), betterSmoothness);
 			timeView.SetupView(bitmap3, "Repetition Time (Average)", previousWorkout.getDuration(), thisWorkout.getDuration(), betterTime);
-
 		} else {
 			repView.SetupView(bitmap1, "Number of Repetitions", -1, thisWorkout.getReps(), false);
 			qualityView.SetupView(bitmap2, "Repetition Smoothness (Average)", -1, thisWorkout.getAccuracy(), false);
@@ -97,7 +96,7 @@ public class PostWorkoutReportActivity extends AppCompatActivity {
 		checkTTS();
 
 		if (betterReps || betterSmoothness || betterTime) {
-			//		sfxPlayer.playSFX();
+			sfxPlayer.playSFX();
 		}
 
 		button.setOnClickListener(new View.OnClickListener() {
