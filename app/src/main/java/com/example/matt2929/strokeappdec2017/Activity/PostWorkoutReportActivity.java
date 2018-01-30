@@ -131,7 +131,6 @@ public class PostWorkoutReportActivity extends AppCompatActivity {
 						_Text2Speech.silence(1000);
 						_Text2Speech.speak("Smoothness " + floatToHundreth(thisWorkout.getAccuracy()), WorkoutData.TTS_WORKOUT_DESCRIPTION);
 						_Text2Speech.silence(1000);
-						_Text2Speech.silence(1000);
 						_Text2Speech.speak("Duration " + floatToHundreth(thisWorkout.getDuration()), WorkoutData.TTS_WORKOUT_DESCRIPTION);
 					}
 				});
