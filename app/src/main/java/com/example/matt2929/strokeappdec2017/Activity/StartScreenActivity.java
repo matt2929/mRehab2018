@@ -36,6 +36,6 @@ public class StartScreenActivity extends AppCompatActivity {
 
 	public void getPermissions() {
 		ActivityCompat.requestPermissions(this,
-				new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.INTERNET, Manifest.permission.ACCESS_NETWORK_STATE}, 55);
+				new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.INTERNET, Manifest.permission.ACCESS_NETWORK_STATE, Manifest.permission.WRITE_CALENDAR}, 55);
 	}
 }
