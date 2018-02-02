@@ -12,6 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
+        android:visibility="visible"
         android:weightSum="10">
 
         <ImageView
@@ -29,7 +30,7 @@
             android:layout_height="0dp"
             android:layout_weight="4"
             android:gravity="center"
-            android:text="Is the phone in the cup?"
+            android:text="Is the phone in the mug?"
             android:textAlignment="center"
             android:textColor="@android:color/background_dark"
             android:textSize="36sp" />
@@ -88,7 +89,7 @@
             android:layout_height="0dp"
             android:layout_weight="4"
             android:gravity="center"
-            android:text="Press OK when the phone is in the cup"
+            android:text="Press 'OK' when the phone is in the mug"
             android:textAlignment="center"
             android:textColor="@android:color/background_dark"
             android:textSize="36sp" />

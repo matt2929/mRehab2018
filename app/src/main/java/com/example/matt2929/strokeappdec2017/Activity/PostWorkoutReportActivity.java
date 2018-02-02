@@ -126,7 +126,6 @@ public class PostWorkoutReportActivity extends AppCompatActivity {
 				_Text2Speech.addInitListener(new SpeechInitListener() {
 					@Override
 					public void onInit() {
-						_Text2Speech.silence(1000);
 						_Text2Speech.speak("Number of Reps " + floatToHundreth(thisWorkout.getReps()), WorkoutData.TTS_WORKOUT_DESCRIPTION);
 						_Text2Speech.silence(1000);
 						_Text2Speech.speak("Smoothness " + floatToHundreth(thisWorkout.getAccuracy()), WorkoutData.TTS_WORKOUT_DESCRIPTION);

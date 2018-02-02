@@ -38,6 +38,7 @@ public class TouchWorkoutRunner extends AppCompatActivity {
 	private final int CHECK_CODE = 0x1;
 	//~~~~~~~~~~~~~~~~~~~~~~~
 	Long TimeOfWorkout = System.currentTimeMillis();
+	Long TimeOfRep = System.currentTimeMillis();
 	//Workout Attributes~~~
 	String _WorkoutHand; //Which Hand
 	String _WorkoutName; //Name of Current Wokrout
@@ -120,6 +121,7 @@ public class TouchWorkoutRunner extends AppCompatActivity {
 							TimeOfWorkout = System.currentTimeMillis();
 							_CurrentWorkout.StartWorkout();
 							_WorkoutInProgress = true;
+							TimeOfRep = System.currentTimeMillis();
 						} else if (s.equals(WorkoutData.TTS_WORKOUT_COMPLETE)) {
 							_SFXPlayer.killAll();
 							_SaveHistoricalReps.updateWorkout(_CurrentWorkout.getName(), _WorkoutReps);
@@ -181,8 +183,8 @@ public class TouchWorkoutRunner extends AppCompatActivity {
 		EndRepTrigger endRepTrigger = new EndRepTrigger() {
 			@Override
 			public void endRep() {
-				saveDurations.add(Float.valueOf(System.currentTimeMillis() - TimeOfWorkout));
-				TimeOfWorkout = System.currentTimeMillis();
+				saveDurations.add(Float.valueOf(System.currentTimeMillis() - TimeOfRep));
+				TimeOfRep = System.currentTimeMillis();
 			}
 		};
 
@@ -245,7 +247,7 @@ public class TouchWorkoutRunner extends AppCompatActivity {
 				_CurrentWorkout.Update();
 				_CurrentWorkoutView.invalidate();
 				if (_CurrentWorkout.isWorkoutComplete() && _WorkoutInProgress) {
-					_Text2Speech.speak("Workout Complete", WorkoutData.TTS_WORKOUT_COMPLETE);
+					_Text2Speech.speak("Activity Complete", WorkoutData.TTS_WORKOUT_COMPLETE);
 					_WorkoutInProgress = false;
 				}
 				handler.postDelayed(this, 35);
@@ -264,7 +266,6 @@ public class TouchWorkoutRunner extends AppCompatActivity {
 			} else {
 				goodTouchInt = 0;
 			}
-			Log.e("Coordinates", "(" + event.getX() + "," + event.getY() + ")");
 			_SaveTouchAndSensor.saveData(new float[]{Math.abs(TimeOfWorkout - System.currentTimeMillis()), event.getX(), event.getY(), goodTouchInt});
 			TimeOfWorkout = System.currentTimeMillis();
 		}

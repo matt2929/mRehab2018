@@ -43,7 +43,8 @@ public class SensorWorkoutRunner extends AppCompatActivity implements SensorEven
 
 	private final int CHECK_CODE = 0x1;
 	//~~~~~~~~~~~~~~~~~~~~~~~
-	Long TimeOfWorkout = System.currentTimeMillis();
+	Long TimeStartWorkout = System.currentTimeMillis();
+	Long TimeOfRep = System.currentTimeMillis();
 	//Workout Attributes~~~
 	String _WorkoutHand; //Which Hand
 	String _WorkoutName; //Name of Current Wokrout
@@ -125,7 +126,8 @@ public class SensorWorkoutRunner extends AppCompatActivity implements SensorEven
 							_Text2Speech.silence(2000);
 							_Text2Speech.speak("Begin", WorkoutData.TTS_WORKOUT_BEGIN);
 						} else if (s.equals(WorkoutData.TTS_WORKOUT_BEGIN)) {
-							TimeOfWorkout = System.currentTimeMillis();
+							TimeStartWorkout = System.currentTimeMillis();
+							TimeOfRep = System.currentTimeMillis();
 							_CurrentWorkout.StartWorkout();
 							_WorkoutInProgress = true;
 						} else if (s.equals(WorkoutData.TTS_WORKOUT_COMPLETE)) {
@@ -213,7 +215,7 @@ public class SensorWorkoutRunner extends AppCompatActivity implements SensorEven
 
 		if (_WorkoutInProgress) {
 			float[] data = new float[sensorEvent.values.length + 1];
-			data[0] = Math.abs(TimeOfWorkout - System.currentTimeMillis());
+			data[0] = Math.abs(TimeStartWorkout - System.currentTimeMillis());
 			for (int i = 0; i < sensorEvent.values.length; i++) {
 				data[i + 1] = sensorEvent.values[i];
 			}
@@ -221,7 +223,7 @@ public class SensorWorkoutRunner extends AppCompatActivity implements SensorEven
 		}
 
 		if (_CurrentWorkout.isWorkoutComplete() && _WorkoutInProgress) {
-			_Text2Speech.speak("Workout Complete", WorkoutData.TTS_WORKOUT_COMPLETE);
+			_Text2Speech.speak("Activity Complete", WorkoutData.TTS_WORKOUT_COMPLETE);
 			_WorkoutInProgress = false;
 		}
 	}
@@ -242,9 +244,8 @@ public class SensorWorkoutRunner extends AppCompatActivity implements SensorEven
 		EndRepTrigger endRepTrigger = new EndRepTrigger() {
 			@Override
 			public void endRep() {
-				saveDurations.add(System.currentTimeMillis() - TimeOfWorkout);
-				Log.e(("duration"), "" + (System.currentTimeMillis() - TimeOfWorkout));
-				TimeOfWorkout = System.currentTimeMillis();
+				saveDurations.add(System.currentTimeMillis() - TimeOfRep);
+				TimeOfRep = System.currentTimeMillis();
 			}
 		};
 

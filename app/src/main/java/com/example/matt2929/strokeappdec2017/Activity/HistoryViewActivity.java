@@ -35,7 +35,7 @@ public class HistoryViewActivity extends AppCompatActivity {
 	TextView xAxis, yAxis, workoutText;
 	RadioGroup groupType;
 	RadioButton timeRadio, gradeRadio, repsRadio;
-	Button nextWorkout, backWorkout;
+	Button nextWorkout, backWorkout, changeHand;
 	ImageButton imageButton;
 	ArrayList<WorkoutJSON> workoutJSONS;
 	ArrayList<String> workoutStrings = new ArrayList<>();
@@ -43,6 +43,8 @@ public class HistoryViewActivity extends AppCompatActivity {
 	int workoutIndex = 0;
 	int workoutType = 0;
 	Integer color = 0;
+	String handToGraph = "";
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -50,6 +52,7 @@ public class HistoryViewActivity extends AppCompatActivity {
 		graphView = (GraphView) findViewById(R.id.historyGraph);
 		nextWorkout = (Button) findViewById(R.id.nextWorkout);
 		backWorkout = (Button) findViewById(R.id.backWorkout);
+		changeHand = (Button) findViewById(R.id.changeHandButtonGraph);
 		imageButton = (ImageButton) findViewById(R.id.historyHome);
 		xAxis = (TextView) findViewById(R.id.graphXAxis);
 		yAxis = (TextView) findViewById(R.id.graphYAxis);
@@ -82,6 +85,13 @@ public class HistoryViewActivity extends AppCompatActivity {
 		});
 		workoutText = (TextView) findViewById(R.id.CurrentWorkoutText);
 		groupType = (RadioGroup) findViewById(R.id.radioTypes);
+
+		if (WorkoutData.UserData.getHand() == 0) {
+			handToGraph = "Left";
+		} else {
+			handToGraph = "Right";
+		}
+		changeHand.setText(handToGraph);
 		saveWorkoutJson = new SaveWorkoutJSON(getApplicationContext());
 		workoutJSONS = saveWorkoutJson.getWorkouts();
 		for (WorkoutJSON workoutJSON : workoutJSONS) {
@@ -103,6 +113,18 @@ public class HistoryViewActivity extends AppCompatActivity {
 		}
 		xAxis.setText("Week From Start");
 
+		changeHand.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				if (handToGraph.equals("Left")) {
+					handToGraph = "Right";
+				} else {
+					handToGraph = "Left";
+				}
+				changeHand.setText(handToGraph);
+				setUpGraph(workoutJSONS, workoutType);
+			}
+		});
 
 		nextWorkout.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -215,8 +237,11 @@ public class HistoryViewActivity extends AppCompatActivity {
 	 */
 	public ArrayList<WorkoutJSON> leftHand(ArrayList<WorkoutJSON> workoutJSONS) {
 		ArrayList<WorkoutJSON> filteredWorkoutJSONS = new ArrayList<>();
+		String usersHand = "";
+
 		for (WorkoutJSON workout : workoutJSONS) {
-			if (workout.getHand().equals("Left")) {
+
+			if (workout.getHand().equals(handToGraph)) {
 				filteredWorkoutJSONS.add(workout);
 			}
 		}

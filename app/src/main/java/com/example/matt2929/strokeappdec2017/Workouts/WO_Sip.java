@@ -65,7 +65,7 @@ public class WO_Sip extends SensorWorkoutAbstract {
 				if (repCount == reps) {
 					workoutComplete = true;
 				} else {
-					speechTrigger.speak("Sip complete, Place the cup back down on the table and wait for the next sip.");
+					speechTrigger.speak("Sip complete, Place the mug back down on the table and wait for the next sip.");
 				}
 			}
 		}
@@ -74,7 +74,7 @@ public class WO_Sip extends SensorWorkoutAbstract {
 				inCoolDown = false;
 				timeDrank = 0;
 				pickedUp = false;
-				speechTrigger.speak("Pick up the cup and drink");
+				speechTrigger.speak("Pick up the mug and sip");
 				checkPoint = System.currentTimeMillis();
 			}
 		}

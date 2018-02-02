@@ -12,21 +12,19 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
+        android:visibility="visible"
         android:weightSum="10">
 
         <TimePicker
             android:id="@+id/setTimeCalendar"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_margin="15sp"
-            android:layout_weight="8"
-            android:background="@drawable/buttonshape" />
+            android:layout_weight="8" />
 
         <TextView
             android:id="@+id/setTimeText"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_margin="15sp"
             android:layout_weight="1"
             android:background="@android:drawable/picture_frame"
             android:gravity="center"
@@ -39,27 +37,31 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:orientation="horizontal"
-            android:weightSum="2">
+            android:weightSum="3">
 
             <ImageButton
                 android:id="@+id/setTimeHomeButt"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_margin="2sp"
-                android:layout_marginRight="10sp"
+                android:layout_margin="1sp"
                 android:layout_weight="1"
                 android:background="@drawable/buttonshape"
                 android:scaleType="centerInside"
                 app:srcCompat="@drawable/home" />
 
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight=".5" />
+
             <Button
                 android:id="@+id/setTimeSaveButton"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_margin="2sp"
-                android:layout_weight="1"
+                android:layout_margin="1sp"
+                android:layout_weight="1.5"
                 android:background="@drawable/buttonshape"
-                android:text="Save Date"
+                android:text="Save"
                 android:textSize="29sp" />
 
         </LinearLayout>
@@ -72,16 +74,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:visibility="invisible"
+        android:visibility="visible"
         android:weightSum="10">
 
         <CalendarView
             android:id="@+id/setDateCalendar"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_margin="15sp"
-            android:layout_weight="8"
-            android:background="@drawable/buttonshape" />
+            android:layout_weight="8" />
 
         <TextView
             android:id="@+id/setDateText"
@@ -99,28 +99,31 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:orientation="horizontal"
-            android:weightSum="2">
+            android:weightSum="3">
 
             <ImageButton
                 android:id="@+id/setDateHomeButt"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_margin="2sp"
-                android:layout_marginRight="10sp"
+                android:layout_margin="1sp"
                 android:layout_weight="1"
                 android:background="@drawable/buttonshape"
                 android:scaleType="centerInside"
                 app:srcCompat="@drawable/home" />
 
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight=".5" />
+
             <Button
                 android:id="@+id/setDateSaveButton"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_margin="2sp"
-                android:layout_marginLeft="10sp"
-                android:layout_weight="1"
+                android:layout_margin="1sp"
+                android:layout_weight="1.5"
                 android:background="@drawable/buttonshape"
-                android:text="Save Date"
+                android:text="Date Set"
                 android:textSize="29sp" />
 
         </LinearLayout>

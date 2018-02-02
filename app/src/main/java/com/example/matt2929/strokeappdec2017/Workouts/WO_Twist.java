@@ -27,6 +27,8 @@ public class WO_Twist extends SensorWorkoutAbstract {
 		zeroCrossCalculation = new ZeroCrossCalculation();
 	}
 
+	//TODO: clockwise right hand  CCW LEFT HAND
+
 	@Override
 	public void SensorDataIn(float[] data) {
 		super.SensorDataIn(data);

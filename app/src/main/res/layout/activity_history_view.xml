@@ -54,7 +54,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="4"
+        android:layout_weight="5"
         android:background="@color/colorBackground"
         android:orientation="horizontal"
         android:weightSum="10">
@@ -115,13 +115,15 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="2"
-        android:orientation="horizontal">
+        android:layout_weight="2.5"
+        android:orientation="vertical"
+        android:weightSum="2">
 
         <RadioGroup
             android:id="@+id/radioTypes"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             android:orientation="horizontal"
             android:weightSum="3">
 
@@ -129,7 +131,6 @@
                 android:id="@+id/radioReps"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_marginBottom="10dp"
                 android:layout_weight="1"
                 android:background="@color/colorBackground"
                 android:checked="true"
@@ -143,7 +144,6 @@
                 android:id="@+id/radioTime"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_marginBottom="10dp"
                 android:layout_weight="1"
                 android:background="@color/colorBackground"
                 android:text="Time"
@@ -165,37 +165,39 @@
                 android:textSize="14sp"
                 android:textStyle="bold" />
         </RadioGroup>
-    </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1.5"
-        android:orientation="horizontal"
-        android:weightSum="4">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:weightSum="2">
 
-        <ImageButton
-            android:id="@+id/historyHome"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="25sp"
-            android:layout_marginRight="25sp"
-            android:layout_weight="2"
-            android:background="@drawable/buttonshape"
-            android:scaleType="centerInside"
-            app:srcCompat="@drawable/home" />
+            <ImageButton
+                android:id="@+id/historyHome"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="5sp"
+                android:layout_weight=".5"
+                android:background="@drawable/buttonshape"
+                android:scaleType="centerInside"
+                app:srcCompat="@drawable/home" />
 
-        <Space
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight=".5" />
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight=".5" />
 
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1.5"
-            android:text="Left\nHand"
-            android:textSize="24sp" />
+            <Button
+                android:id="@+id/changeHandButtonGraph"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="10sp"
+                android:layout_weight="1"
+                android:textSize="24sp" />
+
+        </LinearLayout>
+
     </LinearLayout>
 
 </LinearLayout>

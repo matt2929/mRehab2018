@@ -20,6 +20,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        <TextView
+            android:id="@+id/textView10"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:text="TextView"
+            android:textAlignment="center"
+            android:textColor="@android:color/black"
+            android:textSize="30sp"
+            tools:text="Please select a new workout and goal" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -32,7 +43,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="2"
-                android:background="@android:drawable/screen_background_light_transparent"
+                android:background="@android:color/transparent"
                 android:scaleType="centerInside"
                 app:srcCompat="@drawable/ic_back" />
 
@@ -51,7 +62,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="2"
-                android:background="@android:drawable/screen_background_light_transparent"
+                android:background="@android:color/transparent"
                 android:scaleType="centerInside"
                 app:srcCompat="@drawable/ic_next" />
         </LinearLayout>
@@ -59,7 +70,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="9"
+            android:layout_weight="7"
+            android:background="@android:drawable/screen_background_light_transparent"
             android:orientation="horizontal"
             android:weightSum="2">
 

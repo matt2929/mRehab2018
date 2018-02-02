@@ -19,7 +19,7 @@ public class WO_Walk extends SensorWorkoutAbstract {
 	Boolean startData = false;
 	Long startRep = 0L;
 	int repCount = 0;
-	Long walkLength = 15000L;
+	Long walkLength = 10000L;
 	Long cooldownLength = 15000L;
 	Long cooldownStart = 0L;
 

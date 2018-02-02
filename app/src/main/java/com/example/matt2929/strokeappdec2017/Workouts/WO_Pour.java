@@ -72,11 +72,10 @@ public class WO_Pour extends SensorWorkoutAbstract {
 				if (sfxPlayer.isPlaying()) {
 					if (AngleStandardized - filledPercentage < thresehold) {
 						if (!tooQuicklyFullExplainGiven) {
-							speechTrigger.speak("Your pouring too quickly, please tilt the cup up until water comes out again.");
+							speechTrigger.speak("Your pouring too quickly, please tilt the mug up until water comes out again.");
 							tooQuicklyFullExplainGiven = true;
 						} else {
 							speechTrigger.speak("Your pouring too quickly");
-
 						}
 
 					}

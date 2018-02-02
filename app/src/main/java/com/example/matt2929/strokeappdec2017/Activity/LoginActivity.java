@@ -46,6 +46,7 @@ public class LoginActivity extends AppCompatActivity {
                 if (currentSelection != -1) {
 	                //LoginActivity
 	                WorkoutData.UserName = userList.get(currentSelection).getName();
+	                WorkoutData.UserData = userList.get(currentSelection);
 	                Intent intent = new Intent(getApplicationContext(), WorkoutOrHistoryOrCalendarActivity.class);
 	                startActivity(intent);
                 } else {

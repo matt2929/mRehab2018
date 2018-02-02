@@ -18,6 +18,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.example.matt2929.strokeappdec2017.R;
 import com.example.matt2929.strokeappdec2017.SaveAndLoadData.SaveCalendarDateJSON;
@@ -89,7 +90,11 @@ public class CalendarSetActivity extends AppCompatActivity {
 			public void onClick(View view) {
 				if (_hour != -1) {
 					setDateAndTime(_year, _month, _dom, _hour, _min);
+					Intent intent = new Intent(getApplicationContext(), WorkoutOrHistoryOrCalendarActivity.class);
+					Toast.makeText(getApplicationContext(), "Date Saved!", Toast.LENGTH_SHORT).show();
+					startActivity(intent);
 				}
+
 			}
 		});
 		timePicker.setOnTimeChangedListener(new TimePicker.OnTimeChangedListener() {
