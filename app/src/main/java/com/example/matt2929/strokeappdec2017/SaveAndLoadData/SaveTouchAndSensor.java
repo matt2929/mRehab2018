@@ -29,6 +29,9 @@ public class SaveTouchAndSensor extends AsyncTask<Void, Void, Void> {
 	String heading;
 	UploadToAmazonBucket uploadToAmazonBucket;
 	Calendar cal;
+	private Float Duration, Smoothness;
+	private Integer Reps;
+	private String Hand;
 
 	public SaveTouchAndSensor(Context context, String workoutName, String heading) {
 		_workoutName = workoutName;
@@ -42,11 +45,20 @@ public class SaveTouchAndSensor extends AsyncTask<Void, Void, Void> {
 		int second = cal.get(Calendar.SECOND);
 		this.heading = heading;
 		_fileName = WorkoutData.UserName + "_" + workoutName + "_" + (month + 1) + "-" + day + "-" + year + "_[" + hour + "h~" + minute + "m~" + second + "s].csv";
+		uploadToAmazonBucket = new UploadToAmazonBucket(_context);
 	}
 
-	public void saveData(float[] data) {
+	public void addData(float[] data) {
 		dataQueue.add(data);
-		uploadToAmazonBucket = new UploadToAmazonBucket(_context);
+
+	}
+
+	public void saveAllData(Float Duration, Float Smoothness, Integer Reps, String Hand) {
+		this.Duration = Duration;
+		this.Smoothness = Smoothness;
+		this.Reps = Reps;
+		this.Hand = Hand;
+		this.execute();
 	}
 
 	@Override
@@ -65,7 +77,15 @@ public class SaveTouchAndSensor extends AsyncTask<Void, Void, Void> {
 			try {
 				file.createNewFile();
 				writer = new PrintWriter(new FileWriter(file, true));
-				writer.append(WorkoutData.UserName + _workoutName + " " + humanReadableTime(cal.getTimeInMillis()) + "\n" + heading + "\n");
+				writer.append("Name:" + WorkoutData.UserName + ","
+						+ "Workout:" + _workoutName + ","
+						+ "Date HR:" + humanReadableTime(cal.getTimeInMillis()) + ","
+						+ "Date MS:" + cal.getTimeInMillis() + ","
+						+ "Duration:" + this.Duration + ","
+						+ "Smoothness:" + this.Smoothness + ","
+						+ "Reps:" + this.Reps + ","
+						+ "Hand:" + this.Hand
+						+ "\n" + heading + "\n");
 				for (int i = 0; i < dataQueue.size(); i++) {
 					for (int j = 0; j < dataQueue.get(i).length; j++) {
 						if (j == dataQueue.get(i).length - 1) {
@@ -82,9 +102,8 @@ public class SaveTouchAndSensor extends AsyncTask<Void, Void, Void> {
 				writer.close();
 				ConnectivityManager ConnectionManager = (ConnectivityManager) _context.getSystemService(Context.CONNECTIVITY_SERVICE);
 				NetworkInfo networkInfo = ConnectionManager.getActiveNetworkInfo();
-				if (networkInfo != null && networkInfo.isConnected() == true) {
+				if (networkInfo != null && networkInfo.isConnected() == true && file.exists()) {
 					uploadToAmazonBucket.saveData(file);
-
 					Log.e("Internet", "Some");
 				} else {
 					WorkoutData.progressCloud = 100f;

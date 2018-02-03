@@ -135,7 +135,7 @@
                 android:background="@color/colorBackground"
                 android:checked="true"
                 android:text="Repetitions"
-                android:textAlignment="viewStart"
+                android:textAlignment="textStart"
                 android:textAllCaps="false"
                 android:textSize="14sp"
                 android:textStyle="bold" />
@@ -147,7 +147,7 @@
                 android:layout_weight="1"
                 android:background="@color/colorBackground"
                 android:text="Time"
-                android:textAlignment="viewStart"
+                android:textAlignment="textStart"
                 android:textAllCaps="false"
                 android:textSize="14sp"
                 android:textStyle="bold" />
@@ -156,11 +156,10 @@
                 android:id="@+id/radioAccuracy"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_marginBottom="10dp"
                 android:layout_weight="1"
                 android:background="@color/colorBackground"
                 android:text="Accuracy"
-                android:textAlignment="viewStart"
+                android:textAlignment="textStart"
                 android:textAllCaps="false"
                 android:textSize="14sp"
                 android:textStyle="bold" />

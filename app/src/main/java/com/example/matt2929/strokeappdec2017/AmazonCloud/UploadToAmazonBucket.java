@@ -110,7 +110,7 @@ public class UploadToAmazonBucket {
 	public void saveData(File file) {
 		fileName = file.getName();
 		if (!file.exists()) {
-			Log.e("Save file to bucket", "That file doesnt Exist?");
+			Log.e("saveAllData file to bucket", "That file doesnt Exist?");
 		} else {
 			String path = file.getPath();
 			beginUpload(path, file.getName());

@@ -3,13 +3,13 @@ package com.example.matt2929.strokeappdec2017.WorkoutsView;
 import android.content.Context;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
-import android.view.View;
+import android.widget.RelativeLayout;
 
 /**
  * Created by matt2929 on 12/22/17.
  */
 
-public abstract class WorkoutViewAbstract extends View {
+public abstract class WorkoutViewAbstract extends RelativeLayout {
     float[] data = null;
     String[] strings = null;
 
@@ -37,4 +37,5 @@ public abstract class WorkoutViewAbstract extends View {
     public void stringIn(String[] s) {
         strings = s;
     }
+
 }

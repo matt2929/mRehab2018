@@ -78,8 +78,8 @@ public class CreateNewUserActivity extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable editable) {}
         });
-        //Save but only if data has been entered into each field
-        enterSave.setOnClickListener(new View.OnClickListener() {
+	    //saveAllData but only if data has been entered into each field
+	    enterSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (validateInput()) {

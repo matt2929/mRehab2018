@@ -63,6 +63,7 @@ public class SensorWorkoutRunner extends AppCompatActivity implements SensorEven
 	private Boolean _WorkoutInProgress = false;
 	private ArrayList<Long> saveDurations = new ArrayList<>();
 	private SaveActivitiesDoneToday _SaveActivitiesDoneToday;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -131,14 +132,7 @@ public class SensorWorkoutRunner extends AppCompatActivity implements SensorEven
 							_CurrentWorkout.StartWorkout();
 							_WorkoutInProgress = true;
 						} else if (s.equals(WorkoutData.TTS_WORKOUT_COMPLETE)) {
-							_SFXPlayer.killAll();
-							_SaveHistoricalReps.updateWorkout(_CurrentWorkout.getName(), _WorkoutReps);
-							_SaveTouchAndSensor.execute();
-							_SaveWorkoutJSON.addNewWorkout(_CurrentWorkout.getName(), _WorkoutHand, averageTime(saveDurations) / (float) (1000), _CurrentWorkout.getScore().getScore(), _CurrentWorkout.getReps());
-							_SaveActivitiesDoneToday.updateWorkout(_WorkoutName);
-							Intent intent = getIntent();
-							intent.setClass(getApplicationContext(), LoadingScreenActivity.class);
-							startActivity(intent);
+							endWorkoutSequence();
 						} else if (s.equals(WorkoutData.TTS_WORKOUT_AUDIO_FEEDBACK)) {
 
 						} else if (s.equals(WorkoutData.TEST)) {
@@ -219,7 +213,8 @@ public class SensorWorkoutRunner extends AppCompatActivity implements SensorEven
 			for (int i = 0; i < sensorEvent.values.length; i++) {
 				data[i + 1] = sensorEvent.values[i];
 			}
-			_SaveTouchAndSensor.saveData(data);
+			TimeStartWorkout = System.currentTimeMillis();
+			_SaveTouchAndSensor.addData(data);
 		}
 
 		if (_CurrentWorkout.isWorkoutComplete() && _WorkoutInProgress) {
@@ -301,6 +296,19 @@ public class SensorWorkoutRunner extends AppCompatActivity implements SensorEven
 			_CurrentWorkoutView = new WV_JustText(getApplicationContext());
 		}
 		setContentView(_CurrentWorkoutView);
+	}
+
+	public void endWorkoutSequence() {
+		_SFXPlayer.killAll();
+		_SaveHistoricalReps.updateWorkout(_CurrentWorkout.getName(), _WorkoutReps);
+		Float duration = averageTime(saveDurations) / (float) (1000);
+		_SaveTouchAndSensor.saveAllData(duration, _CurrentWorkout.getScore().getScore(), _CurrentWorkout.getReps(), _WorkoutHand);
+		_SaveWorkoutJSON.addNewWorkout(_CurrentWorkout.getName(), _WorkoutHand, duration, _CurrentWorkout.getScore().getScore(), _CurrentWorkout.getReps());
+		_SaveActivitiesDoneToday.updateWorkout(_WorkoutName);
+		Intent intent = getIntent();
+		intent.setClass(getApplicationContext(), LoadingScreenActivity.class);
+		startActivity(intent);
+
 	}
 
 	public float averageTime(ArrayList<Long> longs) {

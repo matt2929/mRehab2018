@@ -72,7 +72,7 @@ public class WO_PhoneNumber extends TouchWorkoutAbstract {
 				newLevel();
 			} else {
 				whatToType.setText("Cool Down");
-				whatTyped.setText("" + (delayTime - (Math.abs(coolDown - System.currentTimeMillis()))));
+				whatTyped.setText("" + (((delayTime - (Math.abs(coolDown - System.currentTimeMillis()))) / 1000) + 1));
 			}
 		}
 	}
