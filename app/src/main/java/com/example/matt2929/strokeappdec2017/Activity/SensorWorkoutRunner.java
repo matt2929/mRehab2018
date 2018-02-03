@@ -290,10 +290,11 @@ public class SensorWorkoutRunner extends AppCompatActivity implements SensorEven
 			setupGravitySensor();
 			_CurrentWorkout = new WO_Pour(WorkoutName, reps, speechTrigger, endRepTrigger, _SFXPlayer, outputWorkoutData, outputWorkoutStrings);
 			_CurrentWorkoutView = new WV_Pour(getApplicationContext());
+			_CurrentWorkoutView.invalidate();
 		} else if (_WorkoutDescription.getName().equals("Sip")) {
 			setupGravitySensor();
 			_CurrentWorkout = new WO_Sip(WorkoutName, reps, speechTrigger, endRepTrigger, _SFXPlayer, outputWorkoutData, outputWorkoutStrings);
-			_CurrentWorkoutView = new WV_JustText(getApplicationContext());
+			_CurrentWorkoutView = new WV_Pour(getApplicationContext());
 		}
 		setContentView(_CurrentWorkoutView);
 	}

@@ -34,7 +34,10 @@ public class WO_Sip extends SensorWorkoutAbstract {
 	@Override
 	public void SensorDataIn(float[] data) {
 		super.SensorDataIn(data);
+		outputData(new float[]{0, ((float) (timeToDrink - timeDrank) / (float) timeToDrink)});
+
 		if (WorkoutInProgress && !inCoolDown) {
+
 			zeroCrossCalculation.dataIn(data);
 			if (data[1] > thresholdPickup && !pickedUp) {
 				pickedUp = true;

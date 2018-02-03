@@ -48,6 +48,7 @@ public class WV_Pour extends WorkoutViewAbstract {
         paintWater.setColor(Color.argb(255, 120, 171, 246));
         paintBubble = new Paint();
         paintBubble.setColor(Color.argb(255, 198, 218, 232));
+	    setBackgroundColor(Color.BLACK);
     }
 
     @Override
