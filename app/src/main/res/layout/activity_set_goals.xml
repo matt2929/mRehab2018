@@ -27,9 +27,10 @@
             android:layout_weight="2"
             android:text="TextView"
             android:textAlignment="center"
+            android:textAllCaps="false"
             android:textColor="@android:color/black"
             android:textSize="30sp"
-            tools:text="Please select a new workout and goal" />
+            tools:text="Please Set a New Goal" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -118,7 +119,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:checked="true"
-                    android:text="Increase\nReps"
+                    android:text="Increase\nRepetitions"
                     android:textSize="24sp" />
 
                 <RadioButton
@@ -126,7 +127,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Increase\nSmoothness"
+                    android:text="Improve\nSmoothness"
                     android:textSize="24sp" />
 
                 <RadioButton
