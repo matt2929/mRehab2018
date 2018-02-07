@@ -27,45 +27,51 @@ public final class WorkoutData {
 	public final static WorkoutDescription[] WORKOUT_DESCRIPTIONS = new WorkoutDescription[]
 			{
 					new WorkoutDescription("Horizontal Bowl", Workout_Type_Sensor, Sensor_Type_Linear, Print_Container_Bowl, 10,
-							"In this workout you will move the bowl from side to side. Be sure to let it sit on the table when you bring it down. When I count pick up the bowl again",
+							"Move the bowl with two hands from one side of the panel to the other. Set the bowl\n" +
+									"on the table and wait for me to count. Then, move the bowl again.",
 							Color.rgb(51, 204, 255)),
 					new WorkoutDescription("Vertical Bowl", Workout_Type_Sensor, Sensor_Type_Linear, Print_Container_Bowl, 10,
-							"Move the bowl onto the shelf then back onto the table. Wait for me to count before moving\n" +
-									"me again.",
+							"With two hands, move the bowl onto the top of the box and wait for me to count. Then\n" +
+									"return the bowl to the table and wait for me to count again.",
 							Color.rgb(102, 255, 153)),
-					new WorkoutDescription("Horizontal Cup", Workout_Type_Sensor, Sensor_Type_Linear, Print_Container_Cup, 10,
-							"In this workout you will move the cup from side to side. Be sure to let it sit on the table when you bring it down. When I count, pick up the cup again.",
+					new WorkoutDescription("Horizontal Mug", Workout_Type_Sensor, Sensor_Type_Linear, Print_Container_Cup, 10,
+							"You will move the mug from one side of the panel to the other. Set the mug on the table and wait for me to count. Then, move the mug again.",
 							Color.rgb(177, 178, 21)),
-					new WorkoutDescription("Vertical Cup", Workout_Type_Sensor, Sensor_Type_Linear, Print_Container_Cup, 10,
-							"Move the cup onto the shelf then back onto the table. Wait for me to count before moving me again.",
+					new WorkoutDescription("Vertical Mug", Workout_Type_Sensor, Sensor_Type_Linear, Print_Container_Cup, 10,
+							"Lift the mug and place it on the top of the box and wait for me to count. Then return the\n" +
+									"mug to the table and wait for me to count again.",
 							Color.rgb(33, 103, 52)),
-					new WorkoutDescription("Walk Cup", Workout_Type_Sensor, Sensor_Type_Linear, Print_Container_Bowl, 10,
-							"Hold the bowl infront of you. Walk fowards at a comfortable pace. Walk for 15 Seconds",
+					new WorkoutDescription("Walk with mug", Workout_Type_Sensor, Sensor_Type_Linear, Print_Container_Bowl, 10,
+							"Hold the mug with one hand. Walk forward at a comfortable pace. Walk until I tell you\n" +
+									"to stop.",
 							Color.rgb(255, 153, 102)),
-					new WorkoutDescription("Sip", Workout_Type_Sensor, Sensor_Type_Gravity, Print_Container_Cup, 1,
-							"Put the cup on the table, when we say begin, pick the cup up to your mouth and drink for 4 seconds.",
+					new WorkoutDescription("Sip From The Mug", Workout_Type_Sensor, Sensor_Type_Gravity, Print_Container_Cup, 1,
+							"Lift the mug from the table and bring it close to your mouth as if you are going to\n" +
+									"take a sip. Hold it there until I tell you to stop.",
 							Color.rgb(255, 80, 80)),
-					new WorkoutDescription("Twist Cup", Workout_Type_Sensor, Sensor_Type_Linear, Print_Container_Cup, 10,
-							"&quot;Hold the cup in your hand. Hold the cup out in front of you. Start with the cup in the upright\n" +
-									"position. Twist your wrist clockwise as far as possible than back to the upright position.",
+					new WorkoutDescription("Quick Twist Mup", Workout_Type_Sensor, Sensor_Type_Linear, Print_Container_Cup, 10,
+							"Hold the mug in front of you in an upright position. As quickly as you can turn your\n" +
+									"hand outward and then return to the upright position.",
 							Color.rgb(255, 51, 153)),
-					new WorkoutDescription("Pour Cup", Workout_Type_Sensor, Sensor_Type_Gravity, Print_Container_Cup, 3,
-							"In this workout you will hold the cup up and pretend to pour out water in front of you. Do not\n" +
-									"pour too quick or to slow.",
+					new WorkoutDescription("Slow Pour", Workout_Type_Sensor, Sensor_Type_Gravity, Print_Container_Cup, 3,
+							"Hold the mug in front of you and move as if to slowly pour out water.\n" +
+									"[If pouring too quickly - “you are pouring too quickly – please bring the mug to an upright position and\n" +
+									"start pouring again”]",
 							Color.rgb(255, 153, 255)),
-					new WorkoutDescription("Unlock Key", Workout_Type_Touch, null, Print_Container_Key, 5,
-							"With the key in contact with the phone screen, rotate the key clockwise and counterclockwise.\n" +
-									"Try to follow the arc as accurately as possible.",
+					new WorkoutDescription("Unlock With Key", Workout_Type_Touch, null, Print_Container_Key, 5,
+							"With the key in contact with the phone screen, rotate the key clockwise and wait for\n" +
+									"me to count. Then rotate it counterclockwise, and wait for me to count again.",
 							Color.rgb(153, 153, 255)),
-					new WorkoutDescription("Unlock Door", Workout_Type_Touch, null, Print_Container_Door, 5,
-							"With the doorknob in contact with the phone screen, rotate the doorknob clockwise and counterclockwise. Try to follow the arc as accurately as possible.",
+					new WorkoutDescription("Turn Doorknob", Workout_Type_Touch, null, Print_Container_Door, 5,
+							"With the doorknob in contact with the phone screen, rotate the doorknob clockwise\n" +
+									"and wait for me to count. Then rotate it counterclockwise, and wait for me to count again.",
 							Color.rgb(153, 102, 51)),
 					new WorkoutDescription("Phone Number", Workout_Type_Touch, null, Print_Container_No_Container, 3,
-							"Type in the phone number shown above as accurately and quickly as possible. You can hold\n" +
-									"the phone in your hand.",
+							"Hold the phone in your hand. Type in the phone number shown on the screen as\n" +
+									"accurately and quickly as possible.",
 							Color.rgb(51, 153, 102)),
-					new WorkoutDescription("Quick Touch", Workout_Type_Touch, null, Print_Container_No_Container, 5,
-							"In this workout you need to click all the blue circles",
+					new WorkoutDescription("Quick Tap", Workout_Type_Touch, null, Print_Container_No_Container, 5,
+							"Tap all of the blue circles as quickly as possible. Use multiple fingers if you can.",
 							Color.rgb(153, 51, 102)),
 			};
 
