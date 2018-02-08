@@ -1,27 +1,17 @@
 package com.example.matt2929.strokeappdec2017.Activity;
 
-import android.content.Intent;
-import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.ListView;
-import android.widget.Toast;
 
-import com.example.matt2929.strokeappdec2017.R;
-import com.example.matt2929.strokeappdec2017.SaveAndLoadData.SaveAndWriteUserInfo;
 import com.example.matt2929.strokeappdec2017.SaveAndLoadData.User;
-import com.example.matt2929.strokeappdec2017.Values.WorkoutData;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class LoginActivity extends AppCompatActivity {
-    int currentSelection = -1;
-    List<String> userStrings = new ArrayList<>();
-    List<User> userList = new ArrayList<>();
+	int currentSelection = -1;
+	List<String> userStrings = new ArrayList<>();
+	List<User> userList = new ArrayList<>();
+/*no longer used
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,7 +54,7 @@ public class LoginActivity extends AppCompatActivity {
         });
         //turn users into strings for list view
 
-        userList = saveAndWriteUserInfo.getUsers();
+        userList = saveAndWriteUserInfo.getUser();
         for (int i = 0; i < userList.size(); i++) {
             User u = userList.get(i);
             String userString = "";
@@ -76,5 +66,5 @@ public class LoginActivity extends AppCompatActivity {
                 R.layout.text_view_list, android.R.id.text1, userStrings);
         // Assign adapter to ListView
         listView.setAdapter(adapter);
-    }
+    }*///
 }

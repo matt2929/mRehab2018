@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.matt2929.strokeappdec2017.R;
@@ -38,6 +39,8 @@ public class WorkoutSelectAdapter extends ArrayAdapter<WorkoutSelectData> {
 		convertView.setPadding(0, padding, 0, padding);
 		TextView activityName = convertView.findViewById(R.id.rowItemActivityName);
 		TextView activityCount = convertView.findViewById(R.id.rowItemActivityComplete);
+		ImageView imageView = convertView.findViewById(R.id.iconView);
+		imageView.setImageResource(workoutSelectData.getResID());
 		activityName.setText(workoutSelectData.getWorkoutName());
 		activityName.setTextColor(Color.BLACK);
 		activityName.setBackgroundColor(workoutSelectData.getColor());

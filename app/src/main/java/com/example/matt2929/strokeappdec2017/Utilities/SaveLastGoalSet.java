@@ -44,12 +44,12 @@ public class SaveLastGoalSet {
 	 * @param activity
 	 * @return is the last time you set a goal within two weeks, if no last time also return true
 	 */
-	public boolean isTwoWeeks(Activity activity) {
+	public boolean isOneWeek(Activity activity) {
 		Long lastDate = loadGoalDate(activity);
 		if (lastDate.equals(-1L)) {
 			return true;
 		}
 		Long oneDay = 1000L * 60L * 60L * 24L;
-		return (((System.currentTimeMillis() - lastDate) / oneDay) >= 14);
+		return (((System.currentTimeMillis() - lastDate) / oneDay) >= 7);
 	}
 }

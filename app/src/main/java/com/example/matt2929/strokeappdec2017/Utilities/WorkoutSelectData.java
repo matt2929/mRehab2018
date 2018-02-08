@@ -8,12 +8,22 @@ public class WorkoutSelectData {
 
 	private String workoutName = "";
 	private int activityCount = 0;
-	private Integer color;
+	private Integer color = -1;
+	private Integer resID = -1;
 
-	public WorkoutSelectData(String workoutName, int activityCount, Integer color) {
+	public WorkoutSelectData(String workoutName, int activityCount, Integer color, Integer resID) {
 		this.workoutName = workoutName;
 		this.activityCount = activityCount;
 		this.color = color;
+		this.resID = resID;
+	}
+
+	public Integer getResID() {
+		return resID;
+	}
+
+	public void setResID(Integer resID) {
+		this.resID = resID;
 	}
 
 	public Integer getColor() {

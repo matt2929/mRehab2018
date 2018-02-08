@@ -9,30 +9,40 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.matt2929.strokeappdec2017.R;
+import com.example.matt2929.strokeappdec2017.SaveAndLoadData.SaveAndWriteUserInfo;
+import com.example.matt2929.strokeappdec2017.Values.WorkoutData;
 
 public class StartScreenActivity extends AppCompatActivity {
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_start_screen);
-        Button login = (Button) findViewById(R.id.startLogin);
-        Button demo = (Button) findViewById(R.id.startDemo);
-	    getPermissions();
-	    login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-	            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-	            startActivity(intent);
-            }
-        });
-        demo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_start_screen);
+		Button login = (Button) findViewById(R.id.startLogin);
+		Button demo = (Button) findViewById(R.id.startDemo);
+		getPermissions();
+		final SaveAndWriteUserInfo saveAndWriteUserInfo = new SaveAndWriteUserInfo(getApplicationContext());//use this to get users saved o
+		login.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				Intent intent;
+				if (saveAndWriteUserInfo.isUserCreated()) {
+					WorkoutData.UserData = saveAndWriteUserInfo.getUser();
+					WorkoutData.UserName = saveAndWriteUserInfo.getUser().getName();
+					intent = new Intent(getApplicationContext(), WorkoutOrHistoryOrCalendarActivity.class);
+				} else {
+					intent = new Intent(getApplicationContext(), CreateNewUserActivity.class);
+				}
+				startActivity(intent);
+			}
+		});
+		demo.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
 
-            }
-        });
-    }
+			}
+		});
+	}
 
 	public void getPermissions() {
 		ActivityCompat.requestPermissions(this,

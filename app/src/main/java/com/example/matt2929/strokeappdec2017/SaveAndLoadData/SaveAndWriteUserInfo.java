@@ -26,11 +26,15 @@ public class SaveAndWriteUserInfo {
         this.context=context;
     }
 
-    public List<User> getUsers(){
-        List<File> files = getAllFiles(context.getFilesDir());
-        List<User> users = new ArrayList<User>();
-        for(File f:files){
-            User user = new User();
+	public boolean isUserCreated() {
+		List<File> files = getAllFiles(context.getFilesDir());
+		return (files.size() > 0);
+	}
+
+	public User getUser() {
+		List<File> files = getAllFiles(context.getFilesDir());
+		for (File f : files) {
+			User user = new User();
             try {
                 BufferedReader br = new BufferedReader(new FileReader(f));
                 String line="";
@@ -46,17 +50,18 @@ public class SaveAndWriteUserInfo {
                     }else{
 
                     }
+	                return user;
                 }
                 br.close();
-                users.add(user);
+
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             } catch (IOException e){
 
             }
         }
-        return users;
-    }
+		return null;
+	}
     public void saveUser(User newUser){
         String filename = "USER_"+newUser.getName()+"_"+newUser.getHand()+".txt";
         String string = "Name:"+newUser.getName();

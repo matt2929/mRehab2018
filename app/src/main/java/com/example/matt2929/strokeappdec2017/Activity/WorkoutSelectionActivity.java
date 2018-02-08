@@ -29,13 +29,16 @@ public class WorkoutSelectionActivity extends AppCompatActivity {
 	ImageButton imageButton;
 	Boolean isCupWorkout = false;
 	ListView listView;
+	Button left, right;
+	boolean selectedYet = false;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_workout_selection);
-		Button left = (Button) findViewById(R.id.selectLeft);
-		Button right = (Button) findViewById(R.id.selectRight);
+		left = (Button) findViewById(R.id.selectLeft);
+		right = (Button) findViewById(R.id.selectRight);
+		nothingSelectedView();
 		imageButton = (ImageButton) findViewById(R.id.workoutSelectionHome);
 		listView = (ListView) findViewById(R.id.selectActivity);
 		saveActivitiesDoneToday = new SaveActivitiesDoneToday(getApplicationContext());
@@ -69,13 +72,13 @@ public class WorkoutSelectionActivity extends AppCompatActivity {
 			public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 				currentSelection = i;
 				isCupWorkout = WorkoutData.WORKOUT_DESCRIPTIONS[i].getPrintType().equals(WorkoutData.Print_Container_Cup);
-
+				somethingSelectedView();
 			}
 		});
 		ArrayList<WorkoutSelectData> workouts = new ArrayList<>();
 		for (int i = 0; i < WorkoutData.WORKOUT_DESCRIPTIONS.length; i++) {
 			WorkoutDescription wd = WorkoutData.WORKOUT_DESCRIPTIONS[i];
-			workouts.add(new WorkoutSelectData(wd.getName(), saveActivitiesDoneToday.getWorkoutActivityCount(wd.getName()), wd.getColor()));
+			workouts.add(new WorkoutSelectData(wd.getName(), saveActivitiesDoneToday.getWorkoutActivityCount(wd.getName()), wd.getColor(), wd.getDrawableID()));
 		}
 		WorkoutSelectAdapter workoutSelectAdapter = new WorkoutSelectAdapter(getApplicationContext(), workouts);
 		listView.setAdapter(workoutSelectAdapter);
@@ -106,4 +109,24 @@ public class WorkoutSelectionActivity extends AppCompatActivity {
 		}
 	}
 
+	public void nothingSelectedView() {
+		Toast.makeText(getApplicationContext(), "Please Select an Activity", Toast.LENGTH_SHORT).show();
+		left.setAlpha(.1f);
+		right.setAlpha(.1f);
+		left.setClickable(false);
+		right.setClickable(false);
+
+
+	}
+
+	public void somethingSelectedView() {
+		if (!selectedYet) {
+			Toast.makeText(getApplicationContext(), "Please Select a Hand", Toast.LENGTH_SHORT).show();
+		}
+		selectedYet = true;
+		left.setAlpha(1f);
+		right.setAlpha(1f);
+		left.setClickable(true);
+		right.setClickable(true);
+	}
 }

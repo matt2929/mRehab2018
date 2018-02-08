@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.example.matt2929.strokeappdec2017.R;
 import com.example.matt2929.strokeappdec2017.SaveAndLoadData.SaveAndWriteUserInfo;
 import com.example.matt2929.strokeappdec2017.SaveAndLoadData.User;
+import com.example.matt2929.strokeappdec2017.Values.WorkoutData;
 
 public class CreateNewUserActivity extends AppCompatActivity {
     User newUser = new User();
@@ -85,9 +86,12 @@ public class CreateNewUserActivity extends AppCompatActivity {
                 if (validateInput()) {
                     SaveAndWriteUserInfo saveAndWriteUserInfo = new SaveAndWriteUserInfo(getApplicationContext());
                     saveAndWriteUserInfo.saveUser(newUser);
+	                WorkoutData.UserData = newUser;
+	                WorkoutData.UserName = newUser.getName();
+
                 }
-                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-                startActivity(intent);
+	            Intent intent = new Intent(getApplicationContext(), WorkoutOrHistoryOrCalendarActivity.class);
+	            startActivity(intent);
             }
         });
     }

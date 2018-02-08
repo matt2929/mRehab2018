@@ -190,7 +190,7 @@ public class TouchWorkoutRunner extends AppCompatActivity {
 				break;
 			}
 		}
-		if (_WorkoutDescription.getName().equals("Unlock Key")) {
+		if (_WorkoutDescription.getName().equals("Unlock With Key")) {
 			_CurrentWorkoutView = new WV_Unlock(getApplicationContext());
 			setContentView(_CurrentWorkoutView);
 			ArrayList<View> views = new ArrayList<>();
@@ -198,7 +198,7 @@ public class TouchWorkoutRunner extends AppCompatActivity {
 			_CurrentWorkoutView.invalidate();
 			_CurrentWorkout = new WO_Unlock(WorkoutName, reps, views, endRepTrigger, speechTrigger, _SFXPlayer, outputWorkoutData, outputWorkoutStrings);
 
-		} else if (_WorkoutDescription.getName().equals("Unlock Door")) {
+		} else if (_WorkoutDescription.getName().equals("Turn Doorknob")) {
 			_CurrentWorkoutView = new WV_Unlock(getApplicationContext());
 			setContentView(_CurrentWorkoutView);
 			ArrayList<View> views = new ArrayList<>();
@@ -229,7 +229,7 @@ public class TouchWorkoutRunner extends AppCompatActivity {
 			views.add(findViewById(R.id.phone9));
 			_CurrentWorkoutView = workoutViewAbstract;
 			_CurrentWorkout = new WO_PhoneNumber(WorkoutName, reps, views, endRepTrigger, speechTrigger, _SFXPlayer, outputWorkoutData, outputWorkoutStrings);
-		} else if (_WorkoutDescription.getName().equals("Quick Touch")) {
+		} else if (_WorkoutDescription.getName().equals("Quick Tap")) {
 			EmptyView workoutViewAbstract = new EmptyView(this);
 			LayoutInflater factory = LayoutInflater.from(this);
 			View myView = factory.inflate(R.layout.activity_quick_touch, null);

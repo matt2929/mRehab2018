@@ -20,7 +20,7 @@ public class WorkoutOrHistoryOrCalendarActivity extends AppCompatActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_workout_or_history);
 
-		if (saveLastGoalSet.isTwoWeeks(this)) {
+		if (saveLastGoalSet.isOneWeek(this)) {
 			Intent intent = new Intent(this, SetGoalsActivity.class);
 			startActivity(intent);
 		}

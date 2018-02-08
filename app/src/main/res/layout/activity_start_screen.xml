@@ -26,7 +26,7 @@
             android:layout_margin="35dp"
             android:layout_weight=".5"
             android:background="@drawable/buttonshape"
-            android:text="Login"
+            android:text="Begin"
             android:textSize="46sp"
             tools:layout_editor_absoluteX="-265dp"
             tools:layout_editor_absoluteY="259dp" />
@@ -40,6 +40,7 @@
             android:background="@drawable/buttonshape"
             android:text="Demo"
             android:textSize="46sp"
+            android:visibility="invisible"
             tools:layout_editor_absoluteX="133dp"
             tools:layout_editor_absoluteY="346dp" />
     </LinearLayout>

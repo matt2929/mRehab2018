@@ -270,28 +270,28 @@ public class SensorWorkoutRunner extends AppCompatActivity implements SensorEven
 			setupSensorsLinear();
 			_CurrentWorkout = new WO_PickUpVertical(WorkoutName, reps, speechTrigger, endRepTrigger, _SFXPlayer, outputWorkoutData, outputWorkoutStrings);
 			_CurrentWorkoutView = new WV_JustText(getApplicationContext());
-		} else if (_WorkoutDescription.getName().equals("Horizontal Cup")) {
+		} else if (_WorkoutDescription.getName().equals("Horizontal Mug")) {
 			setupSensorsLinear();
 			_CurrentWorkout = new WO_PickUpHorizontal(WorkoutName, reps, speechTrigger, endRepTrigger, _SFXPlayer, outputWorkoutData, outputWorkoutStrings);
 			_CurrentWorkoutView = new WV_JustText(getApplicationContext());
-		} else if (_WorkoutDescription.getName().equals("Vertical Cup")) {
+		} else if (_WorkoutDescription.getName().equals("Vertical Mug")) {
 			setupSensorsLinear();
 			_CurrentWorkout = new WO_PickUpVertical(WorkoutName, reps, speechTrigger, endRepTrigger, _SFXPlayer, outputWorkoutData, outputWorkoutStrings);
 			_CurrentWorkoutView = new WV_JustText(getApplicationContext());
-		} else if (_WorkoutDescription.getName().equals("Walk Cup")) {
+		} else if (_WorkoutDescription.getName().equals("Walk with mug")) {
 			setupSensorsLinear();
 			_CurrentWorkout = new WO_Walk(WorkoutName, reps, speechTrigger, endRepTrigger, _SFXPlayer, outputWorkoutData, outputWorkoutStrings);
 			_CurrentWorkoutView = new WV_JustText(getApplicationContext());
-		} else if (_WorkoutDescription.getName().equals("Twist Cup")) {
+		} else if (_WorkoutDescription.getName().equals("Quick Twist Mug")) {
 			setupSensorsLinear();
 			_CurrentWorkout = new WO_Twist(WorkoutName, reps, speechTrigger, endRepTrigger, _SFXPlayer, outputWorkoutData, outputWorkoutStrings);
 			_CurrentWorkoutView = new WV_JustText(getApplicationContext());
-		} else if (_WorkoutDescription.getName().equals("Pour Cup")) {
+		} else if (_WorkoutDescription.getName().equals("Slow Pour")) {
 			setupGravitySensor();
 			_CurrentWorkout = new WO_Pour(WorkoutName, reps, speechTrigger, endRepTrigger, _SFXPlayer, outputWorkoutData, outputWorkoutStrings);
 			_CurrentWorkoutView = new WV_Pour(getApplicationContext());
 			_CurrentWorkoutView.invalidate();
-		} else if (_WorkoutDescription.getName().equals("Sip")) {
+		} else if (_WorkoutDescription.getName().equals("Sip From The Mug")) {
 			setupGravitySensor();
 			_CurrentWorkout = new WO_Sip(WorkoutName, reps, speechTrigger, endRepTrigger, _SFXPlayer, outputWorkoutData, outputWorkoutStrings);
 			_CurrentWorkoutView = new WV_Pour(getApplicationContext());
