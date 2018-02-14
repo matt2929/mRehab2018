@@ -15,8 +15,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -26,12 +24,10 @@ import com.example.matt2929.strokeappdec2017.SaveAndLoadData.SaveCalendarDateJSO
 import java.util.Calendar;
 
 public class CalendarSetActivity extends AppCompatActivity {
-	TextView textViewCalendar, textViewTime;
-	CalendarView dateView;
+	CalendarView calendarPicker;
 	TimePicker timePicker;
-	Button buttonDate, buttonTime;
-	ImageButton homeDate, homeTime;
-	LinearLayout timeLayout, dateLayout;
+	Button continueButton;
+	ImageButton homeButton;
 	SaveCalendarDateJSON saveCalendarDateJSON;
 	int _month = -1, _dom = -1, _year = -1, _hour = -1, _min = -1;
 
@@ -41,73 +37,62 @@ public class CalendarSetActivity extends AppCompatActivity {
 		setContentView(R.layout.activity_calendar_set);
 		saveCalendarDateJSON = new SaveCalendarDateJSON(getApplicationContext());
 		//Date Views
-		textViewCalendar = (TextView) findViewById(R.id.setDateText);
-		dateView = (CalendarView) findViewById(R.id.setDateCalendar);
-		homeDate = (ImageButton) findViewById(R.id.setDateHomeButt);
-		buttonDate = (Button) findViewById(R.id.setDateSaveButton);
-		dateLayout = (LinearLayout) findViewById(R.id.setDateView);
+		calendarPicker = (CalendarView) findViewById(R.id.setDateCalendar);
+		homeButton = (ImageButton) findViewById(R.id.homeButton);
+		continueButton = (Button) findViewById(R.id.continueButton);
 		//Time Views
 		timePicker = (TimePicker) findViewById(R.id.setTimeCalendar);
-		textViewTime = (TextView) findViewById(R.id.setTimeText);
-		buttonTime = (Button) findViewById(R.id.setTimeSaveButton);
-		homeTime = (ImageButton) findViewById(R.id.setTimeHomeButt);
-		timeLayout = (LinearLayout) findViewById(R.id.setTimeView);
 		//~~~~~~~~
 		dateView();
-		dateView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+		calendarPicker.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
 			@Override
 			public void onSelectedDayChange(@NonNull CalendarView calendarView, int year, int month, int dom) {
-				textViewCalendar.setText(month + "/" + dom + "/" + year);
 				_year = year;
 				_dom = dom;
 				_month = month;
+				continueButton.setAlpha(1);
+				continueButton.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View view) {
+						if (_year != -1) {
+							timeView();
+						}
+					}
+				});
 			}
 		});
-		homeDate.setOnClickListener(new View.OnClickListener() {
+		homeButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
 				Intent intent = new Intent(getApplicationContext(), WorkoutOrHistoryOrCalendarActivity.class);
 				startActivity(intent);
 			}
 		});
-		buttonDate.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				if (_year != -1) {
-					timeView();
-				}
-			}
-		});
-		homeTime.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				Intent intent = new Intent(getApplicationContext(), WorkoutOrHistoryOrCalendarActivity.class);
-				startActivity(intent);
-			}
-		});
-		buttonTime.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				if (_hour != -1) {
-					setDateAndTime(_year, _month, _dom, _hour, _min);
-					Intent intent = new Intent(getApplicationContext(), WorkoutOrHistoryOrCalendarActivity.class);
-					Toast.makeText(getApplicationContext(), "Date Saved!", Toast.LENGTH_SHORT).show();
-					startActivity(intent);
-				}
 
-			}
-		});
+
 		timePicker.setOnTimeChangedListener(new TimePicker.OnTimeChangedListener() {
 			@Override
 			public void onTimeChanged(TimePicker timePicker, int hour, int min) {
 				_hour = hour;
 				_min = min;
-				textViewTime.setText(_hour + ":" + _min);
+				continueButton.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View view) {
+						if (_hour != -1) {
+							setDateAndTime();
+							Intent intent = new Intent(getApplicationContext(), WorkoutOrHistoryOrCalendarActivity.class);
+							Toast.makeText(getApplicationContext(), "Date Saved!", Toast.LENGTH_SHORT).show();
+							startActivity(intent);
+						}
+
+					}
+				});
+				continueButton.setAlpha(1f);
 			}
 		});
 	}
 
-	public void setDateAndTime(int Year, int Month, int Dom, int Hour, int Min) {
+	public void setDateAndTime() {
 		long calID = 1;
 		long startMillis = 0;
 		long endMillis = 0;
@@ -133,13 +118,22 @@ public class CalendarSetActivity extends AppCompatActivity {
 	}
 
 	public void dateView() {
-		timeLayout.setVisibility(View.GONE);
-		dateLayout.setVisibility(View.VISIBLE);
+		timePicker.setVisibility(View.GONE);
+		calendarPicker.setVisibility(View.VISIBLE);
+		continueButton.setAlpha(.2f);
 	}
 
 	public void timeView() {
-		timeLayout.setVisibility(View.VISIBLE);
-		dateLayout.setVisibility(View.GONE);
+		continueButton.setAlpha(.2f);
+		continueButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+
+			}
+		});
+
+		timePicker.setVisibility(View.VISIBLE);
+		calendarPicker.setVisibility(View.GONE);
 	}
 
 }

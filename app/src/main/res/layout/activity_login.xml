@@ -61,7 +61,7 @@
                 android:layout_height="match_parent"
                 android:layout_margin="15dp"
                 android:layout_weight="1"
-                android:background="@drawable/buttonshape"
+                android:background="@drawable/button_shape_grey"
                 android:text="Login As User"
                 android:textSize="24sp"
                 app:layout_constraintRight_toRightOf="parent" />
@@ -72,7 +72,7 @@
                 android:layout_height="match_parent"
                 android:layout_margin="15dp"
                 android:layout_weight="1"
-                android:background="@drawable/buttonshape"
+                android:background="@drawable/button_shape_grey"
                 android:text="Create New User"
                 android:textSize="24sp"
                 app:layout_constraintBottom_toBottomOf="parent"

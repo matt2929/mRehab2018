@@ -1,6 +1,7 @@
 package com.example.matt2929.strokeappdec2017.Activity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -31,6 +32,8 @@ public class WorkoutSelectionActivity extends AppCompatActivity {
 	ListView listView;
 	Button left, right;
 	boolean selectedYet = false;
+	Intent intent;
+	Button continueButton;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -38,9 +41,12 @@ public class WorkoutSelectionActivity extends AppCompatActivity {
 		setContentView(R.layout.activity_workout_selection);
 		left = (Button) findViewById(R.id.selectLeft);
 		right = (Button) findViewById(R.id.selectRight);
-		nothingSelectedView();
-		imageButton = (ImageButton) findViewById(R.id.workoutSelectionHome);
+		intent = new Intent(getApplicationContext(), GoalsAndRepsActivity.class);
+		continueButton = (Button) findViewById(R.id.continueButton);
+		imageButton = (ImageButton) findViewById(R.id.homeButton);
 		listView = (ListView) findViewById(R.id.selectActivity);
+		nothingSelectedView();
+
 		saveActivitiesDoneToday = new SaveActivitiesDoneToday(getApplicationContext());
 		left.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -65,7 +71,15 @@ public class WorkoutSelectionActivity extends AppCompatActivity {
 				startActivity(intent);
 			}
 		});
-
+		continueButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if (isCupWorkout) {
+					intent.setClass(getApplicationContext(), PutPhoneInCupActivity.class);
+				}
+				startActivity(intent);
+			}
+		});
 		//Select Existing User
 		listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			@Override
@@ -86,7 +100,8 @@ public class WorkoutSelectionActivity extends AppCompatActivity {
 
 	public void handSelection(boolean leftHand) {
 		if (currentSelection != -1) {
-			Intent intent = new Intent(getApplicationContext(), GoalsAndRepsActivity.class);
+			continueButton.setAlpha(1f);
+			continueButton.setClickable(true);
 			if (WORKOUT_DESCRIPTIONS[currentSelection].getWorkoutType().equals(Workout_Type_Sensor)) {
 				intent.putExtra("WorkoutType", "Sensor");
 			} else {
@@ -94,16 +109,20 @@ public class WorkoutSelectionActivity extends AppCompatActivity {
 			}
 			if (leftHand) {
 				intent.putExtra("Hand", "Left");
-
+				left.setTextColor(Color.WHITE);
+				left.setBackground(this.getResources().getDrawable(R.drawable.button_shape_maroon));
+				right.setTextColor(Color.BLACK);
+				right.setBackground(this.getResources().getDrawable(R.drawable.button_shape_grey));
 			} else {
+				left.setTextColor(Color.BLACK);
+				left.setBackground(this.getResources().getDrawable(R.drawable.button_shape_grey));
+				right.setTextColor(Color.WHITE);
+				right.setBackground(this.getResources().getDrawable(R.drawable.button_shape_maroon));
 				intent.putExtra("Hand", "Right");
 
 			}
 			intent.putExtra("Workout", WORKOUT_DESCRIPTIONS[currentSelection].getName());
-			if (isCupWorkout) {
-				intent.setClass(getApplicationContext(), PutPhoneInCupActivity.class);
-			}
-			startActivity(intent);
+
 		} else {
 			Toast.makeText(getApplicationContext(), "Please Select a Workout", Toast.LENGTH_SHORT).show();
 		}
@@ -113,8 +132,10 @@ public class WorkoutSelectionActivity extends AppCompatActivity {
 		Toast.makeText(getApplicationContext(), "Please Select an Activity", Toast.LENGTH_SHORT).show();
 		left.setAlpha(.1f);
 		right.setAlpha(.1f);
+		continueButton.setAlpha(.1f);
 		left.setClickable(false);
 		right.setClickable(false);
+		continueButton.setClickable(false);
 
 
 	}

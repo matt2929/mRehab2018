@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.VideoView;
 
 import com.example.matt2929.strokeappdec2017.R;
@@ -17,9 +18,16 @@ public class WorkoutPreviewActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_workout_preview);
 	    VideoView videoView = (VideoView) findViewById(R.id.videoView);
-	    Button button = (Button) findViewById(R.id.preview_start);
-        String workoutName = getIntent().getStringExtra("Workout");
-
+	    Button start = (Button) findViewById(R.id.preview_start);
+	    ImageButton imageButton = (ImageButton) findViewById(R.id.homeButton);
+	    String workoutName = getIntent().getStringExtra("Workout");
+	    imageButton.setOnClickListener(new View.OnClickListener() {
+		    @Override
+		    public void onClick(View v) {
+			    Intent intent = new Intent(getApplicationContext(), WorkoutOrHistoryOrCalendarActivity.class);
+			    startActivity(intent);
+		    }
+	    });
 
         switch (workoutName) {
             case "Horizontal Bowl":
@@ -45,8 +53,8 @@ public class WorkoutPreviewActivity extends AppCompatActivity {
             case "Multi Touch":
                 break;
         }
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
+	    start.setOnClickListener(new View.OnClickListener() {
+		    @Override
             public void onClick(View view) {
                 Intent intent = getIntent();
 	            String WorkoutType = intent.getStringExtra("WorkoutType");

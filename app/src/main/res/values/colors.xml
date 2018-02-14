@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#cddc39</color>
-    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorPrimary">#9D1F61</color>
+    <color name="colorPrimaryDark">#9D1F61</color>
     <color name="colorAccent">#ace2fc</color>
-    <color name="colorBackground">#dff2fb</color>
+    <color name="colorBackground">#fff</color>
     <color name="colorPhoneScreen">#b6ffb6</color>
+    <color name="colorMaroon">#9D1F61</color>
 </resources>

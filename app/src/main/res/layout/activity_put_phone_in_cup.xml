@@ -49,7 +49,7 @@
                 android:layout_height="match_parent"
                 android:layout_margin="15sp"
                 android:layout_weight="5"
-                android:background="@drawable/buttonshape"
+                android:background="@drawable/button_shape_grey"
                 android:text="Yes"
                 android:textSize="30sp" />
 
@@ -59,7 +59,7 @@
                 android:layout_height="match_parent"
                 android:layout_margin="15sp"
                 android:layout_weight="5"
-                android:background="@drawable/buttonshape"
+                android:background="@drawable/button_shape_grey"
                 android:text="No"
                 android:textSize="30sp" />
         </LinearLayout>
@@ -100,7 +100,7 @@
             android:layout_height="0dp"
             android:layout_margin="15sp"
             android:layout_weight="2"
-            android:background="@drawable/buttonshape"
+            android:background="@drawable/button_shape_grey"
             android:text="OK"
             android:textSize="36sp" />
 

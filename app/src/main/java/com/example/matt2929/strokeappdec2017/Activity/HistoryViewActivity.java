@@ -52,8 +52,8 @@ public class HistoryViewActivity extends AppCompatActivity {
 		graphView = (GraphView) findViewById(R.id.historyGraph);
 		nextWorkout = (Button) findViewById(R.id.nextWorkout);
 		backWorkout = (Button) findViewById(R.id.backWorkout);
-		changeHand = (Button) findViewById(R.id.changeHandButtonGraph);
-		imageButton = (ImageButton) findViewById(R.id.historyHome);
+		changeHand = (Button) findViewById(R.id.graphHand);
+		imageButton = (ImageButton) findViewById(R.id.homeButton);
 		xAxis = (TextView) findViewById(R.id.graphXAxis);
 		yAxis = (TextView) findViewById(R.id.graphYAxis);
 		timeRadio = (RadioButton) findViewById(R.id.radioTime);

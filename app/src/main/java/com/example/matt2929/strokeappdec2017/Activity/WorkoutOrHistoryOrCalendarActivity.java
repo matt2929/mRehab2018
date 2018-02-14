@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.example.matt2929.strokeappdec2017.R;
 import com.example.matt2929.strokeappdec2017.Utilities.SaveLastGoalSet;
+import com.example.matt2929.strokeappdec2017.Values.WorkoutData;
 
 public class WorkoutOrHistoryOrCalendarActivity extends AppCompatActivity {
 
@@ -19,7 +20,8 @@ public class WorkoutOrHistoryOrCalendarActivity extends AppCompatActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_workout_or_history);
-
+		textView = (TextView) findViewById(R.id.userNameSplashWelcome);
+		textView.setText("Welcome back, " + WorkoutData.UserName + "!");
 		if (saveLastGoalSet.isOneWeek(this)) {
 			Intent intent = new Intent(this, SetGoalsActivity.class);
 			startActivity(intent);
@@ -27,7 +29,6 @@ public class WorkoutOrHistoryOrCalendarActivity extends AppCompatActivity {
 		Button history = (Button) findViewById(R.id.workHist_Hist);
 		Button workout = (Button) findViewById(R.id.workHist_Work);
 		Button calendar = (Button) findViewById(R.id.workHist_Next);
-		textView = (TextView) findViewById(R.id.setDateText);
 		history.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {

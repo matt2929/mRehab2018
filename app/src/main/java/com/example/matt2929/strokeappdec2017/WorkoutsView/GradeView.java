@@ -46,13 +46,13 @@ public class GradeView extends View {
 	public void Init() {
 		titleTextPaint.setColor(Color.BLACK);
 		titleTextPaint.setTextAlign(Paint.Align.CENTER);
-		titleTextPaint.setTextSize(68);
+		titleTextPaint.setTextSize(75);
 		titleTextPaint.setFakeBoldText(true);
 		//titleTextPaint.setUnderlineText(true);
 
 		textTextPaint.setColor(Color.BLACK);
 		textTextPaint.setTextAlign(Paint.Align.CENTER);
-		textTextPaint.setTextSize(50);
+		textTextPaint.setTextSize(60);
 
 		backgroundPaint.setColor(Color.LTGRAY);
 		marginPaint.setColor(Color.BLACK);

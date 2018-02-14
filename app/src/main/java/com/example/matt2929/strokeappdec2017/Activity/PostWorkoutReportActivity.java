@@ -48,11 +48,11 @@ public class PostWorkoutReportActivity extends AppCompatActivity {
 		GradeView timeView = (GradeView) findViewById(R.id.timeView);
 		BitmapFactory.Options options = new BitmapFactory.Options();
 		options.inJustDecodeBounds = true;
-		Button button = (Button) findViewById(R.id.postWorkoutNext);
+		Button button = (Button) findViewById(R.id.continueButton);
 		Bitmap bitmap1 = BitmapFactory.decodeResource(getResources(), R.drawable.muscle);
 		Bitmap bitmap2 = BitmapFactory.decodeResource(getResources(), R.drawable.shake);
 		Bitmap bitmap3 = BitmapFactory.decodeResource(getResources(), R.drawable.stop_watch);
-		ImageButton imageButton = (ImageButton) findViewById(R.id.postWorkoutHome);
+		ImageButton imageButton = (ImageButton) findViewById(R.id.homeButton);
 		imageButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
