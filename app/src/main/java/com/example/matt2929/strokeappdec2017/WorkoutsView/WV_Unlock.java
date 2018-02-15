@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Rect;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
@@ -15,7 +16,7 @@ import android.util.TypedValue;
 
 public class WV_Unlock extends WorkoutViewAbstract {
 
-	Paint innerCircle, outerCircle, pointColor;
+	Paint innerCircle, outerCircle, pointColor, lockInsert;
 
 	float x = 0, y = 0;
 
@@ -41,8 +42,10 @@ public class WV_Unlock extends WorkoutViewAbstract {
 
 	public void init() {
 		innerCircle = new Paint();
+		lockInsert = new Paint();
 		outerCircle = new Paint();
 		pointColor = new Paint();
+		lockInsert.setColor(Color.BLACK);
 		innerCircle.setColor(Color.rgb(0, 0, 0));
 		outerCircle.setColor(Color.rgb(153, 102, 51));
 		pointColor.setColor(Color.YELLOW);
@@ -58,11 +61,13 @@ public class WV_Unlock extends WorkoutViewAbstract {
 	@Override
 	protected void onDraw(Canvas canvas) {
 		super.onDraw(canvas);
-		float heightCircle = inchToPixels((1.1811f)), radiusTouch = inchToPixels(0.25f);
-		canvas.drawCircle(getWidth() / 2, getHeight() - heightCircle, heightCircle + (radiusTouch * 2), outerCircle);
-		canvas.drawCircle(getWidth() / 2, getHeight() - heightCircle, heightCircle + (radiusTouch), innerCircle);
-		canvas.drawCircle(getWidth() / 2, getHeight() - heightCircle, heightCircle - (radiusTouch), outerCircle);
-		canvas.drawCircle(x, y, radiusTouch, pointColor);
+		float heightCircle = inchToPixels((1f)), rotationalRadius = inchToPixels(1.2f), radiusTouch = inchToPixels(.25f);
+		canvas.drawCircle(getWidth() / 2, getHeight() - heightCircle, rotationalRadius + radiusTouch, outerCircle);
+		canvas.drawCircle(getWidth() / 2, getHeight() - heightCircle, rotationalRadius, innerCircle);
+		canvas.drawCircle(getWidth() / 2, getHeight() - heightCircle, rotationalRadius - radiusTouch, outerCircle);
+		canvas.drawCircle(getWidth() / 2, getHeight() - heightCircle, 50, lockInsert);
+		canvas.drawRect(new Rect(((getWidth() / 2) - 5), (int) (getHeight() - (heightCircle + 250)), ((getWidth() / 2) + 20), (int) (getHeight() - (heightCircle - 20))), lockInsert);
+		canvas.drawCircle(x, y, radiusTouch / 2, pointColor);
 	}
 
 	private float inchToPixels(float dim) {
