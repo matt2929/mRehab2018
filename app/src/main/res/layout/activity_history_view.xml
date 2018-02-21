@@ -150,7 +150,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@color/colorBackground"
-            android:text="Accuracy"
+            android:text="Smoothness"
             android:textAlignment="textStart"
             android:textAllCaps="false"
             android:textSize="14sp"
