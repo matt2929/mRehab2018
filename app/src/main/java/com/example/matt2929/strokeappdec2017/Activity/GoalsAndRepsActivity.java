@@ -21,7 +21,7 @@ public class GoalsAndRepsActivity extends AppCompatActivity {
 	SaveHistoricalReps saveHistoricalReps;
 	Integer reps = 10;
 	Intent newIntent;
-	TextView textView;
+	TextView repCountText, selectedWorkoutText, selectedHandText;
 	ImageButton imageButton;
 
 	@Override
@@ -46,12 +46,16 @@ public class GoalsAndRepsActivity extends AppCompatActivity {
 		}
 		goals = temp;
 		reps = saveHistoricalReps.getWorkoutReps(WorkoutName);
-		textView = (TextView) findViewById(R.id.GoalAndRepNumberText);
+		repCountText = (TextView) findViewById(R.id.GoalAndRepNumberText);
+		selectedHandText = (TextView) findViewById(R.id.handSelectionTextView);
+		selectedWorkoutText = (TextView) findViewById(R.id.workoutSelectionView);
+		selectedWorkoutText.setText(WorkoutName);
+		selectedHandText.setText(WorkoutHand);
 		Button startWorkout = (Button) findViewById(R.id.continueButton);
 		Button repPlus = (Button) findViewById(R.id.GoalAndRepPlus);
 		Button repMinus = (Button) findViewById(R.id.GoalAndRepMinus);
 		imageButton = (ImageButton) findViewById(R.id.homeButton);
-		textView.setText("" + reps);
+		repCountText.setText("" + reps);
 		/*ListView goalListView = (ListView) findViewById(R.id.GoalAndRepGoalsList);
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
 				R.layout.text_view_list, android.R.id.text1, goals);
@@ -89,7 +93,7 @@ public class GoalsAndRepsActivity extends AppCompatActivity {
 	public void updateReps(int i) {
 		if (i <= 30 && i >= 1) {
 			reps = i;
-			textView.setText("" + reps);
+			repCountText.setText("" + reps);
 		} else {
 			Toast.makeText(getApplicationContext(), "Reps Must be between 1 and 30", Toast.LENGTH_SHORT).show();
 		}

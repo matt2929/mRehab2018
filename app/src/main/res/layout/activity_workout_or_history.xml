@@ -21,26 +21,30 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="6"
+            android:cropToPadding="false"
+            android:scaleType="centerInside"
             app:srcCompat="@drawable/mrehab" />
 
         <TextView
             android:id="@+id/userNameSplashWelcome"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight=".85"
+            android:layout_weight="1"
             android:text="TextView"
             android:textAlignment="center"
-            android:textColor="@android:color/black" />
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/textView14"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight=".85"
+            android:layout_weight="1"
             android:text="What would you like to do?"
             android:textAlignment="center"
             android:textColor="@android:color/black"
-            android:textStyle="bold" />
+            android:textSize="18sp" />
 
         <Button
             android:id="@+id/workHist_Work"
@@ -52,7 +56,7 @@
             android:layout_marginTop="10dp"
             android:layout_weight=".5"
             android:background="@drawable/button_shape_grey"
-            android:text="Begin Workout"
+            android:text="Start"
             android:textAlignment="center"
             android:textAllCaps="false"
             android:textSize="24sp"
@@ -69,7 +73,7 @@
             android:layout_marginTop="10dp"
             android:layout_weight=".5"
             android:background="@drawable/button_shape_grey"
-            android:text="History"
+            android:text="View History"
             android:textAlignment="center"
             android:textAllCaps="false"
             android:textSize="24sp"

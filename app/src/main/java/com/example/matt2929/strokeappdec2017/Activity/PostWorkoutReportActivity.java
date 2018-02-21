@@ -1,14 +1,16 @@
 package com.example.matt2929.strokeappdec2017.Activity;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.speech.tts.TextToSpeech;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.matt2929.strokeappdec2017.ListenersAndTriggers.SpeechInitListener;
 import com.example.matt2929.strokeappdec2017.R;
@@ -17,7 +19,6 @@ import com.example.matt2929.strokeappdec2017.SaveAndLoadData.WorkoutJSON;
 import com.example.matt2929.strokeappdec2017.Utilities.SFXPlayer;
 import com.example.matt2929.strokeappdec2017.Utilities.Text2Speech;
 import com.example.matt2929.strokeappdec2017.Values.WorkoutData;
-import com.example.matt2929.strokeappdec2017.WorkoutsView.GradeView;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -34,24 +35,26 @@ public class PostWorkoutReportActivity extends AppCompatActivity {
 	boolean betterSmoothness = false;
 	boolean betterTime = false;
 	WorkoutJSON thisWorkout;
+	TextView currentRep, lastRep, currentTime, lastTime, currentSmooth, lastSmooth;
+	ImageView smoothView, timeView, repView;
 	private Text2Speech _Text2Speech;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_post_workout_report);
-		//TODO: post workout report
+		currentRep = (TextView) findViewById(R.id.currentRep);
+		lastRep = (TextView) findViewById(R.id.lastRep);
+		currentTime = (TextView) findViewById(R.id.currentTime);
+		lastTime = (TextView) findViewById(R.id.lastTime);
+		currentSmooth = (TextView) findViewById(R.id.currentSmoothness);
+		lastSmooth = (TextView) findViewById(R.id.lastSmoothness);
+		smoothView = (ImageView) findViewById(R.id.shakeImage);
+		timeView = (ImageView) findViewById(R.id.timeImage);
+		repView = (ImageView) findViewById(R.id.repImage);
 		sfxPlayer = new SFXPlayer(getApplicationContext());
 		sfxPlayer.loadSFX(R.raw.tada);
-		GradeView repView = (GradeView) findViewById(R.id.repsView);
-		GradeView qualityView = (GradeView) findViewById(R.id.scoreView);
-		GradeView timeView = (GradeView) findViewById(R.id.timeView);
-		BitmapFactory.Options options = new BitmapFactory.Options();
-		options.inJustDecodeBounds = true;
 		Button button = (Button) findViewById(R.id.continueButton);
-		Bitmap bitmap1 = BitmapFactory.decodeResource(getResources(), R.drawable.muscle);
-		Bitmap bitmap2 = BitmapFactory.decodeResource(getResources(), R.drawable.shake);
-		Bitmap bitmap3 = BitmapFactory.decodeResource(getResources(), R.drawable.stop_watch);
 		ImageButton imageButton = (ImageButton) findViewById(R.id.homeButton);
 		imageButton.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -80,18 +83,38 @@ public class PostWorkoutReportActivity extends AppCompatActivity {
 		betterReps = false;
 		betterSmoothness = false;
 		betterTime = false;
+		currentSmooth.setText("" + floatToHundreth(thisWorkout.getAccuracy()));
+		currentRep.setText("" + floatToHundreth(thisWorkout.getReps()));
+		currentTime.setText("" + floatToHundreth(thisWorkout.getDuration()));
 		if (workoutJSONSFiltered.size() >= 2) {
 			WorkoutJSON previousWorkout = workoutJSONSFiltered.get(1);
+			//-----
 			betterReps = (previousWorkout.getReps() <= thisWorkout.getReps());
 			betterSmoothness = (previousWorkout.getAccuracy() >= thisWorkout.getAccuracy());
 			betterTime = (previousWorkout.getDuration() >= thisWorkout.getDuration());
-			repView.SetupView(bitmap1, "Number of Repetitions", previousWorkout.getReps(), thisWorkout.getReps(), betterReps);
-			qualityView.SetupView(bitmap2, "Repetition Smoothness (Average)", previousWorkout.getAccuracy(), thisWorkout.getAccuracy(), betterSmoothness);
-			timeView.SetupView(bitmap3, "Repetition Time (Average)", previousWorkout.getDuration(), thisWorkout.getDuration(), betterTime);
+			//-----
+			lastSmooth.setText("" + floatToHundreth(previousWorkout.getAccuracy()));
+			lastRep.setText("" + floatToHundreth(previousWorkout.getReps()));
+			lastTime.setText("" + floatToHundreth(previousWorkout.getDuration()));
+			//-----
+			if (betterReps) {
+				blinkView(repView);
+				repView.setBackgroundColor(Color.GREEN);
+			}
+			if (betterSmoothness) {
+				blinkView(smoothView);
+				smoothView.setBackgroundColor(Color.GREEN);
+
+			}
+			if (betterTime) {
+				blinkView(timeView);
+				timeView.setBackgroundColor(Color.GREEN);
+			}
 		} else {
-			repView.SetupView(bitmap1, "Number of Repetitions", -1, thisWorkout.getReps(), false);
-			qualityView.SetupView(bitmap2, "Repetition Smoothness (Average)", -1, thisWorkout.getAccuracy(), false);
-			timeView.SetupView(bitmap3, "Repetition Time (Average)", -1, thisWorkout.getDuration(), false);
+			lastSmooth.setText("" + -1);
+			lastRep.setText("" + -1);
+			lastTime.setText("" + -1);
+
 		}
 		checkTTS();
 
@@ -122,7 +145,6 @@ public class PostWorkoutReportActivity extends AppCompatActivity {
 		if (requestCode == CHECK_CODE) {
 			if (resultCode == TextToSpeech.Engine.CHECK_VOICE_DATA_PASS) {
 				_Text2Speech = new Text2Speech(this);
-
 				_Text2Speech.addInitListener(new SpeechInitListener() {
 					@Override
 					public void onInit() {
@@ -143,9 +165,32 @@ public class PostWorkoutReportActivity extends AppCompatActivity {
 		}
 	}
 
+	private void blinkView(final View view) {
+		Handler handler = new Handler();
+		int delay = 750;
+		for (int i = 0; i < 8; i++) {
+			if (i % 2 != 1) {
+				handler.postDelayed(new Runnable() {
+					@Override
+					public void run() {
+						view.setBackgroundColor(Color.TRANSPARENT);
+					}
+				}, delay);
+			} else {
+				handler.postDelayed(new Runnable() {
+					@Override
+					public void run() {
+						view.setBackgroundColor(Color.GREEN);
+					}
+				}, delay);
+			}
+			delay += 100;
+		}
+
+	}
+
 	private String floatToHundreth(float value) {
 		return new DecimalFormat("#.##").format(value);
 	}
-
 }
 

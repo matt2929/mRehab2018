@@ -54,32 +54,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:background="@color/colorBackground"
-        android:orientation="horizontal"
-        android:weightSum="10">
-
-        <Space
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="2"
-            android:background="@color/colorBackground" />
-
-        <TextView
-            android:id="@+id/graphXAxis"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="6"
-            android:background="@color/colorBackground"
-            android:gravity="center"
-            android:text="TextView"
-            android:textColor="@android:color/black" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
         android:layout_weight="4"
         android:background="@color/colorBackground"
         android:orientation="horizontal"
@@ -107,6 +81,32 @@
             android:layout_height="match_parent"
             android:layout_weight="1.8"
             android:background="@color/colorBackground" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/colorBackground"
+        android:orientation="horizontal"
+        android:weightSum="10">
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:background="@color/colorBackground" />
+
+        <TextView
+            android:id="@+id/graphXAxis"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="6"
+            android:background="@color/colorBackground"
+            android:gravity="center"
+            android:text="TextView"
+            android:textColor="@android:color/black" />
 
     </LinearLayout>
 
@@ -158,17 +158,35 @@
 
     </RadioGroup>
 
-    <Button
-        android:id="@+id/graphHand"
-        android:layout_width="100sp"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginLeft="30dp"
         android:layout_weight="1"
-        android:background="@drawable/button_shape_maroon"
-        android:gravity="center_vertical|center"
-        android:text="Button"
-        android:textColor="@color/colorBackground"
-        android:textColorLink="@color/colorMaroon" />
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <Button
+            android:id="@+id/graphLeftHand"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="10sp"
+            android:layout_weight="1"
+            android:background="@drawable/button_shape_maroon"
+            android:gravity="center_vertical|center"
+            android:text="Left"
+            android:textColor="@android:color/white" />
+
+        <Button
+            android:id="@+id/graphRightHand"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="10sp"
+            android:layout_weight="1"
+            android:background="@drawable/button_shape_grey"
+            android:gravity="center_vertical|center"
+            android:text="Right"
+            android:textColor="@android:color/black" />
+    </LinearLayout>
 
     <Space
         android:layout_width="match_parent"

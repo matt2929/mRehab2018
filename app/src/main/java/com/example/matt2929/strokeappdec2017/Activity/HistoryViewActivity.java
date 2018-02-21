@@ -1,6 +1,7 @@
 package com.example.matt2929.strokeappdec2017.Activity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -17,8 +18,8 @@ import com.example.matt2929.strokeappdec2017.SaveAndLoadData.WorkoutJSON;
 import com.example.matt2929.strokeappdec2017.Values.WorkoutData;
 import com.example.matt2929.strokeappdec2017.Workouts.WorkoutDescription;
 import com.jjoe64.graphview.GraphView;
-import com.jjoe64.graphview.series.BarGraphSeries;
 import com.jjoe64.graphview.series.DataPoint;
+import com.jjoe64.graphview.series.LineGraphSeries;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -35,7 +36,7 @@ public class HistoryViewActivity extends AppCompatActivity {
 	TextView xAxis, yAxis, workoutText;
 	RadioGroup groupType;
 	RadioButton timeRadio, gradeRadio, repsRadio;
-	Button nextWorkout, backWorkout, changeHand;
+	Button nextWorkout, backWorkout, graphLeft, graphRight;
 	ImageButton imageButton;
 	ArrayList<WorkoutJSON> workoutJSONS;
 	ArrayList<String> workoutStrings = new ArrayList<>();
@@ -52,7 +53,8 @@ public class HistoryViewActivity extends AppCompatActivity {
 		graphView = (GraphView) findViewById(R.id.historyGraph);
 		nextWorkout = (Button) findViewById(R.id.nextWorkout);
 		backWorkout = (Button) findViewById(R.id.backWorkout);
-		changeHand = (Button) findViewById(R.id.graphHand);
+		graphLeft = (Button) findViewById(R.id.graphLeftHand);
+		graphRight = (Button) findViewById(R.id.graphRightHand);
 		imageButton = (ImageButton) findViewById(R.id.homeButton);
 		xAxis = (TextView) findViewById(R.id.graphXAxis);
 		yAxis = (TextView) findViewById(R.id.graphYAxis);
@@ -88,10 +90,11 @@ public class HistoryViewActivity extends AppCompatActivity {
 
 		if (WorkoutData.UserData.getHand() == 0) {
 			handToGraph = "Left";
+			leftHandView();
 		} else {
 			handToGraph = "Right";
+			rightHandView();
 		}
-		changeHand.setText(handToGraph);
 		saveWorkoutJson = new SaveWorkoutJSON(getApplicationContext());
 		workoutJSONS = saveWorkoutJson.getWorkouts();
 		for (WorkoutJSON workoutJSON : workoutJSONS) {
@@ -113,19 +116,23 @@ public class HistoryViewActivity extends AppCompatActivity {
 		}
 		xAxis.setText("Week From Start");
 
-		changeHand.setOnClickListener(new View.OnClickListener() {
+		graphLeft.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				if (handToGraph.equals("Left")) {
-					handToGraph = "Right";
-				} else {
-					handToGraph = "Left";
-				}
-				changeHand.setText(handToGraph);
+				leftHandView();
+				handToGraph = "Left";
 				setUpGraph(workoutJSONS, workoutType);
 			}
 		});
 
+		graphRight.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				rightHandView();
+				handToGraph = "Right";
+				setUpGraph(workoutJSONS, workoutType);
+			}
+		});
 		nextWorkout.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
@@ -210,18 +217,18 @@ public class HistoryViewActivity extends AppCompatActivity {
 			Collections.sort(workoutJSONS, workoutJSONComparator);
 		}
 		ArrayList<WorkoutJSON> handWorkouts = leftHand(workoutJSONS);
-		BarGraphSeries<DataPoint> lineGraphSeriesLeft;
+		LineGraphSeries<DataPoint> lineGraphSeriesLeft;
 		if (workoutType == 0) {
 			lineGraphSeriesLeft = repsToGraph(workoutName, handWorkouts);
-			graphView.setTitle("Weekly Repetitions (Left)");
+			graphView.setTitle("Weekly Repetitions (" + handToGraph + ")");
 			yAxis.setText("Reps (Average)");
 		} else if (workoutType == 1) {
 			lineGraphSeriesLeft = timeToGraph(workoutName, handWorkouts);
-			graphView.setTitle("Weekly Repetition Time (Left)");
+			graphView.setTitle("Weekly Repetition Time (" + handToGraph + ")");
 			yAxis.setText("Seconds (Average)");
 		} else {
 			lineGraphSeriesLeft = accuracyToGraph(workoutName, handWorkouts);
-			graphView.setTitle("Weekly Repetition Accuracy (Left)");
+			graphView.setTitle("Weekly Repetition Accuracy (" + handToGraph + ")");
 			yAxis.setText("Accuracy (Average)");
 		}
 		lineGraphSeriesLeft.setAnimated(true);
@@ -253,7 +260,7 @@ public class HistoryViewActivity extends AppCompatActivity {
 	 * @param workoutJSONS
 	 * @return
 	 */
-	public BarGraphSeries<DataPoint> repsToGraph(String workoutStr, ArrayList<WorkoutJSON> workoutJSONS) {
+	public LineGraphSeries<DataPoint> repsToGraph(String workoutStr, ArrayList<WorkoutJSON> workoutJSONS) {
 		ArrayList<WorkoutJSON> filteredWorkoutJSONS = new ArrayList<>();
 		for (WorkoutJSON workout : workoutJSONS) {
 			if (workout.getWorkoutName().equals(workoutStr)) {
@@ -264,7 +271,7 @@ public class HistoryViewActivity extends AppCompatActivity {
 		for (int i = 0; i < dataPoints.length; i++) {
 			dataPoints[i] = new DataPoint(i, filteredWorkoutJSONS.get(i).getReps());
 		}
-		BarGraphSeries<DataPoint> series = new BarGraphSeries<>(dataPoints);
+		LineGraphSeries<DataPoint> series = new LineGraphSeries<>(dataPoints);
 		return series;
 	}
 
@@ -273,7 +280,7 @@ public class HistoryViewActivity extends AppCompatActivity {
 	 * @param workoutJSONS
 	 * @return
 	 */
-	public BarGraphSeries<DataPoint> timeToGraph(String workoutStr, ArrayList<WorkoutJSON> workoutJSONS) {
+	public LineGraphSeries<DataPoint> timeToGraph(String workoutStr, ArrayList<WorkoutJSON> workoutJSONS) {
 		ArrayList<WorkoutJSON> filteredWorkoutJSONS = new ArrayList<>();
 		for (WorkoutJSON workout : workoutJSONS) {
 			if (workout.getWorkoutName().equals(workoutStr)) {
@@ -282,9 +289,9 @@ public class HistoryViewActivity extends AppCompatActivity {
 		}
 		DataPoint[] dataPoints = new DataPoint[filteredWorkoutJSONS.size()];
 		for (int i = 0; i < dataPoints.length; i++) {
-			dataPoints[i] = new DataPoint(i, filteredWorkoutJSONS.get(i).getDuration());
+			dataPoints[i] = new DataPoint(i + 1, filteredWorkoutJSONS.get(i).getDuration());
 		}
-		BarGraphSeries<DataPoint> series = new BarGraphSeries<>(dataPoints);
+		LineGraphSeries<DataPoint> series = new LineGraphSeries<>(dataPoints);
 		Log.e("DATA", "" + dataPoints.length);
 		return series;
 	}
@@ -294,7 +301,7 @@ public class HistoryViewActivity extends AppCompatActivity {
 	 * @param workoutJSONS
 	 * @return
 	 */
-	public BarGraphSeries<DataPoint> accuracyToGraph(String workoutStr, ArrayList<WorkoutJSON> workoutJSONS) {
+	public LineGraphSeries<DataPoint> accuracyToGraph(String workoutStr, ArrayList<WorkoutJSON> workoutJSONS) {
 		ArrayList<WorkoutJSON> filteredWorkoutJSONS = new ArrayList<>();
 		for (WorkoutJSON workout : workoutJSONS) {
 			if (workout.getWorkoutName().equals(workoutStr)) {
@@ -305,10 +312,22 @@ public class HistoryViewActivity extends AppCompatActivity {
 		for (int i = 0; i < dataPoints.length; i++) {
 			dataPoints[i] = new DataPoint(i, filteredWorkoutJSONS.get(i).getAccuracy());
 		}
-		BarGraphSeries<DataPoint> series = new BarGraphSeries<>(dataPoints);
+		LineGraphSeries<DataPoint> series = new LineGraphSeries<>(dataPoints);
 		return series;
 	}
 
+	public void leftHandView() {
+		graphLeft.setBackground(getApplicationContext().getDrawable(R.drawable.button_shape_maroon));
+		graphLeft.setTextColor(Color.WHITE);
+		graphRight.setBackground(getApplicationContext().getDrawable(R.drawable.button_shape_grey));
+		graphRight.setTextColor(Color.BLACK);
+	}
 
+	public void rightHandView() {
+		graphRight.setBackground(getApplicationContext().getDrawable(R.drawable.button_shape_maroon));
+		graphRight.setTextColor(Color.WHITE);
+		graphLeft.setBackground(getApplicationContext().getDrawable(R.drawable.button_shape_grey));
+		graphLeft.setTextColor(Color.BLACK);
+	}
 }
 

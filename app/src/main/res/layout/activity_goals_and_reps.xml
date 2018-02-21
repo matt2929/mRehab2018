@@ -30,7 +30,7 @@
             android:textSize="24sp" />
 
         <TextView
-            android:id="@+id/goalTextActivity"
+            android:id="@+id/workoutSelectionView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginLeft="60sp"
@@ -60,7 +60,7 @@
             android:textSize="24sp" />
 
         <TextView
-            android:id="@+id/textView12"
+            android:id="@+id/handSelectionTextView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginLeft="60sp"
