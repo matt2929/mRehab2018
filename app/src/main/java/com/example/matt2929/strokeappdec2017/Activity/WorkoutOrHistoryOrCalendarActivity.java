@@ -1,9 +1,11 @@
 package com.example.matt2929.strokeappdec2017.Activity;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -20,6 +22,9 @@ public class WorkoutOrHistoryOrCalendarActivity extends AppCompatActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_workout_or_history);
+
+		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 		textView = (TextView) findViewById(R.id.userNameSplashWelcome);
 		textView.setText("Welcome back, " + WorkoutData.UserName + "!");
 		if (saveLastGoalSet.isOneWeek(this)) {

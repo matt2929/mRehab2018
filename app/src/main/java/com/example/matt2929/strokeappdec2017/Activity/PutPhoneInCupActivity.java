@@ -1,9 +1,11 @@
 package com.example.matt2929.strokeappdec2017.Activity;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
@@ -20,6 +22,9 @@ public class PutPhoneInCupActivity extends AppCompatActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		saveWorkoutJSON = new SaveWorkoutJSON(getApplicationContext());
+
+		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 		setContentView(R.layout.activity_put_phone_in_cup);
 		isPhoneInCup = (LinearLayout) findViewById(R.id.isPhoneInCup);
 		phoneInCup = (LinearLayout) findViewById(R.id.phoneInCup);

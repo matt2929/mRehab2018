@@ -15,11 +15,12 @@ import com.example.matt2929.strokeappdec2017.Utilities.ZeroCrossCalculation;
 public class WO_Pour extends SensorWorkoutAbstract {
 	int repCount;
 	float filledPercentage = 100f;
-	float thresehold = 15f;
+	float pouringThresehold = 15f;
 	float removalRate = .1f;
 	boolean tooQuicklyFullExplainGiven = false;
 	boolean inCooldown = false;
 	long coolDownDuration = 5000;
+	float emptyThreshold = 15f;
 	long startOfCooldown = 0l;
 	ZeroCrossCalculation zeroCrossCalculation;
 
@@ -49,12 +50,12 @@ public class WO_Pour extends SensorWorkoutAbstract {
 				Angle = -1 * Angle;
 			}
 			Angle = (180 * Angle);
-			if (Math.abs(AngleStandardized - filledPercentage) <= thresehold) {
+			if (Math.abs(AngleStandardized - filledPercentage) <= pouringThresehold) {
 				if (!sfxPlayer.isPlaying()) {
 					sfxPlayer.playSFX();
 				}
 				filledPercentage -= removalRate;
-				if (filledPercentage < 0) {
+				if (filledPercentage < emptyThreshold) {
 					repCount++;
 					zeroCrossCalculation.endRep();
 					endRepTrigger.endRep();
@@ -70,7 +71,7 @@ public class WO_Pour extends SensorWorkoutAbstract {
 
 			} else {
 				if (sfxPlayer.isPlaying()) {
-					if (AngleStandardized - filledPercentage < thresehold) {
+					if (AngleStandardized - filledPercentage < pouringThresehold) {
 						if (!tooQuicklyFullExplainGiven) {
 							speechTrigger.speak("Your pouring too quickly, please tilt the mug up until water comes out again.");
 							tooQuicklyFullExplainGiven = true;
@@ -82,7 +83,7 @@ public class WO_Pour extends SensorWorkoutAbstract {
 					sfxPlayer.pauseSFX();
 				}
 			}
-			outputData(new float[]{Angle, ((filledPercentage) / 100f)});
+			outputData(new float[]{Angle, ((filledPercentage - 15) / 100f)});
 			zeroCrossCalculation.dataIn(new float[]{Angle});
 		} else if (inCooldown) {
 			if (Math.abs(System.currentTimeMillis() - startOfCooldown) >= coolDownDuration) {

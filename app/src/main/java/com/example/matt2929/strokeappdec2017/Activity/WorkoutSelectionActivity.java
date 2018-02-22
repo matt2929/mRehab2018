@@ -1,10 +1,12 @@
 package com.example.matt2929.strokeappdec2017.Activity;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -39,6 +41,9 @@ public class WorkoutSelectionActivity extends AppCompatActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_workout_selection);
+
+		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 		left = (Button) findViewById(R.id.selectLeft);
 		right = (Button) findViewById(R.id.selectRight);
 		intent = new Intent(getApplicationContext(), GoalsAndRepsActivity.class);
@@ -68,14 +73,25 @@ public class WorkoutSelectionActivity extends AppCompatActivity {
 			@Override
 			public void onClick(View view) {
 				Intent intent = new Intent(getApplicationContext(), WorkoutOrHistoryOrCalendarActivity.class);
+
 				startActivity(intent);
 			}
 		});
 		continueButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				isCupWorkout = WorkoutData.WORKOUT_DESCRIPTIONS[currentSelection].getPrintType().equals(WorkoutData.Print_Container_Cup);
+				if (WORKOUT_DESCRIPTIONS[currentSelection].getWorkoutType().equals(Workout_Type_Sensor)) {
+					intent.putExtra("WorkoutType", "Sensor");
+				} else {
+					intent.putExtra("WorkoutType", "Touch");
+				}
+				intent.putExtra("Workout", WORKOUT_DESCRIPTIONS[currentSelection].getName());
 				if (isCupWorkout) {
 					intent.setClass(getApplicationContext(), PutPhoneInCupActivity.class);
+				} else {
+					intent.setClass(getApplicationContext(), GoalsAndRepsActivity.class);
+
 				}
 				startActivity(intent);
 			}
@@ -88,7 +104,31 @@ public class WorkoutSelectionActivity extends AppCompatActivity {
 				isCupWorkout = WorkoutData.WORKOUT_DESCRIPTIONS[i].getPrintType().equals(WorkoutData.Print_Container_Cup);
 				somethingSelectedView();
 			}
+
 		});
+		listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+			@Override
+			public boolean onItemLongClick(AdapterView<?> parent, View view, int i, long id) {
+				currentSelection = i;
+				isCupWorkout = WorkoutData.WORKOUT_DESCRIPTIONS[i].getPrintType().equals(WorkoutData.Print_Container_Cup);
+				somethingSelectedView();
+				return false;
+			}
+		});
+		listView.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+			@Override
+			public void onItemSelected(AdapterView<?> parent, View view, int i, long id) {
+				currentSelection = i;
+				isCupWorkout = WorkoutData.WORKOUT_DESCRIPTIONS[i].getPrintType().equals(WorkoutData.Print_Container_Cup);
+				somethingSelectedView();
+			}
+
+			@Override
+			public void onNothingSelected(AdapterView<?> parent) {
+
+			}
+		});
+
 		ArrayList<WorkoutSelectData> workouts = new ArrayList<>();
 		for (int i = 0; i < WorkoutData.WORKOUT_DESCRIPTIONS.length; i++) {
 			WorkoutDescription wd = WorkoutData.WORKOUT_DESCRIPTIONS[i];
@@ -96,17 +136,14 @@ public class WorkoutSelectionActivity extends AppCompatActivity {
 		}
 		WorkoutSelectAdapter workoutSelectAdapter = new WorkoutSelectAdapter(getApplicationContext(), workouts);
 		listView.setAdapter(workoutSelectAdapter);
+
 	}
 
 	public void handSelection(boolean leftHand) {
 		if (currentSelection != -1) {
+
 			continueButton.setAlpha(1f);
 			continueButton.setClickable(true);
-			if (WORKOUT_DESCRIPTIONS[currentSelection].getWorkoutType().equals(Workout_Type_Sensor)) {
-				intent.putExtra("WorkoutType", "Sensor");
-			} else {
-				intent.putExtra("WorkoutType", "Touch");
-			}
 			if (leftHand) {
 				intent.putExtra("Hand", "Left");
 				left.setTextColor(Color.WHITE);
@@ -121,8 +158,6 @@ public class WorkoutSelectionActivity extends AppCompatActivity {
 				intent.putExtra("Hand", "Right");
 
 			}
-			intent.putExtra("Workout", WORKOUT_DESCRIPTIONS[currentSelection].getName());
-
 		} else {
 			Toast.makeText(getApplicationContext(), "Please Select a Workout", Toast.LENGTH_SHORT).show();
 		}

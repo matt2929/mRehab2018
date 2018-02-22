@@ -1,12 +1,14 @@
 package com.example.matt2929.strokeappdec2017.Activity;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
@@ -24,7 +26,10 @@ public class CreateNewUserActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_new_user);
-        RadioGroup handChoice = (RadioGroup) findViewById(R.id.enterRadios);
+
+	    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+	    getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+	    RadioGroup handChoice = (RadioGroup) findViewById(R.id.enterRadios);
         final EditText nameEnter = (EditText) findViewById(R.id.enterName);
         final EditText ageEnter = (EditText) findViewById(R.id.enterAge);
         final EditText goalsEnter = (EditText) findViewById(R.id.enterGoals);

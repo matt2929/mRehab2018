@@ -53,13 +53,19 @@ public class WO_Unlock extends TouchWorkoutAbstract {
 	}
 
 	public void completeTurn() {
+		if (sfxPlayer.isPlaying()) {
+			sfxPlayer.killAll();
+			sfxPlayer.loadSFX(R.raw.unlockclick);
+		}
 		countReps++;
+		speechTrigger.speak("" + countReps);
 		zeroCrossCalculation.endRep();
 		endRepTrigger.endRep();
 		if (countReps == reps) {
 			workoutComplete = true;
 		} else {
 			sfxPlayer.playSFX();
+
 		}
 		left = !left;
 	}

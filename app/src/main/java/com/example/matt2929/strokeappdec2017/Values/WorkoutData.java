@@ -50,8 +50,7 @@ public final class WorkoutData {
 							"Hold the mug in front of you in an upright position. As quickly as you can turn your hand outward and then return to the upright position.",
 							Color.rgb(125, 190, 214), R.drawable.ic_quicktwistwithmugxhdpi),
 					new WorkoutDescription("Slow Pour", Workout_Type_Sensor, Sensor_Type_Gravity, Print_Container_Cup, 3,
-							"Hold the mug in front of you and move as if to slowly pour out water.\n" +
-									"[If pouring too quickly - “you are pouring too quickly – please bring the mug to an upright position and start pouring again”]",
+							"hold the mug in front of you. Pretend to slowly pour out water as if you were pouring into a water bottle. If you pour too quickly, I will say “you are pouring too quickly”. When you hear this warning, go back to upright position, and start pouring slowly.",
 							Color.rgb(125, 190, 214), R.drawable.ic_slowpourwithmugxhdpi),
 					new WorkoutDescription("Unlock With Key", Workout_Type_Touch, null, Print_Container_Key, 5,
 							"With the key in contact with the phone screen, rotate the key clockwise and wait for me to count. Then rotate it counterclockwise, and wait for me to count again.",
