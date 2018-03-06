@@ -40,7 +40,7 @@ public final class WorkoutData {
 					new WorkoutDescription("Vertical Mug", Workout_Type_Sensor, Sensor_Type_Linear, Print_Container_Cup, 10,
 							"Lift the mug and place it on the top of the box and wait for me to count. Then return the mug to the table and wait for me to count again.",
 							Color.rgb(125, 190, 214), R.drawable.ic_verticalmugxhdpi),
-					new WorkoutDescription("Walk with mug", Workout_Type_Sensor, Sensor_Type_Linear, Print_Container_Bowl, 10,
+					new WorkoutDescription("Walk with mug", Workout_Type_Sensor, Sensor_Type_Linear, Print_Container_Cup, 10,
 							"Hold the mug with one hand. Walk forward at a comfortable pace. Walk until I tell you to stop.",
 							Color.rgb(125, 190, 214), R.drawable.ic_walkwithmughdpi),
 					new WorkoutDescription("Sip From The Mug", Workout_Type_Sensor, Sensor_Type_Gravity, Print_Container_Cup, 1,

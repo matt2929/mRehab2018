@@ -29,10 +29,10 @@ public class LoadingScreenActivity extends AppCompatActivity {
 
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-		textView = (TextView) findViewById(R.id.progressText);
-		progressBarCloud = (ProgressBar) findViewById(R.id.cloudProgress);
-		progressBarLocal = (ProgressBar) findViewById(R.id.localProgress);
-		abortButton = (Button) findViewById(R.id.uploadAbort);
+		textView = findViewById(R.id.progressText);
+		progressBarCloud = findViewById(R.id.cloudProgress);
+		progressBarLocal = findViewById(R.id.localProgress);
+		abortButton = findViewById(R.id.uploadAbort);
 		progressBarLocal.setMax(100);
 		progressBarCloud.setMax(100);
 		final Handler handler = new Handler();
@@ -45,6 +45,7 @@ public class LoadingScreenActivity extends AppCompatActivity {
 					textView.setText("Cloud" + Math.round((progressCloud)));
 					textView.setText(textView.getText().toString() + "\nLocal" + Math.round((progressLocal)));
 					handler.postDelayed(this, 55);
+
 				} else {
 					Intent intent = getIntent();
 					intent.setClass(getApplicationContext(), PostWorkoutReportActivity.class);

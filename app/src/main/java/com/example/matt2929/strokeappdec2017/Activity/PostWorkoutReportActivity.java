@@ -21,6 +21,7 @@ import com.example.matt2929.strokeappdec2017.SaveAndLoadData.WorkoutJSON;
 import com.example.matt2929.strokeappdec2017.Utilities.SFXPlayer;
 import com.example.matt2929.strokeappdec2017.Utilities.Text2Speech;
 import com.example.matt2929.strokeappdec2017.Values.WorkoutData;
+import com.example.matt2929.strokeappdec2017.Workouts.WorkoutDescription;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -48,19 +49,19 @@ public class PostWorkoutReportActivity extends AppCompatActivity {
 
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-		currentRep = (TextView) findViewById(R.id.currentRep);
-		lastRep = (TextView) findViewById(R.id.lastRep);
-		currentTime = (TextView) findViewById(R.id.currentTime);
-		lastTime = (TextView) findViewById(R.id.lastTime);
-		currentSmooth = (TextView) findViewById(R.id.currentSmoothness);
-		lastSmooth = (TextView) findViewById(R.id.lastSmoothness);
-		smoothView = (ImageView) findViewById(R.id.shakeImage);
-		timeView = (ImageView) findViewById(R.id.timeImage);
-		repView = (ImageView) findViewById(R.id.repImage);
+		currentRep = findViewById(R.id.currentRep);
+		lastRep = findViewById(R.id.lastRep);
+		currentTime = findViewById(R.id.currentTime);
+		lastTime = findViewById(R.id.lastTime);
+		currentSmooth = findViewById(R.id.currentSmoothness);
+		lastSmooth = findViewById(R.id.lastSmoothness);
+		smoothView = findViewById(R.id.shakeImage);
+		timeView = findViewById(R.id.timeImage);
+		repView = findViewById(R.id.repImage);
 		sfxPlayer = new SFXPlayer(getApplicationContext());
 		sfxPlayer.loadSFX(R.raw.tada);
-		Button button = (Button) findViewById(R.id.continueButton);
-		ImageButton imageButton = (ImageButton) findViewById(R.id.homeButton);
+		Button button = findViewById(R.id.continueButton);
+		ImageButton imageButton = findViewById(R.id.homeButton);
 		imageButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
@@ -77,10 +78,22 @@ public class PostWorkoutReportActivity extends AppCompatActivity {
 				return (int) (t1.getCalendar().getTimeInMillis() - t0.getCalendar().getTimeInMillis());
 			}
 		};
-
+		String accuracyWording = "";
 		for (WorkoutJSON workoutJSON : workoutJSONS) {
 			if (workoutJSON.getWorkoutName().equals(getIntent().getStringExtra("Workout"))) {
 				workoutJSONSFiltered.add(workoutJSON);
+			}
+		}
+		for (WorkoutDescription workoutDescription : WorkoutData.WORKOUT_DESCRIPTIONS) {
+			if (workoutDescription.getName().equals(getIntent().getStringExtra("Workout"))) {
+				if (workoutDescription.getWorkoutType().equals(WorkoutData.Workout_Type_Touch)) {
+					accuracyWording = "Accuracy";
+				} else {
+					accuracyWording = "Smoothness";
+				}
+				TextView textView = findViewById(R.id.smoothnessTitle);
+				textView.setText("Average " + accuracyWording);
+				break;
 			}
 		}
 		Collections.sort(workoutJSONSFiltered, workoutJSONComparator);

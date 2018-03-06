@@ -44,12 +44,12 @@ public class WorkoutSelectionActivity extends AppCompatActivity {
 
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-		left = (Button) findViewById(R.id.selectLeft);
-		right = (Button) findViewById(R.id.selectRight);
+		left = findViewById(R.id.selectLeft);
+		right = findViewById(R.id.selectRight);
 		intent = new Intent(getApplicationContext(), GoalsAndRepsActivity.class);
-		continueButton = (Button) findViewById(R.id.continueButton);
-		imageButton = (ImageButton) findViewById(R.id.homeButton);
-		listView = (ListView) findViewById(R.id.selectActivity);
+		continueButton = findViewById(R.id.continueButton);
+		imageButton = findViewById(R.id.homeButton);
+		listView = findViewById(R.id.selectActivity);
 		nothingSelectedView();
 
 		saveActivitiesDoneToday = new SaveActivitiesDoneToday(getApplicationContext());
@@ -77,25 +77,7 @@ public class WorkoutSelectionActivity extends AppCompatActivity {
 				startActivity(intent);
 			}
 		});
-		continueButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				isCupWorkout = WorkoutData.WORKOUT_DESCRIPTIONS[currentSelection].getPrintType().equals(WorkoutData.Print_Container_Cup);
-				if (WORKOUT_DESCRIPTIONS[currentSelection].getWorkoutType().equals(Workout_Type_Sensor)) {
-					intent.putExtra("WorkoutType", "Sensor");
-				} else {
-					intent.putExtra("WorkoutType", "Touch");
-				}
-				intent.putExtra("Workout", WORKOUT_DESCRIPTIONS[currentSelection].getName());
-				if (isCupWorkout) {
-					intent.setClass(getApplicationContext(), PutPhoneInCupActivity.class);
-				} else {
-					intent.setClass(getApplicationContext(), GoalsAndRepsActivity.class);
 
-				}
-				startActivity(intent);
-			}
-		});
 		//Select Existing User
 		listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			@Override
@@ -141,7 +123,20 @@ public class WorkoutSelectionActivity extends AppCompatActivity {
 
 	public void handSelection(boolean leftHand) {
 		if (currentSelection != -1) {
-
+			continueButton.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					isCupWorkout = WorkoutData.WORKOUT_DESCRIPTIONS[currentSelection].getPrintType().equals(WorkoutData.Print_Container_Cup);
+					if (WORKOUT_DESCRIPTIONS[currentSelection].getWorkoutType().equals(Workout_Type_Sensor)) {
+						intent.putExtra("WorkoutType", "Sensor");
+					} else {
+						intent.putExtra("WorkoutType", "Touch");
+					}
+					intent.putExtra("Workout", WORKOUT_DESCRIPTIONS[currentSelection].getName());
+					intent.setClass(getApplicationContext(), PutPhoneInContainer.class);
+					startActivity(intent);
+				}
+			});
 			continueButton.setAlpha(1f);
 			continueButton.setClickable(true);
 			if (leftHand) {

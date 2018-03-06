@@ -18,7 +18,8 @@ import com.example.matt2929.strokeappdec2017.Values.WorkoutData;
 
 import java.util.ArrayList;
 
-public class GoalsAndRepsActivity extends AppCompatActivity {
+public class GoalsAndRepsActivity extends
+		AppCompatActivity {
 	SaveHistoricalGoals saveHistoricalGoals;
 	SaveHistoricalReps saveHistoricalReps;
 	Integer reps = 10;
@@ -50,15 +51,15 @@ public class GoalsAndRepsActivity extends AppCompatActivity {
 		}
 		goals = temp;
 		reps = saveHistoricalReps.getWorkoutReps(WorkoutName);
-		repCountText = (TextView) findViewById(R.id.GoalAndRepNumberText);
-		selectedHandText = (TextView) findViewById(R.id.handSelectionTextView);
-		selectedWorkoutText = (TextView) findViewById(R.id.workoutSelectionView);
+		repCountText = findViewById(R.id.GoalAndRepNumberText);
+		selectedHandText = findViewById(R.id.handSelectionTextView);
+		selectedWorkoutText = findViewById(R.id.workoutSelectionView);
 		selectedWorkoutText.setText(WorkoutName);
 		selectedHandText.setText(WorkoutHand);
-		Button startWorkout = (Button) findViewById(R.id.continueButton);
-		Button repPlus = (Button) findViewById(R.id.GoalAndRepPlus);
-		Button repMinus = (Button) findViewById(R.id.GoalAndRepMinus);
-		imageButton = (ImageButton) findViewById(R.id.homeButton);
+		Button startWorkout = findViewById(R.id.continueButton);
+		Button repPlus = findViewById(R.id.GoalAndRepPlus);
+		Button repMinus = findViewById(R.id.GoalAndRepMinus);
+		imageButton = findViewById(R.id.homeButton);
 		repCountText.setText("" + reps);
 		/*ListView goalListView = (ListView) findViewById(R.id.GoalAndRepGoalsList);
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,

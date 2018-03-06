@@ -47,6 +47,7 @@ public class HistoryViewActivity extends AppCompatActivity {
 	int workoutType = 0;
 	Integer color = 0;
 	String handToGraph = "";
+	String wordingForAccuracuy = "Smoothness";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -55,17 +56,17 @@ public class HistoryViewActivity extends AppCompatActivity {
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-		graphView = (GraphView) findViewById(R.id.historyGraph);
-		nextWorkout = (Button) findViewById(R.id.nextWorkout);
-		backWorkout = (Button) findViewById(R.id.backWorkout);
-		graphLeft = (Button) findViewById(R.id.graphLeftHand);
-		graphRight = (Button) findViewById(R.id.graphRightHand);
-		imageButton = (ImageButton) findViewById(R.id.homeButton);
-		xAxis = (TextView) findViewById(R.id.graphXAxis);
-		yAxis = (TextView) findViewById(R.id.graphYAxis);
-		timeRadio = (RadioButton) findViewById(R.id.radioTime);
-		gradeRadio = (RadioButton) findViewById(R.id.radioAccuracy);
-		repsRadio = (RadioButton) findViewById(R.id.radioReps);
+		graphView = findViewById(R.id.historyGraph);
+		nextWorkout = findViewById(R.id.nextWorkout);
+		backWorkout = findViewById(R.id.backWorkout);
+		graphLeft = findViewById(R.id.graphLeftHand);
+		graphRight = findViewById(R.id.graphRightHand);
+		imageButton = findViewById(R.id.homeButton);
+		xAxis = findViewById(R.id.graphXAxis);
+		yAxis = findViewById(R.id.graphYAxis);
+		timeRadio = findViewById(R.id.radioTime);
+		gradeRadio = findViewById(R.id.radioAccuracy);
+		repsRadio = findViewById(R.id.radioReps);
 		workoutJSONComparator = new Comparator<WorkoutJSON>() {
 			@Override
 			public int compare(WorkoutJSON t0, WorkoutJSON t1) {
@@ -90,8 +91,8 @@ public class HistoryViewActivity extends AppCompatActivity {
 				onRadioButtonClicked(view);
 			}
 		});
-		workoutText = (TextView) findViewById(R.id.CurrentWorkoutText);
-		groupType = (RadioGroup) findViewById(R.id.radioTypes);
+		workoutText = findViewById(R.id.CurrentWorkoutText);
+		groupType = findViewById(R.id.radioTypes);
 
 		if (WorkoutData.UserData.getHand() == 0) {
 			handToGraph = "Left";
@@ -114,6 +115,7 @@ public class HistoryViewActivity extends AppCompatActivity {
 			for (WorkoutDescription workoutDescription : WorkoutData.WORKOUT_DESCRIPTIONS) {
 				if (workoutDescription.getName().equals(workoutName)) {
 					color = workoutDescription.getColor();
+
 				}
 			}
 		} else {
@@ -149,7 +151,13 @@ public class HistoryViewActivity extends AppCompatActivity {
 				for (WorkoutDescription workoutDescription : WorkoutData.WORKOUT_DESCRIPTIONS) {
 					if (workoutDescription.getName().equals(workoutName)) {
 						color = workoutDescription.getColor();
+						if (workoutDescription.getWorkoutType().equals(WorkoutData.Workout_Type_Touch)) {
+							wordingForAccuracuy = "Accuracy";
+						} else {
+							wordingForAccuracuy = "Smoothness";
+						}
 					}
+
 				}
 				workoutText.setText(workoutStrings.get(workoutIndex));
 				setUpGraph(workoutJSONS, workoutType);
@@ -167,6 +175,11 @@ public class HistoryViewActivity extends AppCompatActivity {
 				for (WorkoutDescription workoutDescription : WorkoutData.WORKOUT_DESCRIPTIONS) {
 					if (workoutDescription.getName().equals(workoutName)) {
 						color = workoutDescription.getColor();
+					}
+					if (workoutDescription.getWorkoutType().equals(WorkoutData.Workout_Type_Touch)) {
+						wordingForAccuracuy = "Accuracy";
+					} else {
+						wordingForAccuracuy = "Smoothness";
 					}
 				}
 				workoutText.setText(workoutStrings.get(workoutIndex));
@@ -226,15 +239,15 @@ public class HistoryViewActivity extends AppCompatActivity {
 		if (workoutType == 0) {
 			lineGraphSeriesLeft = repsToGraph(workoutName, handWorkouts);
 			graphView.setTitle("Weekly Repetitions (" + handToGraph + ")");
-			yAxis.setText("Reps (Average)");
+			yAxis.setText("Reps");
 		} else if (workoutType == 1) {
 			lineGraphSeriesLeft = timeToGraph(workoutName, handWorkouts);
 			graphView.setTitle("Weekly Repetition Time (" + handToGraph + ")");
-			yAxis.setText("Seconds (Average)");
+			yAxis.setText("Seconds");
 		} else {
 			lineGraphSeriesLeft = accuracyToGraph(workoutName, handWorkouts);
 			graphView.setTitle("Weekly Repetition Accuracy (" + handToGraph + ")");
-			yAxis.setText("Accuracy (Average)");
+			yAxis.setText("wordingForAccuracuy");
 		}
 		lineGraphSeriesLeft.setAnimated(true);
 		graphView.removeAllSeries();

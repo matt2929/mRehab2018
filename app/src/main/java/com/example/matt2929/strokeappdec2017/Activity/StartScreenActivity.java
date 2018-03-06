@@ -9,7 +9,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.NumberPicker;
+import android.widget.RadioButton;
 
 import com.example.matt2929.strokeappdec2017.R;
 import com.example.matt2929.strokeappdec2017.SaveAndLoadData.SaveAndWriteUserInfo;
@@ -18,6 +20,8 @@ import com.example.matt2929.strokeappdec2017.Values.WorkoutData;
 
 public class StartScreenActivity extends AppCompatActivity {
 	String numberDefinedName;
+	RadioButton radioButton;
+	Boolean debug = false;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -26,9 +30,10 @@ public class StartScreenActivity extends AppCompatActivity {
 
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-		final Button login = (Button) findViewById(R.id.startLogin);
+		final Button login = findViewById(R.id.startLogin);
 		//	Button demo = (Button) findViewById(R.id.startDemo);
-		NumberPicker numberPicker = (NumberPicker) findViewById(R.id.numberPicker);
+		radioButton = findViewById(R.id.debugRadio);
+		NumberPicker numberPicker = findViewById(R.id.numberPicker);
 		getPermissions();
 		final SaveAndWriteUserInfo saveAndWriteUserInfo = new SaveAndWriteUserInfo(getApplicationContext());//use this to get users saved o
 		login.setAlpha(.2f);
@@ -49,9 +54,14 @@ public class StartScreenActivity extends AppCompatActivity {
 				WorkoutData.UserData.setAge(20);
 				WorkoutData.UserData.setGoals("Test");
 				WorkoutData.UserData.setHand(1);
-				WorkoutData.UserData.setName(numberDefinedName);
-				WorkoutData.UserName = numberDefinedName;
 
+				if (!debug) {
+					WorkoutData.UserData.setName(numberDefinedName);
+					WorkoutData.UserName = numberDefinedName;
+				} else {
+					WorkoutData.UserData.setName("DEBUG");
+					WorkoutData.UserName = "DEBUG";
+				}
 				//}
 				startActivity(intent);
 			}
@@ -68,12 +78,13 @@ public class StartScreenActivity extends AppCompatActivity {
 				numberDefinedName = "Test Subject " + newVal + "";
 			}
 		});
-		/*demo.setOnClickListener(new View.OnClickListener() {
+		radioButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 			@Override
-			public void onClick(View view) {
-
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				debug = isChecked;
+				login.setClickable(true);
 			}
-		});*/
+		});
 	}
 
 	public void getPermissions() {

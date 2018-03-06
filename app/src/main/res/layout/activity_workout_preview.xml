@@ -8,12 +8,6 @@
     android:weightSum="10"
     tools:context="com.example.matt2929.strokeappdec2017.Activity.WorkoutPreviewActivity">
 
-    <VideoView
-        android:id="@+id/videoView"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="7" />
-
     <Button
         android:id="@+id/preview_start"
         android:layout_width="match_parent"
@@ -26,6 +20,12 @@
         android:textSize="24sp"
         tools:layout_editor_absoluteX="342dp"
         tools:layout_editor_absoluteY="604dp" />
+
+    <com.example.matt2929.strokeappdec2017.WorkoutsView.PlayGifView
+        android:id="@+id/videoView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="7" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -49,4 +49,5 @@
 
 
     </LinearLayout>
+
 </LinearLayout>

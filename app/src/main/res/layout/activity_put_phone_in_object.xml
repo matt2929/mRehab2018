@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.matt2929.strokeappdec2017.Activity.PutPhoneInCupActivity">
+    tools:context="com.example.matt2929.strokeappdec2017.Activity.PutPhoneInContainer">
 
     <LinearLayout
         android:id="@+id/isPhoneInCup"
@@ -16,7 +16,7 @@
         android:weightSum="10">
 
         <ImageView
-            android:id="@+id/imageView3"
+            android:id="@+id/objectPreviewView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="4"
@@ -25,7 +25,7 @@
             app:srcCompat="@drawable/putincup" />
 
         <TextView
-            android:id="@+id/textView8"
+            android:id="@+id/promptTextPutIn"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="4"
@@ -63,46 +63,6 @@
                 android:text="No"
                 android:textSize="30sp" />
         </LinearLayout>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/phoneInCup"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:visibility="visible"
-        android:weightSum="10">
-
-        <ImageView
-            android:id="@+id/imageView4"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="4"
-            android:cropToPadding="true"
-            android:scaleType="centerInside"
-            app:srcCompat="@drawable/putincup" />
-
-        <TextView
-            android:id="@+id/textView9"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="4"
-            android:gravity="center"
-            android:text="Press 'OK' when the phone is in the mug"
-            android:textAlignment="center"
-            android:textColor="@android:color/background_dark"
-            android:textSize="36sp" />
-
-        <Button
-            android:id="@+id/inPhoneButtonOk"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_margin="15sp"
-            android:layout_weight="2"
-            android:background="@drawable/button_shape_grey"
-            android:text="OK"
-            android:textSize="36sp" />
 
     </LinearLayout>
 

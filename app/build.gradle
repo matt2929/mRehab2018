@@ -12,6 +12,7 @@ buildscript {
 
     dependencies {
         classpath 'com.android.tools.build:gradle:3.0.1'
+
     }
 }
 
@@ -21,12 +22,12 @@ dependencies {
     compile 'com.amazonaws:aws-android-sdk-s3:2.6.+'
 }
 android {
-    compileSdkVersion 26
-    buildToolsVersion '26.0.2'
+    compileSdkVersion 27
+    buildToolsVersion '26.0.3'
     defaultConfig {
         applicationId "com.example.matt2929.strokeappdec2017"
         minSdkVersion 23
-        targetSdkVersion 26
+        targetSdkVersion 27
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"

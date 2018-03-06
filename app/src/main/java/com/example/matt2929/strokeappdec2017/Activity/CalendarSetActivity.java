@@ -41,11 +41,11 @@ public class CalendarSetActivity extends AppCompatActivity {
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		saveCalendarDateJSON = new SaveCalendarDateJSON(getApplicationContext());
 		//Date Views
-		calendarPicker = (CalendarView) findViewById(R.id.setDateCalendar);
-		homeButton = (ImageButton) findViewById(R.id.homeButton);
-		continueButton = (Button) findViewById(R.id.continueButton);
+		calendarPicker = findViewById(R.id.setDateCalendar);
+		homeButton = findViewById(R.id.homeButton);
+		continueButton = findViewById(R.id.continueButton);
 		//Time Views
-		timePicker = (TimePicker) findViewById(R.id.setTimeCalendar);
+		timePicker = findViewById(R.id.setTimeCalendar);
 		//~~~~~~~~
 		dateView();
 		calendarPicker.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {

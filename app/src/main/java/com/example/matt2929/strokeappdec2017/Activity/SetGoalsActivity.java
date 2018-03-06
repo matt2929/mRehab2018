@@ -40,13 +40,13 @@ public class SetGoalsActivity extends AppCompatActivity {
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 		saveLastGoalSet = new SaveLastGoalSet();
-		workoutText = (TextView) findViewById(R.id.goalWorktoutText);
-		nextWorkout = (ImageButton) findViewById(R.id.goalNextWorkout);
-		backWorkout = (ImageButton) findViewById(R.id.goalBackWorkout);
-		radioTime = (RadioButton) findViewById(R.id.goalDecreaseTime);
-		radioRep = (RadioButton) findViewById(R.id.goalIncreaseRep);
-		radioSmooth = (RadioButton) findViewById(R.id.goalIncreaseSmoothness);
-		save = (Button) findViewById(R.id.goalSaveGoal);
+		workoutText = findViewById(R.id.goalWorktoutText);
+		nextWorkout = findViewById(R.id.goalNextWorkout);
+		backWorkout = findViewById(R.id.goalBackWorkout);
+		radioTime = findViewById(R.id.goalDecreaseTime);
+		radioRep = findViewById(R.id.goalIncreaseRep);
+		radioSmooth = findViewById(R.id.goalIncreaseSmoothness);
+		save = findViewById(R.id.goalSaveGoal);
 		workoutText.setText(WorkoutData.WORKOUT_DESCRIPTIONS[0].getName());
 		radioRep.performClick();
 		for (int i = 0; i < WorkoutData.WORKOUT_DESCRIPTIONS.length; i++) {

@@ -8,9 +8,9 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.VideoView;
 
 import com.example.matt2929.strokeappdec2017.R;
+import com.example.matt2929.strokeappdec2017.WorkoutsView.PlayGifView;
 
 
 public class WorkoutPreviewActivity extends AppCompatActivity {
@@ -22,9 +22,9 @@ public class WorkoutPreviewActivity extends AppCompatActivity {
 
 	    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 	    getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-	    VideoView videoView = (VideoView) findViewById(R.id.videoView);
-	    Button start = (Button) findViewById(R.id.preview_start);
-	    ImageButton imageButton = (ImageButton) findViewById(R.id.homeButton);
+	    PlayGifView videoView = findViewById(R.id.videoView);
+	    Button start = findViewById(R.id.preview_start);
+	    ImageButton imageButton = findViewById(R.id.homeButton);
 	    String workoutName = getIntent().getStringExtra("Workout");
 	    imageButton.setOnClickListener(new View.OnClickListener() {
 		    @Override
@@ -33,11 +33,13 @@ public class WorkoutPreviewActivity extends AppCompatActivity {
 			    startActivity(intent);
 		    }
 	    });
-
-        switch (workoutName) {
-            case "Horizontal Bowl":
-                break;
-            case "Vertical Bowl":
+	    videoView.setImageResource(R.drawable.skeletondance);
+	    videoView.setScaleX(3);
+	    videoView.setScaleY(3);
+	    switch (workoutName) {
+		    case "Horizontal Bowl":
+			    break;
+		    case "Vertical Bowl":
                 break;
             case "Horizontal Cup":
                 break;

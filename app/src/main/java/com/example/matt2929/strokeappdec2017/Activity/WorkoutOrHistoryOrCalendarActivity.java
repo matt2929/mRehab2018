@@ -25,15 +25,15 @@ public class WorkoutOrHistoryOrCalendarActivity extends AppCompatActivity {
 
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-		textView = (TextView) findViewById(R.id.userNameSplashWelcome);
+		textView = findViewById(R.id.userNameSplashWelcome);
 		textView.setText("Welcome back, " + WorkoutData.UserName + "!");
 		if (saveLastGoalSet.isOneWeek(this)) {
 			Intent intent = new Intent(this, SetGoalsActivity.class);
 			startActivity(intent);
 		}
-		Button history = (Button) findViewById(R.id.workHist_Hist);
-		Button workout = (Button) findViewById(R.id.workHist_Work);
-		Button calendar = (Button) findViewById(R.id.workHist_Next);
+		Button history = findViewById(R.id.workHist_Hist);
+		Button workout = findViewById(R.id.workHist_Work);
+		Button calendar = findViewById(R.id.workHist_Next);
 		history.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {

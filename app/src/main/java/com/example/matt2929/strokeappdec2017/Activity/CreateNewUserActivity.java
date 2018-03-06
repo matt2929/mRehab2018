@@ -29,11 +29,11 @@ public class CreateNewUserActivity extends AppCompatActivity {
 
 	    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 	    getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-	    RadioGroup handChoice = (RadioGroup) findViewById(R.id.enterRadios);
-        final EditText nameEnter = (EditText) findViewById(R.id.enterName);
-        final EditText ageEnter = (EditText) findViewById(R.id.enterAge);
-        final EditText goalsEnter = (EditText) findViewById(R.id.enterGoals);
-        Button enterSave = (Button) findViewById(R.id.enterSave);
+        RadioGroup handChoice = findViewById(R.id.enterRadios);
+        final EditText nameEnter = findViewById(R.id.enterName);
+        final EditText ageEnter = findViewById(R.id.enterAge);
+        final EditText goalsEnter = findViewById(R.id.enterGoals);
+        Button enterSave = findViewById(R.id.enterSave);
 
         //Name
         nameEnter.addTextChangedListener(new TextWatcher() {
@@ -120,12 +120,15 @@ public class CreateNewUserActivity extends AppCompatActivity {
         if (newUser.getAge() == -1) {
             count++;
             issues += ("\nNo age set");
+
         }
         if (count == 0) {
             return true;
         } else {
             Toast.makeText(getApplicationContext(), issues, Toast.LENGTH_SHORT).show();
         }
+
         return false;
     }
+
 }
