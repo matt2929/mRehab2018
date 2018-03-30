@@ -73,7 +73,6 @@ public class WorkoutSelectionActivity extends AppCompatActivity {
 			@Override
 			public void onClick(View view) {
 				Intent intent = new Intent(getApplicationContext(), WorkoutOrHistoryOrCalendarActivity.class);
-
 				startActivity(intent);
 			}
 		});
@@ -83,8 +82,21 @@ public class WorkoutSelectionActivity extends AppCompatActivity {
 			@Override
 			public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 				currentSelection = i;
-				isCupWorkout = WorkoutData.WORKOUT_DESCRIPTIONS[i].getPrintType().equals(WorkoutData.Print_Container_Cup);
-				somethingSelectedView();
+				if (saveActivitiesDoneToday.getWorkoutActivityCount(WorkoutData.WORKOUT_DESCRIPTIONS[i].getName()) >= 3) {
+					Toast.makeText(getApplicationContext(), "This activity is completed, please select another.", Toast.LENGTH_SHORT).show();
+					nothingSelectedView();
+				} else {
+					isCupWorkout = WorkoutData.WORKOUT_DESCRIPTIONS[i].getPrintType().equals(WorkoutData.Print_Container_Cup);
+
+					somethingSelectedView();
+					if (WorkoutData.UserData.getHand() == 0) {
+						handSelection(true);
+
+					} else {
+						handSelection(false);
+
+					}
+				}
 			}
 
 		});
@@ -92,8 +104,21 @@ public class WorkoutSelectionActivity extends AppCompatActivity {
 			@Override
 			public boolean onItemLongClick(AdapterView<?> parent, View view, int i, long id) {
 				currentSelection = i;
-				isCupWorkout = WorkoutData.WORKOUT_DESCRIPTIONS[i].getPrintType().equals(WorkoutData.Print_Container_Cup);
-				somethingSelectedView();
+				if (saveActivitiesDoneToday.getWorkoutActivityCount(WorkoutData.WORKOUT_DESCRIPTIONS[i].getName()) >= 3) {
+					Toast.makeText(getApplicationContext(), "This activity is completed, please select another.", Toast.LENGTH_SHORT).show();
+					nothingSelectedView();
+				} else {
+
+					isCupWorkout = WorkoutData.WORKOUT_DESCRIPTIONS[i].getPrintType().equals(WorkoutData.Print_Container_Cup);
+					somethingSelectedView();
+					if (WorkoutData.UserData.getHand() == 0) {
+						handSelection(true);
+
+					} else {
+						handSelection(false);
+
+					}
+				}
 				return false;
 			}
 		});
@@ -101,8 +126,20 @@ public class WorkoutSelectionActivity extends AppCompatActivity {
 			@Override
 			public void onItemSelected(AdapterView<?> parent, View view, int i, long id) {
 				currentSelection = i;
-				isCupWorkout = WorkoutData.WORKOUT_DESCRIPTIONS[i].getPrintType().equals(WorkoutData.Print_Container_Cup);
-				somethingSelectedView();
+				if (saveActivitiesDoneToday.getWorkoutActivityCount(WorkoutData.WORKOUT_DESCRIPTIONS[i].getName()) >= 3) {
+					Toast.makeText(getApplicationContext(), "This activity is completed, please select another.", Toast.LENGTH_SHORT).show();
+					nothingSelectedView();
+				} else {
+					isCupWorkout = WorkoutData.WORKOUT_DESCRIPTIONS[i].getPrintType().equals(WorkoutData.Print_Container_Cup);
+					somethingSelectedView();
+					if (WorkoutData.UserData.getHand() == 0) {
+						handSelection(true);
+
+					} else {
+						handSelection(false);
+
+					}
+				}
 			}
 
 			@Override
@@ -112,9 +149,17 @@ public class WorkoutSelectionActivity extends AppCompatActivity {
 		});
 
 		ArrayList<WorkoutSelectData> workouts = new ArrayList<>();
+		boolean done = false;
 		for (int i = 0; i < WorkoutData.WORKOUT_DESCRIPTIONS.length; i++) {
 			WorkoutDescription wd = WorkoutData.WORKOUT_DESCRIPTIONS[i];
 			workouts.add(new WorkoutSelectData(wd.getName(), saveActivitiesDoneToday.getWorkoutActivityCount(wd.getName()), wd.getColor(), wd.getDrawableID()));
+			if (saveActivitiesDoneToday.getWorkoutActivityCount(wd.getName()) < 3) {
+				done = false;
+			}
+		}
+		if (done) {
+			Intent intent = new Intent(getApplicationContext(), CalendarSetActivity.class);
+			startActivity(intent);
 		}
 		WorkoutSelectAdapter workoutSelectAdapter = new WorkoutSelectAdapter(getApplicationContext(), workouts);
 		listView.setAdapter(workoutSelectAdapter);
@@ -133,7 +178,11 @@ public class WorkoutSelectionActivity extends AppCompatActivity {
 						intent.putExtra("WorkoutType", "Touch");
 					}
 					intent.putExtra("Workout", WORKOUT_DESCRIPTIONS[currentSelection].getName());
-					intent.setClass(getApplicationContext(), PutPhoneInContainer.class);
+					if (WORKOUT_DESCRIPTIONS[currentSelection].getPrintType().equals(WorkoutData.Print_Container_No_Container) || WORKOUT_DESCRIPTIONS[currentSelection].getPrintType().equals(WorkoutData.Print_Container_Key)) {
+						intent.setClass(getApplicationContext(), GoalsAndRepsActivity.class);
+					} else {
+						intent.setClass(getApplicationContext(), PutPhoneInContainer.class);
+					}
 					startActivity(intent);
 				}
 			});
@@ -172,7 +221,7 @@ public class WorkoutSelectionActivity extends AppCompatActivity {
 
 	public void somethingSelectedView() {
 		if (!selectedYet) {
-			Toast.makeText(getApplicationContext(), "Please Select a Hand", Toast.LENGTH_SHORT).show();
+			//Toast.makeText(getApplicationContext(), "Please Select a Hand", Toast.LENGTH_SHORT).show();
 		}
 		selectedYet = true;
 		left.setAlpha(1f);
