@@ -50,7 +50,8 @@
                 android:paddingBottom="15sp"
                 android:text="Age"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                android:textSize="24sp" />
+                android:textSize="24sp"
+                android:visibility="invisible" />
 
             <EditText
                 android:id="@+id/enterAge"
@@ -59,7 +60,8 @@
                 android:ems="10"
                 android:hint="your age"
                 android:inputType="number"
-                android:paddingBottom="15sp" />
+                android:paddingBottom="15sp"
+                android:visibility="invisible" />
 
             <TextView
                 android:id="@+id/textView4"
@@ -101,7 +103,8 @@
                 android:paddingBottom="15sp"
                 android:text="Rehab Goals"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                android:textSize="24sp" />
+                android:textSize="24sp"
+                android:visibility="invisible" />
 
             <EditText
                 android:id="@+id/enterGoals"
@@ -110,7 +113,8 @@
                 android:ems="10"
                 android:hint="goals for your rehab"
                 android:inputType="textMultiLine"
-                android:paddingBottom="15sp" />
+                android:paddingBottom="15sp"
+                android:visibility="invisible" />
 
             <Button
                 android:id="@+id/enterSave"

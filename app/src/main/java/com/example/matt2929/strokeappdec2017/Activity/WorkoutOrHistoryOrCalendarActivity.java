@@ -27,10 +27,7 @@ public class WorkoutOrHistoryOrCalendarActivity extends AppCompatActivity {
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 		textView = findViewById(R.id.userNameSplashWelcome);
 		textView.setText("Welcome back, " + WorkoutData.UserName + "!");
-		if (saveLastGoalSet.isOneWeek(this)) {
-			Intent intent = new Intent(this, SetGoalsActivity.class);
-			startActivity(intent);
-		}
+
 		Button history = findViewById(R.id.workHist_Hist);
 		Button workout = findViewById(R.id.workHist_Work);
 		Button calendar = findViewById(R.id.workHist_Next);

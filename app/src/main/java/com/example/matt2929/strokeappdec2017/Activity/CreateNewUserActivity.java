@@ -31,8 +31,6 @@ public class CreateNewUserActivity extends AppCompatActivity {
 	    getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         RadioGroup handChoice = findViewById(R.id.enterRadios);
         final EditText nameEnter = findViewById(R.id.enterName);
-        final EditText ageEnter = findViewById(R.id.enterAge);
-        final EditText goalsEnter = findViewById(R.id.enterGoals);
         Button enterSave = findViewById(R.id.enterSave);
 
         //Name
@@ -41,23 +39,13 @@ public class CreateNewUserActivity extends AppCompatActivity {
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                newUser.setName(nameEnter.getText().toString());
+                newUser.setName((nameEnter.getText().toString()) + "BASELINE");
 
             }
             @Override
             public void afterTextChanged(Editable editable) {}
         });
         //Goals
-        goalsEnter.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                newUser.setGoals(goalsEnter.getText().toString());
-            }
-            @Override
-            public void afterTextChanged(Editable editable) {}
-        });
         //Left Hand = 0 || Right Hand = 1
         handChoice.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -70,22 +58,8 @@ public class CreateNewUserActivity extends AppCompatActivity {
             }
         });
         //Age
-        ageEnter.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                try {
-                    newUser.setAge(Integer.valueOf(ageEnter.getText().toString()));
-                } catch (NumberFormatException e) {
-                    Toast.makeText(getApplicationContext(), "The age given is not a number", Toast.LENGTH_SHORT).show();
-                }
-            }
-            @Override
-            public void afterTextChanged(Editable editable) {}
-        });
-	    //saveAllData but only if data has been entered into each field
-	    enterSave.setOnClickListener(new View.OnClickListener() {
+        //saveAllData but only if data has been entered into each field
+        enterSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (validateInput()) {
@@ -112,15 +86,6 @@ public class CreateNewUserActivity extends AppCompatActivity {
         if (newUser.getName().equals("000")) {
             count++;
             issues += ("\nNo Name Set");
-        }
-        if (newUser.getGoals().equals("000")) {
-            count++;
-            issues += ("\nNo goals set");
-        }
-        if (newUser.getAge() == -1) {
-            count++;
-            issues += ("\nNo age set");
-
         }
         if (count == 0) {
             return true;

@@ -82,7 +82,8 @@ public class GoalsAndRepsActivity extends
 		startWorkout.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				newIntent.putExtra("Reps", reps);
+				updateReps((3));
+				newIntent.putExtra("Reps", 3);
 				startActivity(newIntent);
 			}
 		});

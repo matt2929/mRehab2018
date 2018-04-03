@@ -34,7 +34,8 @@
             android:textAlignment="center"
             android:textColor="@android:color/black"
             android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:visibility="visible" />
 
         <TextView
             android:id="@+id/textView14"
@@ -44,7 +45,8 @@
             android:text="What would you like to do?"
             android:textAlignment="center"
             android:textColor="@android:color/black"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:visibility="invisible" />
 
         <Button
             android:id="@+id/workHist_Work"
@@ -77,6 +79,7 @@
             android:textAlignment="center"
             android:textAllCaps="false"
             android:textSize="24sp"
+            android:visibility="invisible"
             tools:layout_editor_absoluteX="133dp"
             tools:layout_editor_absoluteY="346dp" />
 
@@ -93,7 +96,8 @@
             android:text="Set Next Workout"
             android:textAlignment="center"
             android:textAllCaps="false"
-            android:textSize="24sp" />
+            android:textSize="24sp"
+            android:visibility="invisible" />
 
         <Space
             android:layout_width="match_parent"

@@ -82,10 +82,6 @@ public class WorkoutSelectionActivity extends AppCompatActivity {
 			@Override
 			public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 				currentSelection = i;
-				if (saveActivitiesDoneToday.getWorkoutActivityCount(WorkoutData.WORKOUT_DESCRIPTIONS[i].getName()) >= 3) {
-					Toast.makeText(getApplicationContext(), "This activity is completed, please select another.", Toast.LENGTH_SHORT).show();
-					nothingSelectedView();
-				} else {
 					isCupWorkout = WorkoutData.WORKOUT_DESCRIPTIONS[i].getPrintType().equals(WorkoutData.Print_Container_Cup);
 
 					somethingSelectedView();
@@ -96,7 +92,7 @@ public class WorkoutSelectionActivity extends AppCompatActivity {
 						handSelection(false);
 
 					}
-				}
+
 			}
 
 		});
@@ -104,10 +100,6 @@ public class WorkoutSelectionActivity extends AppCompatActivity {
 			@Override
 			public boolean onItemLongClick(AdapterView<?> parent, View view, int i, long id) {
 				currentSelection = i;
-				if (saveActivitiesDoneToday.getWorkoutActivityCount(WorkoutData.WORKOUT_DESCRIPTIONS[i].getName()) >= 3) {
-					Toast.makeText(getApplicationContext(), "This activity is completed, please select another.", Toast.LENGTH_SHORT).show();
-					nothingSelectedView();
-				} else {
 
 					isCupWorkout = WorkoutData.WORKOUT_DESCRIPTIONS[i].getPrintType().equals(WorkoutData.Print_Container_Cup);
 					somethingSelectedView();
@@ -118,7 +110,6 @@ public class WorkoutSelectionActivity extends AppCompatActivity {
 						handSelection(false);
 
 					}
-				}
 				return false;
 			}
 		});

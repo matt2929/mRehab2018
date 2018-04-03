@@ -14,12 +14,9 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.matt2929.strokeappdec2017.ListenersAndTriggers.SpeechInitListener;
 import com.example.matt2929.strokeappdec2017.R;
 import com.example.matt2929.strokeappdec2017.SaveAndLoadData.SaveWorkoutJSON;
 import com.example.matt2929.strokeappdec2017.SaveAndLoadData.WorkoutJSON;
-import com.example.matt2929.strokeappdec2017.Utilities.SFXPlayer;
-import com.example.matt2929.strokeappdec2017.Utilities.Text2Speech;
 import com.example.matt2929.strokeappdec2017.Values.WorkoutData;
 import com.example.matt2929.strokeappdec2017.Workouts.WorkoutDescription;
 
@@ -33,14 +30,11 @@ public class PostWorkoutReportActivity extends AppCompatActivity {
 	ArrayList<WorkoutJSON> workoutJSONS;
 	SaveWorkoutJSON saveWorkoutJSON;
 	ImageButton imageButton;
-	SFXPlayer sfxPlayer;
 	boolean betterReps = false;
 	boolean betterSmoothness = false;
 	boolean betterTime = false;
 	WorkoutJSON thisWorkout;
-	TextView currentRep, lastRep, currentTime, lastTime, currentSmooth, lastSmooth;
 	ImageView smoothView, timeView, repView;
-	private Text2Speech _Text2Speech;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -49,17 +43,9 @@ public class PostWorkoutReportActivity extends AppCompatActivity {
 
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-		currentRep = findViewById(R.id.currentRep);
-		lastRep = findViewById(R.id.lastRep);
-		currentTime = findViewById(R.id.currentTime);
-		lastTime = findViewById(R.id.lastTime);
-		currentSmooth = findViewById(R.id.currentSmoothness);
-		lastSmooth = findViewById(R.id.lastSmoothness);
 		smoothView = findViewById(R.id.shakeImage);
 		timeView = findViewById(R.id.timeImage);
 		repView = findViewById(R.id.repImage);
-		sfxPlayer = new SFXPlayer(getApplicationContext());
-		sfxPlayer.loadSFX(R.raw.tada);
 		Button button = findViewById(R.id.continueButton);
 		ImageButton imageButton = findViewById(R.id.homeButton);
 		imageButton.setOnClickListener(new View.OnClickListener() {
@@ -101,9 +87,6 @@ public class PostWorkoutReportActivity extends AppCompatActivity {
 		betterReps = false;
 		betterSmoothness = false;
 		betterTime = false;
-		currentSmooth.setText("" + floatToHundreth(thisWorkout.getAccuracy()));
-		currentRep.setText("" + floatToHundreth(thisWorkout.getReps()));
-		currentTime.setText("" + floatToHundreth(thisWorkout.getDuration()));
 		if (workoutJSONSFiltered.size() >= 2) {
 			WorkoutJSON previousWorkout = workoutJSONSFiltered.get(1);
 			//-----
@@ -111,9 +94,6 @@ public class PostWorkoutReportActivity extends AppCompatActivity {
 			betterSmoothness = (previousWorkout.getAccuracy() >= thisWorkout.getAccuracy());
 			betterTime = (previousWorkout.getDuration() >= thisWorkout.getDuration());
 			//-----
-			lastSmooth.setText("" + floatToHundreth(previousWorkout.getAccuracy()));
-			lastRep.setText("" + floatToHundreth(previousWorkout.getReps()));
-			lastTime.setText("" + floatToHundreth(previousWorkout.getDuration()));
 			//-----
 			if (betterReps) {
 				blinkView(repView);
@@ -129,16 +109,9 @@ public class PostWorkoutReportActivity extends AppCompatActivity {
 				timeView.setBackgroundColor(Color.GREEN);
 			}
 		} else {
-			lastSmooth.setText("" + -1);
-			lastRep.setText("" + -1);
-			lastTime.setText("" + -1);
 
 		}
-		checkTTS();
 
-		if (betterReps || betterSmoothness || betterTime) {
-			sfxPlayer.playSFX();
-		}
 
 		button.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -157,31 +130,6 @@ public class PostWorkoutReportActivity extends AppCompatActivity {
 		startActivityForResult(check, CHECK_CODE);
 	}
 
-	//use this to know when tts is done speaking
-	@Override
-	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		if (requestCode == CHECK_CODE) {
-			if (resultCode == TextToSpeech.Engine.CHECK_VOICE_DATA_PASS) {
-				_Text2Speech = new Text2Speech(this);
-				_Text2Speech.addInitListener(new SpeechInitListener() {
-					@Override
-					public void onInit() {
-						_Text2Speech.speak("Number of Reps " + floatToHundreth(thisWorkout.getReps()), WorkoutData.TTS_WORKOUT_DESCRIPTION);
-						_Text2Speech.silence(1000);
-						_Text2Speech.speak("Average Time " + floatToHundreth(thisWorkout.getDuration()), WorkoutData.TTS_WORKOUT_DESCRIPTION);
-						_Text2Speech.silence(1000);
-						_Text2Speech.speak("Average Smoothness " + floatToHundreth(thisWorkout.getAccuracy()), WorkoutData.TTS_WORKOUT_DESCRIPTION);
-					}
-				});
-
-			} else {
-				Intent install = new Intent();
-				install.setAction(TextToSpeech.Engine.ACTION_INSTALL_TTS_DATA);
-				startActivity(install);
-			}
-
-		}
-	}
 
 	private void blinkView(final View view) {
 		Handler handler = new Handler();

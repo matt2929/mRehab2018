@@ -16,7 +16,7 @@
     <application
         android:allowBackup="true"
         android:configChanges="keyboard|keyboardHidden|orientation"
-        android:icon="@drawable/mrehab"
+        android:icon="@drawable/ic_infinity_symbol"
         android:label="@string/app_name"
         android:roundIcon="@drawable/cupicon"
         android:supportsRtl="true"
