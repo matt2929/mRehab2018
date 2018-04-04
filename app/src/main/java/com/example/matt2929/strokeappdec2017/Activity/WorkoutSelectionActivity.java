@@ -82,17 +82,16 @@ public class WorkoutSelectionActivity extends AppCompatActivity {
 			@Override
 			public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 				currentSelection = i;
-					isCupWorkout = WorkoutData.WORKOUT_DESCRIPTIONS[i].getPrintType().equals(WorkoutData.Print_Container_Cup);
+				isCupWorkout = WorkoutData.WORKOUT_DESCRIPTIONS[i].getPrintType().equals(WorkoutData.Print_Container_Cup);
 
-					somethingSelectedView();
-					if (WorkoutData.UserData.getHand() == 0) {
-						handSelection(true);
+				somethingSelectedView();
+				if (WorkoutData.UserData.getHand() == 0) {
+					handSelection(true);
 
-					} else {
-						handSelection(false);
+				} else {
+					handSelection(false);
 
-					}
-
+				}
 			}
 
 		});
@@ -101,15 +100,15 @@ public class WorkoutSelectionActivity extends AppCompatActivity {
 			public boolean onItemLongClick(AdapterView<?> parent, View view, int i, long id) {
 				currentSelection = i;
 
-					isCupWorkout = WorkoutData.WORKOUT_DESCRIPTIONS[i].getPrintType().equals(WorkoutData.Print_Container_Cup);
-					somethingSelectedView();
-					if (WorkoutData.UserData.getHand() == 0) {
-						handSelection(true);
+				isCupWorkout = WorkoutData.WORKOUT_DESCRIPTIONS[i].getPrintType().equals(WorkoutData.Print_Container_Cup);
+				somethingSelectedView();
+				if (WorkoutData.UserData.getHand() == 0) {
+					handSelection(true);
 
-					} else {
-						handSelection(false);
+				} else {
+					handSelection(false);
 
-					}
+				}
 				return false;
 			}
 		});
