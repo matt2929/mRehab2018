@@ -44,12 +44,12 @@ public class WorkoutSelectionActivity extends AppCompatActivity {
 
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-		left = findViewById(R.id.selectLeft);
-		right = findViewById(R.id.selectRight);
+		left = (Button) findViewById(R.id.selectLeft);
+		right = (Button) findViewById(R.id.selectRight);
 		intent = new Intent(getApplicationContext(), GoalsAndRepsActivity.class);
-		continueButton = findViewById(R.id.continueButton);
-		imageButton = findViewById(R.id.homeButton);
-		listView = findViewById(R.id.selectActivity);
+		continueButton = (Button) findViewById(R.id.continueButton);
+		imageButton = (ImageButton) findViewById(R.id.homeButton);
+		listView = (ListView) findViewById(R.id.selectActivity);
 		nothingSelectedView();
 
 		saveActivitiesDoneToday = new SaveActivitiesDoneToday(getApplicationContext());
