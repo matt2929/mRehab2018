@@ -32,7 +32,7 @@
                 android:paddingBottom="15sp"
                 android:text="Name"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                android:textSize="24sp" />
+                android:textSize="36sp" />
 
             <EditText
                 android:id="@+id/enterName"
@@ -41,7 +41,8 @@
                 android:ems="10"
                 android:hint="your name"
                 android:inputType="textPersonName"
-                android:paddingBottom="15sp" />
+                android:paddingBottom="15sp"
+                android:textSize="36sp" />
 
             <TextView
                 android:id="@+id/textView3"
@@ -70,7 +71,7 @@
                 android:paddingBottom="15sp"
                 android:text="Affected Side"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                android:textSize="24sp" />
+                android:textSize="36sp" />
 
             <RadioGroup
                 android:id="@+id/enterRadios"
@@ -85,7 +86,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="left"
-                    android:textSize="24sp" />
+                    android:textSize="36sp" />
 
                 <RadioButton
                     android:id="@+id/enterRight"
@@ -93,13 +94,14 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="right"
-                    android:textSize="24sp" />
+                    android:textSize="36sp" />
             </RadioGroup>
 
             <TextView
                 android:id="@+id/textView5"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight=".2"
                 android:paddingBottom="15sp"
                 android:text="Rehab Goals"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body2"
@@ -109,7 +111,8 @@
             <EditText
                 android:id="@+id/enterGoals"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight=".2"
                 android:ems="10"
                 android:hint="goals for your rehab"
                 android:inputType="textMultiLine"
@@ -119,11 +122,11 @@
             <Button
                 android:id="@+id/enterSave"
                 android:layout_width="match_parent"
-                android:layout_height="100sp"
+                android:layout_height="75sp"
                 android:layout_margin="15dp"
                 android:background="@drawable/button_shape_grey"
                 android:text="Save"
-                android:textSize="24sp" />
+                android:textSize="36sp" />
 
         </LinearLayout>
     </ScrollView>

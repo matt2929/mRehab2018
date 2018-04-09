@@ -6,4 +6,5 @@
     <color name="colorBackground">#fff</color>
     <color name="colorPhoneScreen">#b6ffb6</color>
     <color name="colorMaroon">#9D1F61</color>
+    <color name="color_list_back">#d1d1d1</color>
 </resources>

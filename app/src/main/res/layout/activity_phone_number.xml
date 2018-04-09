@@ -60,7 +60,7 @@
                 android:background="@android:drawable/btn_default"
                 android:fontFamily="sans-serif-condensed"
                 android:text="1"
-                android:textSize="36sp"
+                android:textSize="46sp"
                 android:textStyle="bold" />
 
             <Button
@@ -71,7 +71,7 @@
                 android:background="@android:drawable/btn_default"
                 android:fontFamily="sans-serif-condensed"
                 android:text="2"
-                android:textSize="36sp"
+                android:textSize="46sp"
                 android:textStyle="bold" />
 
             <Button
@@ -82,7 +82,7 @@
                 android:background="@android:drawable/btn_default"
                 android:fontFamily="sans-serif-condensed"
                 android:text="3"
-                android:textSize="36sp"
+                android:textSize="46sp"
                 android:textStyle="bold" />
         </LinearLayout>
 

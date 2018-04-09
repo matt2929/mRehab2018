@@ -30,14 +30,14 @@
         android:textColor="@android:color/black"
         android:textSize="18sp"
         android:textStyle="bold"
-        android:visibility="invisible" />
+        android:visibility="gone" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="25"
         android:orientation="horizontal"
-        android:visibility="invisible"
+        android:visibility="gone"
         android:weightSum="3">
 
         <ImageView
@@ -47,7 +47,7 @@
             android:layout_weight="1"
             android:padding="10sp"
             android:scaleType="fitXY"
-            android:visibility="invisible"
+            android:visibility="gone"
             app:srcCompat="@drawable/muscle" />
 
         <LinearLayout
@@ -55,7 +55,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:orientation="vertical"
-            android:visibility="invisible">
+            android:visibility="gone">
 
             <TextView
                 android:layout_width="match_parent"
@@ -65,7 +65,7 @@
                 android:text="Current Attempt"
                 android:textColor="@android:color/black"
                 android:textSize="16sp"
-                android:visibility="invisible" />
+                android:visibility="gone" />
 
             <TextView
                 android:id="@+id/currentRep"
@@ -79,7 +79,7 @@
                 android:textColor="@android:color/black"
                 android:textSize="36sp"
                 android:textStyle="normal|bold"
-                android:visibility="invisible" />
+                android:visibility="gone" />
         </LinearLayout>
 
         <LinearLayout
@@ -87,7 +87,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:orientation="vertical"
-            android:visibility="invisible">
+            android:visibility="gone">
 
             <TextView
                 android:layout_width="match_parent"
@@ -97,7 +97,7 @@
                 android:text="Last Attempt"
                 android:textColor="@android:color/black"
                 android:textSize="16sp"
-                android:visibility="invisible" />
+                android:visibility="gone" />
 
             <TextView
                 android:id="@+id/lastRep"
@@ -313,7 +313,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="10"
+        android:layout_weight="26"
         android:orientation="horizontal"
         android:weightSum="3">
 
@@ -344,7 +344,7 @@
             android:text="Next Activity"
             android:textAllCaps="false"
             android:textColor="@color/colorBackground"
-            android:textSize="24sp" />
+            android:textSize="36sp" />
 
     </LinearLayout>
 

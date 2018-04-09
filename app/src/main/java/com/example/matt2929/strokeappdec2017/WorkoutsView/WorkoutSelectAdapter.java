@@ -42,12 +42,15 @@ public class WorkoutSelectAdapter extends ArrayAdapter<WorkoutSelectData> {
 		ImageView imageView = convertView.findViewById(R.id.iconView);
 		imageView.setImageResource(workoutSelectData.getResID());
 		activityName.setText(workoutSelectData.getWorkoutName());
+		activityName.setTextSize(40);
+		activityCount.setTextSize(40);
+
 		activityName.setTextColor(Color.BLACK);
 		activityName.setBackgroundColor(workoutSelectData.getColor());
 		activityCount.setTextColor(Color.BLACK);
 		activityCount.setText("" + workoutSelectData.getActivityCount() + "/3");
-		activityCount.setTextSize(textSize);
-		activityName.setTextSize(textSize);
+		//	activityCount.setTextSize(textSize);
+		//activityName.setTextSize(textSize);
 		activityName.setShadowLayer(5, 5, 5, Color.LTGRAY);
 		return convertView;
 	}

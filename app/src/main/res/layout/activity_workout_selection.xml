@@ -23,14 +23,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_weight="2"
             android:orientation="horizontal"
             android:weightSum="10">
-
-            <Space
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1.5" />
 
             <TextView
                 android:id="@+id/textView17"
@@ -40,17 +35,17 @@
                 android:gravity="center"
                 android:text="Select an Activity"
                 android:textColor="@android:color/black"
-                android:textSize="18sp" />
+                android:textSize="36sp" />
 
             <TextView
                 android:id="@+id/textView12"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="2"
+                android:layout_weight="3.5"
                 android:gravity="center"
                 android:text="Sets"
                 android:textColor="@android:color/black"
-                android:textSize="18sp" />
+                android:textSize="36sp" />
         </LinearLayout>
 
         <ListView
@@ -59,6 +54,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="6"
+            android:background="@color/color_list_back"
             android:choiceMode="singleChoice"
             android:listSelector="@color/colorPhoneScreen"
             app:layout_constraintBottom_toTopOf="@+id/linearLayout"
@@ -71,7 +67,7 @@
             android:id="@+id/textView6"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight=".5"
+            android:layout_weight="0"
             android:text="Which hand would you like to use?"
             android:textAlignment="center"
             android:textColor="@android:color/black"
@@ -86,7 +82,7 @@
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginStart="8dp"
-            android:layout_weight="1.5"
+            android:layout_weight="0"
             android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -123,7 +119,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_weight="2"
             android:orientation="horizontal"
             android:weightSum="2">
 
@@ -135,7 +131,7 @@
                 android:layout_marginLeft="25dp"
                 android:layout_marginRight="25dp"
                 android:layout_marginTop="10dp"
-                android:layout_weight="1"
+                android:layout_weight=".6"
                 android:background="@drawable/button_shape_grey"
                 android:scaleType="centerInside"
                 app:srcCompat="@drawable/home" />
@@ -145,16 +141,13 @@
                 android:id="@+id/continueButton"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_marginBottom="10dp"
-                android:layout_marginLeft="25dp"
-                android:layout_marginRight="25dp"
-                android:layout_marginTop="10dp"
-                android:layout_weight="1"
+                android:layout_weight="1.3"
                 android:background="@drawable/button_shape_dkblue"
                 android:text="Continue"
+                android:textAlignment="center"
                 android:textAllCaps="false"
                 android:textColor="@color/colorBackground"
-                android:textSize="24sp" />
+                android:textSize="36sp" />
 
         </LinearLayout>
     </LinearLayout>
