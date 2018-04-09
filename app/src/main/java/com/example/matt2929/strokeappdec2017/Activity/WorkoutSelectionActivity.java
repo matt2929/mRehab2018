@@ -82,15 +82,20 @@ public class WorkoutSelectionActivity extends AppCompatActivity {
 			@Override
 			public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 				currentSelection = i;
-				isCupWorkout = WorkoutData.WORKOUT_DESCRIPTIONS[i].getPrintType().equals(WorkoutData.Print_Container_Cup);
-
-				somethingSelectedView();
-				if (WorkoutData.UserData.getHand() == 0) {
-					handSelection(true);
-
+				if (saveActivitiesDoneToday.getWorkoutActivityCount(WorkoutData.WORKOUT_DESCRIPTIONS[i].getName()) >= 3) {
+					Toast.makeText(getApplicationContext(), "This activity is completed, please select another.", Toast.LENGTH_SHORT).show();
+					nothingSelectedView();
 				} else {
-					handSelection(false);
+					isCupWorkout = WorkoutData.WORKOUT_DESCRIPTIONS[i].getPrintType().equals(WorkoutData.Print_Container_Cup);
 
+					somethingSelectedView();
+					if (WorkoutData.UserData.getHand() == 0) {
+						handSelection(true);
+
+					} else {
+						handSelection(false);
+
+					}
 				}
 			}
 
@@ -99,15 +104,20 @@ public class WorkoutSelectionActivity extends AppCompatActivity {
 			@Override
 			public boolean onItemLongClick(AdapterView<?> parent, View view, int i, long id) {
 				currentSelection = i;
-
-				isCupWorkout = WorkoutData.WORKOUT_DESCRIPTIONS[i].getPrintType().equals(WorkoutData.Print_Container_Cup);
-				somethingSelectedView();
-				if (WorkoutData.UserData.getHand() == 0) {
-					handSelection(true);
-
+				if (saveActivitiesDoneToday.getWorkoutActivityCount(WorkoutData.WORKOUT_DESCRIPTIONS[i].getName()) >= 3) {
+					Toast.makeText(getApplicationContext(), "This activity is completed, please select another.", Toast.LENGTH_SHORT).show();
+					nothingSelectedView();
 				} else {
-					handSelection(false);
 
+					isCupWorkout = WorkoutData.WORKOUT_DESCRIPTIONS[i].getPrintType().equals(WorkoutData.Print_Container_Cup);
+					somethingSelectedView();
+					if (WorkoutData.UserData.getHand() == 0) {
+						handSelection(true);
+
+					} else {
+						handSelection(false);
+
+					}
 				}
 				return false;
 			}
@@ -116,17 +126,21 @@ public class WorkoutSelectionActivity extends AppCompatActivity {
 			@Override
 			public void onItemSelected(AdapterView<?> parent, View view, int i, long id) {
 				currentSelection = i;
-				isCupWorkout = WorkoutData.WORKOUT_DESCRIPTIONS[i].getPrintType().equals(WorkoutData.Print_Container_Cup);
-				somethingSelectedView();
-				if (WorkoutData.UserData.getHand() == 0) {
-					handSelection(true);
-
+				if (saveActivitiesDoneToday.getWorkoutActivityCount(WorkoutData.WORKOUT_DESCRIPTIONS[i].getName()) >= 3) {
+					Toast.makeText(getApplicationContext(), "This activity is completed, please select another.", Toast.LENGTH_SHORT).show();
+					nothingSelectedView();
 				} else {
-					handSelection(false);
+					isCupWorkout = WorkoutData.WORKOUT_DESCRIPTIONS[i].getPrintType().equals(WorkoutData.Print_Container_Cup);
+					somethingSelectedView();
+					if (WorkoutData.UserData.getHand() == 0) {
+						handSelection(true);
 
+					} else {
+						handSelection(false);
+
+					}
 				}
 			}
-
 
 			@Override
 			public void onNothingSelected(AdapterView<?> parent) {
@@ -135,12 +149,18 @@ public class WorkoutSelectionActivity extends AppCompatActivity {
 		});
 
 		ArrayList<WorkoutSelectData> workouts = new ArrayList<>();
+		boolean done = true;
 		for (int i = 0; i < WorkoutData.WORKOUT_DESCRIPTIONS.length; i++) {
 			WorkoutDescription wd = WorkoutData.WORKOUT_DESCRIPTIONS[i];
 			workouts.add(new WorkoutSelectData(wd.getName(), saveActivitiesDoneToday.getWorkoutActivityCount(wd.getName()), wd.getColor(), wd.getDrawableID()));
-
+			if (saveActivitiesDoneToday.getWorkoutActivityCount(wd.getName()) < 3) {
+				done = false;
+			}
 		}
-
+		if (done) {
+			Intent intent = new Intent(getApplicationContext(), CalendarSetActivity.class);
+			startActivity(intent);
+		}
 		WorkoutSelectAdapter workoutSelectAdapter = new WorkoutSelectAdapter(getApplicationContext(), workouts);
 		listView.setAdapter(workoutSelectAdapter);
 

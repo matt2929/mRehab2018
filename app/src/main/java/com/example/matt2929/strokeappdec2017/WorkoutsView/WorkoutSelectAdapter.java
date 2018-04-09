@@ -45,7 +45,7 @@ public class WorkoutSelectAdapter extends ArrayAdapter<WorkoutSelectData> {
 		activityName.setTextColor(Color.BLACK);
 		activityName.setBackgroundColor(workoutSelectData.getColor());
 		activityCount.setTextColor(Color.BLACK);
-		activityCount.setText("" + workoutSelectData.getActivityCount());
+		activityCount.setText("" + workoutSelectData.getActivityCount() + "/3");
 		activityCount.setTextSize(textSize);
 		activityName.setTextSize(textSize);
 		activityName.setShadowLayer(5, 5, 5, Color.LTGRAY);

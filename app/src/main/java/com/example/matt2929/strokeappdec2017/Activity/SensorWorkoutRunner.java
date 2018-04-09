@@ -267,6 +267,7 @@ public class SensorWorkoutRunner extends AppCompatActivity implements SensorEven
 				break;
 			}
 		}
+		reps = 3;
 		if (_WorkoutDescription.getName().equals("Horizontal Bowl")) {
 			setupSensorsLinear();
 			_CurrentWorkout = new WO_PickUpHorizontal(WorkoutName, reps, speechTrigger, endRepTrigger, _SFXPlayer, outputWorkoutData, outputWorkoutStrings);

@@ -251,7 +251,7 @@ public class TouchWorkoutRunner extends AppCompatActivity {
 			views.add(findViewById(R.id.circle5));
 			views.add(findViewById(R.id.circle6));
 			_CurrentWorkoutView = workoutViewAbstract;
-			_CurrentWorkout = new WO_QuickTouch(WorkoutName, reps, views, endRepTrigger, speechTrigger, _SFXPlayer, outputWorkoutData, outputWorkoutStrings);
+			_CurrentWorkout = new WO_QuickTouch(WorkoutName, 3, views, endRepTrigger, speechTrigger, _SFXPlayer, outputWorkoutData, outputWorkoutStrings);
 		}
 
 		final Handler handler = new Handler();

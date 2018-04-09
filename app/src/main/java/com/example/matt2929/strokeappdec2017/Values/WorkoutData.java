@@ -27,13 +27,13 @@ public final class WorkoutData {
 
 	public final static WorkoutDescription[] WORKOUT_DESCRIPTIONS = new WorkoutDescription[]
 			{
-					new WorkoutDescription("Horizontal Mug", Workout_Type_Sensor, Sensor_Type_Linear, Print_Container_Cup, 10,
+					new WorkoutDescription("Horizontal Mug", Workout_Type_Sensor, Sensor_Type_Linear, Print_Container_Cup, 3,
 							"You will move the mug from one side of the panel to the other. Set the mug on the table and wait for me to count. Then, move the mug again.",
 							Color.rgb(125, 190, 214), R.drawable.ic_horizontalmugxhdpi),
-					new WorkoutDescription("Quick Twist Mug", Workout_Type_Sensor, Sensor_Type_Linear, Print_Container_Cup, 10,
+					new WorkoutDescription("Quick Twist Mug", Workout_Type_Sensor, Sensor_Type_Linear, Print_Container_Cup, 3,
 							"Hold the mug in front of you in an upright position. As quickly as you can turn your hand outward and then return to the upright position.",
 							Color.rgb(125, 190, 214), R.drawable.ic_quicktwistwithmugxhdpi),
-					new WorkoutDescription("Unlock With Key", Workout_Type_Touch, null, Print_Container_Key, 5,
+					new WorkoutDescription("Unlock With Key", Workout_Type_Touch, null, Print_Container_Key, 3,
 							"With the key in contact with the phone screen, rotate the key clockwise and wait for me to count. Then rotate it counterclockwise, and wait for me to count again.",
 							Color.rgb(146, 157, 24), R.drawable.ic_unlockkeyhdpi),
 			};
