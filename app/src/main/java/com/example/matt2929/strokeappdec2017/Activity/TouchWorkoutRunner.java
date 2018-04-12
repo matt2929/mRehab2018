@@ -273,7 +273,7 @@ public class TouchWorkoutRunner extends AppCompatActivity {
 	@Override
 	public boolean dispatchTouchEvent(MotionEvent event) {
 		if (event.getAction() == MotionEvent.ACTION_DOWN || event.getAction() == MotionEvent.ACTION_MOVE) {
-			Boolean GoodTouch = _CurrentWorkout.TouchIn(event.getX(), event.getY());
+			Boolean GoodTouch = _CurrentWorkout.TouchIn(event.getX(), event.getY(), event);
 			int goodTouchInt;
 			if (GoodTouch) {
 				goodTouchInt = 1;

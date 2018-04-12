@@ -18,7 +18,7 @@ public class WO_Twist extends SensorWorkoutAbstract {
 	boolean down = false;
 	float lastValue = 0;
 	int count = 0;
-	float threshold = -3.75f;
+	float threshold = -3.0f;
 	ZeroCrossCalculation zeroCrossCalculation;
 
 	public WO_Twist(String Name, Integer reps, SpeechTrigger speechTrigger, EndRepTrigger endRepTrigger, SFXPlayer sfxPlayer, OutputWorkoutData outputWorkoutData, OutputWorkoutStrings outputWorkoutStrings) {

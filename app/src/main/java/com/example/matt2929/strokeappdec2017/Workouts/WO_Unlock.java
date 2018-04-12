@@ -1,6 +1,7 @@
 package com.example.matt2929.strokeappdec2017.Workouts;
 
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 
 import com.example.matt2929.strokeappdec2017.ListenersAndTriggers.EndRepTrigger;
@@ -32,7 +33,7 @@ public class WO_Unlock extends TouchWorkoutAbstract {
 	}
 
 	@Override
-	public boolean TouchIn(float x, float y) {
+	public boolean TouchIn(float x, float y, MotionEvent me) {
 		if (WorkoutInProgress) {
 			outputData(new float[]{x, y});
 			double angle = Math.atan((y / x));

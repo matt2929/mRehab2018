@@ -55,7 +55,6 @@
         <view
             android:id="@+id/circle6"
             class="com.example.matt2929.strokeappdec2017.WorkoutsView.CircleView"
-            id="@+id/view"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_weight="2.5"

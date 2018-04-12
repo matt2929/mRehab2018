@@ -101,7 +101,8 @@
                 android:paddingBottom="15sp"
                 android:text="Rehab Goals"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                android:textSize="24sp" />
+                android:textSize="24sp"
+                android:visibility="gone" />
 
             <EditText
                 android:id="@+id/enterGoals"
@@ -110,7 +111,8 @@
                 android:ems="10"
                 android:hint="goals for your rehab"
                 android:inputType="textMultiLine"
-                android:paddingBottom="15sp" />
+                android:paddingBottom="15sp"
+                android:visibility="gone" />
 
             <Button
                 android:id="@+id/enterSave"

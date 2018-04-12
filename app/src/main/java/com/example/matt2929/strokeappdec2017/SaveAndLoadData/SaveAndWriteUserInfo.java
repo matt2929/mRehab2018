@@ -63,7 +63,7 @@ public class SaveAndWriteUserInfo {
 		return null;
 	}
     public void saveUser(User newUser){
-        String filename = "USER_"+newUser.getName()+"_"+newUser.getHand()+".txt";
+        String filename = "USER_Full_" + newUser.getName() + "_" + newUser.getHand() + ".txt";
         String string = "Name:"+newUser.getName();
         string += ("\nAge:"+newUser.getAge());
         string += ("\nAffected:"+newUser.getHand());
@@ -86,7 +86,7 @@ public class SaveAndWriteUserInfo {
             File file = files.remove();
             if (file.isDirectory()) {
                 files.addAll(Arrays.asList(file.listFiles()));
-            } else if (file.getName().contains("USER")) {
+            } else if (file.getName().contains("USER") && file.getName().contains("Full")) {
                 inFiles.add(file);
             }
         }

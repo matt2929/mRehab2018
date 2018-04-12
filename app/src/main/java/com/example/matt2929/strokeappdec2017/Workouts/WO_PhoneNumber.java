@@ -2,6 +2,7 @@ package com.example.matt2929.strokeappdec2017.Workouts;
 
 import android.graphics.Color;
 import android.os.Handler;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -30,7 +31,7 @@ public class WO_PhoneNumber extends TouchWorkoutAbstract {
 	int[] phoneNumber = new int[10];
 	boolean[] phoneNumberProg = new boolean[10];
 	Long delayTime = 4000l;
-	int incorrect = 0;
+	float incorrect = 0;
 
 	public WO_PhoneNumber(String Name, Integer reps, ArrayList<View> views, EndRepTrigger endRepTrigger, SpeechTrigger speechTrigger, SFXPlayer sfxPlayer, OutputWorkoutData outputWorkoutData, OutputWorkoutStrings outputWorkoutStrings) {
 		super.TouchWorkout(Name, reps, views, endRepTrigger, speechTrigger, sfxPlayer, outputWorkoutData, outputWorkoutStrings);
@@ -51,7 +52,7 @@ public class WO_PhoneNumber extends TouchWorkoutAbstract {
 	}
 
 	@Override
-	public boolean TouchIn(float x, float y) {
+	public boolean TouchIn(float x, float y, MotionEvent me) {
 		for (Button button : buttons) {
 			if (x >= button.getLeft() && x < button.getRight()) {
 				if (y > button.getTop() && y < button.getBottom()) {
@@ -84,7 +85,6 @@ public class WO_PhoneNumber extends TouchWorkoutAbstract {
 			for (int i = 0; i < phoneNumberProg.length; i++) {
 				if (phoneNumberProg[i] == false) {
 					if (phoneNumber[i] == number) {
-						incorrect++;
 						phoneNumberProg[i] = true;
 						quickChange(b, Color.GREEN);
 						whatTyped.setText(whatTyped.getText().toString() + numS);
@@ -100,6 +100,7 @@ public class WO_PhoneNumber extends TouchWorkoutAbstract {
 						break;
 					} else {
 						quickChange(b, Color.RED);
+						incorrect++;
 						break;
 					}
 				}
@@ -146,7 +147,9 @@ public class WO_PhoneNumber extends TouchWorkoutAbstract {
 
 	@Override
 	public WorkoutScore getScore() {
-		return new WorkoutScore("Accuracy", ((((float) reps * 10f) - (float) incorrect)) / ((float) reps * 10f) * 100f);
+		Float touches = Float.valueOf(10 * this.reps);
+
+		return new WorkoutScore("Accuracy", ((touches) / ((touches) + incorrect)) * 100f);
 	}
 
 	public boolean checkDone() {

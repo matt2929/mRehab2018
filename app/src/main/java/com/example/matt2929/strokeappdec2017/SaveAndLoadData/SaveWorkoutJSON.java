@@ -64,9 +64,9 @@ public class SaveWorkoutJSON {
 
 	public void addNewWorkout(String WorkoutName, String Hand, float Duration, float Accuracy, int Reps) {
 		Calendar currentCalendar = Calendar.getInstance();
-		String fileName = WorkoutData.UserName + "_" + WorkoutName + "_" + currentCalendar.get(Calendar.YEAR) + "~" + currentCalendar.get(Calendar.MONTH) + "~" + currentCalendar.get(Calendar.DAY_OF_MONTH) + "_[" + currentCalendar.get(Calendar.HOUR_OF_DAY) + "h~" + currentCalendar.get(Calendar.MINUTE) + "m" + currentCalendar.get(Calendar.SECOND) + "].json";
+		String fileName = WorkoutData.UserName + "_" + "FullVersion" + "_" + WorkoutName + "_" + currentCalendar.get(Calendar.YEAR) + "~" + currentCalendar.get(Calendar.MONTH) + "~" + currentCalendar.get(Calendar.DAY_OF_MONTH) + "_[" + currentCalendar.get(Calendar.HOUR_OF_DAY) + "h~" + currentCalendar.get(Calendar.MINUTE) + "m" + currentCalendar.get(Calendar.SECOND) + "].json";
 		String output = "";
-		WorkoutJSON newWorkoutJSON = new WorkoutJSON(WorkoutData.UserName, WorkoutName, Reps, Duration, Accuracy, Hand);
+		WorkoutJSON newWorkoutJSON = new WorkoutJSON(context, WorkoutData.UserName, WorkoutName, Reps, Duration, Accuracy, Hand);
 		output = newWorkoutJSON.getJSONString();
 		File fileParent = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "RehabApplicationAllWorkouts");
 		if (!fileParent.exists()) {

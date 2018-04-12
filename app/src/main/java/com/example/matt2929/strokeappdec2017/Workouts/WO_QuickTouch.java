@@ -1,6 +1,7 @@
 package com.example.matt2929.strokeappdec2017.Workouts;
 
 import android.graphics.Color;
+import android.view.MotionEvent;
 import android.view.View;
 
 import com.example.matt2929.strokeappdec2017.ListenersAndTriggers.EndRepTrigger;
@@ -37,39 +38,42 @@ public class WO_QuickTouch extends TouchWorkoutAbstract {
 	}
 
 	@Override
-	public boolean TouchIn(float x, float y) {
-		if (WorkoutInProgress && !inCooldown) {
-			for (View v : views) {
-				int[] coor = new int[2];
-				v.getLocationInWindow(coor);
-				if (coor[0] <= x && coor[0] + v.getWidth() > x) {
-					if (coor[1] <= y && coor[1] + v.getHeight() > y) {
-						CircleView circleView = (CircleView) v;
-						circleView.setColor(Color.GREEN);
-						circleView.invalidate();
-						if (!touched.contains(v.getId())) {
-							touched.add(v.getId());
-						}
-						if (checkDone()) {
-							completed++;
-							endRepTrigger.endRep();
-							if (completed == reps) {
-								workoutComplete = true;
-							} else {
-								canTouch = false;
-								inCooldown = true;
-								speechTrigger.speak("Rep " + completed + " completed. Next rep starting in 5 Seconds.");
-								coolDown = System.currentTimeMillis();
+	public boolean TouchIn(float x, float y, MotionEvent me) {
+		if (me.getAction() == MotionEvent.ACTION_DOWN) {
+			if (WorkoutInProgress && !inCooldown) {
+				for (View v : views) {
+					int[] coor = new int[2];
+					v.getLocationInWindow(coor);
+					if (coor[0] <= x && coor[0] + v.getWidth() > x) {
+						if (coor[1] <= y && coor[1] + v.getHeight() > y) {
+							CircleView circleView = (CircleView) v;
+							circleView.setColor(Color.GREEN);
+							circleView.invalidate();
+							if (!touched.contains(v.getId())) {
+								touched.add(v.getId());
 							}
+							if (checkDone()) {
+								completed++;
+								endRepTrigger.endRep();
+								if (completed == reps) {
+									workoutComplete = true;
+								} else {
+									canTouch = false;
+									inCooldown = true;
+									speechTrigger.speak("Rep " + completed + " completed. Next rep starting in 5 Seconds.");
+									coolDown = System.currentTimeMillis();
+								}
 
+							}
+							return true;
 						}
-						return true;
 					}
 				}
 			}
+			incorrect++;
+			return false;
 		}
-		incorrect++;
-		return false;
+		return true;
 	}
 
 	@Override

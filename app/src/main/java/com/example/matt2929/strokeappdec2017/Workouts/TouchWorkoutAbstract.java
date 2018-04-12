@@ -1,5 +1,6 @@
 package com.example.matt2929.strokeappdec2017.Workouts;
 
+import android.view.MotionEvent;
 import android.view.View;
 
 import com.example.matt2929.strokeappdec2017.ListenersAndTriggers.EndRepTrigger;
@@ -23,7 +24,7 @@ public class TouchWorkoutAbstract extends WorkoutAbstract {
 
 	}
 
-	public boolean TouchIn(float x, float y) {
+	public boolean TouchIn(float x, float y, MotionEvent me) {
 		return false;
 	}
 

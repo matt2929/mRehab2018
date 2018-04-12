@@ -44,7 +44,7 @@ public class SaveTouchAndSensor extends AsyncTask<Void, Void, Void> {
 		int minute = cal.get(Calendar.MINUTE);
 		int second = cal.get(Calendar.SECOND);
 		this.heading = heading;
-		_fileName = WorkoutData.UserName + "_" + workoutName + "_" + (month + 1) + "-" + day + "-" + year + "_[" + hour + "h~" + minute + "m~" + second + "s].csv";
+		_fileName = WorkoutData.UserName + "_" + workoutName + "_" + "FullVersion" + "_" + (month + 1) + "-" + day + "-" + year + "_[" + hour + "h~" + minute + "m~" + second + "s].csv";
 		uploadToAmazonBucket = new UploadToAmazonBucket(_context);
 	}
 

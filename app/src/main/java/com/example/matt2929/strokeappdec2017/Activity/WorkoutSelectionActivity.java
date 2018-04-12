@@ -133,7 +133,11 @@ public class WorkoutSelectionActivity extends AppCompatActivity {
 						intent.putExtra("WorkoutType", "Touch");
 					}
 					intent.putExtra("Workout", WORKOUT_DESCRIPTIONS[currentSelection].getName());
-					intent.setClass(getApplicationContext(), PutPhoneInContainer.class);
+					if (WORKOUT_DESCRIPTIONS[currentSelection].getPrintType().equals(WorkoutData.Print_Container_No_Container) || WORKOUT_DESCRIPTIONS[currentSelection].getPrintType().equals(WorkoutData.Print_Container_Door) || WORKOUT_DESCRIPTIONS[currentSelection].getPrintType().equals(WorkoutData.Print_Container_Key)) {
+						intent.setClass(getApplicationContext(), GoalsAndRepsActivity.class);
+					} else {
+						intent.setClass(getApplicationContext(), PutPhoneInContainer.class);
+					}
 					startActivity(intent);
 				}
 			});

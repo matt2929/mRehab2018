@@ -113,10 +113,6 @@ public class CreateNewUserActivity extends AppCompatActivity {
             count++;
             issues += ("\nNo Name Set");
         }
-        if (newUser.getGoals().equals("000")) {
-            count++;
-            issues += ("\nNo goals set");
-        }
         if (newUser.getAge() == -1) {
             count++;
             issues += ("\nNo age set");
