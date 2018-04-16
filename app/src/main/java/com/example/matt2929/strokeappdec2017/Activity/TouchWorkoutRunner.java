@@ -7,9 +7,11 @@ import android.os.Handler;
 import android.speech.tts.TextToSpeech;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.RelativeLayout;
 
@@ -76,6 +78,10 @@ public class TouchWorkoutRunner extends AppCompatActivity {
 		_SaveWorkoutJSON = new SaveWorkoutJSON(getApplicationContext());
 		_SFXPlayer = new SFXPlayer(getApplicationContext());
 		_SaveActivitiesDoneToday = new SaveActivitiesDoneToday(getApplicationContext());
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+				WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
 		SetupWorkout(_WorkoutName, _WorkoutReps);
 		checkTTS();
 
@@ -162,6 +168,17 @@ public class TouchWorkoutRunner extends AppCompatActivity {
 	}
 
 	public void SetupWorkout(String WorkoutName, int reps) {
+		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+				WindowManager.LayoutParams.FLAG_FULLSCREEN);
+		int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+				| View.SYSTEM_UI_FLAG_FULLSCREEN;
+
+// Hide both the navigation bar and the status bar.
+// SYSTEM_UI_FLAG_FULLSCREEN is only available on Android 4.1 and higher, but as
+// a general rule, you should design your app to hide the status bar whenever you
+// hide the navigation bar.
+		//decorView.setSystemUiVisibility(uiOptions);
+
 		SpeechTrigger speechTrigger = new SpeechTrigger() {
 			@Override
 			public void speak(String s) {
@@ -196,6 +213,10 @@ public class TouchWorkoutRunner extends AppCompatActivity {
 			}
 		}
 		if (_WorkoutDescription.getName().equals("Unlock With Key")) {
+			getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+					WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+
 			_CurrentWorkoutView = new WV_Unlock(getApplicationContext());
 			setContentView(_CurrentWorkoutView);
 			ArrayList<View> views = new ArrayList<>();
@@ -268,8 +289,28 @@ public class TouchWorkoutRunner extends AppCompatActivity {
 			}
 		});
 
+// SYSTEM_UI_FLAG_FULLSCREEN is only available on Android 4.1 and higher, but as
+// a general rule, you should design your app to hide the status bar whenever you
+// hide the navigation bar.
+	
+
 	}
 
+	@Override
+	public void onWindowFocusChanged(boolean hasFocus) {
+		View decorView = getWindow().getDecorView();
+
+		super.onWindowFocusChanged(hasFocus);
+		if (hasFocus) {
+			decorView.setSystemUiVisibility(
+					View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+							| View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+							| View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+							| View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+							| View.SYSTEM_UI_FLAG_FULLSCREEN
+							| View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+		}
+	}
 	@Override
 	public boolean dispatchTouchEvent(MotionEvent event) {
 		if (event.getAction() == MotionEvent.ACTION_DOWN || event.getAction() == MotionEvent.ACTION_MOVE) {
@@ -295,6 +336,12 @@ public class TouchWorkoutRunner extends AppCompatActivity {
 		return value;
 	}
 
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if ((keyCode == KeyEvent.KEYCODE_BACK)) {
+		}
+		return super.onKeyDown(keyCode, event);
+	}
 	private void workoutEndSequence() {
 		_SFXPlayer.killAll();
 		_SaveHistoricalReps.updateWorkout(_CurrentWorkout.getName(), _WorkoutReps);
