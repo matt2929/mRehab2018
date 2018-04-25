@@ -41,8 +41,10 @@ public class WorkoutJSON {
 		if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
 			// TODO: Consider calling
 			Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-			longitude = location.getLongitude();
-			latitude = location.getLatitude();
+			if (location != null) {
+				longitude = location.getLongitude();
+				latitude = location.getLatitude();
+			}
 		}
 		try {
 			object.put("Name", WorkoutName);
