@@ -1,5 +1,12 @@
 package com.example.matt2929.strokeappdec2017.SaveAndLoadData;
 
+import android.Manifest;
+import android.content.Context;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationManager;
+import android.support.v4.app.ActivityCompat;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -18,7 +25,8 @@ public class WorkoutJSON {
 	String Hand = "Not Set", UserName = "Not Set";
 	Calendar calendar;
 
-	public WorkoutJSON(String UserName, String WorkoutName, Integer Reps, float Duration, float Accuracy, String Hand) {
+
+	public WorkoutJSON(Context context, String UserName, String WorkoutName, Integer Reps, float Duration, float Accuracy, String Hand) {
 		this.UserName = UserName;
 		this.WorkoutName = WorkoutName;
 		this.Reps = Reps;
@@ -26,7 +34,18 @@ public class WorkoutJSON {
 		this.Accuracy = Accuracy;
 		this.calendar = Calendar.getInstance();
 		this.Hand = Hand;
+		double longitude = -1d;
+		double latitude = -1d;
 
+		LocationManager lm = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
+		if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+			// TODO: Consider calling
+			Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+			if (location != null) {
+				longitude = location.getLongitude();
+				latitude = location.getLatitude();
+			}
+		}
 		try {
 			object.put("Name", WorkoutName);
 			object.put("UserName", UserName);
@@ -40,6 +59,8 @@ public class WorkoutJSON {
 			object.put("HourOfDay", calendar.get(Calendar.HOUR));
 			object.put("Minute", calendar.get(Calendar.MINUTE));
 			object.put("Second", calendar.get(Calendar.SECOND));
+			object.put("longitude", longitude);
+			object.put("latitude", latitude);
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
