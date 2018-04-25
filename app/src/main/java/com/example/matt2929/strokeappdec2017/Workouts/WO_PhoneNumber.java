@@ -11,6 +11,7 @@ import com.example.matt2929.strokeappdec2017.ListenersAndTriggers.EndRepTrigger;
 import com.example.matt2929.strokeappdec2017.ListenersAndTriggers.OutputWorkoutData;
 import com.example.matt2929.strokeappdec2017.ListenersAndTriggers.OutputWorkoutStrings;
 import com.example.matt2929.strokeappdec2017.ListenersAndTriggers.SpeechTrigger;
+import com.example.matt2929.strokeappdec2017.R;
 import com.example.matt2929.strokeappdec2017.Utilities.SFXPlayer;
 
 import java.util.ArrayList;
@@ -87,6 +88,11 @@ public class WO_PhoneNumber extends TouchWorkoutAbstract {
 					if (phoneNumber[i] == number) {
 						phoneNumberProg[i] = true;
 						quickChange(b, Color.GREEN);
+						if (sfxPlayer.isPlaying()) {
+							sfxPlayer.killAll();
+							sfxPlayer.loadSFX(R.raw.beep);
+						}
+						sfxPlayer.playSFX();
 						whatTyped.setText(whatTyped.getText().toString() + numS);
 						if (i == 9) {
 							completed++;
