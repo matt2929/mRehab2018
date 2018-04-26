@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
-import android.support.v4.app.ActivityCompat;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -38,7 +37,8 @@ public class WorkoutJSON {
 		double latitude = -1d;
 
 		LocationManager lm = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
-		if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+
+		if (context.checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED && context.checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
 			// TODO: Consider calling
 			Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
 			if (location != null) {
