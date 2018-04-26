@@ -12,7 +12,6 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="15"
         android:background="@color/colorMaroon"
         android:gravity="center"
         android:text="Great Job! Here's how you did."
@@ -43,9 +42,9 @@
             android:id="@+id/repImage"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_weight=".5"
             android:padding="10sp"
-            android:scaleType="fitXY"
+            android:scaleType="fitStart"
             app:srcCompat="@drawable/muscle" />
 
         <LinearLayout
@@ -59,9 +58,9 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:gravity="bottom|center"
-                android:text="Current Attempt"
+                android:text="Current"
                 android:textColor="@android:color/black"
-                android:textSize="16sp" />
+                android:textSize="36sp" />
 
             <TextView
                 android:id="@+id/currentRep"
@@ -88,9 +87,9 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:gravity="bottom|center"
-                android:text="Last Attempt"
+                android:text="Last"
                 android:textColor="@android:color/black"
-                android:textSize="16sp" />
+                android:textSize="36sp" />
 
             <TextView
                 android:id="@+id/lastRep"
@@ -132,9 +131,9 @@
             android:id="@+id/timeImage"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_weight=".5"
             android:padding="10sp"
-            android:scaleType="fitXY"
+            android:scaleType="fitStart"
             app:srcCompat="@drawable/ic_timer_clock" />
 
         <LinearLayout
@@ -148,9 +147,9 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:gravity="bottom|center"
-                android:text="Current Attempt"
+                android:text="Current"
                 android:textColor="@android:color/black"
-                android:textSize="16sp" />
+                android:textSize="36sp" />
 
             <TextView
                 android:id="@+id/currentTime"
@@ -177,9 +176,9 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:gravity="bottom|center"
-                android:text="Last Attempt"
+                android:text="Last"
                 android:textColor="@android:color/black"
-                android:textSize="16sp" />
+                android:textSize="36sp" />
 
             <TextView
                 android:id="@+id/lastTime"
@@ -219,9 +218,9 @@
             android:id="@+id/shakeImage"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_weight=".5"
             android:padding="10sp"
-            android:scaleType="fitXY"
+            android:scaleType="fitStart"
             app:srcCompat="@drawable/shake" />
 
         <LinearLayout
@@ -235,9 +234,9 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:gravity="bottom|center"
-                android:text="Current Attempt"
+                android:text="Current"
                 android:textColor="@android:color/black"
-                android:textSize="16sp" />
+                android:textSize="36sp" />
 
             <TextView
                 android:id="@+id/currentSmoothness"
@@ -264,9 +263,9 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:gravity="bottom|center"
-                android:text="Last Attempt"
+                android:text="Last"
                 android:textColor="@android:color/black"
-                android:textSize="16sp" />
+                android:textSize="36sp" />
 
             <TextView
                 android:id="@+id/lastSmoothness"
@@ -287,7 +286,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="10"
+        android:layout_weight="20"
         android:orientation="horizontal"
         android:weightSum="3">
 
@@ -315,7 +314,7 @@
             android:layout_marginTop="10dp"
             android:layout_weight="2"
             android:background="@drawable/button_shape_dkblue"
-            android:text="Next Activity"
+            android:text="Next"
             android:textAllCaps="false"
             android:textColor="@color/colorBackground"
             android:textSize="24sp" />

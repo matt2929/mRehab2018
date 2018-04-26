@@ -59,7 +59,7 @@
             android:text="Start"
             android:textAlignment="center"
             android:textAllCaps="false"
-            android:textSize="24sp"
+            android:textSize="36sp"
             tools:layout_editor_absoluteX="-265dp"
             tools:layout_editor_absoluteY="259dp" />
 
@@ -77,6 +77,7 @@
             android:textAlignment="center"
             android:textAllCaps="false"
             android:textSize="24sp"
+            android:visibility="gone"
             tools:layout_editor_absoluteX="133dp"
             tools:layout_editor_absoluteY="346dp" />
 
@@ -93,7 +94,7 @@
             android:text="Set Next Workout"
             android:textAlignment="center"
             android:textAllCaps="false"
-            android:textSize="24sp" />
+            android:textSize="36sp" />
 
         <Space
             android:layout_width="match_parent"

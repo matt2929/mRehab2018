@@ -23,7 +23,7 @@ dependencies {
     compile 'com.amazonaws:aws-android-sdk-s3:2.6.+'
 }
 android {
-    compileSdkVersion 27
+    compileSdkVersion 26
     buildToolsVersion '27.0.3'
     defaultConfig {
         applicationId "com.example.matt2929.strokeappdec2017"
@@ -38,6 +38,10 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
     }
 }
 
