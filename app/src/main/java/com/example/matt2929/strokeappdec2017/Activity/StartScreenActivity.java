@@ -18,8 +18,8 @@ public class StartScreenActivity extends AppCompatActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_start_screen);
-		Button login = findViewById(R.id.startLogin);
-		Button demo = findViewById(R.id.startDemo);
+		Button login = (Button) findViewById(R.id.startLogin);
+		Button demo = (Button) findViewById(R.id.startDemo);
 		getPermissions();
 		final SaveAndWriteUserInfo saveAndWriteUserInfo = new SaveAndWriteUserInfo(getApplicationContext());//use this to get users saved o
 		login.setOnClickListener(new View.OnClickListener() {
