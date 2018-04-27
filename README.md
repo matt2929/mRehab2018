@@ -1,0 +1,1 @@
+# StrokeAppDec2017
