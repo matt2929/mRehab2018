@@ -88,11 +88,7 @@ public class WO_PhoneNumber extends TouchWorkoutAbstract {
 					if (phoneNumber[i] == number) {
 						phoneNumberProg[i] = true;
 						quickChange(b, Color.GREEN);
-						if (sfxPlayer.isPlaying()) {
-							sfxPlayer.killAll();
-							sfxPlayer.loadSFX(R.raw.beep);
-						}
-						sfxPlayer.playSFX();
+						//sfxPlayer.loadAndPlay(R.raw.beep);
 						whatTyped.setText(whatTyped.getText().toString() + numS);
 						if (i == 9) {
 							completed++;
@@ -117,10 +113,12 @@ public class WO_PhoneNumber extends TouchWorkoutAbstract {
 	public void quickChange(final Button button, final Integer color) {
 		Handler handler = new Handler();
 		button.setBackgroundColor(color);
+		whatTyped.setTextColor(color);
 		handler.postDelayed(new Runnable() {
 			@Override
 			public void run() {
 				button.setBackground(button.getContext().getResources().getDrawable(android.R.drawable.btn_default));
+				whatTyped.setTextColor(Color.BLACK);
 			}
 		}, 100);
 	}
