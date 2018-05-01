@@ -1,9 +1,11 @@
 package com.example.matt2929.strokeappdec2017.Utilities;
 
 import android.content.Context;
+import android.content.Intent;
 import android.speech.tts.TextToSpeech;
 import android.speech.tts.UtteranceProgressListener;
 
+import com.example.matt2929.strokeappdec2017.Activity.GoalsAndRepsActivity;
 import com.example.matt2929.strokeappdec2017.ListenersAndTriggers.SpeechCompleteListener;
 import com.example.matt2929.strokeappdec2017.ListenersAndTriggers.SpeechInitListener;
 
@@ -80,6 +82,13 @@ public class Text2Speech extends UtteranceProgressListener implements TextToSpee
         } else {
             ready = false;
         }
+    }
+
+    @Override
+    public void onError(String utteranceId, int errorCode) {
+        Intent intent = new Intent(context, GoalsAndRepsActivity.class);
+        context.startActivity(intent);
+        super.onError(utteranceId, errorCode);
     }
 
     @Override
