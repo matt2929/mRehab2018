@@ -20,7 +20,7 @@ public class WO_Walk extends SensorWorkoutAbstract {
 	Long startRep = 0L;
 	int repCount = 0;
 	Long walkLength = 10000L;
-	Long cooldownLength = 15000L;
+	Long cooldownLength = 7000L;
 	Long cooldownStart = 0L;
 
 	public WO_Walk(String Name, Integer reps, SpeechTrigger speechTrigger, EndRepTrigger endRepTrigger, SFXPlayer sfxPlayer, OutputWorkoutData outputWorkoutData, OutputWorkoutStrings outputWorkoutStrings) {
