@@ -48,7 +48,7 @@ public class WorkoutJSON {
 		}
 		try {
 			object.put("Name", WorkoutName);
-			object.put("UserName", UserName+"FINAL");
+			object.put("UserName", UserName+"BASELINE");
 			object.put("Reps", Reps);
 			object.put("Duration", String.valueOf(Duration));
 			object.put("Accuracy", Accuracy);
