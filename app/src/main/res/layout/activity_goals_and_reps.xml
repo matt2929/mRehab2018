@@ -22,7 +22,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight=".7"
+            android:layout_weight=".9"
             android:gravity="center"
             android:text="Activity Selected"
             android:textAlignment="center"
@@ -35,7 +35,7 @@
             android:layout_height="0dp"
             android:layout_marginLeft="60sp"
             android:layout_marginRight="60sp"
-            android:layout_weight=".7"
+            android:layout_weight=".9"
             android:background="@color/colorMaroon"
             android:gravity="center"
             android:text="Vertical Bowl"
@@ -52,7 +52,7 @@
             android:id="@+id/textView13"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight=".7"
+            android:layout_weight="0"
             android:gravity="center"
             android:text="Activity Hand"
             android:textAlignment="center"
@@ -65,7 +65,7 @@
             android:layout_height="0dp"
             android:layout_marginLeft="60sp"
             android:layout_marginRight="60sp"
-            android:layout_weight=".7"
+            android:layout_weight="0"
             android:background="@color/colorMaroon"
             android:gravity="center"
             android:text="Right"
@@ -76,13 +76,13 @@
         <Space
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight=".75" />
+            android:layout_weight="2" />
 
         <TextView
             android:id="@+id/textView7"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_weight="0"
             android:gravity="center"
             android:paddingLeft="25sp"
             android:paddingRight="25sp"
@@ -94,7 +94,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="2"
+            android:layout_weight="2.5"
             android:orientation="horizontal">
 
             <Button
@@ -136,13 +136,12 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1.8" />
+            android:layout_height="0dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_weight="2.5"
             android:orientation="horizontal"
             android:weightSum="2">
 

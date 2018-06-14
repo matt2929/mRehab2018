@@ -20,7 +20,7 @@
             android:id="@+id/imageView8"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="6"
+            android:layout_weight="5"
             android:cropToPadding="false"
             android:scaleType="centerInside"
             app:srcCompat="@drawable/mrehab" />
@@ -29,7 +29,7 @@
             android:id="@+id/userNameSplashWelcome"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_weight="0"
             android:text="TextView"
             android:textAlignment="center"
             android:textColor="@android:color/black"
@@ -40,7 +40,7 @@
             android:id="@+id/textView14"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_weight="0"
             android:text="What would you like to do?"
             android:textAlignment="center"
             android:textColor="@android:color/black"
@@ -54,12 +54,12 @@
             android:layout_marginLeft="40dp"
             android:layout_marginRight="40dp"
             android:layout_marginTop="10dp"
-            android:layout_weight=".5"
+            android:layout_weight="1.25"
             android:background="@drawable/button_shape_grey"
             android:text="Start"
             android:textAlignment="center"
             android:textAllCaps="false"
-            android:textSize="24sp"
+            android:textSize="36sp"
             tools:layout_editor_absoluteX="-265dp"
             tools:layout_editor_absoluteY="259dp" />
 
@@ -71,12 +71,12 @@
             android:layout_marginLeft="40dp"
             android:layout_marginRight="40dp"
             android:layout_marginTop="10dp"
-            android:layout_weight=".5"
+            android:layout_weight="1.25"
             android:background="@drawable/button_shape_grey"
             android:text="View History"
             android:textAlignment="center"
             android:textAllCaps="false"
-            android:textSize="24sp"
+            android:textSize="36sp"
             tools:layout_editor_absoluteX="133dp"
             tools:layout_editor_absoluteY="346dp" />
 
@@ -88,12 +88,12 @@
             android:layout_marginLeft="40dp"
             android:layout_marginRight="40dp"
             android:layout_marginTop="10dp"
-            android:layout_weight=".5"
+            android:layout_weight="1.25"
             android:background="@drawable/button_shape_grey"
             android:text="Set Next Workout"
             android:textAlignment="center"
             android:textAllCaps="false"
-            android:textSize="24sp" />
+            android:textSize="36sp" />
 
         <Space
             android:layout_width="match_parent"

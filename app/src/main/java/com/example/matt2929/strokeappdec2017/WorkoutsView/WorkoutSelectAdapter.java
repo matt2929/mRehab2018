@@ -20,7 +20,7 @@ import java.util.ArrayList;
 
 public class WorkoutSelectAdapter extends ArrayAdapter<WorkoutSelectData> {
 
-	float textSize = 25;
+	float textSize = 36;
 	int minHeight = 200, padding = 15;
 
 

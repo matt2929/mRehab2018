@@ -19,16 +19,17 @@
         android:id="@+id/rowItemActivityName"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="6.5"
+        android:layout_weight="6"
         android:gravity="center"
         android:text="TextView"
-        android:textSize="12sp" />
+        android:textSize="42sp" />
 
     <TextView
         android:id="@+id/rowItemActivityComplete"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="2"
+        android:layout_weight="2.5"
         android:gravity="center"
-        android:text="TextView" />
+        android:text="TextView"
+        android:textSize="42sp" />
 </LinearLayout>

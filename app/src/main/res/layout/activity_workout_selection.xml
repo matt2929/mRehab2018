@@ -23,14 +23,14 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_weight="1.5"
             android:orientation="horizontal"
             android:weightSum="10">
 
             <Space
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1.5" />
+                android:layout_weight="0" />
 
             <TextView
                 android:id="@+id/textView17"
@@ -40,17 +40,19 @@
                 android:gravity="center"
                 android:text="Select an Activity"
                 android:textColor="@android:color/black"
-                android:textSize="18sp" />
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/textView12"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="2"
+                android:layout_weight="3.5"
                 android:gravity="center"
                 android:text="Sets"
                 android:textColor="@android:color/black"
-                android:textSize="18sp" />
+                android:textSize="24sp"
+                android:textStyle="bold" />
         </LinearLayout>
 
         <ListView
@@ -58,7 +60,7 @@
             style="@style/Widget.AppCompat.ListView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="6"
+            android:layout_weight="5"
             android:choiceMode="singleChoice"
             android:listSelector="@color/colorPhoneScreen"
             app:layout_constraintBottom_toTopOf="@+id/linearLayout"
@@ -71,7 +73,7 @@
             android:id="@+id/textView6"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight=".5"
+            android:layout_weight="0"
             android:text="Which hand would you like to use?"
             android:textAlignment="center"
             android:textColor="@android:color/black" />
@@ -120,7 +122,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_weight="1.5"
             android:orientation="horizontal"
             android:weightSum="2">
 
