@@ -157,10 +157,10 @@ public class WorkoutSelectionActivity extends AppCompatActivity {
 				done = false;
 			}
 		}
-		if (done) {
+		/*if (done) {
 			Intent intent = new Intent(getApplicationContext(), CalendarSetActivity.class);
 			startActivity(intent);
-		}
+		}*/
 		WorkoutSelectAdapter workoutSelectAdapter = new WorkoutSelectAdapter(getApplicationContext(), workouts);
 		listView.setAdapter(workoutSelectAdapter);
 
