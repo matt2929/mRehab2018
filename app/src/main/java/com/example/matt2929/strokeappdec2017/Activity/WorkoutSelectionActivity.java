@@ -44,12 +44,12 @@ public class WorkoutSelectionActivity extends AppCompatActivity {
 
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-		left = findViewById(R.id.selectLeft);
-		right = findViewById(R.id.selectRight);
+		left = (Button) findViewById(R.id.selectLeft);
+		right = (Button) findViewById(R.id.selectRight);
 		intent = new Intent(getApplicationContext(), GoalsAndRepsActivity.class);
-		continueButton = findViewById(R.id.continueButton);
-		imageButton = findViewById(R.id.homeButton);
-		listView = findViewById(R.id.selectActivity);
+		continueButton = (Button) findViewById(R.id.continueButton);
+		imageButton = (ImageButton) findViewById(R.id.homeButton);
+		listView = (ListView) findViewById(R.id.selectActivity);
 		nothingSelectedView();
 
 		saveActivitiesDoneToday = new SaveActivitiesDoneToday(getApplicationContext());
@@ -82,20 +82,14 @@ public class WorkoutSelectionActivity extends AppCompatActivity {
 			@Override
 			public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 				currentSelection = i;
-				if (saveActivitiesDoneToday.getWorkoutActivityCount(WorkoutData.WORKOUT_DESCRIPTIONS[i].getName()) >= 3) {
-					Toast.makeText(getApplicationContext(), "This activity is completed, please select another.", Toast.LENGTH_SHORT).show();
-					nothingSelectedView();
+				isCupWorkout = WorkoutData.WORKOUT_DESCRIPTIONS[i].getPrintType().equals(WorkoutData.Print_Container_Cup);
+				somethingSelectedView();
+				if (WorkoutData.UserData.getHand() == 0) {
+					handSelection(true);
+
 				} else {
-					isCupWorkout = WorkoutData.WORKOUT_DESCRIPTIONS[i].getPrintType().equals(WorkoutData.Print_Container_Cup);
+					handSelection(false);
 
-					somethingSelectedView();
-					if (WorkoutData.UserData.getHand() == 0) {
-						handSelection(true);
-
-					} else {
-						handSelection(false);
-
-					}
 				}
 			}
 
@@ -104,20 +98,14 @@ public class WorkoutSelectionActivity extends AppCompatActivity {
 			@Override
 			public boolean onItemLongClick(AdapterView<?> parent, View view, int i, long id) {
 				currentSelection = i;
-				if (saveActivitiesDoneToday.getWorkoutActivityCount(WorkoutData.WORKOUT_DESCRIPTIONS[i].getName()) >= 3) {
-					Toast.makeText(getApplicationContext(), "This activity is completed, please select another.", Toast.LENGTH_SHORT).show();
-					nothingSelectedView();
+				isCupWorkout = WorkoutData.WORKOUT_DESCRIPTIONS[i].getPrintType().equals(WorkoutData.Print_Container_Cup);
+				somethingSelectedView();
+				if (WorkoutData.UserData.getHand() == 0) {
+					handSelection(true);
+
 				} else {
+					handSelection(false);
 
-					isCupWorkout = WorkoutData.WORKOUT_DESCRIPTIONS[i].getPrintType().equals(WorkoutData.Print_Container_Cup);
-					somethingSelectedView();
-					if (WorkoutData.UserData.getHand() == 0) {
-						handSelection(true);
-
-					} else {
-						handSelection(false);
-
-					}
 				}
 				return false;
 			}
@@ -126,19 +114,14 @@ public class WorkoutSelectionActivity extends AppCompatActivity {
 			@Override
 			public void onItemSelected(AdapterView<?> parent, View view, int i, long id) {
 				currentSelection = i;
-				if (saveActivitiesDoneToday.getWorkoutActivityCount(WorkoutData.WORKOUT_DESCRIPTIONS[i].getName()) >= 3) {
-					Toast.makeText(getApplicationContext(), "This activity is completed, please select another.", Toast.LENGTH_SHORT).show();
-					nothingSelectedView();
+				isCupWorkout = WorkoutData.WORKOUT_DESCRIPTIONS[i].getPrintType().equals(WorkoutData.Print_Container_Cup);
+				somethingSelectedView();
+				if (WorkoutData.UserData.getHand() == 0) {
+					handSelection(true);
+
 				} else {
-					isCupWorkout = WorkoutData.WORKOUT_DESCRIPTIONS[i].getPrintType().equals(WorkoutData.Print_Container_Cup);
-					somethingSelectedView();
-					if (WorkoutData.UserData.getHand() == 0) {
-						handSelection(true);
+					handSelection(false);
 
-					} else {
-						handSelection(false);
-
-					}
 				}
 			}
 
@@ -157,10 +140,10 @@ public class WorkoutSelectionActivity extends AppCompatActivity {
 				done = false;
 			}
 		}
-		/*if (done) {
-			Intent intent = new Intent(getApplicationContext(), CalendarSetActivity.class);
-			startActivity(intent);
-		}*/
+		if (done) {
+			//	Intent intent = new Intent(getApplicationContext(), CalendarSetActivity.class);
+			Toast.makeText(getApplicationContext(),"You've finished today's activities",Toast.LENGTH_SHORT).show();
+		}
 		WorkoutSelectAdapter workoutSelectAdapter = new WorkoutSelectAdapter(getApplicationContext(), workouts);
 		listView.setAdapter(workoutSelectAdapter);
 

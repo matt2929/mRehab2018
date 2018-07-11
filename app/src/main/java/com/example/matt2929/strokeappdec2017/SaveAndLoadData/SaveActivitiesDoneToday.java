@@ -40,7 +40,7 @@ public class SaveActivitiesDoneToday {
 			lastTime.setTimeInMillis(workouts.get(LAST_TIME));
 			Calendar midnight = Calendar.getInstance();
 			midnight.setTimeInMillis(lastTime.getTimeInMillis());
-			midnight.set(lastTime.get(Calendar.YEAR), lastTime.get(Calendar.MONTH), lastTime.get(Calendar.DAY_OF_MONTH) + 3, 23, 59, 59);
+			midnight.set(lastTime.get(Calendar.YEAR), lastTime.get(Calendar.MONTH), lastTime.get(Calendar.DAY_OF_MONTH), 23, 59, 59);
 			if (midnight.getTimeInMillis() - System.currentTimeMillis() <= 0) {
 				workouts.clear();
 			}
@@ -119,7 +119,6 @@ public class SaveActivitiesDoneToday {
 		return inFiles;
 	}
 }
-
 
 
 
